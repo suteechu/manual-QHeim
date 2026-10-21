@@ -1,5 +1,8 @@
 # 🛁 คู่มือและเอกสารการทำงานระบบ Bathroom & Finishing (SketchUp Conceptual)
 
+[🏠 กลับสู่หน้าหลัก (Master Documentation)](README.md) &bull; [🌐 เปิดอ่านบนเว็บเบราว์เซอร์ (GitHub Pages)](https://suteechu.github.io/manual-QHeim/Bathroom_Finishing_Doc.html)
+
+
 > [!IMPORTANT]
 > **📢 หมายเหตุสำคัญจากผู้พัฒนา (Developer's Note):**  
 > โมดูล **Step 8: Bathroom & Finishing** นี้ ผู้พัฒนาเดิม (คุณสุธี) **ยังไม่ได้ลงมือเขียนโค้ด Ruby Plugin**  
@@ -345,3 +348,8 @@ flowchart TD
 > 🏢 **ทีมพัฒนา:** SCG HEIM Engineering Automation & Modular BIM System  
 > 🔗 **เอกสารหลัก:** [Master Documentation Portal](index.html) &bull; [README.md](README.md)  
 > 📅 **เวอร์ชันแนวคิด (Conceptual Release):** ตุลาคม 2026
+
+
+---
+
+[🏠 กลับสู่หน้าหลัก (Master Documentation)](README.md) &bull; [🌐 เปิดอ่านบนเว็บเบราว์เซอร์ (GitHub Pages)](https://suteechu.github.io/manual-QHeim/Bathroom_Finishing_Doc.html)

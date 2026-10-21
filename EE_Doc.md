@@ -1,5 +1,8 @@
 # คู่มือและเอกสารการทำงานระบบ Electricity & Communication (EE) - QHeim
 
+[🏠 กลับสู่หน้าหลัก (Master Documentation)](README.md) &bull; [🌐 เปิดอ่านบนเว็บเบราว์เซอร์ (GitHub Pages)](https://suteechu.github.io/manual-QHeim/EE_Doc.html)
+
+
 เอกสารฉบับนี้จัดทำขึ้นเพื่ออธิบายหลักการทำงาน, สถาปัตยกรรมโค้ด (Code Architecture), ตรรกะการวิเคราะห์เส้นทางเดินสายอัตโนมัติ (Pathfinding Walkway Logic), ระบบไฟฟ้าแสงสว่างและสวิตช์ (Lighting & Switches), ระบบเต้ารับไฟฟ้า (Power Receptacles / Plugs), ระบบเครื่องปรับอากาศ (Air Conditioning CDU/FCU & Control Wiring), ระบบสายสื่อสารและรักษาความปลอดภัย (COMMU: LAN, TV, TEL, CCTV, Security, Aiphone), การจำแนกสีวงจร (Wire Color Coding), การเขียนไดอะแกรม Single-Line Loop, การส่งออก LayOut 2D Shop Drawing, และการถอดรายการวัสดุ (BOM) เชื่อมต่อระบบโรงงานของระบบ **Electricity (EE)** ในส่วนขยาย **QHeim (SketchUp Ruby Extension)**
 
 ---
@@ -497,3 +500,8 @@ flowchart LR
 | **4. ส่งออก BOM แล้วโปรแกรมค้าง หรือเกิด Error Excel** | ไฟล์ `Job Order.xlsx` หรือ `Recheck - Combine EE 3.xlsx` ถูกเปิดค้างไว้ใน Microsoft Excel | สลับหน้าต่างไปที่ Microsoft Excel แล้วกด **ปิดไฟล์งาน (Close) ทั้งหมด** ก่อน แล้วจึงกลับมากดปุ่ม Quan ใหม่อีกครั้ง |
 | **5. สีมาร์กเกอร์สวิตช์และโคมไฟไม่เปลี่ยนสี** | ขาดโฟลเดอร์คอมโพเนนต์สีในระบบ | ตรวจสอบว่ามีโฟลเดอร์ `C:/QHeim/DATA/EE/Color/` และมีไฟล์คอมโพเนนต์ `Color1.skp` ถึง `Color4.skp` อยู่ครบถ้วน |
 | **6. สัญลักษณ์ LayOut ใน SKU.layout เปิดแล้วภาพว่างเปล่า** | ไม่ได้รันคำสั่ง **Scene** ก่อนกดปุ่ม **Layout** | กดปุ่มไอคอน **Scene** เพื่อให้ระบบสร้าง Scene Tab `FL1..3` ใน SketchUp ให้เรียบร้อย บันทึกโมเดล แล้วกดปุ่ม **Layout** ใหม่อีกครั้ง |
+
+
+---
+
+[🏠 กลับสู่หน้าหลัก (Master Documentation)](README.md) &bull; [🌐 เปิดอ่านบนเว็บเบราว์เซอร์ (GitHub Pages)](https://suteechu.github.io/manual-QHeim/EE_Doc.html)

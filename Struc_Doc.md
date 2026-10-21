@@ -1,5 +1,8 @@
 # คู่มือและเอกสารการทำงานระบบ Struc (QHeim)
 
+[🏠 กลับสู่หน้าหลัก (Master Documentation)](README.md) &bull; [🌐 เปิดอ่านบนเว็บเบราว์เซอร์ (GitHub Pages)](https://suteechu.github.io/manual-QHeim/Struc_Doc.html)
+
+
 เอกสารฉบับนี้จัดทำขึ้นเพื่ออธิบายหลักการทำงาน, สถาปัตยกรรมโค้ด (Code Architecture), ตรรกะการคำนวณ (Business Logic), โครงสร้างเลเยอร์ (Layers), กระบวนการสร้างและดรอปพื้นยูนิตโมดูลาร์สำเร็จรูป (Modular Units), การจัดการงานระบบสุขาภิบาล/ท่อ (Plumbing/Piping Holes), การติดตั้งชิ้นส่วนข้อต่อยึดโครงสร้าง (Ceiling Joints, Turnbuckles, Setbacks), ระบบเปรียบเทียบโมเดลกับฐานข้อมูล (QTO Check Data), และการส่งออกรายการถอดแบบวัสดุ (BOM) ของระบบ **Structure (Struc)** ในส่วนขยาย **QHeim (SketchUp Ruby Extension)**
 
 ---
@@ -428,3 +431,8 @@ flowchart LR
 | **ขึ้นแจ้งเตือน `"House ID not found"`** | ยังไม่ได้กำหนด House ID ในโมเดล | เปิดเมนู **Setting** (หรือกด `strsetting`) กรอกช่อง **House ID** และกดบันทึก |
 | **กด Clone Setback แล้วมีข้อความเตือน:**<br/>`"Select 2 units to clone set-back"` | ไม่ได้กดเลือกยูนิตให้ครบ 2 ยูนิต หรือยูนิตที่เลือกไม่ใช่ Full Unit (`08_U*F`) | กดปุ่ม `Ctrl` ค้างไว้ แล้วคลิกเลือก 2 ยูนิต (ต้นทางที่มีชิ้นส่วน Setback 1 ยูนิต และปลายทาง 1 ยูนิต) จากนั้นกดไอคอน SetBack อีกครั้ง |
 | **คานซอย Sub-beam ซ้อนทับกับรูเจาะท่อ** | ไม่ได้รันคำสั่ง Hole SB อัตโนมัติ หรือมีการขยับตำแหน่ง CAD ทีหลัง | ให้รันคำสั่ง **Hole SB** ซ้ำอีกครั้ง ระบบจะทำการตรวจจับและเลื่อนขยับคานซอยหลบรูเจาะให้โดยอัตโนมัติ |
+
+
+---
+
+[🏠 กลับสู่หน้าหลัก (Master Documentation)](README.md) &bull; [🌐 เปิดอ่านบนเว็บเบราว์เซอร์ (GitHub Pages)](https://suteechu.github.io/manual-QHeim/Struc_Doc.html)

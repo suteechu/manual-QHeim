@@ -1,5 +1,8 @@
 # คู่มือและเอกสารการทำงานระบบ Exterior Wall (QHeim)
 
+[🏠 กลับสู่หน้าหลัก (Master Documentation)](README.md) &bull; [🌐 เปิดอ่านบนเว็บเบราว์เซอร์ (GitHub Pages)](https://suteechu.github.io/manual-QHeim/ExteriorWall_Doc.html)
+
+
 เอกสารฉบับนี้จัดทำขึ้นเพื่ออธิบายหลักการทำงาน, สถาปัตยกรรมโค้ด (Code Architecture), ตรรกะการคำนวณ (Business Logic), โครงสร้างเลเยอร์ (Layers), กระบวนการวางโครงเหล็กและแผ่นผนัง 3D, ระบบแจ้งเตือนตรวจสอบเสาช่องเปิด 225/332 มม., และการถอดรายการวัสดุ (BOM) ของระบบ **Exterior Wall** ในส่วนขยาย **QHeim (SketchUp Ruby Extension)**
 
 ---
@@ -321,3 +324,8 @@ flowchart TD
    เกิดจากไฟล์ `BOMEX.csv` กำลังเปิดค้างอยู่ใน Microsoft Excel ให้ปิดโปรแกรม Excel ก่อนแล้วกด Export ใหม่อีกครั้ง
 6. **แผ่น Pannel ไม่ยอมตัดช่องเปิดหน้าต่าง:**  
    ตรวจสอบว่าเลเยอร์ `S-Window` ถูกเปิดแสดงผล (Visible) อยู่หรือไม่ และตำแหน่งหน้าต่างต้องแนบสนิทกับขอบเขตภายนอกของยูนิต
+
+
+---
+
+[🏠 กลับสู่หน้าหลัก (Master Documentation)](README.md) &bull; [🌐 เปิดอ่านบนเว็บเบราว์เซอร์ (GitHub Pages)](https://suteechu.github.io/manual-QHeim/ExteriorWall_Doc.html)

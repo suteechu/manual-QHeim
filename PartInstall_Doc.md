@@ -1,5 +1,8 @@
 # คู่มือและเอกสารการทำงานระบบ PartInstall (QHeim)
 
+[🏠 กลับสู่หน้าหลัก (Master Documentation)](README.md) &bull; [🌐 เปิดอ่านบนเว็บเบราว์เซอร์ (GitHub Pages)](https://suteechu.github.io/manual-QHeim/PartInstall_Doc.html)
+
+
 เอกสารฉบับนี้จัดทำขึ้นเพื่ออธิบายหลักการทำงาน, สถาปัตยกรรมโค้ด (Code Architecture), ตรรกะการคำนวณ (Business Logic), โครงสร้างเลเยอร์ (Layers) และการถอดรายการวัสดุ (BOM) ของระบบ **PartInstall** ในส่วนขยาย **QHeim (SketchUp Ruby Extension)**
 
 ---
@@ -321,3 +324,8 @@ flowchart LR
    * **ข้อต่อ Joint Set หรือ Antivibration วางไม่ตรงตำแหน่ง:** ตรวจสอบว่าได้รัน `Unit Position` ใหม่หลังจากที่มีการขยับ/ย้ายตำแหน่งยูนิตหรือไม่ หากย้ายยูนิตต้องรัน `Unit Position` ซ้ำเสมอ
    * **Export BOM แล้วขึ้น Error:** เกิดจากไฟล์ `C:/QHeim/BOMInstall.csv` กำลังถูกเปิดค้างอยู่ในโปรแกรม Microsoft Excel ให้ปิดหน้าต่าง Excel นั้นก่อนแล้วกด Export ใหม่อีกครั้ง
    * **ราง Flashing ไม่ยอมสร้าง:** ตรวจสอบว่าโมเดลยูนิตติดกันแนบสนิทหรือไม่ หากมีช่องว่างเกินระยะ Tolerance สคริปต์ `Heim_Perimeter` จะไม่สามารถรวม Solid Outer Loop ได้
+
+
+---
+
+[🏠 กลับสู่หน้าหลัก (Master Documentation)](README.md) &bull; [🌐 เปิดอ่านบนเว็บเบราว์เซอร์ (GitHub Pages)](https://suteechu.github.io/manual-QHeim/PartInstall_Doc.html)

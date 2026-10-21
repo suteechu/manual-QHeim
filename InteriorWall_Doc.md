@@ -1,5 +1,8 @@
 # คู่มือและเอกสารการทำงานระบบ Interior Wall (QHeim)
 
+[🏠 กลับสู่หน้าหลัก (Master Documentation)](README.md) &bull; [🌐 เปิดอ่านบนเว็บเบราว์เซอร์ (GitHub Pages)](https://suteechu.github.io/manual-QHeim/InteriorWall_Doc.html)
+
+
 เอกสารฉบับนี้จัดทำขึ้นเพื่ออธิบายหลักการทำงาน, สถาปัตยกรรมโค้ด (Code Architecture), ตรรกะการคำนวณ (Business Logic), โครงสร้างเลเยอร์ (Layers), กระบวนการสร้างผนัง 3D, ระบบโครงเหล็กและแผ่นสมาร์ทบอร์ดผนังใน (IW Frame & Board), ระบบผนังกั้นห้อง (Partition Wall), ระบบเจาะช่องบล็อกไฟฟ้าและแอร์ (EE Punching), การออก Tag มิติ, และการถอดรายการวัสดุ (BOM) เชื่อมต่อฐานข้อมูล SSIC ของระบบ **Interior Wall** ในส่วนขยาย **QHeim (SketchUp Ruby Extension)**
 
 ---
@@ -516,3 +519,8 @@ flowchart LR
 #### ❌ ปัญหาที่ 5: Export CSV แล้วโปรแกรมค้าง หรือแจ้งเตือน Permission Denied
 * **สาเหตุ:** ไฟล์ CSV ปลายทางกำลังถูกเปิดใช้งานค้างอยู่ในโปรแกรม Microsoft Excel
 * **วิธีแก้:** ปิดหน้าต่างโปรแกรม Microsoft Excel ทั้งหมด แล้วกด Export ใหม่อีกครั้ง
+
+
+---
+
+[🏠 กลับสู่หน้าหลัก (Master Documentation)](README.md) &bull; [🌐 เปิดอ่านบนเว็บเบราว์เซอร์ (GitHub Pages)](https://suteechu.github.io/manual-QHeim/InteriorWall_Doc.html)

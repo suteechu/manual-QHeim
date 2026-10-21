@@ -1,5 +1,8 @@
 # คู่มือและเอกสารการทำงานระบบ นำเข้าและเตรียมไฟล์ CAD AR (QHeim)
 
+[🏠 กลับสู่หน้าหลัก (Master Documentation)](README.md) &bull; [🌐 เปิดอ่านบนเว็บเบราว์เซอร์ (GitHub Pages)](https://suteechu.github.io/manual-QHeim/CAD_AR_Doc.html)
+
+
 เอกสารฉบับนี้จัดทำขึ้นเพื่ออธิบายหลักการทำงาน, มาตรฐานการเตรียมไฟล์ AutoCAD สถาปัตยกรรม (CAD AR / Floor Plan DWG), การส่งออกข้อมูลตัวอักษรและพิกัดด้วย VBA/JSON, สถาปัตยกรรมโค้ด (Code Architecture), การนำเข้าแปลน 2D DWG สู่ SketchUp โดยคงพิกัดจุดกำเนิด (Preserve Origin), การจัดกลุ่มยูนิตเข้าสู่เลเยอร์โครงสร้าง (`S-Unit`), การจับคู่และเปลี่ยนชื่อบล็อกช่องเปิดประตู-หน้าต่างอัตโนมัติ (`text_door` / `A-DOOR` / `A-WIND`), การจัดการงานระบบไฟฟ้าและแอร์ (EE & AC Block/Text), และแนวทางแก้ปัญหา (Troubleshooting) ของระบบ **CAD AR / CAD LTF** ในส่วนขยาย **QHeim (SketchUp Ruby Extension)**
 
 ---
@@ -331,3 +334,8 @@ flowchart LR
 #### 5. กดปุ่ม Unit Number แล้วไม่มีอะไรเกิดขึ้น หรือไม่สร้างเลเยอร์ `S-Unit`
 * **สาเหตุ:** กริดไม่ได้อยู่ในเลเยอร์ `EE-GRID-UNIT` หรือตัวเลขยูนิตในเลเยอร์ `A-ANNO` ไม่ได้วางอยู่ภายในกรอบสี่เหลี่ยมของกริด
 * **วิธีแก้:** เช็คว่าข้อความตัวเลขยูนิตอยู่ในขอบเขต Bounding Box ของกริดโมดูลาร์หรือไม่ และชื่อข้อความต้องเป็นตัวเลขล้วน (เช่น `01`, `02`) หรือขึ้นต้นด้วยตัว H (เช่น `H01`)
+
+
+---
+
+[🏠 กลับสู่หน้าหลัก (Master Documentation)](README.md) &bull; [🌐 เปิดอ่านบนเว็บเบราว์เซอร์ (GitHub Pages)](https://suteechu.github.io/manual-QHeim/CAD_AR_Doc.html)

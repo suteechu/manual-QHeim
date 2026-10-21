@@ -1,5 +1,8 @@
 # คู่มือและเอกสารการทำงานระบบ LongleadTime (QHeim)
 
+[🏠 กลับสู่หน้าหลัก (Master Documentation)](README.md) &bull; [🌐 เปิดอ่านบนเว็บเบราว์เซอร์ (GitHub Pages)](https://suteechu.github.io/manual-QHeim/LongleadTime_Doc.html)
+
+
 เอกสารฉบับนี้จัดทำขึ้นเพื่ออธิบายหลักการทำงาน, สถาปัตยกรรมโค้ด (Code Architecture), ตรรกะการคำนวณ (Business Logic), โครงสร้างเลเยอร์ (Layers), กระบวนการวางชิ้นงาน 3D และการถอดรายการสั่งซื้อล่วงหน้า (Long Lead Time BOM & Extra Order Request) ของระบบ **LongleadTime** ในส่วนขยาย **QHeim (SketchUp Ruby Extension)**
 
 ---
@@ -426,3 +429,8 @@ flowchart TD
 * **⚠️ ปัญหา มือจับ Curve Handle (`AAJO`) ไม่ยอมคำนวณออกมาใน Extra Order:**
   * *สาเหตุ:* มือจับกลุ่ม Curve Handle (`AAJO10360` ถึง `AAJO10400`) มีเงื่อนไขเฉพาะว่าจะต้องใช้กับ **บานเลื่อน 4 บาน (`S4`) เท่านั้น**
   * *วิธีแก้:* ตรวจสอบว่าชื่อสัญลักษณ์ของบานหน้าต่างหรือประตูเลื่อนมีคำว่า `S4` ระบุอยู่ในชื่อหรือไม่ หากไม่มีระบบจะคัดกรองข้ามไปตามมาตรฐานวิศวกรรม
+
+
+---
+
+[🏠 กลับสู่หน้าหลัก (Master Documentation)](README.md) &bull; [🌐 เปิดอ่านบนเว็บเบราว์เซอร์ (GitHub Pages)](https://suteechu.github.io/manual-QHeim/LongleadTime_Doc.html)

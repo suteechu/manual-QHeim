@@ -27,9 +27,14 @@
     <div class="bg-gradient-to-r from-purple-900 via-indigo-800 to-blue-700 p-8 text-white">
       <div class="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-semibold uppercase tracking-wider mb-2">
-            QHeim Modular Construction Extension
-          </span>
+          <div class="flex items-center gap-2 mb-2">
+            <span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-semibold uppercase tracking-wider">
+              QHeim Modular Construction
+            </span>
+            <a href="index.html" class="inline-flex items-center gap-1.5 text-xs bg-black/25 hover:bg-black/40 text-white px-3 py-1 rounded-full font-medium transition backdrop-blur-sm border border-white/20">
+              <span>🏠 กลับสู่หน้าพอร์ทัลหลัก (Master Documentation)</span>
+            </a>
+          </div>
           <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight">คู่มือและเอกสารการทำงาน Interior Wall</h1>
           <p class="text-purple-100 mt-2 text-sm md:text-base max-w-2xl">
             สถาปัตยกรรมโค้ด, การสร้างผนัง 3D, โครงเหล็กและแผ่นสมาร์ทบอร์ดผนังใน (IW), แผงกั้นห้อง (Partition), ระบบเจาะบล็อกไฟฟ้า/แอร์ (EE Punching), การออก Tag มิติ และการถอดรายการวัสดุ (BOM) เชื่อมต่อฐานข้อมูล SSIC
@@ -46,6 +51,10 @@
 
     <!-- Quick Navigation Bar -->
     <div class="bg-slate-100 border-b border-slate-200 px-6 py-3 flex flex-wrap gap-2 text-xs md:text-sm font-medium text-slate-600 no-print">
+      <a href="index.html" class="inline-flex items-center gap-1 font-bold text-slate-800 bg-white px-2.5 py-1 rounded border border-slate-300 hover:bg-blue-50 hover:text-blue-600 transition shadow-xs">
+        <span>🏠 หน้าหลัก</span>
+      </a>
+      <span class="text-slate-300">|</span>
       <a href="#overview" class="hover:text-purple-600 px-2 py-1 rounded hover:bg-white transition">ภาพรวม &amp; Workflow</a>
       <span class="text-slate-300">|</span>
       <a href="#toolbar" class="hover:text-purple-600 px-2 py-1 rounded hover:bg-white transition">แถบเครื่องมือ Toolbar (37 ไอคอน)</a>
@@ -911,9 +920,30 @@
   </main>
 
   <!-- Footer -->
+  
+
+
+  <!-- Bottom Return Button -->
+  <div class="max-w-6xl mx-auto text-center my-8 no-print">
+    <a href="index.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-medium transition text-sm shadow-sm">
+      <span>🏠 กลับสู่หน้าพอร์ทัลหลัก (Master Documentation)</span>
+    </a>
+  </div>
+
+  <!-- Standardized 8-Step Navigation Footer -->
   <footer class="max-w-6xl mx-auto mt-12 mb-8 text-center text-xs text-slate-400 no-print">
-    <p>© 2026 QHeim Modular Construction Extension — Internal Technical Documentation</p>
-    <p class="mt-1 font-mono text-[11px]">C:\QHeim\manual\InteriorWall_Doc.html &amp; InteriorWall_Doc.md</p>
+    <div class="flex flex-wrap items-center justify-center gap-3 mb-2">
+      <a href="index.html" class="hover:text-slate-600 font-bold">🏠 สารบัญรวมระบบ</a> &bull;
+      <a href="CAD_AR_Doc.html" class="hover:text-slate-600">Step 1: CAD AR</a> &bull;
+      <a href="LongleadTime_Doc.html" class="hover:text-slate-600">Step 2: Longlead</a> &bull;
+      <a href="Struc_Doc.html" class="hover:text-slate-600">Step 3: Structure</a> &bull;
+      <a href="ExteriorWall_Doc.html" class="hover:text-slate-600">Step 4: Ext Wall</a> &bull;
+      <a href="InteriorWall_Doc.html" class="hover:text-slate-600">Step 5: Int Wall</a> &bull;
+      <a href="PartInstall_Doc.html" class="hover:text-slate-600">Step 6: PartInstall</a> &bull;
+      <a href="EE_Doc.html" class="hover:text-slate-600">Step 7: EE System</a> &bull;
+      <a href="Bathroom_Finishing_Doc.html" class="hover:text-slate-600">Step 8: Bathroom</a>
+    </div>
+    <p>QHeim Modular Construction BIM Documentation &bull; SCG HEIM Engineering Automation</p>
   </footer>
 
 </body>
