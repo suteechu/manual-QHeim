@@ -13,29 +13,33 @@
 
 ## 📑 สารบัญหลัก (Table of Contents)
 
-1. [ภาพรวม 7 ลำดับขั้นตอนหลัก (7 Standard Steps Overview)](#1-ภาพรวม-7-ลำดับขั้นตอนหลัก-7-standard-steps-overview)
+1. [ภาพรวม 8 ลำดับขั้นตอนหลัก (8 Standard Steps Overview)](#1-ภาพรวม-8-ลำดับขั้นตอนหลัก-8-standard-steps-overview)
 2. [👥 การแบ่งสายงานในทีมแบบคู่ขนาน (Multi-User Collaborative & Parallel Workflow)](#2--การแบ่งสายงานในทีมแบบคู่ขนาน-multi-user-collaborative--parallel-workflow)
 3. [🔰 คู่มือสำหรับพนักงานใหม่ (Onboarding & Getting Started Guide)](#3--คู่มือสำหรับพนักงานใหม่-onboarding--getting-started-guide)
 4. [⚡ คู่มือสำหรับคนที่ลืม (Quick Reference & Operator Cheat Sheet)](#4--คู่มือสำหรับคนที่ลืม-quick-reference--operator-cheat-sheet)
 5. [🏛️ เอกสารส่งมอบงานและสถาปัตยกรรมระบบสำหรับนักพัฒนา (Handover & Developer Architecture)](#5-️-เอกสารส่งมอบงานและสถาปัตยกรรมระบบสำหรับนักพัฒนา-handover--developer-architecture)
-6. [📚 สารบัญคู่มือเจาะลึก 7 ระบบหลัก (System Modules Catalog)](#6--สารบัญคู่มือเจาะลึก-7-ระบบหลัก-system-modules-catalog)
+6. [📚 สารบัญคู่มือเจาะลึก 8 ระบบหลัก (System Modules Catalog)](#6--สารบัญคู่มือเจาะลึก-8-ระบบหลัก-system-modules-catalog)
 7. [🛠️ แนวทางการพัฒนาต่อยอดและการบำรุงรักษา (Future Roadmap & Maintenance)](#7-️-แนวทางการพัฒนาต่อยอดและการบำรุงรักษา-future-roadmap--maintenance)
 
 ---
 
-## 1. ภาพรวม 7 ลำดับขั้นตอนหลัก (7 Standard Steps Overview)
+## 1. ภาพรวม 8 ลำดับขั้นตอนหลัก (8 Standard Steps Overview)
 
-ระบบ QHeim เรียงลำดับสายการทำงานตั้งแต่แบบสถาปัตยกรรม 2D จนถึงแบบ 2D Shop Drawing และการถอดประกอบวัสดุ (BOM) เป็น 7 ขั้นตอนมาตรฐาน:
+ระบบ QHeim ครอบคลุมสายการทำงานตั้งแต่แบบสถาปัตยกรรม 2D จนถึงแบบ 2D Shop Drawing, การตกแต่งผิว และการถอดประกอบวัสดุ (BOM) รวม 8 ขั้นตอน:
 
-| ขั้นตอน (Step) | ระบบงาน (Module) | รายละเอียดหน้าที่ | ลิงก์คู่มือฉบับเต็ม (Web HTML / Markdown) |
-| :---: | :--- | :--- | :---: |
-| **Step 1** | **CAD AR** | นำเข้าแปลน 2D DWG, Text JSON, จัดกลุ่ม `S-Unit`, ตั้งชื่อประตู-หน้าต่าง | [🌐 Web HTML](https://suteechu.github.io/manual-QHeim/CAD_AR_Doc.html) &bull; [📄 Markdown](CAD_AR_Doc.md) |
-| **Step 2** | **Longlead** | สร้างโมเดลประตู-หน้าต่าง 3D, ถอดรหัส MIM, สรุป BOM สั่งผลิตล่วงหน้า | [🌐 Web HTML](https://suteechu.github.io/manual-QHeim/LongleadTime_Doc.html) &bull; [📄 Markdown](LongleadTime_Doc.md) |
-| **Step 3** | **Structure** | เสา, คาน, ตง, พื้น Smartboard, รูท่อ (BR/FS/CS/AC), ชาร์ป, Ceiling Joint | [🌐 Web HTML](https://suteechu.github.io/manual-QHeim/Struc_Doc.html) &bull; [📄 Markdown](Struc_Doc.md) |
-| **Step 4** | **Ext Wall** | ผนังภายนอก AAFP, เสา Stud, เสามุม Corner, เสา Window Set, กันซึม C3 | [🌐 Web HTML](https://suteechu.github.io/manual-QHeim/ExteriorWall_Doc.html) &bull; [📄 Markdown](ExteriorWall_Doc.md) |
-| **Step 5** | **Int Wall** | ผนังภายในและพาร์ทิชันแบ่งห้อง, เสากรอบช่องเปิด, บล็อกปิดรอยต่อ | [🌐 Web HTML](https://suteechu.github.io/manual-QHeim/InteriorWall_Doc.html) &bull; [📄 Markdown](InteriorWall_Doc.md) |
-| **Step 6** | **PartInstall** | ติดตั้ง Flashing กันน้ำ, Guide Pin, ยางกันสั่น, รหัสทิศทางโมดูลาร์ 01-12 | [🌐 Web HTML](https://suteechu.github.io/manual-QHeim/PartInstall_Doc.html) &bull; [📄 Markdown](PartInstall_Doc.md) |
-| **Step 7** | **EE System** | ระบบไฟฟ้าแสงสว่าง, เต้ารับ, แอร์ CDU/FCU, สื่อสาร COMMU, LayOut, BOM | [🌐 Web HTML](https://suteechu.github.io/manual-QHeim/EE_Doc.html) &bull; [📄 Markdown](EE_Doc.md) |
+| ขั้นตอน (Step) | ระบบงาน (Module) | รายละเอียดหน้าที่ | สถานะ | ลิงก์คู่มือ (Web HTML / Markdown) |
+| :---: | :--- | :--- | :---: | :---: |
+| **Step 1** | **CAD AR** | นำเข้าแปลน 2D DWG, Text JSON, จัดกลุ่ม `S-Unit`, ตั้งชื่อประตู-หน้าต่าง | ✅ ใช้งานจริง | [🌐 Web HTML](https://suteechu.github.io/manual-QHeim/CAD_AR_Doc.html) &bull; [📄 Markdown](CAD_AR_Doc.md) |
+| **Step 2** | **Longlead** | สร้างโมเดลประตู-หน้าต่าง 3D, ถอดรหัส MIM, สรุป BOM สั่งผลิตล่วงหน้า | ✅ ใช้งานจริง | [🌐 Web HTML](https://suteechu.github.io/manual-QHeim/LongleadTime_Doc.html) &bull; [📄 Markdown](LongleadTime_Doc.md) |
+| **Step 3** | **Structure** | เสา, คาน, ตง, พื้น Smartboard, รูท่อ (BR/FS/CS/AC), ชาร์ป, Ceiling Joint | ✅ ใช้งานจริง | [🌐 Web HTML](https://suteechu.github.io/manual-QHeim/Struc_Doc.html) &bull; [📄 Markdown](Struc_Doc.md) |
+| **Step 4** | **Ext Wall** | ผนังภายนอก AAFP, เสา Stud, เสามุม Corner, เสา Window Set, กันซึม C3 | ✅ ใช้งานจริง | [🌐 Web HTML](https://suteechu.github.io/manual-QHeim/ExteriorWall_Doc.html) &bull; [📄 Markdown](ExteriorWall_Doc.md) |
+| **Step 5** | **Int Wall** | ผนังภายในและพาร์ทิชันแบ่งห้อง, เสากรอบช่องเปิด, บล็อกปิดรอยต่อ | ✅ ใช้งานจริง | [🌐 Web HTML](https://suteechu.github.io/manual-QHeim/InteriorWall_Doc.html) &bull; [📄 Markdown](InteriorWall_Doc.md) |
+| **Step 6** | **PartInstall** | ติดตั้ง Flashing กันน้ำ, Guide Pin, ยางกันสั่น, รหัสทิศทางโมดูลาร์ 01-12 | ✅ ใช้งานจริง | [🌐 Web HTML](https://suteechu.github.io/manual-QHeim/PartInstall_Doc.html) &bull; [📄 Markdown](PartInstall_Doc.md) |
+| **Step 7** | **EE System** | ระบบไฟฟ้าแสงสว่าง, เต้ารับ, แอร์ CDU/FCU, สื่อสาร COMMU, LayOut, BOM | ✅ ใช้งานจริง | [🌐 Web HTML](https://suteechu.github.io/manual-QHeim/EE_Doc.html) &bull; [📄 Markdown](EE_Doc.md) |
+| **Step 8** | **Bathroom & Finishing** | ประกอบห้องน้ำสำเร็จรูป, สุขภัณฑ์, กันซึม, ปูกระเบื้อง, วัสดุปิดผิวพื้น/ผนัง/ฝ้า | 🚧 กำลังพัฒนา | [🌐 Web HTML](https://suteechu.github.io/manual-QHeim/Bathroom_Finishing_Doc.html) &bull; [📄 Markdown](Bathroom_Finishing_Doc.md) |
+
+> 💡 **หมายเหตุสำหรับ Step 8:**  
+> ระบบ **Bathroom & Finishing** อยู่ระหว่างขั้นตอนการคิดสร้างและพัฒนา (Under Active Development) โดยทีมงานจะนำตัวโปรแกรมและเอกสารฉบับสมบูรณ์มาอัปเดตให้ในเวอร์ชันถัดไป
 
 ---
 
@@ -58,11 +62,12 @@ flowchart TD
         BASE -->|ส่งต่อไฟล์ Base| TEAM_C["👤 ผู้รับผิดชอบสายงาน C: สถาปัตยกรรมภายใน<br/>-----------------------------------------<br/>👉 Step 5: Int Wall (ผนังใน & พาร์ทิชัน)"]
     end
 
-    subgraph INTEGRATION["3. ประกอบโมเดล & งานระบบขั้นสุดท้าย (Assembly & Final Delivery)"]
+    subgraph INTEGRATION["3. ประกอบโมเดล & งานระบบ & ตกแต่ง (Assembly & Final Delivery)"]
         TEAM_A & TEAM_B & TEAM_C --> MERGE["🔗 นำโมเดลแต่ละสายงานมารวมกัน<br/>(Master Model Integration)"]
         MERGE --> S6["👉 Step 6: PartInstall<br/>(Flashing, Guide Pin, ยางกันสั่น, Super Sheet)"]
-        S6 --> S7["👉 Step 7: EE System<br/>(เดินสายไฟ แอร์ สื่อสาร, ออกแบบ LayOut, ถอดสรุป BOM รวม)"]
-        S7 --> OUTPUT[("📦 Final Deliverables:<br/>1. Complete 3D BIM Model (.skp)<br/>2. 2D Shop Drawing (.layout)<br/>3. Factory Production BOM (.xlsx / .csv)")]
+        S6 --> S7["👉 Step 7: EE System<br/>(เดินสายไฟ แอร์ สื่อสาร, ออกแบบ LayOut, ถอดสรุป BOM)"]
+        S7 --> S8["🚧 Step 8: Bathroom & Finishing<br/>(ประกอบห้องน้ำ สุขภัณฑ์ ปูกระเบื้อง วัสดุปิดผิวพื้น/ผนัง/ฝ้า)"]
+        S8 --> OUTPUT[("📦 Final Deliverables:<br/>1. Complete 3D BIM Model (.skp)<br/>2. 2D Shop Drawing (.layout)<br/>3. Factory Production BOM (.xlsx / .csv)")]
     end
 
     style PREP fill:#eff6ff,stroke:#3b82f6,stroke-width:2px
@@ -70,6 +75,7 @@ flowchart TD
     style TEAM_B fill:#f5f3ff,stroke:#8b5cf6,stroke-width:2px
     style TEAM_C fill:#fdf4ff,stroke:#d946ef,stroke-width:2px
     style INTEGRATION fill:#fffbeb,stroke:#f59e0b,stroke-width:2px
+    style S8 fill:#fef3c7,stroke:#f59e0b,stroke-dasharray: 5 5
 ```
 
 ---
@@ -97,12 +103,13 @@ flowchart TD
 #### 4) 👷 คนที่ทำ Step 5 (Int Wall)
 * **หน้าที่หลัก:** วางแนวผนังพาร์ทิชันภายในอาคารตามฟังก์ชันห้อง, ติดตั้งเสากรอบช่องเปิดประตู-หน้าต่างภายใน, และวางบล็อกปิดรอยต่อระหว่างยูนิตกล่องโมดูลาร์
 
-#### 5) 👷 คนที่ทำ Step 6 (PartInstall) และ Step 7 (EE System)
+#### 5) 👷 คนที่ทำ Step 6 (PartInstall), Step 7 (EE System) และ Step 8 (Bathroom & Finishing)
 * **หน้าที่หลัก:** เมื่อนำงานโครงสร้างและผนังมารวมกัน ช่างหรือวิศวกรระบบจะเข้ามาดำเนินการ:
   * ติดตั้งอุปกรณ์ยึดและกันน้ำรอยต่อ (Flashing, Guide Pin, Antivibration Rubber)
   * รันคำสั่ง Shaft และ Floor Area
   * เดินสายไฟฟ้ากำลัง, สวิตช์, แอร์, และสายสัญญาณสื่อสาร
   * ส่งออก Shop Drawing A3 ไปยัง Trimble LayOut และส่งออกยอดวัสดุเข้าสู่ระบบผลิตโรงงาน
+  * **[Step 8]:** งานประกอบชุดห้องน้ำสำเร็จรูป สุขภัณฑ์ งานปูกระเบื้อง และวัสดุปิดผิวสถาปัตยกรรม (กำลังพัฒนา)
 
 ---
 
@@ -207,60 +214,22 @@ C:\QHeim├── AutoLISP_ExportLTF\   # สคริปต์ AutoLISP/DCL ฝ
 └── Setup\                # สคริปต์ติดตั้งระบบ และไฟล์ acad.lsp
 ```
 
-### 5.2 สถาปัตยกรรมโค้ดและการไหลของข้อมูล (Data Architecture & Attribute Schema)
-
-```mermaid
-classDiagram
-    class UnitEntity {
-        +Dictionary: "Unit"
-        +String FL: "fl1" | "fl2" | "fl3"
-        +String Pos: "1-1" | "2-3" (ix-iy)
-        +Array Shaft: [s0, s1, s2, s3]
-        +String Name: "01", "02", ...
-    }
-
-    class EEComponentEntity {
-        +Dictionary: "Com"
-        +String Floor: "fl1"
-        +String IM: "IM_APA_001"
-        +Array Unit: [Name, pc0..pc3, center, pos]
-        +String UnitID: GUID
-        +Dictionary: "REC" / "BOX"
-        +String ZONE: "LC1"
-    }
-
-    class StructureEntity {
-        +Dictionary: "SU_DefinitionPath"
-        +String PartName: "AGAZ*", "Beam", "Column"
-        +String SubBeamAdjust: Offset Distance
-    }
-
-    class WallEntity {
-        +Dictionary: "Wall"
-        +String Type: "AAFP", "Partition"
-        +Float StudSpacing: 225.0 | 332.0
-    }
-
-    UnitEntity --> EEComponentEntity : ครอบครองอุปกรณ์
-    UnitEntity --> StructureEntity : ประกอบเป็นโครงสร้างยูนิต
-    UnitEntity --> WallEntity : แนบผนังรอบยูนิต
-```
-
 ---
 
-## 6. 📚 สารบัญคู่มือเจาะลึก 7 ระบบหลัก (System Modules Catalog)
+## 6. 📚 สารบัญคู่มือเจาะลึก 8 ระบบหลัก (System Modules Catalog)
 
 คลิกที่ชื่อระบบเพื่อเปิดอ่านคู่มือฉบับเต็ม ทั้งในรูปแบบ Web HTML บน GitHub Pages และไฟล์ Markdown:
 
-| ลำดับ (Step) | ระบบย่อย (Subsystem) | รายละเอียดและขอบเขตการทำงาน | ลิงก์ Web HTML (GitHub Pages) | ลิงก์ Markdown |
-| :---: | :--- | :--- | :---: | :---: |
-| **Step 1** | **CAD AR** | การเตรียมไฟล์ AutoCAD 2D DWG, การส่งออก Text JSON, การนำเข้าแบบพิกัดเดิม (Preserve Origin), การจัดกลุ่ม `S-Unit`, และการเปลี่ยนชื่อบล็อกช่องเปิดประตู-หน้าต่างอัตโนมัติ | [🌐 CAD_AR_Doc.html](https://suteechu.github.io/manual-QHeim/CAD_AR_Doc.html) | [CAD_AR_Doc.md](CAD_AR_Doc.md) |
-| **Step 2** | **Longlead** | ระบบสร้างโมเดลบานประตูและหน้าต่าง 3D, การจับคู่ชื่อแปลนกับรหัส MIM, และการถอดสรุปรายการวัสดุสำหรับสั่งผลิตล่วงหน้า | [🌐 LongleadTime_Doc.html](https://suteechu.github.io/manual-QHeim/LongleadTime_Doc.html) | [LongleadTime_Doc.md](LongleadTime_Doc.md) |
-| **Step 3** | **Structure** | ระบบสร้างโครงสร้างโมดูลาร์ 3D (ชั้น 1-3), ปรับระดับพื้น Smartboard, งานระบบห้องน้ำ-บันได-Void-ทางเข้า, งานเจาะท่อ Service Hole (BR/FS/CS/AC), ชิ้นส่วนพิเศษ Setback/Turnbuckle, ข้อต่อเพดาน Ceiling Joint, และการถอด BOM | [🌐 Struc_Doc.html](https://suteechu.github.io/manual-QHeim/Struc_Doc.html) | [Struc_Doc.md](Struc_Doc.md) |
-| **Step 4** | **Ext Wall** | ระบบผนังภายนอกสำเร็จรูป AAFP, เสา Stud, เสามุม Corner, เสา Window Set, ระบบกันซึม C3, ระบบตรวจสอบระยะเสา 225/332 มม. อัตโนมัติ, และการถอดรายการวัสดุ | [🌐 ExteriorWall_Doc.html](https://suteechu.github.io/manual-QHeim/ExteriorWall_Doc.html) | [ExteriorWall_Doc.md](ExteriorWall_Doc.md) |
-| **Step 5** | **Int Wall** | ระบบผนังภายในและพาร์ทิชันแบ่งห้อง, เสากรอบช่องเปิด, บล็อกปิดรอยต่อระหว่างยูนิต, และการคำนวณถอดแบบโครงคร่าว | [🌐 InteriorWall_Doc.html](https://suteechu.github.io/manual-QHeim/InteriorWall_Doc.html) | [InteriorWall_Doc.md](InteriorWall_Doc.md) |
-| **Step 6** | **PartInstall** | ระบบชิ้นส่วนติดตั้งและตัวยึด, Flashing, Guide Pin, ยางกันสั่น Antivibration Rubber, Super Sheet, และการคำนวณรหัสทิศทางโมดูลาร์ 01-12 | [🌐 PartInstall_Doc.html](https://suteechu.github.io/manual-QHeim/PartInstall_Doc.html) | [PartInstall_Doc.md](PartInstall_Doc.md) |
-| **Step 7** | **EE System** | ระบบไฟฟ้าแสงสว่าง, เต้ารับ, สวิตช์ 1-3 ทาง, ระบบแอร์ CDU/FCU, ระบบสื่อสาร LAN/TV/CCTV/Aiphone, อัลกอริทึม Pathfinding, การสร้างผัง Single-line Loop, ส่งออก LayOut 2D, และการสรุป BOM | [🌐 EE_Doc.html](https://suteechu.github.io/manual-QHeim/EE_Doc.html) | [EE_Doc.md](EE_Doc.md) |
+| ลำดับ (Step) | ระบบย่อย (Subsystem) | รายละเอียดและขอบเขตการทำงาน | สถานะ | ลิงก์ Web HTML (GitHub Pages) | ลิงก์ Markdown |
+| :---: | :--- | :--- | :---: | :---: | :---: |
+| **Step 1** | **CAD AR** | การเตรียมไฟล์ AutoCAD 2D DWG, การส่งออก Text JSON, การนำเข้าแบบพิกัดเดิม (Preserve Origin), การจัดกลุ่ม `S-Unit`, และการเปลี่ยนชื่อบล็อกช่องเปิดประตู-หน้าต่างอัตโนมัติ | ✅ ใช้งานจริง | [🌐 CAD_AR_Doc.html](https://suteechu.github.io/manual-QHeim/CAD_AR_Doc.html) | [CAD_AR_Doc.md](CAD_AR_Doc.md) |
+| **Step 2** | **Longlead** | ระบบสร้างโมเดลบานประตูและหน้าต่าง 3D, การจับคู่ชื่อแปลนกับรหัส MIM, และการถอดสรุปรายการวัสดุสำหรับสั่งผลิตล่วงหน้า | ✅ ใช้งานจริง | [🌐 LongleadTime_Doc.html](https://suteechu.github.io/manual-QHeim/LongleadTime_Doc.html) | [LongleadTime_Doc.md](LongleadTime_Doc.md) |
+| **Step 3** | **Structure** | ระบบสร้างโครงสร้างโมดูลาร์ 3D (ชั้น 1-3), ปรับระดับพื้น Smartboard, งานระบบห้องน้ำ-บันได-Void-ทางเข้า, งานเจาะท่อ Service Hole (BR/FS/CS/AC), ชิ้นส่วนพิเศษ Setback/Turnbuckle, ข้อต่อเพดาน Ceiling Joint, และการถอด BOM | ✅ ใช้งานจริง | [🌐 Struc_Doc.html](https://suteechu.github.io/manual-QHeim/Struc_Doc.html) | [Struc_Doc.md](Struc_Doc.md) |
+| **Step 4** | **Ext Wall** | ระบบผนังภายนอกสำเร็จรูป AAFP, เสา Stud, เสามุม Corner, เสา Window Set, ระบบกันซึม C3, ระบบตรวจสอบระยะเสา 225/332 มม. อัตโนมัติ, และการถอดรายการวัสดุ | ✅ ใช้งานจริง | [🌐 ExteriorWall_Doc.html](https://suteechu.github.io/manual-QHeim/ExteriorWall_Doc.html) | [ExteriorWall_Doc.md](ExteriorWall_Doc.md) |
+| **Step 5** | **Int Wall** | ระบบผนังภายในและพาร์ทิชันแบ่งห้อง, เสากรอบช่องเปิด, บล็อกปิดรอยต่อระหว่างยูนิต, และการคำนวณถอดแบบโครงคร่าว | ✅ ใช้งานจริง | [🌐 InteriorWall_Doc.html](https://suteechu.github.io/manual-QHeim/InteriorWall_Doc.html) | [InteriorWall_Doc.md](InteriorWall_Doc.md) |
+| **Step 6** | **PartInstall** | ระบบชิ้นส่วนติดตั้งและตัวยึด, Flashing, Guide Pin, ยางกันสั่น Antivibration Rubber, Super Sheet, และการคำนวณรหัสทิศทางโมดูลาร์ 01-12 | ✅ ใช้งานจริง | [🌐 PartInstall_Doc.html](https://suteechu.github.io/manual-QHeim/PartInstall_Doc.html) | [PartInstall_Doc.md](PartInstall_Doc.md) |
+| **Step 7** | **EE System** | ระบบไฟฟ้าแสงสว่าง, เต้ารับ, สวิตช์ 1-3 ทาง, ระบบแอร์ CDU/FCU, ระบบสื่อสาร LAN/TV/CCTV/Aiphone, อัลกอริทึม Pathfinding, การสร้างผัง Single-line Loop, ส่งออก LayOut 2D, และการสรุป BOM | ✅ ใช้งานจริง | [🌐 EE_Doc.html](https://suteechu.github.io/manual-QHeim/EE_Doc.html) | [EE_Doc.md](EE_Doc.md) |
+| **Step 8** | **Bathroom & Finishing** | ประกอบห้องน้ำสำเร็จรูป, สุขภัณฑ์, กันซึม, ปูกระเบื้อง, วัสดุปิดผิวพื้น/ผนัง/ฝ้าเพดาน, และสรุปยอด BOM ตกแต่ง | 🚧 กำลังพัฒนา | [🌐 Bathroom_Finishing_Doc.html](https://suteechu.github.io/manual-QHeim/Bathroom_Finishing_Doc.html) | [Bathroom_Finishing_Doc.md](Bathroom_Finishing_Doc.md) |
 
 ---
 
@@ -268,13 +237,15 @@ classDiagram
 
 สำหรับทีมงานรุ่นหลังที่ต้องการปรับปรุง พัฒนา หรือขยายขีดความสามารถของระบบ QHeim:
 
-1. **การเปลี่ยนผ่านจาก AutoCAD VBA สู่ Pure AutoLISP:**  
+1. **การพัฒนาโมดูล Step 8: Bathroom & Finishing (เป้าหมายถัดไป):**  
+   ปัจจุบันกำลังออกแบบระบบสร้างโมเดลห้องน้ำสำเร็จรูป การคำนวณถาดกันซึม และการปูกระเบื้องอัตโนมัติ ซึ่งจะเชื่อมต่อกับพื้นดรอปห้องน้ำจาก Step 3 และสายไฟเครื่องทำน้ำอุ่นจาก Step 7
+2. **การเปลี่ยนผ่านจาก AutoCAD VBA สู่ Pure AutoLISP:**  
    สคริปต์ใน `AutoLISP_ExportLTF/` ถูกพัฒนาขึ้นเพื่อทดแทน VBA DVB เดิม เพื่อให้สามารถทำงานบน AutoCAD เวอร์ชันใหม่ๆ (รวมถึงระบบที่ปิดกั้น VBA) ได้อย่างราบรื่น ควรทดสอบและย้ายมาใช้ `ExportLTF.lsp` เป็นหลัก
-2. **การอัปเดตรหัสชิ้นส่วนและราคา (Master Data Updates):**  
+3. **การอัปเดตรหัสชิ้นส่วนและราคา (Master Data Updates):**  
    เมื่อมีการเปลี่ยนแปลงสเปกวัสดุหรือรหัสสินค้าในโรงงาน ให้อัปเดตที่ตาราง `C:/QHeim/DATA/Data MIM&IM - Component Block.xlsx` ระบบถอด BOM จะดึงข้อมูลล่าสุดไปใช้โดยอัตโนมัติ
-3. **การเชื่อมต่อ API ตรงกับระบบ ERP:**  
+4. **การเชื่อมต่อ API ตรงกับระบบ ERP:**  
    ปัจจุบันระบบสร้างไฟล์ `File Upload.csv` เพื่อให้นำไปอัปโหลดแบบ Manual ในอนาคตสามารถพัฒนาโมดูล Ruby ด้วย `Net::HTTP` หรือ REST API เพื่อยิงข้อมูลเข้าสู่ระบบ SAP หรือ MES ของโรงงานได้โดยตรงแบบอัตโนมัติ
-4. **การรองรับ SketchUp เวอร์ชันใหม่ในอนาคต:**  
+5. **การรองรับ SketchUp เวอร์ชันใหม่ในอนาคต:**  
    ตรวจสอบการเปลี่ยนแปลงของ SketchUp Ruby API ในแต่ละปี โดยเฉพาะส่วนของ `Geom::Transformation` และ `Layout::Document` เมื่ออัปเกรดเวอร์ชัน SketchUp ให้ทดสอบการสร้าง Viewport ในไฟล์ LayOut เป็นลำดับแรก
 
 ---

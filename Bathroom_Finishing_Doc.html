@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QHeim - Step 8: Bathroom & Finishing (กำลังพัฒนา)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({startOnLoad:true, theme:'neutral'});</script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Tahoma, "Sarabun", sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased p-4 md:p-8 min-h-screen flex flex-col justify-between">
+
+  <div>
+    <!-- Header Container -->
+    <div class="max-w-5xl mx-auto bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden mb-8">
+      <div class="bg-gradient-to-r from-teal-700 via-cyan-800 to-slate-800 p-8 text-white">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="inline-block px-3 py-1 bg-amber-400/20 text-amber-300 border border-amber-300/30 backdrop-blur-md rounded-full text-xs font-semibold uppercase tracking-wider">
+                🚧 กำลังคิดสร้างและพัฒนา (Under Development)
+              </span>
+              <a href="index.html" class="inline-flex items-center gap-1 text-xs bg-black/20 hover:bg-black/30 text-white px-2.5 py-1 rounded-full transition">
+                <span>🏠 สารบัญหลัก</span>
+              </a>
+            </div>
+            <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight">Step 8: Bathroom &amp; Finishing</h1>
+            <p class="text-cyan-100 mt-2 text-sm md:text-base max-w-2xl">
+              ระบบประกอบห้องน้ำสำเร็จรูป (WC Assembly), สุขภัณฑ์, งานกันซึม, งานปูกระเบื้อง, และการตกแต่งปิดผิวพื้น-ผนัง-ฝ้าเพดาน (Architectural Finishing)
+            </p>
+          </div>
+          <div class="text-right">
+            <div class="text-xs text-cyan-200">SketchUp Ruby Extension &bull; Upcoming Module</div>
+            <div class="text-sm font-bold bg-teal-950/60 px-3.5 py-1.5 rounded-lg border border-teal-300/30 mt-1">
+              Status: Coming Soon
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto space-y-8">
+      
+      <!-- Notice Box -->
+      <div class="bg-amber-50 border-2 border-amber-300 rounded-2xl p-6 md:p-8 text-slate-700 shadow-sm">
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 rounded-xl bg-amber-500 text-white flex items-center justify-center font-bold text-2xl shrink-0">
+            🛠️
+          </div>
+          <div>
+            <h2 class="text-xl font-bold text-amber-950 mb-2">โมดูลนี้กำลังอยู่ระหว่างการคิดสร้างและพัฒนา (Coming Soon)</h2>
+            <p class="text-sm md:text-base text-amber-900 leading-relaxed mb-4">
+              โมดูลระบบ <strong>Bathroom &amp; Finishing</strong> เป็นส่วนขยายลำดับที่ 8 ของระบบ QHeim กำลังอยู่ในขั้นตอนการออกแบบสถาปัตยกรรมโค้ดและการสร้างคอมโพเนนต์ชิ้นส่วนมาตรฐาน โดยทีมงานจะนำตัวโปรแกรมและคู่มือการใช้งานฉบับสมบูรณ์มาอัปเดตให้ในภายหลัง
+            </p>
+            <div class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-lg bg-amber-200 text-amber-900">
+              <span>📌 โค้ดต้นแบบในระบบ:</span>
+              <code>Ruby/Heim_MakeWC.rb</code> &bull; <code>Ruby/WCGetCode.html</code> &bull; <code>ICON/M-Bathroom.png</code>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scope Section -->
+      <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 space-y-6">
+        <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+          <span>📋</span> ขอบเขตฟังก์ชันการทำงานที่วางแผนไว้ (Planned Features &amp; Scope)
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm">
+          <div class="p-4 rounded-xl border border-teal-200 bg-teal-50/40 space-y-2">
+            <h4 class="font-bold text-teal-900">1. ระบบห้องน้ำสำเร็จรูป (Modular WC Pod Assembly)</h4>
+            <p class="text-slate-600 leading-relaxed">
+              เชื่อมต่อกับพื้นดรอปจาก Step 3 (Structure: Bathroom Drop) วางโมเดล 3D สุขภัณฑ์มาตรฐาน (โถสุขภัณฑ์, อ่างล้างหน้า, อ่างอาบน้ำ, ฝักบัว) พร้อมเจาะท่อ Service Hole (BR)
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl border border-cyan-200 bg-cyan-50/40 space-y-2">
+            <h4 class="font-bold text-cyan-900">2. ระบบกันซึมและปูกระเบื้อง (Waterproofing &amp; Tiling)</h4>
+            <p class="text-slate-600 leading-relaxed">
+              คำนวณแผ่นกันซึมถาดรองพื้นห้องน้ำสำเร็จรูป และการวางแนวจัดเรียงกระเบื้องพื้น-ผนัง พร้อมคำนวณรอยต่อยาแนว
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl border border-indigo-200 bg-indigo-50/40 space-y-2">
+            <h4 class="font-bold text-indigo-900">3. วัสดุปิดผิวสถาปัตยกรรม (Architectural Finishing)</h4>
+            <p class="text-slate-600 leading-relaxed">
+              การเลือกวัสดุปิดผิวพื้นห้องต่างๆ (Laminate, SPC, Vinyl, ไม้ปาร์เก้), งานบัวเชิงผนัง (Skirting), และการปิดผิวฝ้าเพดาน
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl border border-purple-200 bg-purple-50/40 space-y-2">
+            <h4 class="font-bold text-purple-900">4. การถอดรายการวัสดุและปริมาณงาน (Finishing BOM)</h4>
+            <p class="text-slate-600 leading-relaxed">
+              สรุปตารางรหัสสุขภัณฑ์, พื้นที่ปูวัสดุ (ตร.ม.), ความยาวบัวเชิงผนัง (ม.) แยกรายยูนิตและรายห้อง ส่งออกสู่ Excel และ ERP โรงงาน
+            </p>
+          </div>
+        </div>
+
+        <!-- Mermaid Diagram -->
+        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 mt-4">
+          <h4 class="text-xs font-bold uppercase text-slate-500 mb-3 tracking-wider">ผังการเชื่อมโยงระบบ (System Integration Diagram)</h4>
+          <pre class="mermaid bg-transparent p-0">
+flowchart LR
+    S3["Step 3: Structure<br/>(ดรอปพื้น Bathroom & รูท่อ BR)"] --> S8["🚧 Step 8: Bathroom & Finishing<br/>(สุขภัณฑ์, กันซึม, ปูกระเบื้อง, ปิดผิว)"]
+    S5["Step 5: Int Wall<br/>(ผนังพาร์ทิชันห้องน้ำ)"] --> S8
+    S7["Step 7: EE System<br/>(สายไฟเครื่องทำน้ำอุ่น & พัดลมระบายอากาศ)"] --> S8
+    S8 --> OUT[("📊 Finishing & Sanitary BOM<br/>(ใบสั่งผลิตและจัดซื้อส่งโรงงาน)")]
+          </pre>
+        </div>
+      </section>
+
+      <!-- Back to Portal Button -->
+      <div class="text-center pt-4">
+        <a href="index.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-medium transition text-sm shadow-sm">
+          <span>🏠 กลับสู่หน้าพอร์ทัลหลัก (Master Documentation)</span>
+        </a>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="max-w-5xl mx-auto mt-12 py-6 text-center text-xs text-slate-400 w-full border-t border-slate-200">
+    <p>QHeim Modular Construction BIM Documentation &bull; SCG HEIM Engineering Automation</p>
+    <p class="mt-1">
+      <a href="index.html" class="hover:text-slate-600">สารบัญหลัก</a> &bull;
+      <a href="README.md" class="hover:text-slate-600">README.md</a> &bull;
+      <a href="https://github.com/suteechu/manual-QHeim.git" class="hover:text-slate-600">GitHub Repository</a>
+    </p>
+  </footer>
+
+</body>
+</html>
