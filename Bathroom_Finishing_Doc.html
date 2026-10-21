@@ -3,136 +3,569 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QHeim - Step 8: Bathroom & Finishing (กำลังพัฒนา)</title>
+  <title>QHeim - คู่มือและพิมพ์เขียวระบบ Bathroom & Finishing (SketchUp Conceptual)</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
   <script>mermaid.initialize({startOnLoad:true, theme:'neutral'});</script>
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Tahoma, "Sarabun", sans-serif;
     }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white !important; color: black !important; padding: 0 !important; }
+      .shadow-sm, .shadow-md, .shadow-lg, .shadow-xl { box-shadow: none !important; }
+      .border { border-color: #cbd5e1 !important; }
+      section { break-inside: avoid; page-break-inside: avoid; margin-bottom: 24px !important; }
+      table { break-inside: auto; }
+      tr { break-inside: avoid; page-break-inside: avoid; }
+    }
+    pre {
+      background-color: #0f172a;
+      color: #e2e8f0;
+      padding: 1rem;
+      border-radius: 0.75rem;
+      overflow-x: auto;
+      font-size: 0.825rem;
+      line-height: 1.5;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased p-4 md:p-8 min-h-screen flex flex-col justify-between">
+<body class="bg-slate-50 text-slate-800 antialiased p-4 md:p-8">
 
-  <div>
-    <!-- Header Container -->
-    <div class="max-w-5xl mx-auto bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden mb-8">
-      <div class="bg-gradient-to-r from-teal-700 via-cyan-800 to-slate-800 p-8 text-white">
-        <div class="flex flex-wrap items-center justify-between gap-4">
-          <div>
-            <div class="flex items-center gap-2 mb-2">
-              <span class="inline-block px-3 py-1 bg-amber-400/20 text-amber-300 border border-amber-300/30 backdrop-blur-md rounded-full text-xs font-semibold uppercase tracking-wider">
-                🚧 กำลังคิดสร้างและพัฒนา (Under Development)
-              </span>
-              <a href="index.html" class="inline-flex items-center gap-1 text-xs bg-black/20 hover:bg-black/30 text-white px-2.5 py-1 rounded-full transition">
-                <span>🏠 สารบัญหลัก</span>
-              </a>
-            </div>
-            <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight">Step 8: Bathroom &amp; Finishing</h1>
-            <p class="text-cyan-100 mt-2 text-sm md:text-base max-w-2xl">
-              ระบบประกอบห้องน้ำสำเร็จรูป (WC Assembly), สุขภัณฑ์, งานกันซึม, งานปูกระเบื้อง, และการตกแต่งปิดผิวพื้น-ผนัง-ฝ้าเพดาน (Architectural Finishing)
-            </p>
+  <!-- Header Container -->
+  <div class="max-w-6xl mx-auto bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden mb-8">
+    <div class="bg-gradient-to-r from-teal-700 via-cyan-800 to-slate-800 p-8 text-white">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-2">
+            <span class="inline-block px-3 py-1 bg-amber-400/20 text-amber-300 border border-amber-300/30 backdrop-blur-md rounded-full text-xs font-semibold uppercase tracking-wider">
+              Step 08 &bull; Conceptual Blueprint (แนวคิดระบบ)
+            </span>
+            <a href="index.html" class="inline-flex items-center gap-1 text-xs bg-black/20 hover:bg-black/30 text-white px-2.5 py-1 rounded-full transition">
+              <span>🏠 สารบัญหลัก</span>
+            </a>
           </div>
-          <div class="text-right">
-            <div class="text-xs text-cyan-200">SketchUp Ruby Extension &bull; Upcoming Module</div>
-            <div class="text-sm font-bold bg-teal-950/60 px-3.5 py-1.5 rounded-lg border border-teal-300/30 mt-1">
-              Status: Coming Soon
-            </div>
+          <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight">คู่มือและพิมพ์เขียวระบบ Bathroom &amp; Finishing</h1>
+          <p class="text-teal-100 mt-2 text-sm md:text-base max-w-2xl leading-relaxed">
+            สถาปัตยกรรมระบบจำลอง 3D ห้องน้ำสำเร็จรูป, การเดินท่อ PVC &amp; PPR อัตโนมัติ (Auto Run), ระบบโครงสร้างเคาน์เตอร์ Smartframe 33.3, โครงผนังกล่องสุขภัณฑ์, ฝ้าเพดานห้องน้ำ, แผ่นกันซึม Evalon, การตรวจเช็ก Recheck Data Grid, และการออก Shop Drawing พร้อมตาราง Bar Cut List
+          </p>
+        </div>
+        <div class="text-right">
+          <div class="text-xs text-teal-200">SketchUp Ruby Extension &bull; BR Module</div>
+          <div class="text-sm font-bold bg-teal-950/60 px-3 py-1.5 rounded-lg border border-teal-300/30 mt-1">
+            Status: Conceptual Design
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Main Content -->
-    <main class="max-w-5xl mx-auto space-y-8">
-      
-      <!-- Notice Box -->
-      <div class="bg-amber-50 border-2 border-amber-300 rounded-2xl p-6 md:p-8 text-slate-700 shadow-sm">
-        <div class="flex items-start gap-4">
-          <div class="w-12 h-12 rounded-xl bg-amber-500 text-white flex items-center justify-center font-bold text-2xl shrink-0">
-            🛠️
-          </div>
+    <!-- Quick Navigation Bar -->
+    <div class="bg-slate-100 border-b border-slate-200 px-6 py-3 flex flex-wrap gap-2 text-xs md:text-sm font-medium text-slate-600 no-print">
+      <a href="#overview" class="hover:text-teal-600 px-2 py-1 rounded hover:bg-white transition">ภาพรวมระบบ</a>
+      <span class="text-slate-300">|</span>
+      <a href="#ui-toolbar" class="hover:text-teal-600 px-2 py-1 rounded hover:bg-white transition">แถบเครื่องมือ (UI)</a>
+      <span class="text-slate-300">|</span>
+      <a href="#workflow" class="text-teal-700 bg-teal-100 font-bold px-2 py-1 rounded hover:bg-teal-200 transition">👉 6 ขั้นตอนการทำงาน</a>
+      <span class="text-slate-300">|</span>
+      <a href="#autorun-pipe" class="hover:text-teal-600 px-2 py-1 rounded hover:bg-white transition">Auto Run ท่อ PVC/PPR</a>
+      <span class="text-slate-300">|</span>
+      <a href="#framing-ceiling" class="hover:text-teal-600 px-2 py-1 rounded hover:bg-white transition">โครงสร้างเฟรม &amp; ฝ้า</a>
+      <span class="text-slate-300">|</span>
+      <a href="#bom-matrix" class="hover:text-teal-600 px-2 py-1 rounded hover:bg-white transition">ตารางถอดวัสดุ (BOM)</a>
+      <span class="text-slate-300">|</span>
+      <a href="#gallery" class="hover:text-teal-600 px-2 py-1 rounded hover:bg-white transition">คลังแบบ Shop Drawing</a>
+    </div>
+  </div>
+
+  <main class="max-w-6xl mx-auto space-y-8">
+
+    <!-- Section 1: Overview -->
+    <section id="overview" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-teal-100 text-teal-700 flex items-center justify-center font-bold text-lg">01</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">1. ภาพรวมและเป้าหมายของระบบ (System Overview)</h2>
+          <p class="text-sm text-slate-500">บทบาทของระบบห้องน้ำในกระบวนการผลิตบ้านโมดูลาร์ SCG HEIM</p>
+        </div>
+      </div>
+
+      <p class="text-slate-700 leading-relaxed mb-6 text-sm md:text-base">
+        ในบ้านสำเร็จรูปโครงสร้างเหล็กโมดูลาร์ งานห้องน้ำเป็นพื้นที่ที่มีความหนาแน่นของงานระบบสูงสุด (Highest System Density) ประกอบด้วยงานท่อประปาสุขาภิบาล, ถาดกันซึม, งานโครงเหล็กซ่อนผนัง (Concealed Framing), เคาน์เตอร์, และฝ้าเพดาน ระบบ <strong>Bathroom (BR)</strong> ใน QHeim ถูกออกแบบขึ้นเพื่อแปลงข้อมูลแบบร่างจาก AutoCAD สุขาภิบาลและสถาปัตยกรรม (<code class="bg-slate-100 px-1 py-0.5 rounded font-mono">DWG CAD.IN + SN</code>) ให้กลายเป็นโมเดล 3D BIM อัจฉริยะบน SketchUp แบบ <strong>กึ่งอัตโนมัติ (Semi-Automated)</strong>
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="p-4 rounded-xl border border-teal-200 bg-teal-50/50">
+          <div class="font-bold text-teal-900 text-sm mb-1">⚡ 1. ลดเวลาเขียนแบบท่อ</div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            จากเดิมที่ต้องขึ้นโมเดลท่อ 3D ทีละท่อน เปลี่ยนเป็นการอ่าน Sleeve Pipe จาก CAD แล้วรันเส้นท่อ PVC และ PPR ขึ้นมาใน 3D อัตโนมัติ (Auto Run Engine)
+          </p>
+        </div>
+        <div class="p-4 rounded-xl border border-cyan-200 bg-cyan-50/50">
+          <div class="font-bold text-cyan-900 text-sm mb-1">📐 2. คำนวณตัดเหล็ก (Bar Cut List)</div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            สร้างตารางตัดเหล็ก/อลูมิเนียมสำหรับโครงเคาน์เตอร์ โครงผนังหลังชักโครก และโครงฝ้าเพดาน พร้อมระยะตัด (Cut Length) และจำนวน เพื่อส่งตัดในโรงงานได้ทันที
+          </p>
+        </div>
+        <div class="p-4 rounded-xl border border-indigo-200 bg-indigo-50/50">
+          <div class="font-bold text-indigo-900 text-sm mb-1">🛡️ 3. ป้องกันการรั่วซึม (Waterproofing)</div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            คำนวณพื้นที่แผ่นกันซึม Evalon Membrane พับยกขอบ 150 มม. และจำลองรอยต่อกระเบื้องแบบ Dry Lay อย่างแม่นยำ
+          </p>
+        </div>
+      </div>
+
+      <!-- Mermaid Pipeline -->
+      <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+        <h4 class="text-xs font-bold uppercase text-slate-500 mb-3 tracking-wider">กระบวนการไหลของข้อมูล (Conceptual Pipeline)</h4>
+        <pre class="mermaid bg-transparent p-0">
+flowchart LR
+    A["AutoCAD 2D<br/>(DWG CAD.IN + SN)"] --> B["1. CAD Import<br/>เข้า SketchUp WCS"]
+    B --> C["2. Auto Run Pipes<br/>PVC & PPR System"]
+    C --> D["3. Framing & Zones<br/>Shower, Counter, WC, Floor"]
+    D --> E["4. Recheck Data Grid<br/>ตรวจสอบ & แก้ไข BOQ"]
+    E --> F["5. Auto Shop Drawings<br/>LayOut + Bar Cut List"]
+    E --> G["6. Factory BOM<br/>CSV / Excel Export"]
+        </pre>
+      </div>
+    </section>
+
+    <!-- Section 2: UI & Toolbar -->
+    <section id="ui-toolbar" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-cyan-100 text-cyan-700 flex items-center justify-center font-bold text-lg">02</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">2. หน้าต่างเมนูและแถบเครื่องมือ (UI Toolbar &amp; Controllers)</h2>
+          <p class="text-sm text-slate-500">แถบเครื่องมือและชุดไอคอนควบคุมระบบ Bathroom ใน SketchUp</p>
+        </div>
+      </div>
+
+      <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 mb-6 text-xs md:text-sm">
+        <div class="font-bold text-slate-800 mb-2">แถบเครื่องมือ SCG HEIM Toolbar (ตำแหน่งแท็บ BR):</div>
+        <div class="p-3 bg-white rounded-lg border border-slate-200 font-mono text-xs flex flex-wrap gap-2 items-center">
+          <span class="bg-red-600 text-white px-2 py-1 rounded font-bold">SCG HEIM</span>
+          <span class="bg-slate-100 px-2 py-1 rounded">Home</span>
+          <span class="bg-slate-100 px-2 py-1 rounded">ST (Structure)</span>
+          <span class="bg-slate-100 px-2 py-1 rounded">EW (Exterior)</span>
+          <span class="bg-slate-100 px-2 py-1 rounded">IW (Interior)</span>
+          <span class="bg-slate-100 px-2 py-1 rounded">EE (Electricity)</span>
+          <span class="bg-teal-600 text-white px-2.5 py-1 rounded font-bold shadow-sm">👉 BR (Bathroom)</span>
+          <span class="bg-slate-100 px-2 py-1 rounded">IN (Part Install)</span>
+          <span class="bg-slate-100 px-2 py-1 rounded">LT (Long lead time)</span>
+          <span class="bg-slate-100 px-2 py-1 rounded">Layout</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs">
+        <div class="p-3 rounded-xl border border-slate-200 bg-white shadow-sm flex items-center gap-3">
+          <div class="w-10 h-10 rounded bg-red-100 text-red-600 flex items-center justify-center font-bold text-sm shrink-0">CAD</div>
           <div>
-            <h2 class="text-xl font-bold text-amber-950 mb-2">โมดูลนี้กำลังอยู่ระหว่างการคิดสร้างและพัฒนา (Coming Soon)</h2>
-            <p class="text-sm md:text-base text-amber-900 leading-relaxed mb-4">
-              โมดูลระบบ <strong>Bathroom &amp; Finishing</strong> เป็นส่วนขยายลำดับที่ 8 ของระบบ QHeim กำลังอยู่ในขั้นตอนการออกแบบสถาปัตยกรรมโค้ดและการสร้างคอมโพเนนต์ชิ้นส่วนมาตรฐาน โดยทีมงานจะนำตัวโปรแกรมและคู่มือการใช้งานฉบับสมบูรณ์มาอัปเดตให้ในภายหลัง
-            </p>
-            <div class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-lg bg-amber-200 text-amber-900">
-              <span>📌 โค้ดต้นแบบในระบบ:</span>
-              <code>Ruby/Heim_MakeWC.rb</code> &bull; <code>Ruby/WCGetCode.html</code> &bull; <code>ICON/M-Bathroom.png</code>
+            <div class="font-bold text-slate-800">ปุ่ม CAD Import</div>
+            <div class="text-slate-500">เชื่อมโยงไฟล์ DWG CAD.IN+SN</div>
+          </div>
+        </div>
+        <div class="p-3 rounded-xl border border-slate-200 bg-white shadow-sm flex items-center gap-3">
+          <div class="w-10 h-10 rounded bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-sm shrink-0">CSV</div>
+          <div>
+            <div class="font-bold text-slate-800">ปุ่ม CSV Export</div>
+            <div class="text-slate-500">ส่งออกข้อมูล BOQ/BOM</div>
+          </div>
+        </div>
+        <div class="p-3 rounded-xl border border-slate-200 bg-white shadow-sm flex items-center gap-3">
+          <div class="w-10 h-10 rounded bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-sm shrink-0">WIN</div>
+          <div>
+            <div class="font-bold text-slate-800">ปุ่ม Layer Window</div>
+            <div class="text-slate-500">เปิด-ปิดเลเยอร์แสดงผล 2D/3D</div>
+          </div>
+        </div>
+        <div class="p-3 rounded-xl border border-slate-200 bg-white shadow-sm flex items-center gap-3">
+          <div class="w-10 h-10 rounded bg-purple-100 text-purple-600 flex items-center justify-center font-bold text-sm shrink-0">A-E</div>
+          <div>
+            <div class="font-bold text-slate-800">ปุ่มขั้นตอน A ถึง E</div>
+            <div class="text-slate-500">คุมการทำงานทีละสเต็ป</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: 6-Stage Workflow -->
+    <section id="workflow" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-lg">03</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">3. กระบวนการทำงานหลัก 6 ขั้นตอน (6-Stage Conceptual Workflow)</h2>
+          <p class="text-sm text-slate-500">ขั้นตอนการแปลงแบบ CAD สู่โมเดล 3D BIM และการสั่งผลิตโรงงาน</p>
+        </div>
+      </div>
+
+      <div class="space-y-6 text-xs md:text-sm text-slate-700">
+        
+        <!-- Stage 1 -->
+        <div class="border border-slate-200 rounded-xl p-5 bg-slate-50">
+          <div class="flex items-center gap-2 font-bold text-slate-800 text-base mb-2">
+            <span class="w-6 h-6 rounded bg-teal-600 text-white flex items-center justify-center text-xs">1</span>
+            <span>การนำเข้าไฟล์ CAD (CAD Import &amp; Layer Management)</span>
+          </div>
+          <p class="mb-3 leading-relaxed">
+            Import ไฟล์ 2D DWG จาก AutoCAD เข้าสู่ SketchUp โดยอ้างอิงจุดกำเนิด WCS (0,0,0) เดียวกัน เพื่อให้โมเดลสุขาภิบาลและสถาปัตยกรรมซ้อนทับกันพอดี:
+          </p>
+          <ul class="list-disc list-inside space-y-1 mb-3">
+            <li><code class="font-mono font-bold text-blue-600">DWG PDF. SN</code>: เลเยอร์งานระบบสุขาภิบาล (Sleeve Pipe, Soil, Waste, Cold Water, Vent)</li>
+            <li><code class="font-mono font-bold text-indigo-600">DWG PDF. IN</code>: เลเยอร์งานสถาปัตยกรรมภายใน (Floor Plan, Vanity Counter, Sanitary Fixtures, Tiles)</li>
+          </ul>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+            <div class="p-3 bg-white rounded-lg border border-slate-200">
+              <div class="font-bold text-slate-700 mb-1 text-xs">📄 ผังท่อสุขาภิบาล (DWG SN1-05):</div>
+              <img src="images/bathroom/br_cad_dwg_sn.png" alt="DWG SN" class="w-full h-44 object-cover rounded border border-slate-200">
+            </div>
+            <div class="p-3 bg-white rounded-lg border border-slate-200">
+              <div class="font-bold text-slate-700 mb-1 text-xs">📄 ผังสถาปัตยกรรมห้องน้ำ (DWG IN3-05):</div>
+              <img src="images/bathroom/br_cad_dwg_in.png" alt="DWG IN" class="w-full h-44 object-cover rounded border border-slate-200">
+            </div>
+          </div>
+        </div>
+
+        <!-- Stage 2: Auto Run Pipes -->
+        <div id="autorun-pipe" class="border border-slate-200 rounded-xl p-5 bg-slate-50">
+          <div class="flex items-center gap-2 font-bold text-slate-800 text-base mb-2">
+            <span class="w-6 h-6 rounded bg-teal-600 text-white flex items-center justify-center text-xs">2</span>
+            <span>การจำลอง 3D และ Auto Run ท่อ PVC &amp; PPR อัตโนมัติ</span>
+          </div>
+          <p class="mb-3 leading-relaxed">
+            ระบบสแกนตำแหน่ง Sleeve Pipe จากแปลน CAD แล้วสร้างท่อ 3D ขึ้นมาในโมเดล พร้อมอุปกรณ์ข้อต่อข้องอ 90°, 45°, สามทาง (Tee), และเกลียวนอก-ใน วิ่งขึ้นสู่ระดับอุปกรณ์สุขภัณฑ์โดยอัตโนมัติ:
+          </p>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4 text-center">
+            <div class="p-2 bg-white rounded border border-slate-200">
+              <div class="font-bold text-blue-700 text-xs">ระดับฝักบัวอาบน้ำ</div>
+              <div class="font-mono text-sm">+1,995 mm</div>
+            </div>
+            <div class="p-2 bg-white rounded border border-slate-200">
+              <div class="font-bold text-blue-700 text-xs">ระดับวาล์วน้ำผสม</div>
+              <div class="font-mono text-sm">+1,020 mm</div>
+            </div>
+            <div class="p-2 bg-white rounded border border-slate-200">
+              <div class="font-bold text-blue-700 text-xs">ระดับก๊อกอ่างล้างหน้า</div>
+              <div class="font-mono text-sm">+540 mm</div>
+            </div>
+            <div class="p-2 bg-white rounded border border-slate-200">
+              <div class="font-bold text-blue-700 text-xs">ระดับน้ำดีโถสุขภัณฑ์</div>
+              <div class="font-mono text-sm">+190 mm</div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="p-3 bg-white rounded-lg border border-slate-200">
+              <div class="font-bold text-slate-700 mb-1 text-xs">โครงร่างท่อ 3D เริ่มต้น:</div>
+              <img src="images/bathroom/br_skp_import.png" alt="SKP Import" class="w-full h-44 object-cover rounded border border-slate-200">
+            </div>
+            <div class="p-3 bg-white rounded-lg border border-slate-200">
+              <div class="font-bold text-slate-700 mb-1 text-xs">Auto Run ท่อ PVC (สีฟ้า) &amp; PPR (สีเขียว):</div>
+              <img src="images/bathroom/br_skp_pipe_autorun.png" alt="Auto Run Pipe" class="w-full h-44 object-cover rounded border border-slate-200">
+            </div>
+          </div>
+        </div>
+
+        <!-- Stage 3: Floor, Shower & Counter -->
+        <div id="framing-ceiling" class="border border-slate-200 rounded-xl p-5 bg-slate-50">
+          <div class="flex items-center gap-2 font-bold text-slate-800 text-base mb-2">
+            <span class="w-6 h-6 rounded bg-teal-600 text-white flex items-center justify-center text-xs">3</span>
+            <span>ระบบโซนพื้น, โซนอาบน้ำ, ช่องวางสบู่, และเคาน์เตอร์</span>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+            <div class="p-3 bg-white rounded-lg border border-slate-200">
+              <div class="font-bold text-teal-800 mb-1 text-xs">1. Floor System (Mark Location)</div>
+              <p class="text-xs text-slate-600 mb-2">วางมาร์กเกอร์และแอตทริบิวต์ระบุชนิดพื้น (AD, BD, DD) คำนวณถาดรองพื้นดรอป</p>
+              <img src="images/bathroom/br_skp_floor_mark.png" alt="Floor Mark" class="w-full h-32 object-cover rounded border border-slate-200">
+            </div>
+            <div class="p-3 bg-white rounded-lg border border-slate-200">
+              <div class="font-bold text-teal-800 mb-1 text-xs">2. Shower &amp; Soap Niche</div>
+              <p class="text-xs text-slate-600 mb-2">แบ่งโซนเปียก-แห้ง และเจาะช่องสบู่ <code class="font-mono">Soap: high 970</code> กว้าง 900 mm</p>
+              <img src="images/bathroom/br_skp_shower_work.png" alt="Shower Work" class="w-full h-32 object-cover rounded border border-slate-200">
+            </div>
+            <div class="p-3 bg-white rounded-lg border border-slate-200">
+              <div class="font-bold text-teal-800 mb-1 text-xs">3. Counter System Work</div>
+              <p class="text-xs text-slate-600 mb-2">วางโครง Smartframe 33.3 เคาน์เตอร์ท็อป +850 mm กระจก 1570x1000 mm</p>
+              <img src="images/bathroom/br_skp_counter_work.png" alt="Counter Work" class="w-full h-32 object-cover rounded border border-slate-200">
+            </div>
+          </div>
+
+          <div class="p-3 bg-white rounded-lg border border-slate-200">
+            <div class="font-bold text-slate-700 mb-1 text-xs">โมเดล 3D รวมทุกระบบ (Complete 3D Assembly):</div>
+            <img src="images/bathroom/br_skp_assembly.png" alt="3D Assembly" class="w-full h-56 object-cover rounded border border-slate-200">
+          </div>
+        </div>
+
+        <!-- Stage 4: BOQ & Recheck -->
+        <div class="border border-slate-200 rounded-xl p-5 bg-slate-50">
+          <div class="flex items-center gap-2 font-bold text-slate-800 text-base mb-2">
+            <span class="w-6 h-6 rounded bg-teal-600 text-white flex items-center justify-center text-xs">4</span>
+            <span>กระบวนการคำนวณ BOQ และการตรวจสอบ Recheck Data Grid</span>
+          </div>
+          <ul class="list-disc list-inside space-y-1 mb-3">
+            <li><strong>BOQ Engine:</strong> ดึงข้อมูลจาก 3D Components คำนวณปริมาณวัสดุสำหรับงานโครงเฟรม, ท่อ, และฝ้าเพดาน พร้อมระบบ Undo/Redo</li>
+            <li><strong>Auto Data Grid:</strong> แสดงตารางชิ้นส่วนทั้งหมดเพื่อตรวจสอบความถูกต้อง และสามารถ Edit แก้ไขข้อมูลที่ผิดพลาดได้ทันทีก่อนส่งออก</li>
+            <li><strong>Message Alert:</strong> มีระบบแจ้งเตือนอัตโนมัติเมื่อมีการอัปเดตรหัสชิ้นส่วนมาตรฐานใหม่ (<code class="font-mono">IM SB New</code>)</li>
+          </ul>
+        </div>
+
+        <!-- Stage 5: Export BOM & Shop Drawings -->
+        <div class="border border-slate-200 rounded-xl p-5 bg-slate-50">
+          <div class="flex items-center gap-2 font-bold text-slate-800 text-base mb-2">
+            <span class="w-6 h-6 rounded bg-teal-600 text-white flex items-center justify-center text-xs">5</span>
+            <span>การส่งออก BOM และแบบ Shop Drawing อัตโนมัติ (Bar Cut List)</span>
+          </div>
+          <p class="mb-3 leading-relaxed">
+            ระบบสร้างเอกสารสำหรับสั่งผลิตโรงงานได้ 2 รูปแบบทันที:
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="p-3 bg-white rounded-lg border border-slate-200">
+              <h4 class="font-bold text-teal-900 mb-1 text-xs">📊 Export BOM (CSV / Excel):</h4>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                แยกตามหมวดหมู่งาน: งานระบบท่อ (PVC/PPR), งานเฟรม (Aluminium, Box 50x40, U-Frame SB_8), งานฝ้าเพดาน (C-Line, Clip Lock), และงานเคมีภัณฑ์ (แผ่นกันซึม Evalon, ปูนกาว, อีพ็อกซี่)
+              </p>
+            </div>
+            <div class="p-3 bg-white rounded-lg border border-slate-200">
+              <h4 class="font-bold text-teal-900 mb-1 text-xs">📐 Export Drawing อัตโนมัติ:</h4>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                ใช้ Auto Template HEIM สร้างภาพ 2D Top-View, Elevation รูปด้าน 1-4, บอกระยะ Auto Dimension, และคำนวณตารางตัดเหล็ก <strong>Bar Cut List</strong> แสดงรหัสท่อน ความยาว และจำนวนชิ้น
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 4: BOM Matrix -->
+    <section id="bom-matrix" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-lg">04</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">4. ตารางถอดแบบรายการวัสดุ 4 หมวดหลัก (BOM &amp; Materials Matrix)</h2>
+          <p class="text-sm text-slate-500">แคตตาล็อกรายการวัสดุและเกณฑ์การคำนวณปริมาณงานห้องน้ำ</p>
+        </div>
+      </div>
+
+      <!-- Category 1: Piping -->
+      <h3 class="text-sm font-bold text-slate-800 mb-2">4.1 หมวดที่ 1: งานระบบท่อประปาและสุขาภิบาล (Piping System)</h3>
+      <div class="overflow-x-auto border border-slate-200 rounded-xl mb-6">
+        <table class="w-full text-left text-xs">
+          <thead class="bg-slate-100 text-slate-700 font-bold border-b">
+            <tr><th class="p-2.5">รายการวัสดุ</th><th class="p-2.5">มาตรฐาน / สเปก</th><th class="p-2.5">หน้าที่ / ตำแหน่งติดตั้ง</th><th class="p-2.5 text-center">หน่วย BOM</th></tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            <tr><td class="p-2.5 font-bold">ท่อ PVC น้ำดี/น้ำทิ้ง</td><td class="p-2.5">PVC ตราช้าง 13.5 (ขนาด 1", 3/4", 1/2")</td><td class="p-2.5 text-slate-600">ท่อน้ำดีและท่อน้ำทิ้ง Floor Drain</td><td class="p-2.5 text-center font-mono">เมตร (m.)</td></tr>
+            <tr><td class="p-2.5 font-bold">ท่อ PVC โสโครก</td><td class="p-2.5">PVC 4" ชั้น 8.5/13.5</td><td class="p-2.5 text-slate-600">ท่อส้วมจากโถสุขภัณฑ์ลงสู่ Shaft</td><td class="p-2.5 text-center font-mono">เมตร (m.)</td></tr>
+            <tr><td class="p-2.5 font-bold">ท่อ PP-R น้ำดี</td><td class="p-2.5">PP-R Class 20 (ขนาด 25mm / 1/2")</td><td class="p-2.5 text-slate-600">ท่อน้ำดีแรงดันสูงฝังผนัง</td><td class="p-2.5 text-center font-mono">เมตร (m.)</td></tr>
+            <tr><td class="p-2.5 font-bold">ข้อต่อตรง / ข้องอ 90° / 45°</td><td class="p-2.5">PVC / PPR ตามขนาดท่อ</td><td class="p-2.5 text-slate-600">จุดเปลี่ยนทิศทางท่อ</td><td class="p-2.5 text-center font-mono">ชุด (EA)</td></tr>
+            <tr><td class="p-2.5 font-bold">สามทาง (Tee) / ข้อต่อสะพาน</td><td class="p-2.5">PVC / PPR</td><td class="p-2.5 text-slate-600">แยกแขนงท่อน้ำดีและท่อระบายอากาศ</td><td class="p-2.5 text-center font-mono">ชุด (EA)</td></tr>
+            <tr><td class="p-2.5 font-bold">ข้อต่อเกลียวนอก-ใน / วาล์ว</td><td class="p-2.5">ทองเหลือง / PPR เกลียวโลหะ</td><td class="p-2.5 text-slate-600">จุดต่อสุขภัณฑ์และวาล์วผสม</td><td class="p-2.5 text-center font-mono">ชุด (EA)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Category 2: Framing & Bar Cut List -->
+      <h3 class="text-sm font-bold text-slate-800 mb-2">4.2 หมวดที่ 2: งานโครงสร้างเฟรมและตารางตัดบาร์ (Framing &amp; Bar Cut List)</h3>
+      <div class="overflow-x-auto border border-slate-200 rounded-xl mb-6">
+        <table class="w-full text-left text-xs">
+          <thead class="bg-slate-100 text-slate-700 font-bold border-b">
+            <tr><th class="p-2.5">รหัสชิ้นส่วน</th><th class="p-2.5">ชื่อชิ้นส่วน</th><th class="p-2.5">สเปก / ขนาดหน้าตัด</th><th class="p-2.5">ตำแหน่งการใช้งาน</th></tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            <tr><td class="p-2.5 font-mono font-bold">Smartframe 33.3</td><td class="p-2.5 font-bold">โครงสร้างสมาร์ทเฟรม</td><td class="p-2.5">C-Section กัลวาไนซ์ 33.3 mm</td><td class="p-2.5 text-slate-600">โครงรับเคาน์เตอร์อ่างล้างหน้า</td></tr>
+            <tr><td class="p-2.5 font-mono font-bold">BOX / U / C</td><td class="p-2.5 font-bold">กล่องเฟรมรับแรง</td><td class="p-2.5">เหล็กกล่อง 50x40 mm ลายกันลื่น</td><td class="p-2.5 text-slate-600">โครงผนังหลังโถสุขภัณฑ์, โครงส่วนอาบน้ำ</td></tr>
+            <tr><td class="p-2.5 font-mono font-bold">U-Frame (SB_8)</td><td class="p-2.5 font-bold">โครงตัวยูรับแผ่น</td><td class="p-2.5">ราง U กัลวาไนซ์สำหรับแผ่น 8 mm</td><td class="p-2.5 text-slate-600">ขอบจบงานผนังเบาห้องน้ำ</td></tr>
+            <tr><td class="p-2.5 font-mono font-bold">Aluminium Frame</td><td class="p-2.5 font-bold">กรอบอลูมิเนียม Extrusion</td><td class="p-2.5">รางอลูมิเนียม T-Slot</td><td class="p-2.5 text-slate-600">โครงฉากกั้นอาบน้ำกระจกนิรภัย</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Category 3: Ceiling & Waterproofing -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="text-sm font-bold text-slate-800 mb-2">4.3 หมวดฝ้าเพดาน (Ceiling System)</h3>
+          <div class="border border-slate-200 rounded-xl overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-100 font-bold border-b">
+                <tr><th class="p-2">Part No.</th><th class="p-2">ชื่อวัสดุ</th><th class="p-2 text-center">จำนวน</th></tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200">
+                <tr><td class="p-2 font-mono">AAGN01xxx</td><td class="p-2">Angle Steel L รอบผนัง</td><td class="p-2 text-center font-mono">2-6</td></tr>
+                <tr><td class="p-2 font-mono">AAGN02xxx</td><td class="p-2">Pro-Line ติดแผ่น GB</td><td class="p-2 text-center font-mono">6-8</td></tr>
+                <tr><td class="p-2 font-mono">AAGN03000</td><td class="p-2">HF DCB (L=220mm)</td><td class="p-2 text-center font-mono">24</td></tr>
+                <tr><td class="p-2 font-mono">AAGN03010</td><td class="p-2 font-bold text-teal-700">Cf Clip Lock</td><td class="p-2 text-center font-mono font-bold text-teal-700">25</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-bold text-slate-800 mb-2">4.4 หมวดกันซึมและเคมีภัณฑ์</h3>
+          <div class="border border-slate-200 rounded-xl overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-100 font-bold border-b">
+                <tr><th class="p-2">วัสดุ</th><th class="p-2">คุณสมบัติ</th><th class="p-2 text-center">หน่วย</th></tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200">
+                <tr><td class="p-2 font-bold">แผ่นกันซึม Evalon</td><td class="p-2 text-slate-600">เมมเบรน EVA-PVC ยกขอบ 150 mm</td><td class="p-2 text-center font-mono">ม.² (m²)</td></tr>
+                <tr><td class="p-2 font-bold">กาวอีพ็อกซี่ (Epoxy)</td><td class="p-2 text-slate-600">กาวสองส่วนผสมยึดโครงสร้าง</td><td class="p-2 text-center font-mono">กก. (kg)</td></tr>
+                <tr><td class="p-2 font-bold">ปูนกาวปูกระเบื้อง</td><td class="p-2 text-slate-600">ปูนกาวสูตรทนชื้นห้องน้ำ</td><td class="p-2 text-center font-mono">ถุง (Bag)</td></tr>
+                <tr><td class="p-2 font-bold">ยาแนวกันราดำ</td><td class="p-2 text-slate-600">ยาแนวผสม Microban</td><td class="p-2 text-center font-mono">ถุง (Bag)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+    <!-- Section 4.5: Finishing Calculations -->
+    <section class="bg-gradient-to-br from-amber-50/70 via-orange-50/40 to-slate-50 rounded-2xl border-2 border-amber-300 p-6 md:p-8 space-y-6 shadow-sm">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center font-bold text-lg">🧪</div>
+        <div>
+          <h2 class="text-2xl font-bold text-amber-950">งาน Finishing: การคำนวณหา ปูนกาว, ปูนฉาบ, และเคมีภัณฑ์อื่นๆ</h2>
+          <p class="text-sm text-amber-800">นิยามหลักของงาน Finishing ใน QHeim: การถอดพื้นที่ผิวเพื่อคำนวณวัสดุประสาน ปิดผิว และกันซึม</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xs md:text-sm">
+        <div class="p-4 bg-white rounded-xl border border-amber-200 shadow-sm space-y-2">
+          <div class="font-bold text-amber-900 text-sm flex items-center gap-1.5">
+            <span>🧱</span> 1. ปูนกาว (Tile Adhesive)
+          </div>
+          <p class="text-slate-600 text-xs leading-relaxed">
+            คิดจากพื้นที่ปูกระเบื้องพื้นและผนังห้องน้ำ (ตร.ม.) &times; อัตราการใช้ 4-5 กก./ตร.ม. (หวีเกรียง 3-5 มม.) เผื่อตัด 5% คำนวณเป็นจำนวนถุง (20 กก./ถุง)
+          </p>
+          <div class="p-2 bg-amber-50 rounded font-mono text-[11px] text-amber-900 border border-amber-200">
+            สูตร: (พื้นที่ &times; 4.5 / 20) &times; 1.05
+          </div>
+        </div>
+
+        <div class="p-4 bg-white rounded-xl border border-amber-200 shadow-sm space-y-2">
+          <div class="font-bold text-amber-900 text-sm flex items-center gap-1.5">
+            <span>🖌️</span> 2. ปูนฉาบ (Plaster / Skim)
+          </div>
+          <p class="text-slate-600 text-xs leading-relaxed">
+            - <strong>ปูนฉาบรอยต่อแผ่น:</strong> คิดจากความยาวรอยต่อแผ่น (ม.) &times; 0.2 กก./ม. พร้อมเทปผ้าใยแก้ว<br>
+            - <strong>สกิมโค้ทฉาบผิวบาง:</strong> 1.2-1.5 กก./ตร.ม./หนา 1 มม. ก่อนทาสี
+          </p>
+          <div class="p-2 bg-amber-50 rounded font-mono text-[11px] text-amber-900 border border-amber-200">
+            ถุง 20 กก. ฉาบได้ ~13-16 ตร.ม.
+          </div>
+        </div>
+
+        <div class="p-4 bg-white rounded-xl border border-amber-200 shadow-sm space-y-2">
+          <div class="font-bold text-amber-900 text-sm flex items-center gap-1.5">
+            <span>🛡️</span> 3. แผ่นกันซึม Evalon
+          </div>
+          <p class="text-slate-600 text-xs leading-relaxed">
+            คิดจากพื้นที่ถาดรองพื้นดรอป + พื้นที่พับยกขอบบัวสูง 150-200 มม. รอบห้อง + ระยะซ้อนทับ Lap รอยต่อ 100 มม. (เผื่อรวม 15%)
+          </p>
+          <div class="p-2 bg-amber-50 rounded font-mono text-[11px] text-amber-900 border border-amber-200">
+            พื้นที่จริง + ยกขอบ &times; 1.15
+          </div>
+        </div>
+
+        <div class="p-4 bg-white rounded-xl border border-amber-200 shadow-sm space-y-2">
+          <div class="font-bold text-amber-900 text-sm flex items-center gap-1.5">
+            <span>🧴</span> 4. อีพ็อกซี่, ยาแนว, ซิลิโคน
+          </div>
+          <p class="text-slate-600 text-xs leading-relaxed">
+            - <strong>กาวอีพ็อกซี่:</strong> 0.15-0.20 กก./จุดต่อโครงสร้าง<br>
+            - <strong>ยาแนวกันราดำ:</strong> 0.25-0.35 กก./ตร.ม. กระเบื้อง<br>
+            - <strong>ซิลิโคนสุขภัณฑ์:</strong> 1 หลอด / 8-10 เมตรแนวรอยต่อ
+          </p>
+          <div class="p-2 bg-amber-50 rounded font-mono text-[11px] text-amber-900 border border-amber-200">
+            แยกจำนวนเป็นหลอด/ถุง/ชุด
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Section 5: Gallery & Shop Drawings -->
+    <section id="gallery" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-lg">05</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">5. คลังภาพร่างแนวคิดและแบบก่อสร้าง (Conceptual Gallery &amp; Shop Drawings)</h2>
+          <p class="text-sm text-slate-500">แบบ Shop Drawing มาตรฐานโรงงานและภาพจำลองกระบวนการทำงาน</p>
+        </div>
+      </div>
+
+      <div class="space-y-6">
+        <!-- Row 1: Full Shop Drawings -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="border border-slate-200 rounded-xl p-3 bg-slate-50">
+            <div class="font-bold text-slate-800 text-xs mb-1">แบบสั่งผลิตเคาน์เตอร์และโครงผนัง (Thanawin T-WC21):</div>
+            <img src="images/bathroom/br_shop_dwg_full_wc21.png" alt="Shop Drawing WC21" class="w-full h-56 object-cover rounded border border-slate-200 hover:scale-105 transition duration-300">
+          </div>
+          <div class="border border-slate-200 rounded-xl p-3 bg-slate-50">
+            <div class="font-bold text-slate-800 text-xs mb-1">แบบสั่งผลิตผนังอาบน้ำและชักโครก (Thanawin T-WC22):</div>
+            <img src="images/bathroom/br_shop_dwg_full_wc22.png" alt="Shop Drawing WC22" class="w-full h-56 object-cover rounded border border-slate-200 hover:scale-105 transition duration-300">
+          </div>
+        </div>
+
+        <!-- Row 2: Elevation & Detail -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="border border-slate-200 rounded-xl p-3 bg-slate-50">
+            <div class="font-bold text-slate-800 text-xs mb-1">Elevation แนวท่อน้ำและสุขภัณฑ์:</div>
+            <img src="images/bathroom/br_plumbing_elevation.png" alt="Plumbing Elevation" class="w-full h-40 object-cover rounded border border-slate-200">
+          </div>
+          <div class="border border-slate-200 rounded-xl p-3 bg-slate-50">
+            <div class="font-bold text-slate-800 text-xs mb-1">โครงสร้างฝ้าเพดานห้องน้ำ:</div>
+            <img src="images/bathroom/br_shop_dwg_ceiling.png" alt="Ceiling Drawing" class="w-full h-40 object-cover rounded border border-slate-200">
+          </div>
+          <div class="border border-slate-200 rounded-xl p-3 bg-slate-50">
+            <div class="font-bold text-slate-800 text-xs mb-1">ช่องวางสบู่ (Soap Niche +970 mm):</div>
+            <img src="images/bathroom/br_skp_soap_niche.png" alt="Soap Niche" class="w-full h-40 object-cover rounded border border-slate-200">
+          </div>
+        </div>
+
+        <!-- Row 3: Catalog -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="border border-slate-200 rounded-xl p-3 bg-slate-50 flex items-center gap-3">
+            <img src="images/bathroom/br_mat_pvc_ppr.png" alt="PVC PPR Fittings" class="w-32 h-24 object-cover rounded border border-slate-200">
+            <div>
+              <div class="font-bold text-slate-800 text-xs">อุปกรณ์ข้อต่อท่อ PVC &amp; PPR:</div>
+              <p class="text-[11px] text-slate-500 mt-1">ข้อต่อตรง, ข้องอ 90°/45°, สามทาง, ข้อต่อเกลียวนอก-ใน, ข้อต่อยูเนี่ยน, ข้อต่อสะพานหลบคาน</p>
+            </div>
+          </div>
+          <div class="border border-slate-200 rounded-xl p-3 bg-slate-50 flex items-center gap-3">
+            <img src="images/bathroom/br_mat_evalon.png" alt="Evalon Membrane" class="w-32 h-24 object-cover rounded border border-slate-200">
+            <div>
+              <div class="font-bold text-slate-800 text-xs">แผ่นกันซึม Evalon Membrane:</div>
+              <p class="text-[11px] text-slate-500 mt-1">ม้วนแผ่นกันซึมคุณภาพสูงสำหรับปูถาดรองพื้นห้องน้ำและยกขอบกันน้ำรั่วซึม</p>
             </div>
           </div>
         </div>
       </div>
+    </section>
 
-      <!-- Scope Section -->
-      <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 space-y-6">
-        <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
-          <span>📋</span> ขอบเขตฟังก์ชันการทำงานที่วางแผนไว้ (Planned Features &amp; Scope)
-        </h3>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm">
-          <div class="p-4 rounded-xl border border-teal-200 bg-teal-50/40 space-y-2">
-            <h4 class="font-bold text-teal-900">1. ระบบห้องน้ำสำเร็จรูป (Modular WC Pod Assembly)</h4>
-            <p class="text-slate-600 leading-relaxed">
-              เชื่อมต่อกับพื้นดรอปจาก Step 3 (Structure: Bathroom Drop) วางโมเดล 3D สุขภัณฑ์มาตรฐาน (โถสุขภัณฑ์, อ่างล้างหน้า, อ่างอาบน้ำ, ฝักบัว) พร้อมเจาะท่อ Service Hole (BR)
-            </p>
-          </div>
-
-          <div class="p-4 rounded-xl border border-cyan-200 bg-cyan-50/40 space-y-2">
-            <h4 class="font-bold text-cyan-900">2. ระบบกันซึมและปูกระเบื้อง (Waterproofing &amp; Tiling)</h4>
-            <p class="text-slate-600 leading-relaxed">
-              คำนวณแผ่นกันซึมถาดรองพื้นห้องน้ำสำเร็จรูป และการวางแนวจัดเรียงกระเบื้องพื้น-ผนัง พร้อมคำนวณรอยต่อยาแนว
-            </p>
-          </div>
-
-          <div class="p-4 rounded-xl border border-indigo-200 bg-indigo-50/40 space-y-2">
-            <h4 class="font-bold text-indigo-900">3. วัสดุปิดผิวสถาปัตยกรรม (Architectural Finishing)</h4>
-            <p class="text-slate-600 leading-relaxed">
-              การเลือกวัสดุปิดผิวพื้นห้องต่างๆ (Laminate, SPC, Vinyl, ไม้ปาร์เก้), งานบัวเชิงผนัง (Skirting), และการปิดผิวฝ้าเพดาน
-            </p>
-          </div>
-
-          <div class="p-4 rounded-xl border border-purple-200 bg-purple-50/40 space-y-2">
-            <h4 class="font-bold text-purple-900">4. การถอดรายการวัสดุและปริมาณงาน (Finishing BOM)</h4>
-            <p class="text-slate-600 leading-relaxed">
-              สรุปตารางรหัสสุขภัณฑ์, พื้นที่ปูวัสดุ (ตร.ม.), ความยาวบัวเชิงผนัง (ม.) แยกรายยูนิตและรายห้อง ส่งออกสู่ Excel และ ERP โรงงาน
-            </p>
-          </div>
-        </div>
-
-        <!-- Mermaid Diagram -->
-        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 mt-4">
-          <h4 class="text-xs font-bold uppercase text-slate-500 mb-3 tracking-wider">ผังการเชื่อมโยงระบบ (System Integration Diagram)</h4>
-          <pre class="mermaid bg-transparent p-0">
-flowchart LR
-    S3["Step 3: Structure<br/>(ดรอปพื้น Bathroom & รูท่อ BR)"] --> S8["🚧 Step 8: Bathroom & Finishing<br/>(สุขภัณฑ์, กันซึม, ปูกระเบื้อง, ปิดผิว)"]
-    S5["Step 5: Int Wall<br/>(ผนังพาร์ทิชันห้องน้ำ)"] --> S8
-    S7["Step 7: EE System<br/>(สายไฟเครื่องทำน้ำอุ่น & พัดลมระบายอากาศ)"] --> S8
-    S8 --> OUT[("📊 Finishing & Sanitary BOM<br/>(ใบสั่งผลิตและจัดซื้อส่งโรงงาน)")]
-          </pre>
-        </div>
-      </section>
-
-      <!-- Back to Portal Button -->
-      <div class="text-center pt-4">
-        <a href="index.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-medium transition text-sm shadow-sm">
-          <span>🏠 กลับสู่หน้าพอร์ทัลหลัก (Master Documentation)</span>
-        </a>
-      </div>
-
-    </main>
-  </div>
+  </main>
 
   <!-- Footer -->
-  <footer class="max-w-5xl mx-auto mt-12 py-6 text-center text-xs text-slate-400 w-full border-t border-slate-200">
+  <footer class="max-w-6xl mx-auto mt-12 mb-8 text-center text-xs text-slate-400 no-print">
+    <div class="flex flex-wrap items-center justify-center gap-3 mb-2">
+      <a href="index.html" class="hover:text-slate-600">🏠 สารบัญรวมระบบ</a> &bull;
+      <a href="CAD_AR_Doc.html" class="hover:text-slate-600">Step 1: CAD AR</a> &bull;
+      <a href="LongleadTime_Doc.html" class="hover:text-slate-600">Step 2: Longlead</a> &bull;
+      <a href="Struc_Doc.html" class="hover:text-slate-600">Step 3: Structure</a> &bull;
+      <a href="ExteriorWall_Doc.html" class="hover:text-slate-600">Step 4: Ext Wall</a> &bull;
+      <a href="InteriorWall_Doc.html" class="hover:text-slate-600">Step 5: Int Wall</a> &bull;
+      <a href="PartInstall_Doc.html" class="hover:text-slate-600">Step 6: PartInstall</a> &bull;
+      <a href="EE_Doc.html" class="hover:text-slate-600">Step 7: EE System</a> &bull;
+      <span class="font-bold text-teal-600">Step 8: Bathroom (Conceptual)</span>
+    </div>
     <p>QHeim Modular Construction BIM Documentation &bull; SCG HEIM Engineering Automation</p>
-    <p class="mt-1">
-      <a href="index.html" class="hover:text-slate-600">สารบัญหลัก</a> &bull;
-      <a href="README.md" class="hover:text-slate-600">README.md</a> &bull;
-      <a href="https://github.com/suteechu/manual-QHeim.git" class="hover:text-slate-600">GitHub Repository</a>
-    </p>
   </footer>
 
 </body>

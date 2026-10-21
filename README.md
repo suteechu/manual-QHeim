@@ -36,7 +36,7 @@
 | **Step 5** | **Int Wall** | ผนังภายในและพาร์ทิชันแบ่งห้อง, เสากรอบช่องเปิด, บล็อกปิดรอยต่อ | ✅ ใช้งานจริง | [🌐 Web HTML](https://suteechu.github.io/manual-QHeim/InteriorWall_Doc.html) &bull; [📄 Markdown](InteriorWall_Doc.md) |
 | **Step 6** | **PartInstall** | ติดตั้ง Flashing กันน้ำ, Guide Pin, ยางกันสั่น, รหัสทิศทางโมดูลาร์ 01-12 | ✅ ใช้งานจริง | [🌐 Web HTML](https://suteechu.github.io/manual-QHeim/PartInstall_Doc.html) &bull; [📄 Markdown](PartInstall_Doc.md) |
 | **Step 7** | **EE System** | ระบบไฟฟ้าแสงสว่าง, เต้ารับ, แอร์ CDU/FCU, สื่อสาร COMMU, LayOut, BOM | ✅ ใช้งานจริง | [🌐 Web HTML](https://suteechu.github.io/manual-QHeim/EE_Doc.html) &bull; [📄 Markdown](EE_Doc.md) |
-| **Step 8** | **Bathroom & Finishing** | ประกอบห้องน้ำสำเร็จรูป, สุขภัณฑ์, กันซึม, ปูกระเบื้อง, วัสดุปิดผิวพื้น/ผนัง/ฝ้า | 🚧 กำลังพัฒนา | [🌐 Web HTML](https://suteechu.github.io/manual-QHeim/Bathroom_Finishing_Doc.html) &bull; [📄 Markdown](Bathroom_Finishing_Doc.md) |
+| **Step 8** | **Bathroom & Finishing** | ประกอบห้องน้ำสำเร็จรูป, สุขภัณฑ์, งานกันซึม, และงาน Finishing (คำนวณปูนกาว, ปูนฉาบ, ยาแนว, เคมีภัณฑ์อื่นๆ) | 🚧 กำลังพัฒนา | [🌐 Web HTML](https://suteechu.github.io/manual-QHeim/Bathroom_Finishing_Doc.html) &bull; [📄 Markdown](Bathroom_Finishing_Doc.md) |
 
 > 💡 **หมายเหตุสำหรับ Step 8:**  
 > ระบบ **Bathroom & Finishing** อยู่ระหว่างขั้นตอนการคิดสร้างและพัฒนา (Under Active Development) โดยทีมงานจะนำตัวโปรแกรมและเอกสารฉบับสมบูรณ์มาอัปเดตให้ในเวอร์ชันถัดไป
@@ -147,7 +147,9 @@ D: _QHeim_Work └── [ชื่อโครงการ หรือ House I
 1. **พิกัดจุด Origin (0,0,0) ใน AutoCAD ต้องตรงกันทุกชั้น:**  
    หากพิกัดใน CAD เคลื่อน เมื่อนำเข้า SketchUp ด้วยตัวเลือก Preserve Origin โมเดลชั้น 1, 2, 3 จะไม่ซ้อนทับกัน
 2. **ห้ามรันข้ามขั้นตอนในการนำเข้า CAD AR (Step 1):**  
-   ต้องกดตามลำดับ: `Import CAD Original` $ightarrow$ `Unit Number` $ightarrow$ `Door Window Name` เท่านั้น
+   ต้องกดตามลำดับ: `Import CAD Original` $
+ightarrow$ `Unit Number` $
+ightarrow$ `Door Window Name` เท่านั้น
 3. **ต้องเจาะรูท่อ (Hole SB) ก่อนรัน Ceiling Joint เสมอ (Step 3):**  
    หากมีคอมโพเนนต์ `AGAZ*` ค้างอยู่ในโมเดล ระบบ Hole SB จะถูกบล็อกทันทีเพื่อป้องกันคานขยับไม่ได้
 4. **ต้องรันปุ่ม Shaft และ Floor Area ก่อนเริ่มเดินสายระบบ EE เสมอ (Step 7):**  
@@ -229,7 +231,7 @@ C:\QHeim├── AutoLISP_ExportLTF\   # สคริปต์ AutoLISP/DCL ฝ
 | **Step 5** | **Int Wall** | ระบบผนังภายในและพาร์ทิชันแบ่งห้อง, เสากรอบช่องเปิด, บล็อกปิดรอยต่อระหว่างยูนิต, และการคำนวณถอดแบบโครงคร่าว | ✅ ใช้งานจริง | [🌐 InteriorWall_Doc.html](https://suteechu.github.io/manual-QHeim/InteriorWall_Doc.html) | [InteriorWall_Doc.md](InteriorWall_Doc.md) |
 | **Step 6** | **PartInstall** | ระบบชิ้นส่วนติดตั้งและตัวยึด, Flashing, Guide Pin, ยางกันสั่น Antivibration Rubber, Super Sheet, และการคำนวณรหัสทิศทางโมดูลาร์ 01-12 | ✅ ใช้งานจริง | [🌐 PartInstall_Doc.html](https://suteechu.github.io/manual-QHeim/PartInstall_Doc.html) | [PartInstall_Doc.md](PartInstall_Doc.md) |
 | **Step 7** | **EE System** | ระบบไฟฟ้าแสงสว่าง, เต้ารับ, สวิตช์ 1-3 ทาง, ระบบแอร์ CDU/FCU, ระบบสื่อสาร LAN/TV/CCTV/Aiphone, อัลกอริทึม Pathfinding, การสร้างผัง Single-line Loop, ส่งออก LayOut 2D, และการสรุป BOM | ✅ ใช้งานจริง | [🌐 EE_Doc.html](https://suteechu.github.io/manual-QHeim/EE_Doc.html) | [EE_Doc.md](EE_Doc.md) |
-| **Step 8** | **Bathroom & Finishing** | ประกอบห้องน้ำสำเร็จรูป, สุขภัณฑ์, กันซึม, ปูกระเบื้อง, วัสดุปิดผิวพื้น/ผนัง/ฝ้าเพดาน, และสรุปยอด BOM ตกแต่ง | 🚧 กำลังพัฒนา | [🌐 Bathroom_Finishing_Doc.html](https://suteechu.github.io/manual-QHeim/Bathroom_Finishing_Doc.html) | [Bathroom_Finishing_Doc.md](Bathroom_Finishing_Doc.md) |
+| **Step 8** | **Bathroom & Finishing** | ประกอบห้องน้ำสำเร็จรูป, สุขภัณฑ์, งานกันซึม, และงาน Finishing (คำนวณปูนกาว, ปูนฉาบ, ยาแนว, เคมีภัณฑ์อื่นๆ)เพดาน, และสรุปยอด BOM ตกแต่ง | 🚧 กำลังพัฒนา | [🌐 Bathroom_Finishing_Doc.html](https://suteechu.github.io/manual-QHeim/Bathroom_Finishing_Doc.html) | [Bathroom_Finishing_Doc.md](Bathroom_Finishing_Doc.md) |
 
 ---
 
