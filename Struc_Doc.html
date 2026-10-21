@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QHeim - เอกสารและคู่มือการทำงานระบบ Structure (Struc)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Tahoma, "Sarabun", sans-serif;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white !important; color: black !important; padding: 0 !important; }
+      .shadow-sm, .shadow-md, .shadow-lg, .shadow-xl { box-shadow: none !important; }
+      .border { border-color: #cbd5e1 !important; }
+      section { break-inside: avoid; page-break-inside: avoid; margin-bottom: 24px !important; }
+      table { break-inside: auto; }
+      tr { break-inside: avoid; page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased p-4 md:p-8">
+
+  <!-- Header Container -->
+  <div class="max-w-6xl mx-auto bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden mb-8">
+    <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-blue-900 p-8 text-white">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <span class="inline-block px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-xs font-semibold uppercase tracking-wider mb-2 border border-white/20">
+            QHeim Modular Construction Extension
+          </span>
+          <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight">คู่มือและเอกสารการทำงาน Structure (Struc)</h1>
+          <p class="text-blue-200 mt-2 text-sm md:text-base max-w-2xl leading-relaxed">
+            ระบบสร้างโครงสร้างโมดูลาร์ 3D (ชั้น 1-3), ปรับระดับพื้น Smartboard, งานระบบห้องน้ำ-บันได-Void-ทางเข้า, งานเจาะท่อ Service Hole (BR/FS/CS/AC), ชิ้นส่วนพิเศษ Setback/Turnbuckle, ข้อต่อเพดาน Ceiling Joint, และการถอดรายการวัสดุ (BOM)
+          </p>
+        </div>
+        <div class="text-right">
+          <div class="text-xs text-blue-300">SketchUp Ruby Extension</div>
+          <div class="text-sm font-bold bg-blue-950/80 px-3.5 py-1.5 rounded-lg border border-blue-400/30 mt-1">
+            Path: C:/QHeim/Ruby/Struc/
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Navigation Bar -->
+    <div class="bg-slate-100 border-b border-slate-200 px-6 py-3 flex flex-wrap gap-2 text-xs md:text-sm font-medium text-slate-600 no-print">
+      <a href="#overview" class="hover:text-blue-600 px-2 py-1 rounded hover:bg-white transition">ภาพรวม &amp; Workflow</a>
+      <span class="text-slate-300">|</span>
+      <a href="#operator-guide" class="text-amber-700 bg-amber-100 font-bold px-2 py-1 rounded hover:bg-amber-200 transition">👉 คู่มือการกดแต่ละไอคอน (SOP สำหรับคนทำงาน)</a>
+      <span class="text-slate-300">|</span>
+      <a href="#unit-insert" class="hover:text-blue-600 px-2 py-1 rounded hover:bg-white transition">1. สร้าง Unit &amp; พื้น Floor</a>
+      <span class="text-slate-300">|</span>
+      <a href="#special-rooms" class="hover:text-blue-600 px-2 py-1 rounded hover:bg-white transition">2. ห้องน้ำ / บันได / Void / ทางเข้า</a>
+      <span class="text-slate-300">|</span>
+      <a href="#service-hole" class="hover:text-blue-600 px-2 py-1 rounded hover:bg-white transition">3. เจาะรูท่อ Service Hole</a>
+      <span class="text-slate-300">|</span>
+      <a href="#joints-accessories" class="hover:text-blue-600 px-2 py-1 rounded hover:bg-white transition">4. อุปกรณ์พิเศษ &amp; Ceiling Joint</a>
+      <span class="text-slate-300">|</span>
+      <a href="#bom-section" class="hover:text-blue-600 px-2 py-1 rounded hover:bg-white transition">5. Check Data &amp; Export BOM</a>
+      <span class="text-slate-300">|</span>
+      <a href="#matrix" class="hover:text-blue-600 px-2 py-1 rounded hover:bg-white transition">Layer &amp; Component Matrix</a>
+    </div>
+  </div>
+
+  <main class="max-w-6xl mx-auto space-y-8">
+
+    <!-- Section 1: Overview & Workflow -->
+    <section id="overview" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-lg">01</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">ภาพรวมระบบและขั้นตอนการทำงาน (Workflow Lifecycle)</h2>
+          <p class="text-sm text-slate-500">ลำดับการทำงานมาตรฐานในการสร้างและประกอบโครงสร้างโมดูลาร์สำเร็จรูป</p>
+        </div>
+      </div>
+
+      <!-- Critical Rules Alert Box -->
+      <div class="p-4 bg-amber-50 border-l-4 border-amber-500 rounded-r-xl mb-6 space-y-2">
+        <div class="flex items-start gap-2">
+          <span class="text-amber-600 font-bold text-xl leading-none">⚠️</span>
+          <div>
+            <h4 class="font-bold text-amber-900 text-sm">กฎเหล็กสำคัญที่สุด 3 ข้อก่อนเริ่มทำงาน:</h4>
+            <ul class="text-amber-800 text-xs md:text-sm mt-1 list-disc list-inside space-y-1">
+              <li><strong>ต้องตั้งค่า Model Parameters ก่อน:</strong> เปิดหน้าต่าง <strong>Setting</strong> เพื่อใส่ <code class="bg-amber-100 px-1 py-0.5 rounded font-mono">House ID</code>, <code class="bg-amber-100 px-1 py-0.5 rounded font-mono">Floor total (NFL)</code>, และ <code class="bg-amber-100 px-1 py-0.5 rounded font-mono">Platform</code> มิฉะนั้นระบบจะไม่สามารถถอดแบบและส่งออก BOM ได้</li>
+              <li><strong>ต้องเจาะรูท่อ (Hole SB) ก่อนรัน Ceiling Joint เสมอ:</strong> หากมีชิ้นส่วน Ceiling Joint (<code class="bg-amber-100 px-1 py-0.5 rounded font-mono">AGAZ*</code>) ค้างอยู่ในโมเดล ระบบ Hole จะถูกบล็อกการทำงานทันที เพราะต้องอนุญาตให้คานซอย Sub-beam ขยับเลื่อนหลบแนวท่อได้อย่างอิสระ</li>
+              <li><strong>เตรียมเลเยอร์ให้พร้อม:</strong> กล่องขอบเขตยูนิตต้องอยู่ใน <code class="bg-amber-100 px-1 py-0.5 rounded font-mono">S-Unit</code>, มีเส้นกริดใน <code class="bg-amber-100 px-1 py-0.5 rounded font-mono">EE-GRID-UNIT</code>, และแบบแปลนเส้น 2D อยู่ในเลเยอร์มาตรฐาน CAD (<code class="bg-amber-100 px-1 py-0.5 rounded font-mono">A-WALL</code>, <code class="bg-amber-100 px-1 py-0.5 rounded font-mono">A-DOOR</code>, <code class="bg-amber-100 px-1 py-0.5 rounded font-mono">SN-S PIPE</code> ฯลฯ)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-slate-50 transition">
+          <div class="text-xs font-bold text-blue-600 uppercase mb-1">ขั้นตอนที่ 1</div>
+          <h3 class="font-bold text-slate-800 mb-1">สร้าง Unit โครงสร้าง</h3>
+          <p class="text-xs text-slate-600">ครอบยูนิตใน <code class="bg-slate-200 px-1 rounded">S-Unit</code> รัน <strong>Floor 1st/2nd/3rd</strong> เพื่อแปลง 2D Grid เป็นโครงสร้าง 3D เสา-คาน-พื้น-เพดาน</p>
+        </div>
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-slate-50 transition">
+          <div class="text-xs font-bold text-indigo-600 uppercase mb-1">ขั้นตอนที่ 2</div>
+          <h3 class="font-bold text-slate-800 mb-1">ดรอปพื้น &amp; ช่องเปิด</h3>
+          <p class="text-xs text-slate-600">รัน <strong>Bathroom</strong> (ดรอปพื้นห้องน้ำ), <strong>Void</strong> (เปิดช่องโล่ง), <strong>Stair</strong> (ช่องบันได), และ <strong>Entrance</strong> (ดรอปชานเข้าบ้าน)</p>
+        </div>
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-slate-50 transition">
+          <div class="text-xs font-bold text-amber-600 uppercase mb-1">ขั้นตอนที่ 3</div>
+          <h3 class="font-bold text-slate-800 mb-1">เจาะรูท่อ &amp; ข้อต่อพิเศษ</h3>
+          <p class="text-xs text-slate-600">รัน <strong>Hole SB</strong> เจาะรูท่อและเลื่อนหลบคาน &rarr; ติดตั้ง <strong>Others, TurnBuckle</strong> &rarr; ปิดท้ายด้วย <strong>Ceiling Joint</strong></p>
+        </div>
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-slate-50 transition">
+          <div class="text-xs font-bold text-emerald-600 uppercase mb-1">ขั้นตอนที่ 4</div>
+          <h3 class="font-bold text-slate-800 mb-1">ตรวจ QTO &amp; Export BOM</h3>
+          <p class="text-xs text-slate-600">กด <strong>Check Data</strong> เพื่อเทียบโมเดลกับฐานข้อมูล &rarr; กด <strong>Export CSV</strong> สรุปยอดลง Excel อัตโนมัติ</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Operator Guide (SOP) -->
+    <section id="operator-guide" class="bg-white rounded-2xl shadow-sm border-2 border-amber-300 p-6 md:p-8">
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-xl bg-amber-500 text-white flex items-center justify-center font-black text-2xl shadow-sm">
+            👷
+          </div>
+          <div>
+            <span class="text-xs font-bold bg-amber-100 text-amber-800 px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+              Standard Operating Procedure (SOP)
+            </span>
+            <h2 class="text-2xl md:text-3xl font-extrabold text-slate-800 mt-1">
+              คู่มือขั้นตอนการกดใช้งานแต่ละไอคอน (สำหรับคนทำงาน)
+            </h2>
+            <p class="text-sm text-slate-500">
+              รายละเอียดวิธีครอบเลือกวัตถุ, การคลิก &amp; ตั้งค่ากล่องโต้ตอบ, และสิ่งที่ระบบสร้างให้ในโมเดล 3D ครบทั้ง 18 ไอคอน
+            </p>
+          </div>
+        </div>
+        <div class="text-right">
+          <span class="text-xs font-semibold text-slate-400">Toolbar: Heim_Structure.html</span>
+        </div>
+      </div>
+
+      <!-- Icon-by-Icon Manual Cards -->
+      <div class="space-y-4">
+
+        <!-- 1. Floor 1st -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-blue-400 bg-white transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-60 shrink-0">
+            <img src="ICON/S-Insert Unit_1.jpg" alt="Floor 1st" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">1. Floor 1st</div>
+              <div class="text-xs text-slate-400 font-mono">Heim_InsertUnit("FL1")</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              ลากเมาส์ครอบ Unit ทั้งหมดของชั้น 1 ในเลเยอร์ <code class="bg-slate-200 px-1 rounded">S-Unit</code> พร้อมเปิดเลเยอร์ CAD 2D
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              กดไอคอน Floor 1st ระบบทำงานอัตโนมัติ ไม่ต้องกรอกค่าเพิ่มเติม
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              สร้างชุดยูนิต 3D ชั้น 1 (เสา, คาน, พื้น Smartboard, โครงฝ้าเพดาน) พร้อมตัดขอบตามทิศทาง 01-12
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Floor 2nd -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-blue-400 bg-white transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-60 shrink-0">
+            <img src="ICON/S-Insert Unit_2.jpg" alt="Floor 2nd" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">2. Floor 2nd</div>
+              <div class="text-xs text-slate-400 font-mono">Heim_InsertUnit("FL2")</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              ลากเมาส์ครอบ Unit ทั้งหมดของชั้น 2 ในเลเยอร์ <code class="bg-slate-200 px-1 rounded">S-Unit</code>
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              กดไอคอน Floor 2nd ระบบทำงานอัตโนมัติ
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              สร้างชุดยูนิต 3D ชั้น 2 และหากมียูนิต U63 ต่อชนกันจะติดตั้งเหล็ก Extension Joint <code class="text-slate-700">AABP21000</code> ให้ทันที
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Floor 3rd -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-blue-400 bg-white transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-60 shrink-0">
+            <img src="ICON/S-Insert Unit_3.jpg" alt="Floor 3rd" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">3. Floor 3rd</div>
+              <div class="text-xs text-slate-400 font-mono">Heim_InsertUnit("FL3")</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              ลากเมาส์ครอบ Unit ทั้งหมดของชั้น 3 ในเลเยอร์ <code class="bg-slate-200 px-1 rounded">S-Unit</code>
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              กดไอคอน Floor 3rd
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              สร้างชุดยูนิต 3D ชั้น 3 พร้อมโครงสร้างหลังคา/เพดานชั้นบนสุด
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Bathroom -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-blue-400 bg-white transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-60 shrink-0">
+            <img src="ICON/S-Insert Unit-BR.jpg" alt="Bathroom" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">4. Bathroom</div>
+              <div class="text-xs text-slate-400 font-mono">Heim_WCgetCode &rarr; MakeWC</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              คลิกเลือก **1 Unit** ที่เป็นห้องน้ำในโมเดล 3D
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              กดไอคอน &rarr; เลือก Type (AD/BD/DD), ขนาด (1822-2254), ตำแหน่ง (0/L), และความหนา Double Board (18/25mm)
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              แปลงพื้นเป็นพื้นดรอปห้องน้ำ (Drop Floor), ปรับแนวคานซอย และเสริมแผ่น Double Board ให้อัตโนมัติ
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Void -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-blue-400 bg-white transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-60 shrink-0">
+            <img src="ICON/S-Insert Unit-Void.jpg" alt="Void" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">5. Void</div>
+              <div class="text-xs text-slate-400 font-mono">Heim_VoidgetCode &rarr; MakeVoid</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              คลิกเลือกยูนิตที่มีช่องเปิด Void
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              กดไอคอน &rarr; เลือกขนาด Void (2222-2245: VFA-VFF) และตำแหน่ง (0/L)
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              เจาะเปิดช่องโล่งทะลุพื้นและฝ้าเพดาน พร้อมวางคานซอยรับแรงรอบช่องเปิด (Trimmer Beams)
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. Stair -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-blue-400 bg-white transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-60 shrink-0">
+            <img src="ICON/S-Insert Unit-Stair.jpg" alt="Stair" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">6. Stair</div>
+              <div class="text-xs text-slate-400 font-mono">Heim_StairGetCode &rarr; MakeStair</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              คลิกเลือกยูนิตโถงบันได
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              กดไอคอน &rarr; คลิกเลือกโมเดลบันไดจากภาพ (C22-C45 / U24-U36) และเลือกตัด Floor / Ceiling
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              เจาะช่องเปิดรับบันไดตามขนาดมาตรฐาน พร้อมวางโครงสร้างคานรับหัว-ท้ายบันได
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. Entrance -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-blue-400 bg-white transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-60 shrink-0">
+            <img src="ICON/S-Insert Unit-Ent.jpg" alt="Entrance" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">7. Entrance</div>
+              <div class="text-xs text-slate-400 font-mono">Heim_EntranceGetCode &rarr; MakeEntrance</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              คลิกเลือกยูนิตชานทางเข้าบ้านชั้น 1
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              กดไอคอน &rarr; เลือก Side (KETA/TSUMA), ขนาดประตู (1350/1800), และตำแหน่ง (L/CL/R)
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              ดรอปแผ่นพื้นสร้างชานพักบันไดทางเข้า พร้อมประกอบเหล็กโครงสร้างรับขั้นบันไดทางเข้า
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. Ceiling Below BR -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-blue-400 bg-white transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-60 shrink-0">
+            <img src="ICON/S-Ceilingblbr.jpg" alt="Ceiling below BR" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">8. Ceiling below BR</div>
+              <div class="text-xs text-slate-400 font-mono">MakeWC.genceilingunderbathroom</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              คลิกเลือกยูนิตชั้นล่างที่อยู่ **"ใต้ห้องน้ำ"** โดยตรง
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              กดไอคอน Ceiling below BR ครั้งเดียว
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              เปลี่ยนรหัสฝ้าเพดานเป็นแบบลดระดับ (เติมรหัส <code class="text-slate-700">P</code> เช่น <code class="text-slate-700">AGA5FSDK01****1P**</code>) เว้นช่องว่างให้ท่อสุขาภิบาล
+            </div>
+          </div>
+        </div>
+
+        <!-- 9. Hole SB -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-blue-400 bg-white transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-60 shrink-0">
+            <img src="ICON/S-hole.jpg" alt="Hole SB" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">9. Hole SB</div>
+              <div class="text-xs text-slate-400 font-mono">MakeHole.new</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              <strong>ไม่ต้องเลือกวัตถุ</strong> (ตรวจสอบให้แน่ใจว่ายังไม่ได้รัน Ceiling Joint)
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              กดไอคอน Hole SB ระบบจะประมวลผลอัตโนมัติทั้งอาคาร
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              เจาะรูท่อ Smartboard (BR, FS, CS, AC), <strong>ขยับหลบคานซอยอัตโนมัติ</strong>, ใส่แฮตช์ และเปลี่ยนแปฝ้าโคมไฟ Downlight เป็น DS
+            </div>
+          </div>
+        </div>
+
+        <!-- 10. Others -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-blue-400 bg-white transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-60 shrink-0">
+            <img src="ICON/S-Others.jpg" alt="Others" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">10. Others</div>
+              <div class="text-xs text-slate-400 font-mono">Otherspart.addothers</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              เลือกยูนิตที่มีความต่างระดับ หรือความยาวด้าน Keta ไม่เท่ากัน
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              กดไอคอน Others
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              คำนวณและติดตั้งชิ้นส่วน Setback ปิดรอยต่อระดับต่าง (<code class="text-slate-700">2ZY2FCTT***4***</code>, <code class="text-slate-700">2ZY2FCTS*D*4*A*</code>)
+            </div>
+          </div>
+        </div>
+
+        <!-- 11. SetBack -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-blue-400 bg-white transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-60 shrink-0">
+            <img src="ICON/S-Clone long-short.jpg" alt="SetBack" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">11. SetBack (Clone)</div>
+              <div class="text-xs text-slate-400 font-mono">Otherspart.clonesetback</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              กด <kbd class="bg-slate-200 px-1 py-0.5 rounded">Ctrl</kbd> เลือก <strong>2 Full Units (08_U*F)</strong> (ยูนิตต้นทาง + ยูนิตปลายทาง)
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              กดไอคอน SetBack
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              คัดลอกชิ้นส่วน Setback จากยูนิตต้นทางไปติดตั้งที่ยูนิตปลายทางในตำแหน่งและพิกัดเดียวกันทันที
+            </div>
+          </div>
+        </div>
+
+        <!-- 12. TurnBuckle -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-blue-400 bg-white transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-60 shrink-0">
+            <img src="ICON/S-TurnBuckle.jpg" alt="TurnBuckle" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">12. TurnBuckle</div>
+              <div class="text-xs text-slate-400 font-mono">Otherspart.addturnbuckle</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              ลากเมาส์ครอบยูนิตที่ต้องการติดตั้งเหล็กค้ำยันลม
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              กดไอคอน TurnBuckle ครั้งเดียว
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              วางชุดเหล็กค้ำยันลม Turnbuckle (<code class="text-slate-700">ABL###_______**</code>) ที่ระดับความสูง 3,245 มม. บนหัวเสา
+            </div>
+          </div>
+        </div>
+
+        <!-- 13. Extra Beam -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-blue-400 bg-white transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-60 shrink-0">
+            <img src="ICON/S-Add Beam.jpg" alt="Extra Beam" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">13. Extra Beam</div>
+              <div class="text-xs text-slate-400 font-mono">Heim_InteriorWall.new</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              <strong>ไม่ต้องเลือกวัตถุล่วงหน้า</strong> (Interactive Click Tool)
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              กดไอคอน &rarr; นำเมาส์ไปคลิกบนจุดในแปลนที่ต้องการวางคานเสริมรับผนัง
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              ยิงลำแสงคำนวณช่องว่างระหว่างเสา และสร้างคานเสริมรับผนังเบาในเลเยอร์ <code class="text-slate-700">S-InteriorWall</code>
+            </div>
+          </div>
+        </div>
+
+        <!-- 14. Ceiling Joint -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-blue-400 bg-white transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-60 shrink-0">
+            <img src="ICON/S-CeilingJoint.jpg" alt="Ceiling Joint" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">14. Ceiling Joint</div>
+              <div class="text-xs text-slate-400 font-mono">Heim_CeilingConnectUnit</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              ไม่ต้องเลือกวัตถุเพื่อรันทั้งชั้น (หรือเลือกเฉพาะยูนิตที่ต้องการเชื่อม)
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              กดไอคอน Ceiling Joint (<strong>ต้องทำหลัง Hole SB เสมอ</strong>)
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              ตรวจจับแนวรอยต่อยูนิตทั้ง Keta และ Tsuma แล้วติดตั้งแผ่นเหล็กข้อต่อเพดาน <code class="text-slate-700">AGAZ*</code> ให้ครบทุกรอยต่อ
+            </div>
+          </div>
+        </div>
+
+        <!-- 15. Check Data -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-blue-400 bg-white transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-60 shrink-0">
+            <img src="ICON/Manaul Tab.jpg" alt="Check Data" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">15. Check Data</div>
+              <div class="text-xs text-slate-400 font-mono">StrucTemplate.takeoffdialog</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              ไม่ต้องเลือกวัตถุ
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              กดไอคอน Check Data
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              เปิดตาราง HTML Dialog เปรียบเทียบชิ้นส่วน 3D กับ Database BOM และ<strong>คลิกเลือกแถวเพื่อไฮไลต์วัตถุใน 3D ได้</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- 16. Export CSV -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-blue-400 bg-white transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-60 shrink-0">
+            <img src="ICON/QuanToExcel.jpg" alt="Export CSV" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">16. Export CSV</div>
+              <div class="text-xs text-slate-400 font-mono">StrucTemplate.takeoffxls</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              ลากครอบยูนิตทั้งหมดของอาคาร
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              ปิดไฟล์ Excel เก่า &rarr; กดไอคอน Export CSV
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              สร้างไฟล์ <code class="text-slate-700">C:/QHeim/takeoffcomp.csv</code> และเด้งเปิด Microsoft Excel แสดงตารางสรุปยอดวัสดุทันที
+            </div>
+          </div>
+        </div>
+
+        <!-- 17. Erase by Layer -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-blue-400 bg-white transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-60 shrink-0">
+            <img src="ICON/Delete.jpg" alt="Erase by Layer" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">17. Erase by Layer</div>
+              <div class="text-xs text-slate-400 font-mono">UtilJ.eraseentbylayer</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              เลือกยูนิตหรือคอมโพเนนต์ที่ต้องการลบชิ้นส่วนย่อยข้างใน
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              กดไอคอนถังขยะ &rarr; เลือก Layer ที่ต้องการลบจาก Dropdown แล้วกดยืนยัน
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              ลบเฉพาะ Entity ลูกที่อยู่ในเลเยอร์นั้นออกอย่างหมดจด โดยไม่ลบโครงสร้างหลักของยูนิต
+            </div>
+          </div>
+        </div>
+
+        <!-- 18. Layout -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-blue-400 bg-white transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-60 shrink-0">
+            <img src="ICON/M-Layout.png" alt="Layout" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">18. Layout (Struc)</div>
+              <div class="text-xs text-slate-400 font-mono">Heim_Struc_LayoutIcon</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              ไม่ต้องเลือกวัตถุ
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              กดไอคอน Layout
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              เปิดแถบเครื่องมือ LayoutStruc เพื่อ Export DWG 2D, สร้าง Scene แปลนโครงสร้าง และเตรียมแบบก่อสร้าง
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 3: Deep Technical Details -->
+    <section id="unit-insert" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-lg">02</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">ตรรกะการวิเคราะห์พิกัดและโมดูลาร์ (Direction Codes 01-12)</h2>
+          <p class="text-sm text-slate-500">การคำนวณ Raytest ตรวจจับเพื่อนบ้าน 4 ทิศ และตรรกะการตัดขอบ Smartboard 83 มม.</p>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto rounded-xl border border-slate-200 mb-6">
+        <table class="w-full text-xs text-left">
+          <thead class="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
+            <tr>
+              <th class="p-3 text-center">รหัส Dir</th>
+              <th class="p-3 text-center">ซ้าย (-X)</th>
+              <th class="p-3 text-center">ล่าง (-Y)</th>
+              <th class="p-3 text-center">ขวา (+X)</th>
+              <th class="p-3 text-center">บน (+Y)</th>
+              <th class="p-3">ลักษณะตำแหน่งในแปลน</th>
+              <th class="p-3 text-center">ด้านที่ตัดขอบ Smartboard (83mm)</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200 text-slate-600">
+            <tr><td class="p-2.5 font-bold text-center text-blue-600 bg-blue-50/50">01</td><td class="p-2.5 text-center">1 (เปิด)</td><td class="p-2.5 text-center text-slate-400">0 (ติด)</td><td class="p-2.5 text-center">1 (เปิด)</td><td class="p-2.5 text-center">1 (เปิด)</td><td>ยูนิตเดี่ยวยื่นปลายบน</td><td class="p-2.5 text-center font-mono font-bold text-amber-700">T, L, R</td></tr>
+            <tr><td class="p-2.5 font-bold text-center text-blue-600 bg-blue-50/50">02</td><td class="p-2.5 text-center">1 (เปิด)</td><td class="p-2.5 text-center text-slate-400">0 (ติด)</td><td class="p-2.5 text-center">1 (เปิด)</td><td class="p-2.5 text-center text-slate-400">0 (ติด)</td><td>ยูนิตแถวกลางเปิดซ้าย-ขวา</td><td class="p-2.5 text-center font-mono font-bold text-amber-700">L, R</td></tr>
+            <tr><td class="p-2.5 font-bold text-center text-blue-600 bg-blue-50/50">03</td><td class="p-2.5 text-center">1 (เปิด)</td><td class="p-2.5 text-center">1 (เปิด)</td><td class="p-2.5 text-center">1 (เปิด)</td><td class="p-2.5 text-center text-slate-400">0 (ติด)</td><td>ยูนิตเดี่ยวยื่นปลายล่าง</td><td class="p-2.5 text-center font-mono font-bold text-amber-700">L, R, B</td></tr>
+            <tr><td class="p-2.5 font-bold text-center text-blue-600 bg-blue-50/50">04</td><td class="p-2.5 text-center">1 (เปิด)</td><td class="p-2.5 text-center text-slate-400">0 (ติด)</td><td class="p-2.5 text-center text-slate-400">0 (ติด)</td><td class="p-2.5 text-center">1 (เปิด)</td><td>มุมบนซ้าย (Top-Left Corner)</td><td class="p-2.5 text-center font-mono font-bold text-amber-700">T, L</td></tr>
+            <tr><td class="p-2.5 font-bold text-center text-blue-600 bg-blue-50/50">05</td><td class="p-2.5 text-center">1 (เปิด)</td><td class="p-2.5 text-center text-slate-400">0 (ติด)</td><td class="p-2.5 text-center text-slate-400">0 (ติด)</td><td class="p-2.5 text-center text-slate-400">0 (ติด)</td><td>ขอบซ้าย (Left Edge)</td><td class="p-2.5 text-center font-mono font-bold text-amber-700">L</td></tr>
+            <tr><td class="p-2.5 font-bold text-center text-blue-600 bg-blue-50/50">06</td><td class="p-2.5 text-center">1 (เปิด)</td><td class="p-2.5 text-center">1 (เปิด)</td><td class="p-2.5 text-center text-slate-400">0 (ติด)</td><td class="p-2.5 text-center text-slate-400">0 (ติด)</td><td>มุมล่างซ้าย (Bottom-Left Corner)</td><td class="p-2.5 text-center font-mono font-bold text-amber-700">L, B</td></tr>
+            <tr><td class="p-2.5 font-bold text-center text-blue-600 bg-blue-50/50">07</td><td class="p-2.5 text-center text-slate-400">0 (ติด)</td><td class="p-2.5 text-center text-slate-400">0 (ติด)</td><td class="p-2.5 text-center text-slate-400">0 (ติด)</td><td class="p-2.5 text-center">1 (เปิด)</td><td>ขอบบน (Top Edge)</td><td class="p-2.5 text-center font-mono font-bold text-amber-700">T</td></tr>
+            <tr><td class="p-2.5 font-bold text-center text-emerald-600 bg-emerald-50/50">08</td><td class="p-2.5 text-center text-slate-400">0 (ติด)</td><td class="p-2.5 text-center text-slate-400">0 (ติด)</td><td class="p-2.5 text-center text-slate-400">0 (ติด)</td><td class="p-2.5 text-center text-slate-400">0 (ติด)</td><td>ตรงกลางอาคารล้อมรอบ 4 ด้าน (Center Core)</td><td class="p-2.5 text-center font-mono text-slate-400">-</td></tr>
+            <tr><td class="p-2.5 font-bold text-center text-blue-600 bg-blue-50/50">09</td><td class="p-2.5 text-center text-slate-400">0 (ติด)</td><td class="p-2.5 text-center">1 (เปิด)</td><td class="p-2.5 text-center text-slate-400">0 (ติด)</td><td class="p-2.5 text-center text-slate-400">0 (ติด)</td><td>ขอบล่าง (Bottom Edge)</td><td class="p-2.5 text-center font-mono font-bold text-amber-700">B</td></tr>
+            <tr><td class="p-2.5 font-bold text-center text-blue-600 bg-blue-50/50">10</td><td class="p-2.5 text-center text-slate-400">0 (ติด)</td><td class="p-2.5 text-center text-slate-400">0 (ติด)</td><td class="p-2.5 text-center">1 (เปิด)</td><td class="p-2.5 text-center">1 (เปิด)</td><td>มุมบนขวา (Top-Right Corner)</td><td class="p-2.5 text-center font-mono font-bold text-amber-700">T, R</td></tr>
+            <tr><td class="p-2.5 font-bold text-center text-blue-600 bg-blue-50/50">11</td><td class="p-2.5 text-center text-slate-400">0 (ติด)</td><td class="p-2.5 text-center text-slate-400">0 (ติด)</td><td class="p-2.5 text-center">1 (เปิด)</td><td class="p-2.5 text-center text-slate-400">0 (ติด)</td><td>ขอบขวา (Right Edge)</td><td class="p-2.5 text-center font-mono font-bold text-amber-700">R</td></tr>
+            <tr><td class="p-2.5 font-bold text-center text-blue-600 bg-blue-50/50">12</td><td class="p-2.5 text-center text-slate-400">0 (ติด)</td><td class="p-2.5 text-center">1 (เปิด)</td><td class="p-2.5 text-center">1 (เปิด)</td><td class="p-2.5 text-center text-slate-400">0 (ติด)</td><td>มุมล่างขวา (Bottom-Right Corner)</td><td class="p-2.5 text-center font-mono font-bold text-amber-700">R, B</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Module Dimension Cards -->
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-3 text-xs">
+        <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+          <div class="font-bold text-indigo-700 text-sm">U36 (Grid 3)</div>
+          <div class="text-slate-500 mt-1">กว้าง: 3,810 - 3,820 mm</div>
+          <div class="text-slate-400 font-mono text-[10px] mt-0.5">08_U36F / 08_U36S</div>
+        </div>
+        <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+          <div class="font-bold text-indigo-700 text-sm">U45 (Grid 4)</div>
+          <div class="text-slate-500 mt-1">กว้าง: 4,710 - 4,720 mm</div>
+          <div class="text-slate-400 font-mono text-[10px] mt-0.5">08_U45F / 08_U45S</div>
+        </div>
+        <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+          <div class="font-bold text-indigo-700 text-sm">U54 (Grid 5)</div>
+          <div class="text-slate-500 mt-1">กว้าง: 5,610 - 5,620 mm</div>
+          <div class="text-slate-400 font-mono text-[10px] mt-0.5">08_U54F / 08_U54S</div>
+        </div>
+        <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+          <div class="font-bold text-indigo-700 text-sm">U59 (Grid 7)</div>
+          <div class="text-slate-500 mt-1">กว้าง: 6,060 - 6,070 mm</div>
+          <div class="text-slate-400 font-mono text-[10px] mt-0.5">08_U59F / 08_U59S</div>
+        </div>
+        <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+          <div class="font-bold text-indigo-700 text-sm">U63 (Grid 6)</div>
+          <div class="text-slate-500 mt-1">กว้าง: 6,510 - 6,520 mm</div>
+          <div class="text-slate-400 font-mono text-[10px] mt-0.5">08_U63F / 08_U63S</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Special Rooms & Openings -->
+    <section id="special-rooms" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center font-bold text-lg">03</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">งานดรอปพื้นห้องน้ำ, บันได, Void, และทางเข้า</h2>
+          <p class="text-sm text-slate-500">สถาปัตยกรรมโครงสร้างลดระดับและการปรับแต่งแนวคานซอยรับแรง</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50">
+          <h3 class="font-bold text-slate-800 text-sm mb-2 flex items-center gap-2">
+            <span>🚿</span> Bathroom &amp; Dropped Floor (Heim_MakeWC.rb)
+          </h3>
+          <ul class="space-y-1.5 text-slate-600 leading-relaxed">
+            <li><strong>รหัสโมเดล:</strong> 1822 (<code class="text-purple-700">SDB</code>), 1827 (<code class="text-purple-700">SDC</code>), 2213 (<code class="text-purple-700">SDD</code>), 2215 (<code class="text-purple-700">SDE</code>), 2218 (<code class="text-purple-700">SDF</code>), 2222 (<code class="text-purple-700">SDG</code>), 2231 (<code class="text-purple-700">SDI</code>), 2236 (<code class="text-purple-700">SDJ</code>), 2245 (<code class="text-purple-700">SDK</code>), 2254 (<code class="text-purple-700">SDL</code>)</li>
+            <li><strong>พื้นลดระดับ:</strong> แปลงโครงสร้างพื้นเป็นพื้นดรอปเพื่อรองรับงานระบบท่อระบายน้ำทิ้ง</li>
+            <li><strong>Double Board:</strong> เสริมแผ่น Smartboard ชั้นที่ 2 (<code class="text-purple-700">SB_18X</code> หรือ <code class="text-purple-700">SB_25X</code>) ยกสูงขึ้น +25 มม. สำหรับปูกระเบื้อง</li>
+            <li><strong>Ceiling Below BR:</strong> รันคำสั่งเปลี่ยนฝ้าชั้นล่างให้มีรหัส <code class="bg-purple-100 px-1 rounded text-purple-900 font-bold">P</code> ต่อท้าย เพื่อให้มีช่องว่างใต้ท้องคานเดินท่อน้ำทิ้ง</li>
+          </ul>
+        </div>
+
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50">
+          <h3 class="font-bold text-slate-800 text-sm mb-2 flex items-center gap-2">
+            <span>🪜</span> Stair &amp; Void (Heim_MakeStair / MakeVoid)
+          </h3>
+          <ul class="space-y-1.5 text-slate-600 leading-relaxed">
+            <li><strong>Void Codes:</strong> ขนาด 2222 (<code class="text-blue-700">VFA</code>), 2227 (<code class="text-blue-700">VFB</code>), 2231 (<code class="text-blue-700">VFC</code>), 2236 (<code class="text-blue-700">VFD</code>), 2241 (<code class="text-blue-700">VFE</code>), 2245 (<code class="text-blue-700">VFF</code>) พร้อมตำแหน่ง 0 หรือ L</li>
+            <li><strong>Stair Models:</strong> บันไดตัว C (C22, C27, C36, C45) และตัว U (U24, U29, U31, U36) ทั้งแบบ Edgeup L/R และ Middleup L/R</li>
+            <li><strong>Trimmer Beams:</strong> ตัดเปิดแผ่นพื้น Smartboard และฝ้าเพดาน พร้อมวางคานเหล็กซอยรับแรงรอบช่องเปิดทั้ง 4 ด้าน</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Service Holes -->
+    <section id="service-hole" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-lg">04</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">ระบบเจาะรูงานระบบท่อ (Hole SB - Heim_MakeHole.rb)</h2>
+          <p class="text-sm text-slate-500">การเจาะรู Smartboard อัตโนมัติและการเลื่อนหลบคานซอยรับแรง</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4 text-xs">
+        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+          <div class="font-bold text-slate-800 mb-1 text-sm">🚰 ท่อสุขาภิบาล (SN-S PIPE)</div>
+          <p class="text-slate-600 mb-2">เจาะรูตามขนาดเส้นผ่านศูนย์กลางจริงจาก CAD:</p>
+          <ul class="space-y-1 font-mono text-[11px] text-slate-700">
+            <li>• PIPESEC1: &Oslash; 48 mm</li>
+            <li>• PIPESEC2: &Oslash; 60 mm</li>
+            <li>• PIPESEC3: &Oslash; 120 mm</li>
+            <li>• PIPESEC4: &Oslash; 134 mm</li>
+            <li>• PIPESEC5: &Oslash; 155 mm</li>
+          </ul>
+        </div>
+        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+          <div class="font-bold text-slate-800 mb-1 text-sm">🔄 ตรวจจับ &amp; หลบคานซอย</div>
+          <p class="text-slate-600 leading-relaxed">
+            ระบบยิง Raytest ตรวจสอบแนวคานซอย (<code class="bg-slate-200 px-1 rounded">AABI*</code>) รอบรูเจาะ หากพบว่าชนหรือทับแนวท่อ สคริปต์จะ <strong>เลื่อนขยับคานซอยหลบระยะท่อให้อัตโนมัติ</strong> เพื่อความปลอดภัยของโครงสร้าง
+          </p>
+        </div>
+        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+          <div class="font-bold text-slate-800 mb-1 text-sm">💡 โคมไฟ Downlight (DS)</div>
+          <p class="text-slate-600 leading-relaxed">
+            สแกนหาตำแหน่งโคมไฟ Downlight ในเลเยอร์ <code class="bg-slate-200 px-1 rounded">EE-EQPM-LTG</code> และทำการเปลี่ยนแปฝ้าเพดานบริเวณนั้นเป็นรุ่นพิเศษ <code class="bg-slate-200 px-1 rounded font-bold text-emerald-700">AAGA0101D#DS</code> ให้โดยอัตโนมัติ
+          </p>
+        </div>
+      </div>
+
+      <div class="p-3 bg-red-50 border border-red-200 rounded-xl text-xs text-red-700 flex items-center gap-2">
+        <span class="font-bold text-base">🛑</span>
+        <span><strong>ข้อควรระวังพิเศษ:</strong> ต้องรัน <code>Hole SB</code> ก่อนรันคำสั่ง <code>Ceiling Joint</code> เสมอ หากมี Ceiling Joint อยู่ในโมเดล ระบบจะไม่ยอมทำงานเพื่อป้องกันการบิดตัวของโครงสร้าง</span>
+      </div>
+    </section>
+
+    <!-- Section 6: Joints & Accessories -->
+    <section id="joints-accessories" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-lg">05</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">อุปกรณ์พิเศษ Setback, Turnbuckle, และ Ceiling Joint</h2>
+          <p class="text-sm text-slate-500">การติดตั้งอุปกรณ์ค้ำยันลม, รอยต่อยูนิตระดับต่าง, และแผ่นเหล็กผูกข้อต่อฝ้าเพดาน</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
+        <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+          <div class="font-bold text-slate-800 mb-1 text-sm">Setback (Others)</div>
+          <p class="text-slate-600 leading-relaxed mb-2">คำนวณรอยต่อลดระดับข้ามชั้น (UnitDiffZ) และด้านกว้างไม่เท่ากัน (KetaDiffX)</p>
+          <div class="text-[10px] font-mono bg-white p-1.5 rounded border border-slate-200 text-slate-500">2ZY2FCTT***4*** / 2ZY2FCTS*</div>
+        </div>
+        <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+          <div class="font-bold text-slate-800 mb-1 text-sm">Clone SetBack</div>
+          <p class="text-slate-600 leading-relaxed mb-2">เลือก 2 Full Units เพื่อคัดลอกชิ้นส่วน Setback ไปยังยูนิตอื่นได้อย่างรวดเร็ว</p>
+          <div class="text-[10px] font-mono bg-white p-1.5 rounded border border-slate-200 text-slate-500">Ctrl + Select 2 Units</div>
+        </div>
+        <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+          <div class="font-bold text-slate-800 mb-1 text-sm">TurnBuckle</div>
+          <p class="text-slate-600 leading-relaxed mb-2">ติดตั้งเหล็กค้ำยันลมรหัส <code class="text-indigo-700">ABL###</code> ที่ระดับความสูง 3,245 มม. บนหัวเสาโครงสร้าง</p>
+          <div class="text-[10px] font-mono bg-white p-1.5 rounded border border-slate-200 text-slate-500">Layer: 00-Extension-Part</div>
+        </div>
+        <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+          <div class="font-bold text-slate-800 mb-1 text-sm">Ceiling Joint</div>
+          <p class="text-slate-600 leading-relaxed mb-2">เชื่อมข้อต่อแปฝ้าเพดานระหว่างยูนิตข้างเคียงด้วยชุดข้อต่อรหัส <code class="text-indigo-700">AGAZ*</code></p>
+          <div class="text-[10px] font-mono bg-white p-1.5 rounded border border-slate-200 text-slate-500">Layer: 00-Ceiling-Joint</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 7: BOM & QTO -->
+    <section id="bom-section" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-teal-100 text-teal-600 flex items-center justify-center font-bold text-lg">06</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">ระบบถอดแบบวัสดุ (Check Data &amp; Export BOM)</h2>
+          <p class="text-sm text-slate-500">การตรวจสอบความถูกต้องและการส่งออกข้อมูลเชื่อมต่อ Microsoft Excel</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50">
+          <h3 class="font-bold text-slate-800 text-sm mb-2">📊 Check Data Dialog (StrucTemplate.takeoffdialog)</h3>
+          <p class="text-slate-600 leading-relaxed mb-2">
+            หน้าต่าง HTML Dialog สำหรับเปรียบเทียบชิ้นส่วนระหว่างโมเดล 3D กับฐานข้อมูล Database:
+          </p>
+          <ul class="list-disc list-inside space-y-1 text-slate-600">
+            <li>แสดงตารางเปรียบเทียบจำนวนชิ้น (Model Qty vs Database Qty)</li>
+            <li>แสดงผลสถานะ Matching (ตรงกัน) และ Diff (ผลต่าง/ขาด/เกิน)</li>
+            <li><strong>Interactive Selection:</strong> คลิกที่แถวใดในตาราง ระบบจะ Highlight เลือกวัตถุชิ้นนั้นในโมเดล 3D ให้ทันที</li>
+          </ul>
+        </div>
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50">
+          <h3 class="font-bold text-slate-800 text-sm mb-2">📈 Export CSV to Excel (StrucTemplate.takeoffxls)</h3>
+          <p class="text-slate-600 leading-relaxed mb-2">
+            ประมวลผลและส่งออกรายการวัสดุโครงสร้างทั้งหมดลงในไฟล์:
+          </p>
+          <div class="bg-white p-2.5 rounded-lg border border-slate-200 font-mono text-[11px] mb-2 text-slate-700">
+            C:/QHeim/takeoffcomp.csv
+          </div>
+          <p class="text-slate-500">
+            โครงสร้างฟิลด์: <code class="bg-slate-200 px-1 rounded text-slate-800">House_ID, Unit(XX), Part_ID, Qty, Method, Place, Station, Position</code>
+            พร้อมสั่งเปิดโปรแกรม Microsoft Excel ขึ้นมาแสดงรายงานสรุปทันที
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 8: Component & Layer Matrix -->
+    <section id="matrix" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-sky-100 text-sky-600 flex items-center justify-center font-bold text-lg">07</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">ตารางสรุปเลเยอร์และคอมโพเนนต์ (Component &amp; Layer Matrix)</h2>
+          <p class="text-sm text-slate-500">โครงสร้างข้อมูลคอมโพเนนต์และเลเยอร์ที่เกี่ยวข้องทั้งหมดในระบบ Structure</p>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto rounded-xl border border-slate-200">
+        <table class="w-full text-xs text-left">
+          <thead class="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
+            <tr>
+              <th class="p-3">หมวดงาน (Category)</th>
+              <th class="p-3">ชื่อ Layer ใน SketchUp</th>
+              <th class="p-3">รหัส Part ID / Pattern</th>
+              <th class="p-3">รายละเอียดชิ้นส่วน</th>
+              <th class="p-3 text-center">หน่วยใน BOM</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200 text-slate-600">
+            <tr>
+              <td class="p-3 font-bold text-slate-800 bg-slate-50/50" rowspan="2">Modular Unit</td>
+              <td class="p-3 font-mono text-blue-700">00-SUnit</td>
+              <td class="p-3 font-mono">08_U36F / U45F / U54F / U59F / U63F</td>
+              <td class="p-3">ชุดยูนิตโมดูลาร์สำเร็จรูป 3D</td>
+              <td class="p-3 text-center">Unit</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-mono text-blue-700">00-Structure</td>
+              <td class="p-3 font-mono">ABE3F, ABE4F, ABE5F, ABE6F</td>
+              <td class="p-3">โครงสร้างเสา-คานเหล็กหลักของยูนิต</td>
+              <td class="p-3 text-center">Set</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-bold text-slate-800 bg-slate-50/50" rowspan="4">Floor &amp; Board</td>
+              <td class="p-3 font-mono text-indigo-700">00-Floor</td>
+              <td class="p-3 font-mono">ADH*</td>
+              <td class="p-3">ชุดประกอบพื้นโมดูลาร์ตาม Direction Code 01-12</td>
+              <td class="p-3 text-center">Set</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-mono text-indigo-700">Tag-SB-Floor 25mm.(Unit Bord)</td>
+              <td class="p-3 font-mono">ABD*</td>
+              <td class="p-3">แผ่นพื้นไฟเบอร์ซีเมนต์ Smartboard ความหนา 25 มม.</td>
+              <td class="p-3 text-center">EA</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-mono text-indigo-700">Tag-SB-Floor 25mm.(Hole)</td>
+              <td class="p-3 font-mono">ABD* (Hole Pattern)</td>
+              <td class="p-3">แผ่น Smartboard ที่ผ่านการเจาะรูงานระบบท่อแล้ว</td>
+              <td class="p-3 text-center">EA</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-mono text-indigo-700">00-Floor</td>
+              <td class="p-3 font-mono">AABI* / AAD*</td>
+              <td class="p-3">คานเหล็กซอยรับพื้น (Floor Sub-Beam) / เหล็กรางตัวยู</td>
+              <td class="p-3 text-center">EA</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-bold text-slate-800 bg-slate-50/50" rowspan="3">Ceiling System</td>
+              <td class="p-3 font-mono text-purple-700">00-Ceiling</td>
+              <td class="p-3 font-mono">AGA*</td>
+              <td class="p-3">ชุดประกอบฝ้าเพดานโมดูลาร์</td>
+              <td class="p-3 text-center">Set</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-mono text-purple-700">Tag-Sub-ceiling(downlight)</td>
+              <td class="p-3 font-mono">AAGA0101D#DS</td>
+              <td class="p-3">โครงแปฝ้าเพดานรุ่นพิเศษหลบแนวโคมไฟ Downlight</td>
+              <td class="p-3 text-center">EA</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-mono text-purple-700">Tag-Gypsum 9mm.</td>
+              <td class="p-3 font-mono">AAGY0005A</td>
+              <td class="p-3">แผ่นยิปซัมฝ้าเพดานความหนา 9 มม.</td>
+              <td class="p-3 text-center">EA</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-bold text-slate-800 bg-slate-50/50" rowspan="4">Extension &amp; Joints</td>
+              <td class="p-3 font-mono text-amber-700">00-Ceiling-Joint</td>
+              <td class="p-3 font-mono">AGAZ*</td>
+              <td class="p-3">แผ่นเหล็กข้อต่อเชื่อมแปฝ้าเพดานระหว่างยูนิต</td>
+              <td class="p-3 text-center">EA</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-mono text-amber-700">00-Extension-Part</td>
+              <td class="p-3 font-mono">AABP21000</td>
+              <td class="p-3">ชุดเหล็กต่อขยายยูนิต U63 ระหว่างชั้น</td>
+              <td class="p-3 text-center">EA</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-mono text-amber-700">00-Extension-Part</td>
+              <td class="p-3 font-mono">ABL###_______**</td>
+              <td class="p-3">ชุดเหล็กค้ำยันลม Turnbuckle บนหัวเสา</td>
+              <td class="p-3 text-center">EA</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-mono text-amber-700">00-Extension-Part</td>
+              <td class="p-3 font-mono">2ZY2FCTT***4*** / 2ZY2FCTS*</td>
+              <td class="p-3">ชิ้นส่วน Setback ปิดรอยต่อระดับต่าง Keta/Tsuma</td>
+              <td class="p-3 text-center">EA</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Section 9: Best Practices & Troubleshooting -->
+    <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center font-bold text-lg">08</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">การแก้ไขปัญหาที่พบบ่อย (Troubleshooting Guide)</h2>
+          <p class="text-sm text-slate-500">แนวทางการวิเคราะห์และแก้ไขปัญหาที่มักเกิดขึ้นหน้างาน</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+        <div class="p-4 rounded-xl border border-rose-200 bg-rose-50/30">
+          <div class="font-bold text-rose-900 mb-1 text-sm flex items-center gap-1.5">
+            <span>⚠️</span> กด Hole SB แล้วขึ้นเตือน "Please remove ceiling joint..."
+          </div>
+          <p class="text-slate-600 leading-relaxed mb-2">
+            <strong>สาเหตุ:</strong> มีคอมโพเนนต์ Ceiling Joint (<code class="text-slate-700">AGAZ*</code>) ค้างอยู่ในโมเดล ทำให้คานซอยไม่สามารถเลื่อนตำแหน่งได้
+          </p>
+          <div class="bg-white p-2.5 rounded-lg border border-rose-200 text-slate-700">
+            <strong>วิธีแก้:</strong> เลือกยูนิต &rarr; กดปุ่ม <strong>ถังขยะ (Erase by Layer)</strong> &rarr; เลือกเลเยอร์ <code class="bg-slate-100 px-1 rounded">00-Ceiling-Joint</code> เพื่อลบออก &rarr; กดรัน <strong>Hole SB</strong> ใหม่ &rarr; เมื่อเจาะรูเสร็จแล้ว ค่อยกดรัน <strong>Ceiling Joint</strong> ซ้ำอีกครั้ง
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl border border-rose-200 bg-rose-50/30">
+          <div class="font-bold text-rose-900 mb-1 text-sm flex items-center gap-1.5">
+            <span>⚠️</span> กด Floor 1st แล้วขึ้น "Some unit don't have unit number"
+          </div>
+          <p class="text-slate-600 leading-relaxed mb-2">
+            <strong>สาเหตุ:</strong> วัตถุขอบเขตยูนิตในเลเยอร์ <code class="text-slate-700">S-Unit</code> มีบางตัวที่ยังไม่ได้ตั้งชื่อ
+          </p>
+          <div class="bg-white p-2.5 rounded-lg border border-rose-200 text-slate-700">
+            <strong>วิธีแก้:</strong> คลิกที่กล่องยูนิตใน <code class="bg-slate-100 px-1 rounded">S-Unit</code> เปิดหน้าต่าง Entity Info แล้วพิมพ์ชื่อยูนิตให้ครบ เช่น <code class="text-indigo-700 font-bold">U01</code>, <code class="text-indigo-700 font-bold">U02</code> ก่อนกดรัน
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl border border-rose-200 bg-rose-50/30">
+          <div class="font-bold text-rose-900 mb-1 text-sm flex items-center gap-1.5">
+            <span>⚠️</span> กด Export CSV แล้วขึ้น Error หรือโปรแกรมค้าง
+          </div>
+          <p class="text-slate-600 leading-relaxed mb-2">
+            <strong>สาเหตุ:</strong> ไฟล์ <code class="text-slate-700">takeoffcomp.csv</code> กำลังถูกเปิดค้างอยู่ใน Microsoft Excel ทำให้ระบบไม่สามารถเขียนทับไฟล์ได้
+          </p>
+          <div class="bg-white p-2.5 rounded-lg border border-rose-200 text-slate-700">
+            <strong>วิธีแก้:</strong> สลับไปปิดหน้าต่าง Microsoft Excel ที่เปิดไฟล์นั้นอยู่ทั้งหมด แล้วกด Export CSV ใหม่อีกครั้ง
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl border border-rose-200 bg-rose-50/30">
+          <div class="font-bold text-rose-900 mb-1 text-sm flex items-center gap-1.5">
+            <span>⚠️</span> ขึ้นข้อความเตือน "House ID not found"
+          </div>
+          <p class="text-slate-600 leading-relaxed mb-2">
+            <strong>สาเหตุ:</strong> ยังไม่ได้กำหนดรหัสโครงการในตัวแปรแบบของโมเดล
+          </p>
+          <div class="bg-white p-2.5 rounded-lg border border-rose-200 text-slate-700">
+            <strong>วิธีแก้:</strong> เปิดหน้าต่าง <strong>Setting</strong> (หรือรันคำสั่ง <code class="bg-slate-100 px-1 rounded">strsetting</code>) กรอกข้อมูลในช่อง <strong>House ID</strong> ให้เรียบร้อย แล้วกดยืนยัน
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="max-w-6xl mx-auto mt-12 mb-8 text-center text-xs text-slate-400 no-print">
+    QHeim Modular Construction Extension &bull; Structural Modeling &amp; Takeoff Manual &bull; Updated 2026
+  </footer>
+
+</body>
+</html>

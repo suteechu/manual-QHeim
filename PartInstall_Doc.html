@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QHeim - เอกสารการทำงานระบบ PartInstall</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Tahoma, "Sarabun", sans-serif;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white !important; color: black !important; padding: 0 !important; }
+      .shadow-sm, .shadow-md, .shadow-lg, .shadow-xl { box-shadow: none !important; }
+      .border { border-color: #cbd5e1 !important; }
+      section { break-inside: avoid; page-break-inside: avoid; margin-bottom: 24px !important; }
+      table { break-inside: auto; }
+      tr { break-inside: avoid; page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased p-4 md:p-8">
+
+  <!-- Header Container -->
+  <div class="max-w-6xl mx-auto bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden mb-8">
+    <div class="bg-gradient-to-r from-blue-700 via-indigo-700 to-sky-600 p-8 text-white">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-semibold uppercase tracking-wider mb-2">
+            QHeim Modular Construction Extension
+          </span>
+          <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight">คู่มือและเอกสารการทำงาน PartInstall</h1>
+          <p class="text-blue-100 mt-2 text-sm md:text-base max-w-2xl">
+            สถาปัตยกรรมโค้ด, ตรรกะการวิเคราะห์พิกัดยูนิต (Direction Codes), การติดตั้งชิ้นส่วนโครงสร้าง, และการถอดรายการวัสดุ (BOM)
+          </p>
+        </div>
+        <div class="text-right">
+          <div class="text-xs text-blue-200">SketchUp Ruby Extension</div>
+          <div class="text-sm font-bold bg-blue-900/60 px-3 py-1.5 rounded-lg border border-blue-400/30 mt-1">
+            Path: C:/QHeim/Ruby/Struc/PartInstall/
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Navigation Bar -->
+    <div class="bg-slate-100 border-b border-slate-200 px-6 py-3 flex flex-wrap gap-2 text-xs md:text-sm font-medium text-slate-600 no-print">
+      <a href="#overview" class="hover:text-blue-600 px-2 py-1 rounded hover:bg-white transition">ภาพรวม & Workflow</a>
+      <span class="text-slate-300">|</span>
+      <a href="#operator-guide" class="text-amber-700 bg-amber-100 font-bold px-2 py-1 rounded hover:bg-amber-200 transition">👉 คู่มือการกดแต่ละไอคอน (สำหรับคนทำงาน)</a>
+      <span class="text-slate-300">|</span>
+      <a href="#positionx" class="hover:text-blue-600 px-2 py-1 rounded hover:bg-white transition">1. Unit Position</a>
+      <span class="text-slate-300">|</span>
+      <a href="#flashing" class="hover:text-blue-600 px-2 py-1 rounded hover:bg-white transition">2. Flashing & SuperSheet</a>
+      <span class="text-slate-300">|</span>
+      <a href="#components" class="hover:text-blue-600 px-2 py-1 rounded hover:bg-white transition">3. Guide Pin / Antivibration / Joint</a>
+      <span class="text-slate-300">|</span>
+      <a href="#bom" class="hover:text-blue-600 px-2 py-1 rounded hover:bg-white transition">4. ถอดแบบ BOM</a>
+      <span class="text-slate-300">|</span>
+      <a href="#matrix" class="hover:text-blue-600 px-2 py-1 rounded hover:bg-white transition">ตาราง Component Matrix</a>
+    </div>
+  </div>
+
+  <main class="max-w-6xl mx-auto space-y-8">
+
+    <!-- Section 1: Overview & Workflow -->
+    <section id="overview" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-lg">01</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">ภาพรวมระบบและขั้นตอนการทำงาน (Workflow Lifecycle)</h2>
+          <p class="text-sm text-slate-500">ลำดับการทำงานมาตรฐานในการติดตั้งอุปกรณ์โครงสร้างรอยต่อยูนิต</p>
+        </div>
+      </div>
+
+      <div class="p-4 bg-amber-50 border-l-4 border-amber-500 rounded-r-xl mb-6">
+        <div class="flex items-start gap-2">
+          <span class="text-amber-600 font-bold text-lg">⚠️</span>
+          <div>
+            <h4 class="font-bold text-amber-800 text-sm">กฎเหล็กสำคัญที่สุดก่อนรันคำสั่งอื่น:</h4>
+            <p class="text-amber-700 text-xs md:text-sm mt-0.5">
+              ผู้ใช้ <strong>ต้องเลือกยูนิตแล้วรันคำสั่ง "Unit Position" ก่อนเสมอ</strong> เพื่อให้ระบบคำนวณและเขียน Attribute ทิศทาง (<code class="bg-amber-100 px-1 py-0.5 rounded text-amber-900 font-mono">U01|U36F|2|1|04</code>) ให้กับยูนิต หากไม่รันคำสั่งนี้ สคริปต์ตัวอื่นจะไม่ทราบตำแหน่งและจะไม่สามารถวางชิ้นส่วนได้
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-slate-50 transition">
+          <div class="text-xs font-bold text-blue-600 uppercase mb-1">ขั้นตอนที่ 1</div>
+          <h3 class="font-bold text-slate-800 mb-2">เลือกยูนิต & ตั้งชั้น</h3>
+          <p class="text-xs text-slate-600">เลือกกลุ่มยูนิตในเลเยอร์ <code class="bg-slate-200 px-1 rounded">S-Unit</code> จากนั้นรัน <strong>Unit Position</strong> เพื่อระบุ Floor NO.</p>
+        </div>
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-slate-50 transition">
+          <div class="text-xs font-bold text-indigo-600 uppercase mb-1">ขั้นตอนที่ 2</div>
+          <h3 class="font-bold text-slate-800 mb-2">คำนวณทิศทาง (Raytest)</h3>
+          <p class="text-xs text-slate-600">ระบบยิงแสง 4 ทิศ (ซ้าย, ขวา, หน้า, หลัง) เพื่อถอดรหัสทิศทาง <strong>01 ถึง 12</strong> และขนาดความกว้างยูนิต</p>
+        </div>
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-slate-50 transition">
+          <div class="text-xs font-bold text-sky-600 uppercase mb-1">ขั้นตอนที่ 3</div>
+          <h3 class="font-bold text-slate-800 mb-2">ติดตั้งชิ้นส่วนอัตโนมัติ</h3>
+          <p class="text-xs text-slate-600">รัน Flashing, Guide Pin, Antivibration, Joint Set ตามต้องการ ระบบจะวางชิ้นส่วนลงเลเยอร์ <code class="bg-slate-200 px-1 rounded">I-*</code></p>
+        </div>
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-slate-50 transition">
+          <div class="text-xs font-bold text-emerald-600 uppercase mb-1">ขั้นตอนที่ 4</div>
+          <h3 class="font-bold text-slate-800 mb-2">ส่งออก BOM สรุปยอด</h3>
+          <p class="text-xs text-slate-600">กดปุ่ม <strong>Export Install Part</strong> เพื่อสร้างไฟล์ <code class="bg-slate-200 px-1 rounded">BOMInstall.csv</code> และเปิดใน Excel อัตโนมัติ</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: OPERATOR GUIDE (SOP FOR WORKERS) -->
+    <section id="operator-guide" class="bg-white rounded-2xl shadow-sm border-2 border-amber-300 p-6 md:p-8">
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-xl bg-amber-500 text-white flex items-center justify-center font-black text-2xl shadow-sm">
+            👷
+          </div>
+          <div>
+            <span class="text-xs font-bold bg-amber-100 text-amber-800 px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+              Standard Operating Procedure (SOP)
+            </span>
+            <h2 class="text-2xl md:text-3xl font-extrabold text-slate-800 mt-1">
+              คู่มือขั้นตอนการกดใช้งานแต่ละไอคอน (สำหรับคนทำงาน)
+            </h2>
+            <p class="text-sm text-slate-500">
+              สรุปขั้นตอนการปฏิบัติงานจริง วิธีการครอบเลือกวัตถุ, การกดปุ่ม และสิ่งที่ระบบสร้างให้ในโมเดล
+            </p>
+          </div>
+        </div>
+        <div class="text-right">
+          <span class="text-xs font-semibold text-slate-400">Toolbar: Heim_PartInstall.html</span>
+        </div>
+      </div>
+
+      <!-- Step 1 & Step 2 Summary Banner -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+        <div class="p-5 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-300">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">1</span>
+            <h3 class="font-bold text-blue-900 text-base">ขั้นตอนที่ 1: เลือกยูนิต &amp; ตั้งชั้น (Unit Position)</h3>
+          </div>
+          <p class="text-xs text-slate-700 leading-relaxed mb-3">
+            เปิดเลเยอร์ <strong class="text-blue-700">S-Unit</strong> &rarr; ลากเมาส์ครอบยูนิตทั้งหมดของชั้นที่กำลังทำงาน &rarr; คลิกไอคอน <strong>Unit Position</strong> &rarr; เลือกเลขชั้น <strong>Floor NO. (1, 2, 3)</strong> ในกล่องข้อความแล้วกด ตกลง
+          </p>
+          <div class="bg-white p-2.5 rounded-lg border border-blue-200 text-xs text-slate-600 font-mono">
+            <strong>✅ วิธีเช็คผลสำเร็จ:</strong> คลิกที่ยูนิตเปิดดูหน้าต่าง Entity Info ชื่อจะเปลี่ยนเป็น <span class="text-blue-600 font-bold">U01|U36F|2|1|04</span> แสดงว่าพร้อมทำงานขั้นต่อไป
+          </div>
+        </div>
+
+        <div class="p-5 rounded-xl bg-gradient-to-br from-emerald-50 to-teal-50 border-2 border-emerald-300">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="w-7 h-7 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-sm">2</span>
+            <h3 class="font-bold text-emerald-900 text-base">ขั้นตอนที่ 2: ครอบ Unit (S-Unit) &amp; เลือกปุ่มติดตั้ง</h3>
+          </div>
+          <p class="text-xs text-slate-700 leading-relaxed mb-3">
+            เมื่อตั้งชื่อยูนิตเสร็จแล้ว ให้ลากเมาส์ <strong>"ครอบกลุ่ม Unit (S-Unit)"</strong> อีกครั้ง จากนั้นกดปุ่มชิ้นส่วนที่ต้องการติดตั้งเรียงตามลำดับหน้างาน: <strong class="text-emerald-700">Flashing &rarr; Guide Pin &rarr; Antivibration &rarr; Joint Set</strong>
+          </p>
+          <div class="bg-white p-2.5 rounded-lg border border-emerald-200 text-xs text-slate-600">
+            <strong>💡 ทริค:</strong> ทุกครั้งที่กดปุ่ม ระบบจะอ่านข้อมูลพิกัดและทิศทางจากชื่อยูนิตที่ได้จากขั้นตอนที่ 1 ไปประมวลผลทันที
+          </div>
+        </div>
+      </div>
+
+      <!-- Icon-by-Icon Operator Manual Grid -->
+      <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <span>📋</span> รายละเอียดการกดใช้งานทีละไอคอน (11 ไอคอน)
+      </h3>
+
+      <div class="space-y-4">
+
+        <!-- 1. Unit Position -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-blue-400 bg-white transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-56 shrink-0">
+            <img src="ICON/PartInstall\UnitNumber.jpg" alt="Unit Position" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">1. Unit Position</div>
+              <div class="text-xs text-slate-400 font-mono">Heim_Positionx</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              ลากเมาส์ครอบ Unit ทั้งหมดของชั้นในเลเยอร์ <code class="bg-slate-200 px-1 rounded">S-Unit</code>
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              กดไอคอน &rarr; จะมีหน้าต่างขึ้นมาถาม <strong>Floor NO.</strong> ให้เลือกชั้น 1, 2 หรือ 3 แล้วกดยืนยัน
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              ระบบยิง Raytest ตั้งรหัสทิศทาง 01-12 และบันทึกชื่อยูนิต (<code class="text-emerald-700">U01|U36F|2|1|04</code>)
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Flashing+SuperSheet -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-blue-400 bg-white transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-56 shrink-0">
+            <img src="ICON/PartInstall\flashing.jpg" alt="Flashing" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">2. Flashing+SuperSheet</div>
+              <div class="text-xs text-slate-400 font-mono">Heim_Flashing</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              ลากเมาส์ครอบ Unit ทั้งหมดของชั้นนั้น (<code class="bg-slate-200 px-1 rounded">S-Unit</code>)
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              กดปุ่ม Flashing ครั้งเดียว ระบบจะทำงานอัตโนมัติ ไม่ต้องกรอกค่าเพิ่มเติม
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              สร้างราง Flashing รอบอาคาร, ใส่ฝาครอบมุมนอก/มุมใน และสร้างแผ่นยาง Super Sheet รองใต้รางให้เสร็จสรรพ
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Cut Flashing -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-blue-400 bg-white transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-56 shrink-0">
+            <img src="ICON/PartInstall\cutflashing.jpg" alt="Cut Flashing" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">3. Cut Flashing</div>
+              <div class="text-xs text-slate-400 font-mono">Heim_CutFlashing</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              <strong>คลิกเลือก Face (ผิวหน้า)</strong> ของพื้นช่องเปิด/ทางเข้าประตูที่ต้องการตัดราง
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              กดปุ่ม Cut Flashing
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              ตัดเจาะราง Flashing เปิดทางเข้า พร้อมวางฝาปิดขอบซ้าย (<code class="text-slate-700">AAFD10240</code>) และขวา (<code class="text-slate-700">AAFD10250</code>) ให้อัตโนมัติ
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Gable -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-blue-400 bg-white transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-56 shrink-0">
+            <img src="ICON/PartInstall\gable.jpg" alt="Gable" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">4. Gable (2 Points)</div>
+              <div class="text-xs text-slate-400 font-mono">Heim_Gable</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              <strong>ไม่ต้องเลือกวัตถุไว้ล่วงหน้า</strong>
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              กดไอคอน &rarr; คลิกจุดที่ 1 (จุดเริ่มจั่ว) &rarr; คลิกจุดที่ 2 (จุดสิ้นสุดจั่ว)
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              สร้างราง Flashing หน้าจั่วพร้อมฝาปิดปลาย Gable_L และ Gable_R ระหว่าง 2 จุดที่คลิก
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Guide Pin -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-blue-400 bg-white transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-56 shrink-0">
+            <img src="ICON/PartInstall\guidepin.jpg" alt="Guide Pin" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">5. Guide Pin</div>
+              <div class="text-xs text-slate-400 font-mono">Heim_GuidePin</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              ลากเมาส์ครอบ Unit ทั้งหมดของชั้นในเลเยอร์ <code class="bg-slate-200 px-1 rounded">S-Unit</code>
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              กดปุ่ม Guide Pin &rarr; เลือก Type ใน Popup:<br>
+              • <strong>General:</strong> วางหมุดใหญ่อัตโนมัติตามมุมเปิด<br>
+              • <strong>Small / Balcony:</strong> นำเมาส์ไปคลิกจุดยูนิตเล็กหรือระเบียง
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              วางหมุดนำศูนย์ <code class="text-slate-700">AASO07510</code> / <code class="text-slate-700">AASO07520</code> ลงในเลเยอร์ <code class="text-emerald-700">I-Guide pin</code>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. Antivibration -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-blue-400 bg-white transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-56 shrink-0">
+            <img src="ICON/PartInstall\antivibration.jpg" alt="Antivibration" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">6. Antivibration</div>
+              <div class="text-xs text-slate-400 font-mono">Heim_Antivibration</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              ลากเมาส์ครอบ Unit ทั้งหมดของชั้นในเลเยอร์ <code class="bg-slate-200 px-1 rounded">S-Unit</code>
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              กดปุ่ม Antivibration ครั้งเดียว ระบบประมวลผลอัตโนมัติ
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              ติดตั้งแผ่นยางซับแรงสั่น <code class="text-slate-700">AASZ50130</code> และแผ่นระหว่างชั้น <code class="text-slate-700">AASD07580</code>/<code class="text-slate-700">AASD07590</code> ใต้เสา
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. Joint Set -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-blue-400 bg-white transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-56 shrink-0">
+            <img src="ICON/PartInstall\jointset.jpg" alt="Joint Set" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">7. Joint Set</div>
+              <div class="text-xs text-slate-400 font-mono">Heim_JointSet</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              ลากเมาส์ครอบ Unit ทั้งหมดของชั้นในเลเยอร์ <code class="bg-slate-200 px-1 rounded">S-Unit</code>
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              กดปุ่ม Joint Set ครั้งเดียว ระบบคำนวณผนังเบิ้ลอัตโนมัติ
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              ติดตั้งข้อต่อ Keta (<code class="text-slate-700">AASD05180</code>) หรือ Tsuma (<code class="text-slate-700">AASD04310</code>) ในเลเยอร์ <code class="text-emerald-700">I-Joint Set</code>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. Canvas -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-blue-400 bg-white transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-56 shrink-0">
+            <img src="ICON/PartInstall\canvas.jpg" alt="Canvas" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">8. Canvas (Roof)</div>
+              <div class="text-xs text-slate-400 font-mono">Heim_Canvas_test</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              ลากครอบ Unit ชั้นหลังคา (หรือคลิกเลือก 1 Face ขอบเขต)
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              กดไอคอน &rarr; ใส่ระยะ Offset ชายผ้าใบ (เช่น 150 และ 1200 มม.)
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              สร้างผืนผ้าใบคลุมหลังคา <code class="text-slate-700">AAEC10230</code>, คำนวณพื้นที่ ตร.ม. และจับภาพ Top View
+            </div>
+          </div>
+        </div>
+
+        <!-- 9. Change Part -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-blue-400 bg-white transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-56 shrink-0">
+            <img src="ICON/PartInstall\changepart.jpg" alt="Change Part" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">9. Change Part</div>
+              <div class="text-xs text-slate-400 font-mono">Heim_ChangePart</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              <strong>ไม่ต้องเลือกวัตถุล่วงหน้า</strong>
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              กดไอคอน &rarr; นำเมาส์ไปคลิกที่ตัวชิ้นส่วนที่ต้องการเปลี่ยน &rarr; เลือกสเปกใหม่ในหน้าต่าง Popup
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              สลับเป็นชิ้นส่วนใหม่ทันที โดยคงตำแหน่ง พิกัดเดิม และมุมหมุนไว้ 100%
+            </div>
+          </div>
+        </div>
+
+        <!-- 10. Delete Part -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-blue-400 bg-white transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-56 shrink-0">
+            <img src="ICON/Delete.jpg" alt="Delete Part" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">10. Delete Part</div>
+              <div class="text-xs text-slate-400 font-mono">Heim_DeletePart</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              ลากครอบชิ้นส่วนที่ต้องการลบในโมเดล
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              กดปุ่มถังขยะ &rarr; เลือกว่าจะลบเฉพาะ Layer ไหน หรือเลือก <strong>All</strong> เพื่อลบทุกชิ้นส่วนติดตั้ง
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              เคลียร์ชิ้นส่วนในหมวด <code class="text-slate-700">I-*</code> ที่เลือกออกอย่างปลอดภัยโดยไม่กระทบตัวยูนิต
+            </div>
+          </div>
+        </div>
+
+        <!-- 11. Export Install Part -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-emerald-400 bg-emerald-50/30 transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-56 shrink-0">
+            <img src="ICON/PartInstall\ExportPart.jpg" alt="Export Install Part" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-emerald-900 text-sm">11. Export BOM</div>
+              <div class="text-xs text-emerald-600 font-mono">Heim_QuanInstall</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-white p-2.5 rounded-lg border border-emerald-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              ลากครอบยูนิตทั้งหมดของอาคาร (หรือชั้นที่ต้องการสรุปยอด)
+            </div>
+            <div class="bg-white p-2.5 rounded-lg border border-emerald-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              กดปุ่ม Export Install Part (ตรวจสอบว่าปิดไฟล์ Excel เก่าก่อนกด)
+            </div>
+            <div class="bg-white p-2.5 rounded-lg border border-emerald-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              สร้างไฟล์ <code class="text-slate-800 font-bold">C:/QHeim/BOMInstall.csv</code> และเด้งเปิดโปรแกรม Excel ขึ้นมาแสดงสรุปยอดชิ้นส่วนและท่อนสต็อกทันที!
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 2: Unit Position Logic -->
+    <section id="positionx" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-lg">02</div>
+          <div>
+            <h2 class="text-2xl font-bold text-slate-800">1. การวิเคราะห์ตำแหน่งยูนิต (Heim_Positionx.rb)</h2>
+            <p class="text-sm text-slate-500">ตรรกะ Raytest 4 ทิศทาง และการแปลงรหัส Direction Codes 01 - 12</p>
+          </div>
+        </div>
+        <span class="text-xs font-mono bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full border border-indigo-200">
+          Heim_Positionx.rb
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div>
+          <h3 class="text-base font-bold text-slate-700 mb-2">การจัดหมวดยูนิตตามขนาดจริง (Width / Height)</h3>
+          <p class="text-xs text-slate-600 mb-3">ระบบตรวจวัด Bounding Box Width ของแต่ละยูนิตเพื่อระบุขนาดโครงสร้าง:</p>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs border border-slate-200 rounded-lg">
+              <thead class="bg-slate-100 text-slate-700 font-semibold border-b border-slate-200">
+                <tr>
+                  <th class="p-2.5">รหัสขนาด (Type)</th>
+                  <th class="p-2.5">ช่วงความกว้างจริง (mm)</th>
+                  <th class="p-2.5">Grid Code</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200">
+                <tr><td class="p-2.5 font-bold text-indigo-600">U36</td><td class="p-2.5">3810 - 3820 mm</td><td class="p-2.5">3</td></tr>
+                <tr><td class="p-2.5 font-bold text-indigo-600">U45</td><td class="p-2.5">4710 - 4720 mm</td><td class="p-2.5">4</td></tr>
+                <tr><td class="p-2.5 font-bold text-indigo-600">U54</td><td class="p-2.5">5610 - 5620 mm</td><td class="p-2.5">5</td></tr>
+                <tr><td class="p-2.5 font-bold text-indigo-600">U59</td><td class="p-2.5">6060 - 6070 mm</td><td class="p-2.5">7</td></tr>
+                <tr><td class="p-2.5 font-bold text-indigo-600">U63</td><td class="p-2.5">6510 - 6520 mm</td><td class="p-2.5">6</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="text-xs text-slate-500 mt-2">
+            * ความสูง &gt; 2460mm กำหนดรหัส <strong>F</strong> (Full), ความสูงอื่นเป็น <strong>S</strong> (Short)
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-base font-bold text-slate-700 mb-2">โครงสร้างรูปแบบการตั้งชื่อ (Naming Structure)</h3>
+          <p class="text-xs text-slate-600 mb-3">เมื่อวิเคราะห์เสร็จ ยูนิตจะถูกเปลี่ยนชื่อและเซฟ Attribute ดังนี้:</p>
+          <div class="bg-slate-900 text-emerald-400 p-4 rounded-xl font-mono text-xs space-y-2">
+            <div><span class="text-slate-400"># รูปแบบ Instance Name:</span></div>
+            <div class="text-sm font-bold text-yellow-300">UnitName | Type | NFL | FL | Dir</div>
+            <div class="text-xs text-slate-300">ตัวอย่าง: <span class="text-white font-bold">U01|U36F|2|1|04</span></div>
+            <div class="pt-2 border-t border-slate-800 text-slate-400">
+              U01 = ชื่อยูนิต<br>
+              U36F = ขนาด U36 ความสูง Full<br>
+              2 = จำนวนชั้นรวม (NFL)<br>
+              1 = ชั้นปัจจุบัน (Floor 1)<br>
+              04 = ทิศทางตำแหน่ง (Top-Left Corner)
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Direction Codes Table -->
+      <h3 class="text-base font-bold text-slate-700 mb-2">ตารางถอดรหัสทิศทางยูนิต (Direction Codes 01 - 12)</h3>
+      <div class="overflow-x-auto border border-slate-200 rounded-xl">
+        <table class="w-full text-left text-xs">
+          <thead class="bg-slate-100 text-slate-700 font-semibold border-b border-slate-200">
+            <tr>
+              <th class="p-2.5 text-center">รหัส Dir</th>
+              <th class="p-2.5 text-center">ซ้าย (-X)</th>
+              <th class="p-2.5 text-center">ล่าง (-Y)</th>
+              <th class="p-2.5 text-center">ขวา (+X)</th>
+              <th class="p-2.5 text-center">บน (+Y)</th>
+              <th class="p-2.5">ตำแหน่งและลักษณะในผัง</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            <tr class="hover:bg-slate-50"><td class="p-2.5 font-bold text-center text-blue-600">01</td><td class="p-2.5 text-center">เปิด (1)</td><td class="p-2.5 text-center text-slate-400">ติด (0)</td><td class="p-2.5 text-center">เปิด (1)</td><td class="p-2.5 text-center">เปิด (1)</td><td class="p-2.5">ยูนิตเดี่ยวยื่น ปลายบนสุด</td></tr>
+            <tr class="hover:bg-slate-50"><td class="p-2.5 font-bold text-center text-blue-600">02</td><td class="p-2.5 text-center">เปิด (1)</td><td class="p-2.5 text-center text-slate-400">ติด (0)</td><td class="p-2.5 text-center">เปิด (1)</td><td class="p-2.5 text-center text-slate-400">ติด (0)</td><td class="p-2.5">ยูนิตแถวกลาง เปิดซ้าย-ขวา</td></tr>
+            <tr class="hover:bg-slate-50"><td class="p-2.5 font-bold text-center text-blue-600">03</td><td class="p-2.5 text-center">เปิด (1)</td><td class="p-2.5 text-center">เปิด (1)</td><td class="p-2.5 text-center">เปิด (1)</td><td class="p-2.5 text-center text-slate-400">ติด (0)</td><td class="p-2.5">ยูนิตเดี่ยวยื่น ปลายล่างสุด</td></tr>
+            <tr class="hover:bg-slate-50 bg-blue-50/30"><td class="p-2.5 font-bold text-center text-blue-600">04</td><td class="p-2.5 text-center">เปิด (1)</td><td class="p-2.5 text-center text-slate-400">ติด (0)</td><td class="p-2.5 text-center text-slate-400">ติด (0)</td><td class="p-2.5 text-center">เปิด (1)</td><td class="p-2.5 font-medium text-slate-800">มุมบนซ้าย (Top-Left Corner)</td></tr>
+            <tr class="hover:bg-slate-50"><td class="p-2.5 font-bold text-center text-blue-600">05</td><td class="p-2.5 text-center">เปิด (1)</td><td class="p-2.5 text-center text-slate-400">ติด (0)</td><td class="p-2.5 text-center text-slate-400">ติด (0)</td><td class="p-2.5 text-center text-slate-400">ติด (0)</td><td class="p-2.5">ขอบซ้ายของอาคาร (Left Edge)</td></tr>
+            <tr class="hover:bg-slate-50 bg-blue-50/30"><td class="p-2.5 font-bold text-center text-blue-600">06</td><td class="p-2.5 text-center">เปิด (1)</td><td class="p-2.5 text-center">เปิด (1)</td><td class="p-2.5 text-center text-slate-400">ติด (0)</td><td class="p-2.5 text-center text-slate-400">ติด (0)</td><td class="p-2.5 font-medium text-slate-800">มุมล่างซ้าย (Bottom-Left Corner)</td></tr>
+            <tr class="hover:bg-slate-50"><td class="p-2.5 font-bold text-center text-blue-600">07</td><td class="p-2.5 text-center text-slate-400">ติด (0)</td><td class="p-2.5 text-center text-slate-400">ติด (0)</td><td class="p-2.5 text-center text-slate-400">ติด (0)</td><td class="p-2.5 text-center">เปิด (1)</td><td class="p-2.5">ขอบบนของอาคาร (Top Edge)</td></tr>
+            <tr class="hover:bg-slate-50"><td class="p-2.5 font-bold text-center text-blue-600">08</td><td class="p-2.5 text-center text-slate-400">ติด (0)</td><td class="p-2.5 text-center text-slate-400">ติด (0)</td><td class="p-2.5 text-center text-slate-400">ติด (0)</td><td class="p-2.5 text-center text-slate-400">ติด (0)</td><td class="p-2.5">ยูนิตแกนกลาง ถูกล้อมรอบ 4 ด้าน (Center Core)</td></tr>
+            <tr class="hover:bg-slate-50"><td class="p-2.5 font-bold text-center text-blue-600">09</td><td class="p-2.5 text-center text-slate-400">ติด (0)</td><td class="p-2.5 text-center">เปิด (1)</td><td class="p-2.5 text-center text-slate-400">ติด (0)</td><td class="p-2.5 text-center text-slate-400">ติด (0)</td><td class="p-2.5">ขอบล่างของอาคาร (Bottom Edge)</td></tr>
+            <tr class="hover:bg-slate-50 bg-blue-50/30"><td class="p-2.5 font-bold text-center text-blue-600">10</td><td class="p-2.5 text-center text-slate-400">ติด (0)</td><td class="p-2.5 text-center text-slate-400">ติด (0)</td><td class="p-2.5 text-center">เปิด (1)</td><td class="p-2.5 text-center">เปิด (1)</td><td class="p-2.5 font-medium text-slate-800">มุมบนขวา (Top-Right Corner)</td></tr>
+            <tr class="hover:bg-slate-50"><td class="p-2.5 font-bold text-center text-blue-600">11</td><td class="p-2.5 text-center text-slate-400">ติด (0)</td><td class="p-2.5 text-center text-slate-400">ติด (0)</td><td class="p-2.5 text-center">เปิด (1)</td><td class="p-2.5 text-center text-slate-400">ติด (0)</td><td class="p-2.5">ขอบขวาของอาคาร (Right Edge)</td></tr>
+            <tr class="hover:bg-slate-50 bg-blue-50/30"><td class="p-2.5 font-bold text-center text-blue-600">12</td><td class="p-2.5 text-center text-slate-400">ติด (0)</td><td class="p-2.5 text-center">เปิด (1)</td><td class="p-2.5 text-center">เปิด (1)</td><td class="p-2.5 text-center text-slate-400">ติด (0)</td><td class="p-2.5 font-medium text-slate-800">มุมล่างขวา (Bottom-Right Corner)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Section 3: Flashing & SuperSheet -->
+    <section id="flashing" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-sky-100 text-sky-600 flex items-center justify-center font-bold text-lg">03</div>
+          <div>
+            <h2 class="text-2xl font-bold text-slate-800">2. รางครอบกันน้ำ Flashing & Super Sheet</h2>
+            <p class="text-sm text-slate-500">Heim_Flashing.rb, Heim_Perimeter.rb, Heim_CutFlashing.rb, Heim_Gable.rb</p>
+          </div>
+        </div>
+        <span class="text-xs font-mono bg-sky-50 text-sky-700 px-3 py-1 rounded-full border border-sky-200">
+          I-Flashing cover 5025 / I-Super sheet
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <!-- Floor 1 Card -->
+        <div class="p-5 rounded-xl border border-sky-200 bg-sky-50/40">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="font-bold text-sky-900 text-base">ชั้น 1 (Floor 1 Logic)</h3>
+            <span class="text-xs font-bold bg-sky-200 text-sky-800 px-2 py-0.5 rounded">flashing_cover1</span>
+          </div>
+          <ul class="text-xs space-y-2 text-slate-700">
+            <li class="flex items-start gap-2">
+              <span class="font-bold text-sky-600">•</span>
+              <span><strong>Super Sheet:</strong> ความกว้าง 0.20m รหัส <code>AATC10050</code> (วัสดุ: Super sheet 20x20x10000)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="font-bold text-sky-600">•</span>
+              <span><strong>มุมนอก (Out Corner):</strong> วางคอมโพเนนต์ <code>FC_Out_Corner</code> รหัส <code>AAFD10210</code></span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="font-bold text-sky-600">•</span>
+              <span><strong>มุมใน (In Corner):</strong> วางคอมโพเนนต์ <code>FC_In_Corner</code> รหัส <code>AAFD10220</code></span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="font-bold text-sky-600">•</span>
+              <span><strong>รางครอบช่วงตรง:</strong> ดึงหน้าตัด <code>Cover_Foundation</code> PushPull รหัส <code>AAFD10120</code></span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Floor 2-3 Card -->
+        <div class="p-5 rounded-xl border border-indigo-200 bg-indigo-50/40">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="font-bold text-indigo-900 text-base">ชั้น 2 - 3 (Floor 2-3 Logic)</h3>
+            <span class="text-xs font-bold bg-indigo-200 text-indigo-800 px-2 py-0.5 rounded">flashing_cover2</span>
+          </div>
+          <ul class="text-xs space-y-2 text-slate-700">
+            <li class="flex items-start gap-2">
+              <span class="font-bold text-indigo-600">•</span>
+              <span><strong>Super Sheet:</strong> ความกว้าง 0.15m รหัส <code>AATC09990</code> (วัสดุ: Super sheet 15x20x10000)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="font-bold text-indigo-600">•</span>
+              <span><strong>มุมนอก (Out Corner):</strong> วางคอมโพเนนต์ <code>FC_Out</code> รหัส <code>AAFD10030</code></span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="font-bold text-indigo-600">•</span>
+              <span><strong>มุมใน (In Corner):</strong> วางคอมโพเนนต์ <code>FC_In</code> รหัส <code>AAFD10040</code></span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="font-bold text-indigo-600">•</span>
+              <span><strong>รางครอบช่วงตรง:</strong> ดึงหน้าตัด <code>Cover_5025</code> PushPull รหัส <code>AAFD10020</code></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Cut Flashing & Gable Sub-features -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+          <h4 class="font-bold text-slate-800 text-sm mb-1">การตัดแบ่ง Flashing (Cut Flashing)</h4>
+          <p class="text-xs text-slate-600 mb-2">เมื่อเลือก Face ของช่องเปิด ประตู หรือจุดเปลี่ยนระดับ:</p>
+          <p class="text-xs text-slate-600">
+            สคริปต์จะยืด Face ลง 0.40m เพื่อตัดเจาะ <code>AAFD10120</code> แล้ววางฝาปิดปลายซ้าย <code>FC_Cap_L</code> (<strong>AAFD10240</strong>) และขวา <code>FC_Cap_R</code> (<strong>AAFD10250</strong>)
+          </p>
+        </div>
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+          <h4 class="font-bold text-slate-800 text-sm mb-1">หน้าจั่ว Flashing (Gable Tool)</h4>
+          <p class="text-xs text-slate-600 mb-2">เครื่องมือโต้ตอบคลิก 2 จุดตามแนวหลังคา:</p>
+          <p class="text-xs text-slate-600">
+            วางชิ้นส่วนครอบมุมซ้าย <code>Gable_L</code> และขวา <code>Gable_R</code> จากนั้นยืดหน้าตัด <code>Cover_5025</code> รหัส <strong>AAFD10120</strong> เชื่อมระหว่างจุด 2 จุดโดยเว้นระยะฝาปิด
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Guide Pin, Antivibration, Joint Set -->
+    <section id="components" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-lg">04</div>
+          <div>
+            <h2 class="text-2xl font-bold text-slate-800">3. ชิ้นส่วนโครงสร้าง (Pins, Dampers & Joints)</h2>
+            <p class="text-sm text-slate-500">Heim_GuidePin.rb, Heim_Antivibration.rb, Heim_JointSet.rb</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Guide Pin Card -->
+        <div class="border border-slate-200 rounded-xl p-5 bg-slate-50/50">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="font-bold text-slate-800 text-base">Guide Pin</h3>
+            <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded font-mono">I-Guide pin</span>
+          </div>
+          <p class="text-xs text-slate-600 mb-3">หมุดนำศูนย์สำหรับยกวางยูนิตสำเร็จรูป:</p>
+          <div class="space-y-2 text-xs">
+            <div class="bg-white p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-600">AASO07510</span>: Guide pin (Big)<br>
+              <span class="text-slate-500">สำหรับยูนิตทั่วไป คำนวณวางตามมุมเปิดภายนอกอัตโนมัติ</span>
+            </div>
+            <div class="bg-white p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-600">AASO07520</span>: Guide pin (Small/Tsuma)<br>
+              <span class="text-slate-500">คลิกเลือกวางจุดยูนิตขนาดเล็ก</span>
+            </div>
+            <div class="bg-white p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-600">AASO07550</span>: Guide pin Balcony<br>
+              <span class="text-slate-500">สำหรับรอยต่อระเบียง</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Antivibration Card -->
+        <div class="border border-slate-200 rounded-xl p-5 bg-slate-50/50">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="font-bold text-slate-800 text-base">Antivibration</h3>
+            <span class="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded font-mono">I-Antivibration</span>
+          </div>
+          <p class="text-xs text-slate-600 mb-3">แผ่นและยางซับแรงสั่นสะเทือน:</p>
+          <div class="space-y-2 text-xs">
+            <div class="bg-white p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-amber-600">AASZ50130</span>: ยางกันสั่นหลัก<br>
+              <span class="text-slate-500">วางใต้รอยต่อเสาเพื่อดูดซับแรงสั่น</span>
+            </div>
+            <div class="bg-white p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-amber-600">AASD07580</span>: Basement M10<br>
+              <span class="text-slate-500">สำหรับฐานราก L=180mm</span>
+            </div>
+            <div class="bg-white p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-amber-600">AASD07590</span>: Intermediate EW<br>
+              <span class="text-slate-500">ซับแรงสั่นสะเทือนระหว่างชั้น 1F-2F</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Joint Set Card -->
+        <div class="border border-slate-200 rounded-xl p-5 bg-slate-50/50">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="font-bold text-slate-800 text-base">Joint Set</h3>
+            <span class="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded font-mono">I-Joint Set</span>
+          </div>
+          <p class="text-xs text-slate-600 mb-3">ข้อต่อเหล็กยึดยูนิตเข้าด้วยกัน:</p>
+          <div class="space-y-2 text-xs">
+            <div class="bg-white p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-purple-600">AASD05180 (Keta)</span><br>
+              <span class="text-slate-500">สำหรับรอยต่อปกติที่ไม่มีผนังแทรก (Double Wall = N)</span>
+            </div>
+            <div class="bg-white p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-purple-600">AASD04310 (Tsuma)</span><br>
+              <span class="text-slate-500">สำหรับจุดที่มีผนังซ้อน (Double Wall = Y)</span>
+            </div>
+            <div class="bg-white p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-purple-600">AASD07390 / AASR08550</span><br>
+              <span class="text-slate-500">Joint ระหว่างชั้น และ Plate เฉพาะบริเวณห้องน้ำ (WC)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: BOM Export Calculation -->
+    <section id="bom" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-lg">05</div>
+          <div>
+            <h2 class="text-2xl font-bold text-slate-800">4. การถอดปริมาณชิ้นส่วนและสร้างรายการวัสดุ (BOM)</h2>
+            <p class="text-sm text-slate-500">Heim_QuanInstall.rb &gt; C:/QHeim/BOMInstall.csv</p>
+          </div>
+        </div>
+        <span class="text-xs font-mono bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full border border-emerald-200">
+          CSV &amp; Excel Exporter
+        </span>
+      </div>
+
+      <p class="text-xs md:text-sm text-slate-600 mb-4">
+        สคริปต์สแกนวัตถุทั้งหมดในเลเยอร์หมวด <code class="bg-slate-100 px-1 py-0.5 rounded font-mono">I-*</code> แล้วแยกกลุ่มตามรหัสยูนิต โดยแบ่งวิธีการคำนวณออกเป็น 2 แบบ:
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <!-- Count Card -->
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+          <h4 class="font-bold text-slate-800 text-sm mb-2 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            1. ชิ้นส่วนนับจำนวนชิ้น (Component Count - EA)
+          </h4>
+          <p class="text-xs text-slate-600 mb-2">นับจำนวน Instance ที่ตรงกับยูนิตนั้นๆ โดยตรง:</p>
+          <ul class="text-xs text-slate-600 list-disc list-inside space-y-1">
+            <li>Joint Sets ทั้งหมด (<code class="text-slate-800">AASD05180</code>, <code class="text-slate-800">AASD04310</code>, <code class="text-slate-800">AASD07390</code>)</li>
+            <li>Antivibration Pads (<code class="text-slate-800">AASZ50130</code>, <code class="text-slate-800">AASD07580</code>, <code class="text-slate-800">AASD07590</code>)</li>
+            <li>Guide Pins (<code class="text-slate-800">AASO07510</code>, <code class="text-slate-800">AASO07520</code>, <code class="text-slate-800">AASO07550</code>)</li>
+            <li>ฝาครอบมุมและฝาปิด Flashing (<code class="text-slate-800">AAFD10030</code>, <code class="text-slate-800">AAFD10210</code>, <code class="text-slate-800">AAFD10240</code> ฯลฯ)</li>
+          </ul>
+        </div>
+
+        <!-- Length / Stick Calculation Card -->
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+          <h4 class="font-bold text-slate-800 text-sm mb-2 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+            2. ชิ้นส่วนคำนวณท่อนสต็อก (Length to Stick)
+          </h4>
+          <p class="text-xs text-slate-600 mb-2">คำนวณจาก Volume / Area ของ Solid Group แล้วปัดเศษท่อนมาตรฐาน:</p>
+          <div class="space-y-2 text-xs font-mono bg-white p-3 rounded-lg border border-slate-200">
+            <div>
+              <span class="text-indigo-600 font-bold">AAFD10020 (Flashing 2F):</span><br>
+              <span class="text-slate-600">จำนวนท่อน = (ความยาวรวม / 4.95m).to_i + 1</span>
+            </div>
+            <div class="pt-2 border-t border-slate-100">
+              <span class="text-indigo-600 font-bold">AAFD10120 (Flashing 1F):</span><br>
+              <span class="text-slate-600">จำนวนท่อน = (ความยาวรวม / 3.814m).to_i + 1</span>
+            </div>
+            <div class="pt-2 border-t border-slate-100">
+              <span class="text-indigo-600 font-bold">AATC10050 / AATC09990 (Super Sheet):</span><br>
+              <span class="text-slate-600">ความยาว = พื้นที่ (Area) / 1.65m (หรือ 1.50m)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: Component Matrix Table with Search -->
+    <section id="matrix" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">ตารางค้นหารายการชิ้นส่วน (Component Matrix)</h2>
+          <p class="text-sm text-slate-500">รหัสชิ้นส่วน, เลเยอร์ที่จัดเก็บ, และหน่วยวัดในระบบ QHeim</p>
+        </div>
+        <div class="w-full sm:w-64">
+          <input type="text" id="searchInput" placeholder="ค้นหารหัส หรือชื่อชิ้นส่วน..." 
+                 class="w-full text-xs px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+        </div>
+      </div>
+
+      <div class="overflow-x-auto border border-slate-200 rounded-xl">
+        <table class="w-full text-left text-xs" id="componentTable">
+          <thead class="bg-slate-100 text-slate-700 font-semibold border-b border-slate-200">
+            <tr>
+              <th class="p-3">รหัสชิ้นส่วน (Part ID)</th>
+              <th class="p-3">ชื่อคอมโพเนนต์ / รายละเอียด</th>
+              <th class="p-3">หมวดหมู่เลเยอร์ (Layer Name)</th>
+              <th class="p-3">การคำนวณใน BOM</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            <tr class="hover:bg-slate-50"><td class="p-3 font-mono font-bold text-blue-600">AAFD10210</td><td class="p-3">ฝาครอบมุมนอก Flashing ชั้น 1 (FC_Out_Corner)</td><td class="p-3 font-mono text-slate-500">I-Flashing cover 5025 (Local)</td><td class="p-3 font-semibold text-emerald-600">นับจำนวน (EA)</td></tr>
+            <tr class="hover:bg-slate-50"><td class="p-3 font-mono font-bold text-blue-600">AAFD10220</td><td class="p-3">ฝาครอบมุมใน Flashing ชั้น 1 (FC_In_Corner)</td><td class="p-3 font-mono text-slate-500">I-Flashing cover 5025 (Local)</td><td class="p-3 font-semibold text-emerald-600">นับจำนวน (EA)</td></tr>
+            <tr class="hover:bg-slate-50"><td class="p-3 font-mono font-bold text-blue-600">AAFD10120</td><td class="p-3">รางครอบตรง Flashing ชั้น 1 (Cover_Foundation)</td><td class="p-3 font-mono text-slate-500">I-Flashing cover 5025 (Local)</td><td class="p-3 font-semibold text-indigo-600">ความยาวท่อน 3.814m</td></tr>
+            <tr class="hover:bg-slate-50"><td class="p-3 font-mono font-bold text-blue-600">AAFD10030</td><td class="p-3">ฝาครอบมุมนอก Flashing ชั้น 2-3 (FC_Out)</td><td class="p-3 font-mono text-slate-500">I-Flashing cover 5025 (Local)</td><td class="p-3 font-semibold text-emerald-600">นับจำนวน (EA)</td></tr>
+            <tr class="hover:bg-slate-50"><td class="p-3 font-mono font-bold text-blue-600">AAFD10040</td><td class="p-3">ฝาครอบมุมใน Flashing ชั้น 2-3 (FC_In)</td><td class="p-3 font-mono text-slate-500">I-Flashing cover 5025 (Local)</td><td class="p-3 font-semibold text-emerald-600">นับจำนวน (EA)</td></tr>
+            <tr class="hover:bg-slate-50"><td class="p-3 font-mono font-bold text-blue-600">AAFD10020</td><td class="p-3">รางครอบตรง Flashing ชั้น 2-3 (Cover_5025)</td><td class="p-3 font-mono text-slate-500">I-Flashing cover 5025 (Local)</td><td class="p-3 font-semibold text-indigo-600">ความยาวท่อน 4.95m</td></tr>
+            <tr class="hover:bg-slate-50"><td class="p-3 font-mono font-bold text-blue-600">AAFD10240</td><td class="p-3">ฝาปิดปลาย Flashing ด้านซ้าย (FC_Cap_L)</td><td class="p-3 font-mono text-slate-500">I-Flashing cover 5025 (Local)</td><td class="p-3 font-semibold text-emerald-600">นับจำนวน (EA)</td></tr>
+            <tr class="hover:bg-slate-50"><td class="p-3 font-mono font-bold text-blue-600">AAFD10250</td><td class="p-3">ฝาปิดปลาย Flashing ด้านขวา (FC_Cap_R)</td><td class="p-3 font-mono text-slate-500">I-Flashing cover 5025 (Local)</td><td class="p-3 font-semibold text-emerald-600">นับจำนวน (EA)</td></tr>
+            <tr class="hover:bg-slate-50"><td class="p-3 font-mono font-bold text-sky-600">AATC10050</td><td class="p-3">Super Sheet แผ่นยางกันซึม ชั้น 1 (กว้าง 20cm)</td><td class="p-3 font-mono text-slate-500">I-Super sheet</td><td class="p-3 font-semibold text-indigo-600">คำนวณจากพื้นที่ (Area/1.65)</td></tr>
+            <tr class="hover:bg-slate-50"><td class="p-3 font-mono font-bold text-sky-600">AATC09990</td><td class="p-3">Super Sheet แผ่นยางกันซึม ชั้น 2-3 (กว้าง 15cm)</td><td class="p-3 font-mono text-slate-500">I-Super sheet</td><td class="p-3 font-semibold text-indigo-600">คำนวณจากพื้นที่ (Area/1.50)</td></tr>
+            <tr class="hover:bg-slate-50"><td class="p-3 font-mono font-bold text-amber-600">AASZ50130</td><td class="p-3">แผ่นยางซับแรงสั่นสะเทือนหลัก (Antivibration Rubber)</td><td class="p-3 font-mono text-slate-500">I-Antivibration</td><td class="p-3 font-semibold text-emerald-600">นับจำนวน (EA)</td></tr>
+            <tr class="hover:bg-slate-50"><td class="p-3 font-mono font-bold text-amber-600">AASD07580</td><td class="p-3">แผ่นซับแรงสั่นสะเทือน Basement M10 L=180mm</td><td class="p-3 font-mono text-slate-500">I-Antivibration</td><td class="p-3 font-semibold text-emerald-600">นับจำนวน (EA)</td></tr>
+            <tr class="hover:bg-slate-50"><td class="p-3 font-mono font-bold text-amber-600">AASD07590</td><td class="p-3">แผ่นซับแรงสั่นสะเทือนระหว่างชั้น 1F-2F EW</td><td class="p-3 font-mono text-slate-500">I-Antivibration</td><td class="p-3 font-semibold text-emerald-600">นับจำนวน (EA)</td></tr>
+            <tr class="hover:bg-slate-50"><td class="p-3 font-mono font-bold text-purple-600">AASD05180</td><td class="p-3">ชุดเหล็กยึดยูนิต Keta (สำหรับ Single Wall)</td><td class="p-3 font-mono text-slate-500">I-Joint Set</td><td class="p-3 font-semibold text-emerald-600">นับจำนวน (EA)</td></tr>
+            <tr class="hover:bg-slate-50"><td class="p-3 font-mono font-bold text-purple-600">AASD04310</td><td class="p-3">ชุดเหล็กยึดยูนิต Tsuma (สำหรับ Double Wall)</td><td class="p-3 font-mono text-slate-500">I-Joint Set</td><td class="p-3 font-semibold text-emerald-600">นับจำนวน (EA)</td></tr>
+            <tr class="hover:bg-slate-50"><td class="p-3 font-mono font-bold text-purple-600">AASD07390</td><td class="p-3">Joint Set แผ่นยึดระหว่างชั้น 1F-2F</td><td class="p-3 font-mono text-slate-500">I-Joint Set</td><td class="p-3 font-semibold text-emerald-600">นับจำนวน (EA)</td></tr>
+            <tr class="hover:bg-slate-50"><td class="p-3 font-mono font-bold text-purple-600">AASR08550</td><td class="p-3">Plate ยึดระหว่างชั้นเฉพาะบริเวณห้องน้ำ (WC)</td><td class="p-3 font-mono text-slate-500">I-Joint Set</td><td class="p-3 font-semibold text-emerald-600">นับจำนวน (EA)</td></tr>
+            <tr class="hover:bg-slate-50"><td class="p-3 font-mono font-bold text-emerald-600">AASO07510</td><td class="p-3">หมุดนำศูนย์ตัวใหญ่มาตรฐาน (Guide Pin Big)</td><td class="p-3 font-mono text-slate-500">I-Guide pin</td><td class="p-3 font-semibold text-emerald-600">นับจำนวน (EA)</td></tr>
+            <tr class="hover:bg-slate-50"><td class="p-3 font-mono font-bold text-emerald-600">AASO07520</td><td class="p-3">หมุดนำศูนย์ตัวเล็ก (Guide Pin Tsuma SB)</td><td class="p-3 font-mono text-slate-500">I-Guide pin</td><td class="p-3 font-semibold text-emerald-600">นับจำนวน (EA)</td></tr>
+            <tr class="hover:bg-slate-50"><td class="p-3 font-mono font-bold text-emerald-600">AASO07550</td><td class="p-3">หมุดนำศูนย์สำหรับระเบียง (Guide Pin Balcony)</td><td class="p-3 font-mono text-slate-500">I-Guide pin</td><td class="p-3 font-semibold text-emerald-600">นับจำนวน (EA)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Section 7: Troubleshooting -->
+    <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4">แนวทางแก้ไขปัญหาที่พบบ่อย (Troubleshooting)</h2>
+      <div class="space-y-4 text-xs md:text-sm">
+        <div class="p-4 rounded-xl border border-red-200 bg-red-50/50">
+          <h4 class="font-bold text-red-900 mb-1">1. เกิดข้อผิดพลาดตอน Export BOM: "Error. BOMInstall.csv may be open"</h4>
+          <p class="text-red-700"><strong>สาเหตุ:</strong> ไฟล์ <code class="bg-red-100 px-1 rounded">C:/QHeim/BOMInstall.csv</code> กำลังถูกเปิดค้างอยู่ในโปรแกรม Excel ทำให้ระบบปฏิบัติการ Windows ล็อกไฟล์ไว้</p>
+          <p class="text-slate-700 mt-1 font-medium"><strong>วิธีแก้:</strong> ปิดหน้าต่าง Excel ของไฟล์ดังกล่าว แล้วกดปุ่ม Export Install Part ใหม่อีกครั้ง</p>
+        </div>
+        <div class="p-4 rounded-xl border border-amber-200 bg-amber-50/50">
+          <h4 class="font-bold text-amber-900 mb-1">2. ขยับยูนิตแล้ว Joint Set หรือ Antivibration วางผิดตำแหน่ง</h4>
+          <p class="text-amber-700"><strong>สาเหตุ:</strong> ยูนิตยังคงจำค่า Direction Code และพิกัดเก่าอยู่</p>
+          <p class="text-slate-700 mt-1 font-medium"><strong>วิธีแก้:</strong> ลากคลุมยูนิตทั้งหมดแล้วกดรัน <span class="text-blue-600 font-bold">Unit Position</span> ซ้ำอีกหนึ่งรอบ ระบบจะทำการยิง Raytest วิเคราะห์เพื่อนบ้านใหม่ให้ทันที</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="max-w-6xl mx-auto text-center text-xs text-slate-400 py-8">
+    QHeim Modular Construction System &bull; Extension Documentation &bull; Generated Automatically
+  </footer>
+
+  <script>
+    // Simple table search filter
+    const searchInput = document.getElementById('searchInput');
+    const table = document.getElementById('componentTable');
+    const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+    searchInput.addEventListener('input', function() {
+      const filter = searchInput.value.toLowerCase();
+      for (let i = 0; i < rows.length; i++) {
+        const text = rows[i].textContent.toLowerCase();
+        rows[i].style.display = text.includes(filter) ? '' : 'none';
+      }
+    });
+  </script>
+</body>
+</html>

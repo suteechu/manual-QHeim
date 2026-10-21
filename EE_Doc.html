@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QHeim - เอกสารและคู่มือการทำงานระบบ Electricity & Communication (EE)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({startOnLoad:true, theme:'neutral'});</script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Tahoma, "Sarabun", sans-serif;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white !important; color: black !important; padding: 0 !important; }
+      .shadow-sm, .shadow-md, .shadow-lg, .shadow-xl { box-shadow: none !important; }
+      .border { border-color: #cbd5e1 !important; }
+      section { break-inside: avoid; page-break-inside: avoid; margin-bottom: 24px !important; }
+      table { break-inside: auto; }
+      tr { break-inside: avoid; page-break-inside: avoid; }
+    }
+    pre {
+      background-color: #0f172a;
+      color: #e2e8f0;
+      padding: 1rem;
+      border-radius: 0.75rem;
+      overflow-x: auto;
+      font-size: 0.825rem;
+      line-height: 1.5;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased p-4 md:p-8">
+
+  <!-- Header Container -->
+  <div class="max-w-6xl mx-auto bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden mb-8">
+    <div class="bg-gradient-to-r from-amber-600 via-orange-600 to-amber-700 p-8 text-white">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-2">
+            <span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-semibold uppercase tracking-wider">
+              QHeim Modular Construction Extension
+            </span>
+            <a href="index.html" class="inline-flex items-center gap-1 text-xs bg-black/20 hover:bg-black/30 text-white px-2.5 py-1 rounded-full transition">
+              <span>🏠 สารบัญหลัก</span>
+            </a>
+          </div>
+          <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight">คู่มือและเอกสารระบบ Electricity & Communication (EE)</h1>
+          <p class="text-amber-100 mt-2 text-sm md:text-base max-w-2xl">
+            สถาปัตยกรรมโค้ด, ตรรกะค้นหาเส้นทางเดินสายอัตโนมัติ (Pathfinding Walkway), ระบบไฟฟ้าแสงสว่าง-สวิตช์, ระบบเครื่องปรับอากาศ (CDU/FCU), ระบบสายสื่อสาร (COMMU), การออก Single-Line Loop, LayOut 2D Shop Drawing, และการถอดรายการวัสดุ (BOM)
+          </p>
+        </div>
+        <div class="text-right">
+          <div class="text-xs text-amber-200">SketchUp Ruby Extension &bull; EE Module</div>
+          <div class="text-sm font-bold bg-amber-950/60 px-3 py-1.5 rounded-lg border border-amber-300/30 mt-1">
+            Path: C:/QHeim/Ruby/EE/
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Navigation Bar -->
+    <div class="bg-slate-100 border-b border-slate-200 px-6 py-3 flex flex-wrap gap-2 text-xs md:text-sm font-medium text-slate-600 no-print">
+      <a href="#overview" class="hover:text-amber-600 px-2 py-1 rounded hover:bg-white transition">ภาพรวม &amp; Workflow</a>
+      <span class="text-slate-300">|</span>
+      <a href="#ui-controller" class="hover:text-amber-600 px-2 py-1 rounded hover:bg-white transition">เมนูและไอคอนคำสั่ง</a>
+      <span class="text-slate-300">|</span>
+      <a href="#sop" class="text-amber-700 bg-amber-100 font-bold px-2 py-1 rounded hover:bg-amber-200 transition">👉 คู่มือปฏิบัติงาน SOP (6 สเต็ป)</a>
+      <span class="text-slate-300">|</span>
+      <a href="#logic" class="hover:text-amber-600 px-2 py-1 rounded hover:bg-white transition">ตรรกะเชิงลึก (Pathfinding &amp; Algorithms)</a>
+      <span class="text-slate-300">|</span>
+      <a href="#matrix" class="hover:text-amber-600 px-2 py-1 rounded hover:bg-white transition">Layer &amp; Attribute Matrix</a>
+      <span class="text-slate-300">|</span>
+      <a href="#bom" class="hover:text-amber-600 px-2 py-1 rounded hover:bg-white transition">การถอด BOM</a>
+      <span class="text-slate-300">|</span>
+      <a href="#troubleshooting" class="text-rose-600 hover:text-rose-700 px-2 py-1 rounded hover:bg-white transition">การแก้ปัญหา</a>
+    </div>
+  </div>
+
+  <main class="max-w-6xl mx-auto space-y-8">
+
+    <!-- Section 1: Overview & Workflow -->
+    <section id="overview" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-lg">01</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">1. ภาพรวมระบบ (System Overview)</h2>
+          <p class="text-sm text-slate-500">ขอบเขตงานวิศวกรรมระบบไฟฟ้า สื่อสาร และเครื่องปรับอากาศโมดูลาร์</p>
+        </div>
+      </div>
+
+      <p class="text-slate-700 leading-relaxed mb-6 text-sm md:text-base">
+        ระบบ <strong>Electricity (EE)</strong> ใน QHeim ทำหน้าที่บริหารจัดการระบบวิศวกรรมไฟฟ้า สื่อสาร และปรับอากาศ สำหรับบ้านโครงสร้างเหล็กสำเร็จรูปโมดูลาร์ (Modular Unit) โดยมีความซับซ้อนกว่าอาคารทั่วไปเนื่องจากสายไฟและท่อร้อยสาย <strong>ไม่สามารถวิ่งตัดผ่านโครงสร้างได้อย่างอิสระ</strong> แต่จะต้องวิ่งผ่านช่องทางเดินสายเฉพาะ (Service Cavities, Beam Holes, Corridors, Ceiling Plenums) และช่องเปิดแนวดิ่ง (Vertical Shafts) ระหว่างยูนิตกล่องโมดูลาร์
+      </p>
+
+      <!-- 4 Pillars Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div class="p-4 rounded-xl border border-amber-200 bg-amber-50/50 hover:bg-amber-50 transition">
+          <div class="text-xs font-bold text-amber-700 uppercase mb-1">เสาหลักที่ 1</div>
+          <h3 class="font-bold text-slate-800 mb-1 text-sm">💡 แสงสว่างและกำลัง (Lighting &amp; Power)</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">คำนวณแนวเดินสายสวิตช์ 1-3 ทาง, เต้ารับไฟฟ้าภายใน-ภายนอกอาคาร, สายเมนเชื่อมตู้ควบคุมหลัก (Load Center)</p>
+        </div>
+        <div class="p-4 rounded-xl border border-sky-200 bg-sky-50/50 hover:bg-sky-50 transition">
+          <div class="text-xs font-bold text-sky-700 uppercase mb-1">เสาหลักที่ 2</div>
+          <h3 class="font-bold text-slate-800 mb-1 text-sm">❄️ ปรับอากาศ (Air Conditioning)</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">จับคู่วงจร CDU ภายนอก และ FCU ภายในจากตารางโหลด CAD, เดินสายเมนกำลัง และสายควบคุม 1-3 ข้ามยูนิต</p>
+        </div>
+        <div class="p-4 rounded-xl border border-indigo-200 bg-indigo-50/50 hover:bg-indigo-50 transition">
+          <div class="text-xs font-bold text-indigo-700 uppercase mb-1">เสาหลักที่ 3</div>
+          <h3 class="font-bold text-slate-800 mb-1 text-sm">📡 สายสื่อสาร (COMMU &amp; Security)</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">เดินสาย LAN Cat.6, TV RG6, TEL, กันขโมย (SEC), กริ่ง Aiphone, และกล้อง CCTV ผ่านรูเจาะ 332mm และช่องชาร์ป</p>
+        </div>
+        <div class="p-4 rounded-xl border border-emerald-200 bg-emerald-50/50 hover:bg-emerald-50 transition">
+          <div class="text-xs font-bold text-emerald-700 uppercase mb-1">เสาหลักที่ 4</div>
+          <h3 class="font-bold text-slate-800 mb-1 text-sm">📊 แบบและยอดวัสดุ (Shop Drawing &amp; BOM)</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">สร้าง Single-line Loop Diagram, จัดทำ Scene 2D Plan, ส่งออก Trimble LayOut A3 (1:70), และยอดวัสดุ Excel/CSV</p>
+        </div>
+      </div>
+
+      <!-- Critical Rules Box -->
+      <div class="p-4 bg-amber-50 border-l-4 border-amber-500 rounded-r-xl mb-6">
+        <div class="flex items-start gap-2">
+          <span class="text-amber-600 font-bold text-xl leading-none">⚠️</span>
+          <div>
+            <h4 class="font-bold text-amber-900 text-sm">ข้อกำหนดสำคัญที่สุดก่อนเริ่มระบบ EE (Prerequisites &amp; Critical Rules):</h4>
+            <ul class="text-amber-800 text-xs md:text-sm mt-1 list-disc list-inside space-y-1">
+              <li>ในโมเดล SketchUp ต้องมีการตั้งชื่อยูนิตและกำหนดเลเยอร์ <code class="bg-amber-100 px-1 py-0.5 rounded font-mono">S-Unit</code> ให้เรียบร้อยจากระบบนำเข้า CAD AR</li>
+              <li>ก่อนเดินสายสัญญาณหรือท่อใดๆ <strong>ต้องรันปุ่ม Shaft และปุ่ม Floor Area เป็นลำดับแรกเสมอ</strong> เพื่อให้ระบบลงทะเบียนพิกัดกริดยูนิต <code class="bg-amber-100 px-1 py-0.5 rounded font-mono">ix-iy</code> และทราบตำแหน่งช่องชาร์ป มิฉะนั้นอัลกอริทึมค้นหาเส้นทางจะไม่สามารถคำนวณแนวการเจาะข้ามยูนิตได้</li>
+              <li>ห้ามขยับหรือหมุนตำแหน่ง Unit หลังจากรัน Floor Area แล้ว หากมีการแก้ไขต้องรัน Floor Area ซ้ำใหม่</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mermaid Diagram -->
+      <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+        <h4 class="text-xs font-bold uppercase text-slate-500 mb-3 tracking-wider">แผนผังลำดับขั้นตอนการทำงาน (Workflow Lifecycle)</h4>
+        <pre class="mermaid bg-transparent p-0">
+flowchart TD
+    A["1. จัดวาง Layout Unit (S-Unit) & Unit Position"] --> B["2. รัน Shaft (Heim_Shaft)<br/>สร้าง Component shaftbox ในช่องชาร์ปแนวดิ่ง"]
+    B --> C["3. รัน Floor Area (Heim_FloorArea)<br/>ระบุชั้น fl1-fl3, พิกัดยูนิต ix-iy, แมป IM Code"]
+    
+    C --> D{"เลือกสายงานประมวลผล EE"}
+    
+    D --> E["สายงาน A: CAD Text & Load Schedule"]
+    E --> E1["Name CDU+FCU -> Name Equip -> Lighting BOX -> Check Text"]
+    
+    D --> F["สายงาน B: แสงสว่างและเต้ารับ EE1"]
+    F --> F1["WireGroup (ตัดหลบ 10mm) -> Zone -> Main Wire -> Lighting SW -> Plug Wire -> Color"]
+    
+    D --> G["สายงาน C: เครื่องปรับอากาศ & กำลัง EE AC"]
+    G --> G1["Main AC (LC ไป CDU) -> Control 1-3 (CDU ไป FCU) -> Equip 1-3 (น้ำอุ่น/ฮูด) -> AirFac"]
+    
+    D --> H["สายงาน D: สายสื่อสาร COMMU"]
+    H --> H1["Routing Walkway (เจาะรู 332mm & Shaft) -> Auto Routing LAN, TV, TEL, SEC, CCTV, AIPH"]
+    
+    E1 --> I["ตรวจสอบ & สรุปผล"]
+    F1 --> I
+    G1 --> I
+    H1 --> I
+    
+    I --> J1["Single-line Diagram:<br/>Heim_MainLoop"]
+    I --> J2["Scenes 2D Top-View:<br/>Heim_EE_Scene"]
+    I --> J3["ส่งออก Trimble LayOut:<br/>Heim_EE_Layout (SKU.layout)"]
+    I --> J4["ส่งออก BOM สรุปวัสดุ:<br/>Job Order / Recheck / File Upload.csv"]
+        </pre>
+      </div>
+    </section>
+
+    <!-- Section 2: UI Controllers & Menus -->
+    <section id="ui-controller" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-orange-100 text-orange-700 flex items-center justify-center font-bold text-lg">02</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">2. หน้าต่างเมนูควบคุม (UI Controllers &amp; Dialogs)</h2>
+          <p class="text-sm text-slate-500">แถบเครื่องมือหลักและไดอะล็อกคำสั่งในโมดูล EE</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs">
+          <div class="font-bold text-slate-700 mb-1">🎮 Ruby Main Controller:</div>
+          <code class="text-blue-600 font-mono">Heim_ElectricityIcon.rb</code>
+        </div>
+        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs">
+          <div class="font-bold text-slate-700 mb-1">🖼️ HTML Main Dialog View:</div>
+          <code class="text-blue-600 font-mono">Heim_Electricity.html</code>
+        </div>
+        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs">
+          <div class="font-bold text-slate-700 mb-1">📁 โฟลเดอร์ต้นทาง:</div>
+          <code class="text-blue-600 font-mono">C:/QHeim/Ruby/EE/</code>
+        </div>
+      </div>
+
+      <!-- Main Toolbar Table -->
+      <h3 class="text-base font-bold text-slate-800 mb-3">2.1 รายการไอคอนบนแถบเมนูหลัก (Main Toolbar)</h3>
+      <div class="overflow-x-auto border border-slate-200 rounded-xl mb-8">
+        <table class="w-full text-left text-xs md:text-sm">
+          <thead class="bg-slate-100 border-b border-slate-200 font-bold text-slate-700">
+            <tr>
+              <th class="p-3 w-16 text-center">ไอคอน</th>
+              <th class="p-3 w-44">ชื่อคำสั่ง (Tool Title)</th>
+              <th class="p-3 w-40">Action / Dialog</th>
+              <th class="p-3 w-52">ไฟล์ประมวลผลหลัก</th>
+              <th class="p-3">หน้าที่หลัก</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Extra.jpg" alt="Extra" class="w-9 h-9 mx-auto rounded shadow-sm border border-slate-200 object-cover"></td>
+              <td class="p-3 font-bold text-slate-800">EE EQPM(Text)</td>
+              <td class="p-3"><span class="bg-amber-100 text-amber-800 px-2 py-0.5 rounded text-xs">Dialog Electrical AC</span></td>
+              <td class="p-3 font-mono text-xs text-blue-600">Heim_EEText.html</td>
+              <td class="p-3 text-slate-600">เมนูนำเข้าและจับคู่วงจรโหลด CDU, FCU, Bair, Lighting Box จากตาราง CAD</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/floor.jpg" alt="Floor" class="w-9 h-9 mx-auto rounded shadow-sm border border-slate-200 object-cover"></td>
+              <td class="p-3 font-bold text-slate-800">Floor Area</td>
+              <td class="p-3"><span class="bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded text-xs">Dialog Floor</span></td>
+              <td class="p-3 font-mono text-xs text-blue-600">Heim_FloorArea.rb</td>
+              <td class="p-3 text-slate-600">กำหนดชั้น (fl1-fl3), คำนวณพิกัดยูนิต <code>ix-iy</code>, จัดกลุ่มผนัง และแมป IM จาก Excel</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/shaft.jpg" alt="Shaft" class="w-9 h-9 mx-auto rounded shadow-sm border border-slate-200 object-cover"></td>
+              <td class="p-3 font-bold text-slate-800">Shaft</td>
+              <td class="p-3"><span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded text-xs">ประมวลผลทันที</span></td>
+              <td class="p-3 font-mono text-xs text-blue-600">Heim_Shaft.rb</td>
+              <td class="p-3 text-slate-600">ตรวจหาช่องชาร์ปจาก <code>A-DETL</code> แล้ววาง <code>shaftbox</code> พร้อมบันทึกมุม 0-3</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Manaul%20Pannel.jpg" alt="Wiring" class="w-9 h-9 mx-auto rounded shadow-sm border border-slate-200 object-cover"></td>
+              <td class="p-3 font-bold text-slate-800">Wiring (COMMU)</td>
+              <td class="p-3"><span class="bg-sky-100 text-sky-800 px-2 py-0.5 rounded text-xs">Dialog Wiring EE3</span></td>
+              <td class="p-3 font-mono text-xs text-blue-600">Heim_EE_UnitPos.rb</td>
+              <td class="p-3 text-slate-600">ประมวลผลเดินสายสื่อสาร LAN, TV, TEL, SEC, CCTV, AIPH และคำนวณ BOM Com</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/aircon.jpg" alt="Air" class="w-9 h-9 mx-auto rounded shadow-sm border border-slate-200 object-cover"></td>
+              <td class="p-3 font-bold text-slate-800">Air</td>
+              <td class="p-3"><span class="bg-cyan-100 text-cyan-800 px-2 py-0.5 rounded text-xs">Dialog EE AC</span></td>
+              <td class="p-3 font-mono text-xs text-blue-600">Heim_EE_AirIcon.rb</td>
+              <td class="p-3 text-slate-600">เมนูจัดการระบบแอร์: สายเมนแอร์, สายควบคุม 1-3, สายอุปกรณ์กำลัง, และ BOM AC</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/lumen.jpg" alt="Light" class="w-9 h-9 mx-auto rounded shadow-sm border border-slate-200 object-cover"></td>
+              <td class="p-3 font-bold text-slate-800">Light</td>
+              <td class="p-3"><span class="bg-amber-100 text-amber-800 px-2 py-0.5 rounded text-xs">Dialog EE1</span></td>
+              <td class="p-3 font-mono text-xs text-blue-600">Heim_EE_LightIcon.rb</td>
+              <td class="p-3 text-slate-600">เมนูระบบไฟส่องสว่าง: WireGroup, Zone, สายเมน LC, สวิตช์ 1-3, ปลั๊ก, แยกสี, BOM</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Export%20To%20Layout.jpg" alt="Layout" class="w-9 h-9 mx-auto rounded shadow-sm border border-slate-200 object-cover"></td>
+              <td class="p-3 font-bold text-slate-800">Layout</td>
+              <td class="p-3"><span class="bg-purple-100 text-purple-800 px-2 py-0.5 rounded text-xs">Dialog Layout EE</span></td>
+              <td class="p-3 font-mono text-xs text-blue-600">Heim_EE_LayoutIcon.rb</td>
+              <td class="p-3 text-slate-600">สร้าง Single-line Loop Diagram, จัด Scene 2D, และส่งออก Trimble LayOut A3</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Submenus Detail -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Submenu 1: Text -->
+        <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/50">
+          <h4 class="font-bold text-sm text-slate-800 mb-2 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+            2.2 เมนูย่อย EE EQPM Text (Heim_EEText.html)
+          </h4>
+          <table class="w-full text-xs">
+            <thead class="bg-slate-100 text-slate-600 font-semibold border-b">
+              <tr><th class="p-2">ปุ่มคำสั่ง</th><th class="p-2">สคริปต์</th><th class="p-2">หน้าที่</th></tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200">
+              <tr><td class="p-2 font-bold">Name CDU+FCU</td><td class="p-2 font-mono">Heim_EE_Name_AC.rb</td><td class="p-2 text-slate-600">อ่าน EELoadLC*.txt แมป CDU/FCU สร้าง 3D Text</td></tr>
+              <tr><td class="p-2 font-bold">Name Equip+AC BOX</td><td class="p-2 font-mono">Heim_EE_Name_Equip.rb</td><td class="p-2 text-slate-600">วางกล่อง Bair และ 3D Text อุปกรณ์กำลัง</td></tr>
+              <tr><td class="p-2 font-bold">Lighting BOX</td><td class="p-2 font-mono">Heim_EE_Load_TextLight.rb</td><td class="p-2 text-slate-600">วางกล่องต่อสายไฟส่องสว่างประจำวงจร</td></tr>
+              <tr><td class="p-2 font-bold">Check Text</td><td class="p-2 font-mono">Heim_EE_Name_CheckText.rb</td><td class="p-2 text-slate-600">เช็คความถูกต้องระหว่าง Text ในแปลนกับตู้โหลด</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Submenu 2: AC -->
+        <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/50">
+          <h4 class="font-bold text-sm text-slate-800 mb-2 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-cyan-500"></span>
+            2.3 เมนูย่อย EE AC Wiring (Heim_EE_AirIcon.html)
+          </h4>
+          <table class="w-full text-xs">
+            <thead class="bg-slate-100 text-slate-600 font-semibold border-b">
+              <tr><th class="p-2">เมนู</th><th class="p-2">สคริปต์</th><th class="p-2">หน้าที่</th></tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200">
+              <tr><td class="p-2 font-bold">Main</td><td class="p-2 font-mono">Heim_EE_UnitPosAC.rb</td><td class="p-2 text-slate-600">เดินสายเมนแอร์ MAIN AC1..3 (LC ไป CDU)</td></tr>
+              <tr><td class="p-2 font-bold">Control 1-3</td><td class="p-2 font-mono">Heim_EE_AC_Control.rb</td><td class="p-2 text-slate-600">เดินสายควบคุม CDU ไปยัง FCU ชั้น 1-3</td></tr>
+              <tr><td class="p-2 font-bold">Equip 1-3</td><td class="p-2 font-mono">Heim_EE_UnitPosAC2.rb</td><td class="p-2 text-slate-600">เดินสายเครื่องทำน้ำอุ่น/เตาไฟฟ้า/ปั๊มน้ำ</td></tr>
+              <tr><td class="p-2 font-bold">QuanAC / Equip</td><td class="p-2 font-mono">Heim_EE_QuanAC.rb</td><td class="p-2 text-slate-600">สรุป BOM แอร์และอุปกรณ์กำลังสู่ Excel</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Submenu 3: Light -->
+        <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/50">
+          <h4 class="font-bold text-sm text-slate-800 mb-2 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+            2.4 เมนูย่อย EE Light / EE1 (Heim_EE_LightIcon.html)
+          </h4>
+          <table class="w-full text-xs">
+            <thead class="bg-slate-100 text-slate-600 font-semibold border-b">
+              <tr><th class="p-2">เมนู</th><th class="p-2">สคริปต์</th><th class="p-2">หน้าที่</th></tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200">
+              <tr><td class="p-2 font-bold">WireGroup</td><td class="p-2 font-mono">Heim_EE_WireGroup.rb</td><td class="p-2 text-slate-600">คลีนเส้น CAD ตัดหลบโคมไฟ 10 mm และรวม Group</td></tr>
+              <tr><td class="p-2 font-bold">Zone</td><td class="p-2 font-mono">Heim_EE_Zone.rb</td><td class="p-2 text-slate-600">คลิกผิวพื้น (Face) กำหนดขอบเขตตู้ LC</td></tr>
+              <tr><td class="p-2 font-bold">Main / Lighting</td><td class="p-2 font-mono">Heim_EE_MainWire / LightSW</td><td class="p-2 text-slate-600">เดินสายเมน MAIN-LC และสายสวิตช์ 1-3 ทาง</td></tr>
+              <tr><td class="p-2 font-bold">Plug / Color</td><td class="p-2 font-mono">Heim_EE_PlugWire / WireColor</td><td class="p-2 text-slate-600">เดินสายเต้ารับ PLUG และมาร์กเกอร์สีคู่สาย</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Submenu 4: Layout -->
+        <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/50">
+          <h4 class="font-bold text-sm text-slate-800 mb-2 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-purple-500"></span>
+            2.5 เมนูย่อย Layout EE (Heim_EE_Layout.html)
+          </h4>
+          <table class="w-full text-xs">
+            <thead class="bg-slate-100 text-slate-600 font-semibold border-b">
+              <tr><th class="p-2">เมนู</th><th class="p-2">สคริปต์</th><th class="p-2">หน้าที่</th></tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200">
+              <tr><td class="p-2 font-bold">MainWire</td><td class="p-2 font-mono">Heim_MainLoop.rb</td><td class="p-2 text-slate-600">วาดผังเส้นวงจร Single-line Loop Diagram</td></tr>
+              <tr><td class="p-2 font-bold">Scene</td><td class="p-2 font-mono">Heim_EE_Scene.rb</td><td class="p-2 text-slate-600">ตั้งกล้อง 2D Top-View สร้างแท็บ FL1, FL2, FL3</td></tr>
+              <tr><td class="p-2 font-bold">Layout</td><td class="p-2 font-mono">Heim_EE_Layout.rb</td><td class="p-2 text-slate-600">โคลน New-A3.layout วาง Viewport สเกล 1:70</td></tr>
+              <tr><td class="p-2 font-bold">Color</td><td class="p-2 font-mono">Heim_WireColor.rb</td><td class="p-2 text-slate-600">ไฮไลต์สีเส้นสายไฟและอุปกรณ์ตามกลุ่มควบคุม</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: SOP Operator Guide -->
+    <section id="sop" class="bg-white rounded-2xl shadow-sm border-2 border-amber-300 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center font-bold text-lg">03</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">3. คู่มือขั้นตอนการปฏิบัติงานสำหรับคนทำงาน (SOP Operator Guide)</h2>
+          <p class="text-sm text-slate-500">ลำดับ 6 สเต็ปมาตรฐาน และคู่มือการคลิกใช้งานแต่ละปุ่มอย่างละเอียด</p>
+        </div>
+      </div>
+
+      <!-- 6-Step Visual Bar -->
+      <div class="space-y-4 mb-8">
+        <div class="flex items-start gap-3 p-3 bg-amber-50 rounded-xl border border-amber-200">
+          <span class="w-7 h-7 rounded-lg bg-amber-600 text-white font-bold flex items-center justify-center text-xs shrink-0">1</span>
+          <div>
+            <h4 class="font-bold text-sm text-slate-800">Setup ฐานรากและโครงสร้าง</h4>
+            <p class="text-xs text-slate-600">ตรวจสอบชื่อยูนิตใน <code>S-Unit</code> &rarr; กดปุ่ม <strong>Shaft</strong> วางท่อชาร์ป &rarr; กดปุ่ม <strong>Floor Area</strong> ครอบโมเดลเลือกชั้น fl1/fl2/fl3</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3 p-3 bg-orange-50 rounded-xl border border-orange-200">
+          <span class="w-7 h-7 rounded-lg bg-orange-600 text-white font-bold flex items-center justify-center text-xs shrink-0">2</span>
+          <div>
+            <h4 class="font-bold text-slate-800 text-sm">ผูกข้อมูลวงจร CAD เข้ากับอุปกรณ์ (EE EQPM Text)</h4>
+            <p class="text-xs text-slate-600">กดปุ่ม <strong>EE EQPM(Text)</strong> &rarr; รัน Name CDU+FCU &rarr; รัน Name Equip &rarr; รัน Lighting BOX &rarr; รัน Check Text</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3 p-3 bg-amber-50 rounded-xl border border-amber-200">
+          <span class="w-7 h-7 rounded-lg bg-amber-600 text-white font-bold flex items-center justify-center text-xs shrink-0">3</span>
+          <div>
+            <h4 class="font-bold text-slate-800 text-sm">เดินสายระบบไฟส่องสว่างและเต้ารับ (Light / EE1)</h4>
+            <p class="text-xs text-slate-600">เปิดเมนู Light &rarr; รัน <strong>WireGroup</strong> &rarr; รัน <strong>Zone</strong> (คลิกผิว Face พื้น) &rarr; รัน <strong>Main</strong> &rarr; รัน <strong>Lighting</strong> (1-3SW) &rarr; รัน <strong>Plug</strong></p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3 p-3 bg-cyan-50 rounded-xl border border-cyan-200">
+          <span class="w-7 h-7 rounded-lg bg-cyan-600 text-white font-bold flex items-center justify-center text-xs shrink-0">4</span>
+          <div>
+            <h4 class="font-bold text-slate-800 text-sm">เดินสายระบบปรับอากาศและอุปกรณ์กำลัง (Air / EE AC)</h4>
+            <p class="text-xs text-slate-600">เปิดเมนู Air &rarr; รัน <strong>Main</strong> (LC ไปยัง CDU) &rarr; รัน <strong>Control 1..3</strong> (CDU ไปยัง FCU) &rarr; รัน <strong>Equip 1..3</strong> (น้ำอุ่น/เตา)</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3 p-3 bg-sky-50 rounded-xl border border-sky-200">
+          <span class="w-7 h-7 rounded-lg bg-sky-600 text-white font-bold flex items-center justify-center text-xs shrink-0">5</span>
+          <div>
+            <h4 class="font-bold text-slate-800 text-sm">เดินสายระบบสื่อสารและรักษาความปลอดภัย (Wiring COMMU)</h4>
+            <p class="text-xs text-slate-600">เปิดเมนู Wiring (COMMU) &rarr; เลือกรหัสชั้น fl1/fl2/fl3 &rarr; ระบบเจาะรู 332mm เดินสาย LAN, TV, TEL, CCTV, AIPH อัตโนมัติ</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3 p-3 bg-purple-50 rounded-xl border border-purple-200">
+          <span class="w-7 h-7 rounded-lg bg-purple-600 text-white font-bold flex items-center justify-center text-xs shrink-0">6</span>
+          <div>
+            <h4 class="font-bold text-slate-800 text-sm">สร้างแบบ 2D LayOut และส่งออกรายการวัสดุ (BOM)</h4>
+            <p class="text-xs text-slate-600">เปิด Layout &rarr; รัน MainWire (Single-line) &rarr; รัน Scene &rarr; รัน Layout สร้าง SKU.layout &rarr; กดปุ่ม Quan ส่งออก Excel/CSV</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step-by-Step Operator Instructions -->
+      <h3 class="text-base font-bold text-slate-800 mb-4">📋 คำแนะนำการกดใช้งานทีละคำสั่ง (Step-by-Step Details)</h3>
+      <div class="space-y-4 text-xs md:text-sm">
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-white">
+          <div class="flex items-center gap-2 font-bold text-slate-800 mb-2">
+            <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 text-xs">Step 1</span>
+            <span>1. ติดตั้งกล่องชาร์ปแนวดิ่ง (Shaft)</span>
+          </div>
+          <p class="text-slate-600 mb-2"><strong>การเลือกวัตถุ:</strong> ไม่ต้องเลือกวัตถุในโมเดลล่วงหน้า (สคริปต์สแกนโมเดลอัตโนมัติ)</p>
+          <p class="text-slate-600 mb-2"><strong>การกด:</strong> กดไอคอน <strong>Shaft</strong> (รูปท่อชาร์ป)</p>
+          <p class="text-slate-600"><strong>ผลลัพธ์:</strong> ค้นหาคอมโพเนนต์ชาร์ปใน <code>A-DETL</code> &rarr; วาง <code>shaftbox.skp</code> ลง Layer <code>EE-Shaft</code> &rarr; บันทึก Attribute <code>[s0, s1, s2, s3]</code> ลง Unit &rarr; ขึ้นข้อความ <code>"Insert Main Shaft EE"</code></p>
+        </div>
+
+        <div class="p-4 rounded-xl border border-slate-200 bg-white">
+          <div class="flex items-center gap-2 font-bold text-slate-800 mb-2">
+            <span class="px-2 py-0.5 rounded bg-indigo-100 text-indigo-800 text-xs">Step 2</span>
+            <span>2. กำหนดพื้นที่ชั้นและพิกัดยูนิต (Floor Area)</span>
+          </div>
+          <p class="text-slate-600 mb-2"><strong>การเลือกวัตถุ:</strong> ลากเมาส์ครอบวัตถุทั้งหมดของชั้นที่กำลังทำ (Unit, ผนัง, ประตู, อุปกรณ์ไฟฟ้า)</p>
+          <p class="text-slate-600 mb-2"><strong>การกด:</strong> กดไอคอน <strong>Floor Area</strong> &rarr; เลือกชั้นใน Popup (<code>fl1</code>, <code>fl2</code>, <code>fl3</code>)</p>
+          <p class="text-slate-600"><strong>ผลลัพธ์:</strong> จัดกลุ่มผนังเป็น <code>wallgroup.flX</code> ใน <code>A-WLL</code> &rarr; บันทึกพิกัดกริด <code>ix-iy</code> (เช่น <code>1-1</code>, <code>2-1</code>) ให้ทุกยูนิต &rarr; แมปรหัส IM จาก Excel ให้กับอุปกรณ์ทั้งหมด</p>
+        </div>
+
+        <div class="p-4 rounded-xl border border-slate-200 bg-white">
+          <div class="flex items-center gap-2 font-bold text-slate-800 mb-2">
+            <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 text-xs">Step 3</span>
+            <span>3. ผูกวงจรและข้อความ 3D จากตารางโหลด CAD (EE EQPM Text)</span>
+          </div>
+          <p class="text-slate-600 mb-2"><strong>การเตรียมการ:</strong> ตรวจสอบว่ามีไฟล์ <code>C:/QHeim/DATA/EELoadLC*.txt</code> จากการส่งออก CAD เรียบร้อย</p>
+          <p class="text-slate-600 mb-2"><strong>การกด:</strong> กด <strong>EE EQPM(Text)</strong> &rarr; กด <strong>Name CDU+FCU</strong> &rarr; กด <strong>Name Equip+AC BOX</strong> &rarr; กด <strong>Lighting BOX</strong> &rarr; กด <strong>Check Text</strong></p>
+          <p class="text-slate-600"><strong>ผลลัพธ์:</strong> สร้าง 3D Text ประจำวงจรและวางกล่องต่อสาย Bair และ Lighting Box ในตำแหน่งที่ถูกต้อง</p>
+        </div>
+
+        <div class="p-4 rounded-xl border border-slate-200 bg-white">
+          <div class="flex items-center gap-2 font-bold text-slate-800 mb-2">
+            <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 text-xs">Step 4</span>
+            <span>4. เดินสายระบบไฟส่องสว่างและสวิตช์ (Light / EE1)</span>
+          </div>
+          <ol class="list-decimal list-inside text-slate-600 space-y-1">
+            <li><strong>WireGroup:</strong> เลือกเส้น CAD &rarr; เลือก <code>WireGroup</code> &rarr; ระบุชั้น &rarr; ระบบตัดปลายเส้นหลบขอบโคมไฟ 10 mm</li>
+            <li><strong>Zone:</strong> เลือก <code>Zone</code> &rarr; ระบุตู้ LC &rarr; <strong>คลิกเมาส์บนผิวพื้น (Face)</strong> ของโซนนั้นเพื่อผูกอุปกรณ์ทั้งหมดในห้องเข้ากับตู้ LC</li>
+            <li><strong>Main:</strong> เลือก <code>Main</code> &rarr; เลือกรหัสชั้น &rarr; ลากสายเมนสีน้ำเงิน <code>MAIN-LC</code> จากตู้ LC สู่กล่องต่อสาย</li>
+            <li><strong>Lighting:</strong> เลือกสวิตช์ (<code>1SW</code>, <code>2SW</code>, <code>3SW</code>) &rarr; ระบบลากสายสวิตช์ไปยังดวงโคม</li>
+            <li><strong>Plug:</strong> เลือกรหัสชั้น &rarr; ระบบเดินสายเต้ารับสีเขียว <code>PLUG</code> สู่เต้ารับทุกจุด</li>
+            <li><strong>Color:</strong> ไฮไลต์คู่สีสวิตช์และดวงโคมให้ตรงกัน</li>
+          </ol>
+        </div>
+
+        <div class="p-4 rounded-xl border border-slate-200 bg-white">
+          <div class="flex items-center gap-2 font-bold text-slate-800 mb-2">
+            <span class="px-2 py-0.5 rounded bg-cyan-100 text-cyan-800 text-xs">Step 5</span>
+            <span>5. เดินสายระบบปรับอากาศและอุปกรณ์กำลัง (Air / EE AC)</span>
+          </div>
+          <p class="text-slate-600">รัน <strong>Main</strong> (เดินสายเมนสีบานเย็น <code>MAIN AC</code> จาก LC ไป CDU BOX) &rarr; รัน <strong>Control 1, 2, 3</strong> (เดินสายควบคุมสีฟ้า <code>CONTROL AC</code> จาก CDU สู่ FCU ตามชั้น) &rarr; รัน <strong>Equip 1, 2, 3</strong> (เดินสายเครื่องทำน้ำอุ่น/เตา)</p>
+        </div>
+
+        <div class="p-4 rounded-xl border border-slate-200 bg-white">
+          <div class="flex items-center gap-2 font-bold text-slate-800 mb-2">
+            <span class="px-2 py-0.5 rounded bg-sky-100 text-sky-800 text-xs">Step 6</span>
+            <span>6. เดินสายระบบสื่อสาร (Wiring COMMU)</span>
+          </div>
+          <p class="text-slate-600">กดไอคอน <strong>Wiring (COMMU)</strong> &rarr; เลือกชั้น <code>fl1/fl2/fl3</code> &rarr; ระบบคำนวณ Pathfinding เจาะผ่านผนังและรูรอยต่อยูนิต 332mm เดินสาย LAN (Cat.C), TV (Cat.D), TEL (Cat.E), SEC, AIPH, และ CCTV เข้าสู่ตู้เราเตอร์หลัก</p>
+        </div>
+
+        <div class="p-4 rounded-xl border border-slate-200 bg-white">
+          <div class="flex items-center gap-2 font-bold text-slate-800 mb-2">
+            <span class="px-2 py-0.5 rounded bg-purple-100 text-purple-800 text-xs">Step 7</span>
+            <span>7. สร้างแบบ LayOut 2D และถอด BOM</span>
+          </div>
+          <p class="text-slate-600 mb-2">เปิด Layout &rarr; กด <strong>MainWire</strong> (วาด Single-line Loop Diagram) &rarr; กด <strong>Scene</strong> (จัดกล้อง 2D สร้างแท็บ FL1..3) &rarr; กด <strong>Layout</strong> (โคลนเทมเพลตวาง Viewport สเกล 1:70 ลง A3)</p>
+          <p class="text-slate-600">กดปุ่ม <strong>Quan</strong> (QuanAC / QuanCom / QuanLTG) &rarr; เลือกยี่ห้อ (Panasonic/Schneider) &rarr; เลือกรุปแบบ (Job Order / Recheck / File Upload.csv)</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 4: Detailed Logic & Algorithms -->
+    <section id="logic" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-lg">04</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">4. สถาปัตยกรรมและตรรกะการทำงานเชิงลึก (Detailed Module Logic)</h2>
+          <p class="text-sm text-slate-500">อัลกอริทึมค้นหาเส้นทาง Manhattan, การวิเคราะห์ขอบเขตยูนิต และ Raycast</p>
+        </div>
+      </div>
+
+      <!-- Walkway Logic -->
+      <div class="space-y-6 text-xs md:text-sm text-slate-700">
+        <div class="border border-slate-200 rounded-xl p-5 bg-slate-50">
+          <h3 class="font-bold text-slate-800 text-base mb-2">4.1 อัลกอริทึมการค้นหาเส้นทางเดินสายอัตโนมัติ (findwalkway.rb &amp; ClassEE.rb)</h3>
+          <p class="mb-3 leading-relaxed">
+            หัวใจสำคัญที่สุดของระบบ EE คือการคำนวณเส้นทางเดินสายข้ามยูนิตโมดูลาร์โดยอัตโนมัติผ่าน 3 ขั้นตอนหลัก:
+          </p>
+          <ol class="list-decimal list-inside space-y-2 mb-4">
+            <li>
+              <strong>การวิเคราะห์ขอบเขตยูนิต ($dcposborder):</strong> ตรวจสอบว่าขอบด้านใดของยูนิตเปิดออกสู่ภายนอก หรือติดกับเพื่อนบ้าน โดยอ้างอิงตารางทิศทาง 01-12:
+              <pre class="mt-1"><code>$dcposborder = {
+  "01"=&gt;["T","L","R"], "02"=&gt;["L","R"],     "03"=&gt;["L","R","B"],
+  "04"=&gt;["T","L"],     "05"=&gt;["L"],         "06"=&gt;["L","B"],
+  "07"=&gt;["T"],         "08"=&gt;[],            "09"=&gt;["B"],
+  "10"=&gt;["T","R"],     "11"=&gt;["R"],         "12"=&gt;["R","B"]
+} # T = Top, B = Bottom, L = Left, R = Right</code></pre>
+            </li>
+            <li>
+              <strong>ตำแหน่งรูเจาะบริการที่มุมยูนิต ($P_{corner}$ ที่ระยะ Offset 332 mm):</strong>
+              <div class="bg-white p-3 rounded-lg border border-slate-200 my-2 font-mono text-center">
+                $$P_{corner} = P_{center} \pm \left( rac{	ext{Width}}{2} - 332\,	ext{mm},\, rac{	ext{Height}}{2} - 332\,	ext{mm},\, 0 ight)$$
+              </div>
+              ระบบสร้างจุดผ่าน \(pc_0, pc_1, pc_2, pc_3\) เพื่อใช้เป็นโหนดหลักในการเปลี่ยนทิศทางสายไฟ
+            </li>
+            <li>
+              <strong>ตรรกะการหาเส้นทางแบบ Manhattan Route (makeroute):</strong> ตรวจสอบแนวแกน X และ Y ผ่านฟังก์ชัน <code>throughx</code> / <code>throughy</code> หากติดสิ่งกีดขวาง จะเลี้ยวเข้า Walkway แนวขนาน พร้อมยิง Raycast ตรวจสอบการชนช่องชาร์ป (<code>rayShaft2</code> / <code>rayShaft3</code>) ป้องกันสายไฟพาดลอย
+            </li>
+          </ol>
+        </div>
+
+        <div class="border border-slate-200 rounded-xl p-5 bg-slate-50">
+          <h3 class="font-bold text-slate-800 text-base mb-2">4.2 โมดูลตำแหน่งชั้นและช่องชาร์ป (Heim_FloorArea.rb &amp; Heim_Shaft.rb)</h3>
+          <ul class="list-disc list-inside space-y-2">
+            <li><strong>Heim_Shaft.rb:</strong> สแกนหาวัตถุใน <code>A-DETL</code> กว้าง/ยาว &gt; 150 mm แล้ววาง <code>shaftbox.skp</code> ลง <code>EE-Shaft</code> พร้อมบันทึกมุม <code>[s0, s1, s2, s3]</code></li>
+            <li><strong>Heim_FloorArea.rb:</strong> จัดเรียงพิกัดศูนย์กลางยูนิต กำหนดรหัสตำแหน่งแบบพิกัดฉาก <code class="font-mono font-bold text-blue-600">Unit Pos = ix-iy</code> (เช่น <code>1-1</code>, <code>2-1</code>) พร้อมเชื่อมโยงชีต Excel <code>COMMU C D E</code>, <code>COMMU AIPH</code>, <code>CCTV</code>, <code>SEC</code> เพื่อแมปรหัส IM อัตโนมัติ</li>
+          </ul>
+        </div>
+
+        <div class="border border-slate-200 rounded-xl p-5 bg-slate-50">
+          <h3 class="font-bold text-slate-800 text-base mb-2">4.3 การสร้างแบบ LayOut อัตโนมัติ (Heim_EE_Layout.rb)</h3>
+          <p class="leading-relaxed">
+            ระบบทำงานร่วมกับ <strong>SketchUp LayOut Ruby API</strong> (<code>Layout::Document.open</code>) โดยคัดลอกไฟล์ต้นแบบ <code>New-A3.layout</code> ไปยังโฟลเดอร์โครงการ แล้วนำ Scene 2D Top-View แต่ละชั้นมาจัดวางลงกระดาษ A3 ด้วยอัตราส่วนมาตราส่วนมาตรฐาน <strong>Scale = 1:70</strong> โดยอัตโนมัติ ทำให้ได้แบบ Shop Drawing ที่พร้อมพิมพ์หรือแก้ไขต่อได้ทันที
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Matrix -->
+    <section id="matrix" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-lg">05</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">5. ตารางสรุปเลเยอร์, แมตทีเรียล และคอมโพเนนต์ (EE Matrix)</h2>
+          <p class="text-sm text-slate-500">มาตรฐานเลเยอร์ โค้ดสี และพจนานุกรม Attribute ประจำระบบ EE</p>
+        </div>
+      </div>
+
+      <!-- Layer Table -->
+      <h3 class="text-sm font-bold text-slate-800 mb-2">5.1 โครงสร้างโฟลเดอร์เลเยอร์และสายไฟ (Layer &amp; Folder Hierarchy)</h3>
+      <div class="overflow-x-auto border border-slate-200 rounded-xl mb-6">
+        <table class="w-full text-left text-xs">
+          <thead class="bg-slate-100 text-slate-700 font-bold border-b">
+            <tr><th class="p-2.5">Folder</th><th class="p-2.5">Layer Name</th><th class="p-2.5 text-center">สี / Material</th><th class="p-2.5">หน้าที่และการใช้งาน</th></tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            <tr><td class="p-2.5 font-bold" rowspan="6">WIRE-COMMU</td><td class="p-2.5 font-mono">LAN(C)</td><td class="p-2.5 text-center"><span class="inline-block w-4 h-4 rounded bg-slate-900 align-middle"></span> ดำ</td><td class="p-2.5 text-slate-600">สายสัญญาณคอมพิวเตอร์ LAN Cat.6 (Mat: <code>twotwenty</code>)</td></tr>
+            <tr><td class="p-2.5 font-mono">TV(D)</td><td class="p-2.5 text-center"><span class="inline-block w-4 h-4 rounded bg-slate-900 align-middle"></span> ดำ</td><td class="p-2.5 text-slate-600">สายสัญญาณโทรทัศน์ Coaxial RG6 (Mat: <code>matD</code>)</td></tr>
+            <tr><td class="p-2.5 font-mono">TEL(E)</td><td class="p-2.5 text-center"><span class="inline-block w-4 h-4 rounded bg-slate-900 align-middle"></span> ดำ</td><td class="p-2.5 text-slate-600">สายสัญญาณโทรศัพท์ (Mat: <code>matE</code>)</td></tr>
+            <tr><td class="p-2.5 font-mono">SEC</td><td class="p-2.5 text-center"><span class="inline-block w-4 h-4 rounded bg-slate-900 align-middle"></span> ดำ</td><td class="p-2.5 text-slate-600">สายสัญญาณกันขโมยและเตือนภัย (Mat: <code>matSEC</code>)</td></tr>
+            <tr><td class="p-2.5 font-mono">AIPH</td><td class="p-2.5 text-center"><span class="inline-block w-4 h-4 rounded bg-slate-900 align-middle"></span> ดำ</td><td class="p-2.5 text-slate-600">สายอินเตอร์คอมและกริ่งวิดีโอ Aiphone</td></tr>
+            <tr><td class="p-2.5 font-mono">CCTV</td><td class="p-2.5 text-center"><span class="inline-block w-4 h-4 rounded bg-slate-900 align-middle"></span> ดำ</td><td class="p-2.5 text-slate-600">สายกล้องวงจรปิด (Mat: <code>matCCTV</code>)</td></tr>
+            
+            <tr class="bg-slate-50/50"><td class="p-2.5 font-bold" rowspan="2">WIRE-AC</td><td class="p-2.5 font-mono">MAIN AC1..3</td><td class="p-2.5 text-center"><span class="inline-block w-4 h-4 rounded bg-fuchsia-600 align-middle"></span> บานเย็น</td><td class="p-2.5 text-slate-600">สายไฟเมนกำลังจ่ายเครื่องปรับอากาศ ชั้น 1-3</td></tr>
+            <tr class="bg-slate-50/50"><td class="p-2.5 font-mono">CONTROL AC1..3</td><td class="p-2.5 text-center"><span class="inline-block w-4 h-4 rounded bg-blue-600 align-middle"></span> น้ำเงิน</td><td class="p-2.5 text-slate-600">สายสัญญาณควบคุม CDU ไปยัง FCU ชั้น 1-3</td></tr>
+
+            <tr><td class="p-2.5 font-bold" rowspan="4">WIRE-LTG&amp;REC</td><td class="p-2.5 font-mono">MAIN-LC</td><td class="p-2.5 text-center"><span class="inline-block w-4 h-4 rounded bg-blue-600 align-middle"></span> น้ำเงิน</td><td class="p-2.5 text-slate-600">สายเมนตู้ Load Center สู่กล่องต่อสาย</td></tr>
+            <tr><td class="p-2.5 font-mono">PLUG</td><td class="p-2.5 text-center"><span class="inline-block w-4 h-4 rounded bg-green-500 align-middle"></span> เขียว</td><td class="p-2.5 text-slate-600">สายไฟวงจรเต้ารับ ปลั๊กไฟทั่วไป</td></tr>
+            <tr><td class="p-2.5 font-mono">SW1WAY..3WAYS</td><td class="p-2.5 text-center">ตามสีวงจร</td><td class="p-2.5 text-slate-600">สายไฟสวิตช์ควบคุมดวงโคม 1-3 ทาง</td></tr>
+            <tr><td class="p-2.5 font-mono">WireColor</td><td class="p-2.5 text-center">ตามมาร์กเกอร์</td><td class="p-2.5 text-slate-600">มาร์กเกอร์สีประจำวงจรย่อยเพื่อแยกกลุ่มควบคุม</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Attribute Matrix -->
+      <h3 class="text-sm font-bold text-slate-800 mb-2">5.2 โครงสร้างพจนานุกรม Attribute (SketchUp Attribute Dictionary)</h3>
+      <div class="overflow-x-auto border border-slate-200 rounded-xl">
+        <table class="w-full text-left text-xs">
+          <thead class="bg-slate-100 text-slate-700 font-bold border-b">
+            <tr><th class="p-2.5">Entity Target</th><th class="p-2.5">Dictionary Name</th><th class="p-2.5">Key</th><th class="p-2.5">Type</th><th class="p-2.5">ตัวอย่างค่า &amp; ความหมาย</th></tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            <tr><td class="p-2.5 font-bold" rowspan="3">Unit (S-Unit)</td><td class="p-2.5 font-mono">"Unit"</td><td class="p-2.5 font-mono">"FL"</td><td class="p-2.5">String</td><td class="p-2.5"><code>"fl1"</code>, <code>"fl2"</code>, <code>"fl3"</code> (ระบุชั้น)</td></tr>
+            <tr><td class="p-2.5 font-mono">"Unit"</td><td class="p-2.5 font-mono">"Pos"</td><td class="p-2.5">String</td><td class="p-2.5"><code>"1-1"</code>, <code>"2-3"</code> (พิกัดกริดยูนิต)</td></tr>
+            <tr><td class="p-2.5 font-mono">"Unit"</td><td class="p-2.5 font-mono">"Shaft"</td><td class="p-2.5">Array</td><td class="p-2.5"><code>[1, 0, 0, 1]</code> (มุมที่มีชาร์ป 0 ถึง 3)</td></tr>
+
+            <tr class="bg-slate-50/50"><td class="p-2.5 font-bold" rowspan="3">อุปกรณ์ (EE-EQPM-*)</td><td class="p-2.5 font-mono">"Com"</td><td class="p-2.5 font-mono">"Floor" / "IM"</td><td class="p-2.5">String</td><td class="p-2.5"><code>"fl1"</code>, <code>"IM_APA_001"</code> (รหัสวัสดุโรงงาน)</td></tr>
+            <tr class="bg-slate-50/50"><td class="p-2.5 font-mono">"Com"</td><td class="p-2.5 font-mono">"Unit"</td><td class="p-2.5">Array</td><td class="p-2.5"><code>[UnitName, pc0, pc1, pc2, pc3, center, pos]</code></td></tr>
+            <tr class="bg-slate-50/50"><td class="p-2.5 font-mono">"REC"/"BOX"</td><td class="p-2.5 font-mono">"ZONE"</td><td class="p-2.5">String</td><td class="p-2.5"><code>"LC1"</code> (โซนตู้ควบคุมที่สังกัด)</td></tr>
+            
+            <tr><td class="p-2.5 font-bold">ตู้โหลด (EE-PANEL)</td><td class="p-2.5 font-mono">"Router"</td><td class="p-2.5 font-mono">"Pos" / "Unit"</td><td class="p-2.5">String</td><td class="p-2.5">พิกัดและชื่อยูนิตที่ตู้ตั้งอยู่</td></tr>
+            <tr class="bg-slate-50/50"><td class="p-2.5 font-bold">ชาร์ป (EE-Shaft)</td><td class="p-2.5 font-mono">"Shaft"</td><td class="p-2.5 font-mono">"Unit" / "Corner"</td><td class="p-2.5">String</td><td class="p-2.5"><code>"0".."3"</code> (มุมยูนิตที่ชาร์ปติดตั้ง)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Section 6: BOM -->
+    <section id="bom" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-lg">06</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">6. การถอดปริมาณงานและระบบเชื่อมต่อข้อมูล (BOM &amp; Data Integration)</h2>
+          <p class="text-sm text-slate-500">การส่งออกยอดวัสดุเข้าสู่ระบบโรงงานและฐานข้อมูล ERP</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="p-4 rounded-xl border border-blue-200 bg-blue-50/50">
+          <h4 class="font-bold text-blue-900 text-sm mb-1">📄 1. Job Order (Job Order.xlsx)</h4>
+          <p class="text-xs text-blue-800 leading-relaxed">
+            สรุปจำนวนชิ้นส่วน (EA) และความยาวสายไฟรวม (m.) แยกตามรหัสยูนิตโมดูลาร์ เพื่อใช้ในการสั่งตัดสายไฟและจัดกล่องอุปกรณ์ประกอบล่วงหน้าจากโรงงาน
+          </p>
+        </div>
+        <div class="p-4 rounded-xl border border-indigo-200 bg-indigo-50/50">
+          <h4 class="font-bold text-indigo-900 text-sm mb-1">🔍 2. Recheck (Recheck - Combine EE 3.xlsx)</h4>
+          <p class="text-xs text-indigo-800 leading-relaxed">
+            แสดง Matrix ความสัมพันธ์ระหว่าง House ID, Unit Name, Part ID, Description, Circuit No, Location และ Quantity สำหรับวิศวกรใช้ตรวจสอบร่วมกับแบบ
+          </p>
+        </div>
+        <div class="p-4 rounded-xl border border-emerald-200 bg-emerald-50/50">
+          <h4 class="font-bold text-emerald-900 text-sm mb-1">💾 3. File Upload (File Upload.csv)</h4>
+          <p class="text-xs text-emerald-800 leading-relaxed">
+            ไฟล์ CSV มาตรฐานสำหรับอัปโหลดตรงเข้าสู่ระบบบริหารการผลิต ERP (SAP/MES) ของโรงงาน SCG Heim โดยตรง
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 7: Troubleshooting -->
+    <section id="troubleshooting" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center font-bold text-lg">07</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">7. ข้อควรระวังและการแก้ไขปัญหา (Troubleshooting &amp; FAQ)</h2>
+          <p class="text-sm text-slate-500">ปัญหาที่พบบ่อยและวิธีแก้ไขอย่างเป็นระบบ</p>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto border border-slate-200 rounded-xl">
+        <table class="w-full text-left text-xs md:text-sm">
+          <thead class="bg-slate-100 text-slate-700 font-bold border-b">
+            <tr>
+              <th class="p-3 w-56">อาการปัญหาที่พบ</th>
+              <th class="p-3 w-52">สาเหตุที่เป็นไปได้</th>
+              <th class="p-3">แนวทางการแก้ไขที่ถูกต้อง</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 font-bold text-rose-700">1. แจ้งเตือน "Please Set FloorArea"</td>
+              <td class="p-3 text-slate-600">กดรันเมนูเดินสายโดยที่ยังไม่ได้รัน Floor Area ประจำชั้นนั้น</td>
+              <td class="p-3 text-slate-700">ลากครอบโมเดลของชั้นนั้น กดไอคอน <strong>Floor Area</strong> เลือกชั้น (<code>fl1..3</code>) รอให้ขึ้น "OK" แล้วจึงกดเดินสายใหม่</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 font-bold text-rose-700">2. สายไฟไม่วิ่ง หรือขึ้น "cannot find route"</td>
+              <td class="p-3 text-slate-600">ไม่มีช่องเปิดระหว่างยูนิต หรือยูนิตไม่ได้วางชิดแนบสนิทกัน</td>
+              <td class="p-3 text-slate-700">1. ตรวจสอบว่าโมเดลยูนิตแตะกันสนิท<br>2. ตรวจสอบว่าช่องชาร์ป (<code>EE-Shaft</code>) ไม่ถูกบัง<br>3. เช็คว่ารหัส Direction ทิศทางของยูนิตเปิดถูกด้าน</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 font-bold text-rose-700">3. กดปุ่ม Name CDU+FCU แล้วขึ้น "NO AC"</td>
+              <td class="p-3 text-slate-600">ไม่มีข้อมูลในไฟล์ <code>C:/QHeim/DATA/EEAC.txt</code></td>
+              <td class="p-3 text-slate-700">ตรวจสอบว่าได้ Export ข้อความจาก CAD แล้วหรือไม่ และตรวจดูว่าไฟล์ <code>EEAC.txt</code> ไม่เป็นไฟล์ว่าง</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 font-bold text-rose-700">4. ส่งออก BOM แล้วโปรแกรมค้าง หรือ Error Excel</td>
+              <td class="p-3 text-slate-600">ไฟล์ <code>Job Order.xlsx</code> หรือ <code>Recheck*.xlsx</code> ถูกเปิดค้างไว้ใน Microsoft Excel</td>
+              <td class="p-3 text-slate-700">สลับหน้าต่างไปที่ Microsoft Excel แล้วกด <strong>ปิดไฟล์งาน (Close) ทั้งหมด</strong> ก่อน แล้วจึงกลับมากดปุ่ม Quan ใหม่อีกครั้ง</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 font-bold text-rose-700">5. สีมาร์กเกอร์สวิตช์และโคมไฟไม่เปลี่ยนสี</td>
+              <td class="p-3 text-slate-600">ขาดโฟลเดอร์คอมโพเนนต์สีในระบบ</td>
+              <td class="p-3 text-slate-700">ตรวจสอบว่ามีโฟลเดอร์ <code>C:/QHeim/DATA/EE/Color/</code> และมีไฟล์ <code>Color1.skp</code> ถึง <code>Color4.skp</code> อยู่ครบถ้วน</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 font-bold text-rose-700">6. สัญลักษณ์ LayOut ใน SKU.layout ว่างเปล่า</td>
+              <td class="p-3 text-slate-600">ไม่ได้รันคำสั่ง Scene ก่อนกดปุ่ม Layout</td>
+              <td class="p-3 text-slate-700">กดปุ่มไอคอน <strong>Scene</strong> เพื่อให้ระบบสร้าง Scene Tab <code>FL1..3</code> ใน SketchUp ให้เรียบร้อย บันทึกโมเดล แล้วกดปุ่ม <strong>Layout</strong> ใหม่อีกครั้ง</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="max-w-6xl mx-auto mt-12 mb-8 text-center text-xs text-slate-400 no-print">
+    <div class="flex items-center justify-center gap-4 mb-2">
+      <a href="index.html" class="hover:text-slate-600">🏠 สารบัญรวมระบบ</a> &bull;
+      <a href="CAD_AR_Doc.html" class="hover:text-slate-600">CAD AR</a> &bull;
+      <a href="Struc_Doc.html" class="hover:text-slate-600">Structure</a> &bull;
+      <a href="ExteriorWall_Doc.html" class="hover:text-slate-600">Exterior Wall</a> &bull;
+      <a href="InteriorWall_Doc.html" class="hover:text-slate-600">Interior Wall</a> &bull;
+      <a href="PartInstall_Doc.html" class="hover:text-slate-600">PartInstall</a> &bull;
+      <a href="LongleadTime_Doc.html" class="hover:text-slate-600">LongleadTime</a> &bull;
+      <span class="font-bold text-amber-600">EE</span>
+    </div>
+    <p>QHeim Modular Construction BIM Documentation &bull; SCG HEIM Engineering Automation</p>
+  </footer>
+
+</body>
+</html>

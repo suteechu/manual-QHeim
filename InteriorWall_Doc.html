@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QHeim - เอกสารและคู่มือการทำงานระบบ Interior Wall</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Tahoma, "Sarabun", sans-serif;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white !important; color: black !important; padding: 0 !important; }
+      .shadow-sm, .shadow-md, .shadow-lg, .shadow-xl { box-shadow: none !important; }
+      .border { border-color: #cbd5e1 !important; }
+      section { break-inside: avoid; page-break-inside: avoid; margin-bottom: 24px !important; }
+      table { break-inside: auto; }
+      tr { break-inside: avoid; page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased p-4 md:p-8">
+
+  <!-- Header Container -->
+  <div class="max-w-6xl mx-auto bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden mb-8">
+    <div class="bg-gradient-to-r from-purple-900 via-indigo-800 to-blue-700 p-8 text-white">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-semibold uppercase tracking-wider mb-2">
+            QHeim Modular Construction Extension
+          </span>
+          <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight">คู่มือและเอกสารการทำงาน Interior Wall</h1>
+          <p class="text-purple-100 mt-2 text-sm md:text-base max-w-2xl">
+            สถาปัตยกรรมโค้ด, การสร้างผนัง 3D, โครงเหล็กและแผ่นสมาร์ทบอร์ดผนังใน (IW), แผงกั้นห้อง (Partition), ระบบเจาะบล็อกไฟฟ้า/แอร์ (EE Punching), การออก Tag มิติ และการถอดรายการวัสดุ (BOM) เชื่อมต่อฐานข้อมูล SSIC
+          </p>
+        </div>
+        <div class="text-right">
+          <div class="text-xs text-purple-200">SketchUp Ruby Extension</div>
+          <div class="text-sm font-bold bg-purple-950/60 px-3 py-1.5 rounded-lg border border-purple-400/30 mt-1">
+            Path: C:/QHeim/Ruby/Interior/
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Navigation Bar -->
+    <div class="bg-slate-100 border-b border-slate-200 px-6 py-3 flex flex-wrap gap-2 text-xs md:text-sm font-medium text-slate-600 no-print">
+      <a href="#overview" class="hover:text-purple-600 px-2 py-1 rounded hover:bg-white transition">ภาพรวม &amp; Workflow</a>
+      <span class="text-slate-300">|</span>
+      <a href="#toolbar" class="hover:text-purple-600 px-2 py-1 rounded hover:bg-white transition">แถบเครื่องมือ Toolbar (37 ไอคอน)</a>
+      <span class="text-slate-300">|</span>
+      <a href="#operator-guide" class="text-purple-900 bg-purple-100 font-bold px-2 py-1 rounded hover:bg-purple-200 transition">👉 คู่มือการกดใช้งาน (SOP สำหรับคนทำงาน)</a>
+      <span class="text-slate-300">|</span>
+      <a href="#logic" class="hover:text-purple-600 px-2 py-1 rounded hover:bg-white transition">สถาปัตยกรรม &amp; ตรรกะโค้ด</a>
+      <span class="text-slate-300">|</span>
+      <a href="#punching" class="text-indigo-800 bg-indigo-100 font-bold px-2 py-1 rounded hover:bg-indigo-200 transition">⚡ ระบบ EE Punching &amp; CAD DWG</a>
+      <span class="text-slate-300">|</span>
+      <a href="#matrix" class="hover:text-purple-600 px-2 py-1 rounded hover:bg-white transition">ตาราง Component &amp; Layer Matrix</a>
+      <span class="text-slate-300">|</span>
+      <a href="#troubleshooting" class="text-rose-800 bg-rose-100 font-bold px-2 py-1 rounded hover:bg-rose-200 transition">⚠️ วิธีแก้ปัญหา (Troubleshooting)</a>
+    </div>
+  </div>
+
+  <main class="max-w-6xl mx-auto space-y-8">
+
+    <!-- Section 1: Overview & Workflow -->
+    <section id="overview" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-lg">01</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">ภาพรวมระบบและขั้นตอนการทำงาน (Workflow Lifecycle)</h2>
+          <p class="text-sm text-slate-500">4 ระบบย่อยในการจัดการงานสถาปัตยกรรมภายในอาคารโครงสร้างเหล็กโมดูลาร์</p>
+        </div>
+      </div>
+
+      <!-- Critical Rules Alert Box -->
+      <div class="p-4 bg-amber-50 border-l-4 border-amber-500 rounded-r-xl mb-6">
+        <div class="flex items-start gap-2">
+          <span class="text-amber-600 font-bold text-lg">⚠️</span>
+          <div>
+            <h4 class="font-bold text-amber-800 text-sm">กฎเหล็กและข้อกำหนดสำคัญที่สุดของระบบ Interior Wall:</h4>
+            <p class="text-amber-700 text-xs md:text-sm mt-0.5 leading-relaxed">
+              1. <strong>ยูนิตต้องมี Attribute <code>position</code>:</strong> ก่อนรันผนัง ให้มั่นใจว่าได้รันคำสั่ง <code class="bg-amber-200/60 px-1 rounded font-bold">Unit Position</code> แล้ว เพื่อป้องกันข้อผิดพลาด <code class="font-mono text-rose-700">undefined method 'include?' for nil:NilClass</code><br/>
+              2. <strong>จุด Origin ประตูต้องอยู่ระหว่างช่องว่างผนัง:</strong> ตำแหน่งกึ่งกลางของ Component ประตูต้องตกลงในช่องว่างระหว่างแผงผนัง ไม่เหลื่อมทับตัวเนื้อผนัง มิฉะนั้นระบบจะแจ้งเตือน <code class="font-mono text-rose-700">Door's origin is outside the temporary wall</code><br/>
+              3. <strong>ห้ามข้ามขั้นตอน Partition:</strong> ต้องทำเรียงลำดับ <span class="font-bold text-purple-900 font-mono bg-purple-200/60 px-1.5 py-0.5 rounded">Door Spec &rarr; Set Height &rarr; Split Partition &rarr; Code Partition &rarr; Build Partition</span> เสมอ<br/>
+              4. <strong>ปิด Excel ก่อน Export CSV:</strong> ปิดไฟล์ <code class="font-mono">.csv</code> ที่เปิดค้างไว้ก่อนกด Export เพื่อป้องกันปัญหาถูกล็อกสิทธิ์การเขียนไฟล์ (Permission Denied)
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 Pillars Architecture -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <div class="p-4 rounded-xl border border-slate-200 bg-purple-50/40">
+          <div class="text-xs font-bold text-purple-700 uppercase mb-1">สายงานที่ 1</div>
+          <h3 class="font-bold text-slate-800 text-base mb-1">3D Wall &amp; Pipe Shaft</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">แปลงเส้น CAD 41 มม. เป็น Solid 3D (Single/Double Wall), เคลียร์เสาโครงสร้าง และแปลงท่อสุขาภิบาล</p>
+        </div>
+        <div class="p-4 rounded-xl border border-slate-200 bg-indigo-50/40">
+          <div class="text-xs font-bold text-indigo-700 uppercase mb-1">สายงานที่ 2</div>
+          <h3 class="font-bold text-slate-800 text-base mb-1">Interior Wall (IW)</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">ซอยโครงเหล็ก C-Stud / Box Frame ตามระดับความสูง Low, Normal, High, กรุแผ่น Smartboard และใส่แผ่น Joint</p>
+        </div>
+        <div class="p-4 rounded-xl border border-slate-200 bg-blue-50/40">
+          <div class="text-xs font-bold text-blue-700 uppercase mb-1">สายงานที่ 3</div>
+          <h3 class="font-bold text-slate-800 text-base mb-1">Partition Wall (PT)</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">วิเคราะห์สเปกประตู, ซอยแผง, ใส่รหัสโค้ด, สร้างแผง 3D, กำหนดแผง On-site, ใส่ข้อต่อ Joint และออกแท็กบอกมิติ</p>
+        </div>
+        <div class="p-4 rounded-xl border border-slate-200 bg-teal-50/40">
+          <div class="text-xs font-bold text-teal-700 uppercase mb-1">สายงานที่ 4</div>
+          <h3 class="font-bold text-slate-800 text-base mb-1">EE Punching &amp; DWG</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">เจาะช่องบล็อกไฟฟ้า/แอร์ทะลุแผ่น Smartboard 3D, ตรวจสอบบล็อกตกขอบ, สร้างแบบ 2D Drawing และส่งออกไฟล์ CAD DWG</p>
+        </div>
+      </div>
+
+      <!-- Process Diagram Visual Box -->
+      <div class="p-4 bg-slate-900 rounded-xl text-white overflow-x-auto text-xs font-mono">
+        <div class="text-slate-400 mb-2 font-bold">// WORKFLOW LIFECYCLE PIPELINE</div>
+        <div class="flex items-center gap-2 whitespace-nowrap text-slate-300">
+          <span class="px-2 py-1 bg-purple-600 rounded text-white font-bold">1. CAD Lines &amp; S-Unit</span>
+          <span>&rarr;</span>
+          <span class="px-2 py-1 bg-indigo-600 rounded text-white font-bold">2. Build 3D Wall (Single / Double)</span>
+          <span>&rarr;</span>
+          <span class="px-2 py-1 bg-blue-600 rounded text-white font-bold">3. IW Frame &amp; Smartboard</span>
+          <span>&rarr;</span>
+          <span class="px-2 py-1 bg-sky-600 rounded text-white font-bold">4. Partition (Spec &rarr; Code &rarr; Build)</span>
+          <span>&rarr;</span>
+          <span class="px-2 py-1 bg-teal-600 rounded text-white font-bold">5. EE Punching &rarr; 2D CAD</span>
+          <span>&rarr;</span>
+          <span class="px-2 py-1 bg-emerald-600 rounded text-white font-bold">6. BOM &amp; SSIC Database</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Toolbar Table (37 Icons) -->
+    <section id="toolbar" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-lg">02</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">หน้าต่างเมนูควบคุม (UI Controller &amp; Toolbar)</h2>
+          <p class="text-sm text-slate-500">แถบเครื่องมือ HTML (Heim_Interior.html) และตัวควบคุม Ruby (Heim_InteriorIcon.rb)</p>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse text-xs md:text-sm">
+          <thead>
+            <tr class="bg-slate-100 text-slate-700 border-b border-slate-300 font-bold">
+              <th class="p-3 w-16 text-center">ไอคอน</th>
+              <th class="p-3 w-48">ชื่อคำสั่ง (Tool Title)</th>
+              <th class="p-3 w-48">ไฟล์ Ruby</th>
+              <th class="p-3">หน้าที่และตรรกะการทำงานหลัก</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            <!-- 3D Wall -->
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\3d-wall.png" class="w-9 h-9 mx-auto rounded shadow-xs" alt="Build 3D wall"></td>
+              <td class="p-3 font-bold text-purple-900">Build 3D wall</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_InMain.rb<br/>Heim_BuildWall.rb</td>
+              <td class="p-3 text-slate-700">สแกนเส้น CAD ผนังหนา 41 มม. สร้างเป็น Solid Single Wall (01-3dsinglewall) และ Double Wall (01-3ddoublewall) สูง 1000 มม. พร้อมเคลียร์เสา</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\Manaul SP.png" class="w-9 h-9 mx-auto rounded shadow-xs" alt="Click Single Wall"></td>
+              <td class="p-3 font-bold text-purple-900">Click Single Wall</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_BuildWall.rb</td>
+              <td class="p-3 text-slate-700">เครื่องมือ Interactive คลิกด้วยมือภายในแนวเส้นคู่ระยะ 41 มม. 3 เส้น เพื่อสร้าง Single Wall เฉพาะจุด</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\pipeshaft.png" class="w-9 h-9 mx-auto rounded shadow-xs" alt="Pipe Shaft"></td>
+              <td class="p-3 font-bold text-purple-900">Select Pipe Shaft</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_BuildWall.rb</td>
+              <td class="p-3 text-slate-700">คลิกเลือก Single Wall เพื่อแปลงเลเยอร์และสเปกเป็นช่องท่อสุขาภิบาล (Pipe Shaft) ไม่ให้นำไปซอยเป็นผนังห้อง</td>
+            </tr>
+            <!-- IW Frame & Board -->
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\sw-frame.png" class="w-9 h-9 mx-auto rounded shadow-xs" alt="Split Frame"></td>
+              <td class="p-3 font-bold text-indigo-900">Split Frame</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_InMain.rb</td>
+              <td class="p-3 text-slate-700">ซอยตัดแบ่งแนวโครงเหล็กผนังใน (IW Frame) ออกเป็นช่วงๆ ตามแนวเสาอาคารและช่องเปิดหน้าต่าง/ประตู</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\sp-frame.png" class="w-9 h-9 mx-auto rounded shadow-xs" alt="Build Frame"></td>
+              <td class="p-3 font-bold text-indigo-900">Build Frame</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_InFrame.rb</td>
+              <td class="p-3 text-slate-700">ประกอบโครงเหล็ก C-Stud (AAHA01100), U-Steel, U52, U66 และเสากล่อง Box Frame 3D ในเลเยอร์ 01-iwframe</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\code.png" class="w-9 h-9 mx-auto rounded shadow-xs" alt="Switch Frame Code"></td>
+              <td class="p-3 font-bold text-indigo-900">Switch Frame Code</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_InMain.rb</td>
+              <td class="p-3 text-slate-700">สลับลำดับความสำคัญของโครงเหล็กตัววิ่งยาวกับตัวชนตรงมุมห้องที่บรรจบกัน (Corner) เพื่อการยึดประกอบที่ถูกต้อง</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\sw-board.png" class="w-9 h-9 mx-auto rounded shadow-xs" alt="Split Board"></td>
+              <td class="p-3 font-bold text-indigo-900">Split Smartboard</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_InBoard.rb</td>
+              <td class="p-3 text-slate-700">ซอยแบ่งระยะแผ่น Smartboard ตามระยะโมดูลมาตรฐาน (450, 900 มม.) และตัดตามแนวช่องเปิด</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\SB-IW.png" class="w-9 h-9 mx-auto rounded shadow-xs" alt="Build Board"></td>
+              <td class="p-3 font-bold text-indigo-900">Build Smartboard</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_InBoard.rb</td>
+              <td class="p-3 text-slate-700">สร้างแผ่น Smartboard 3D หนา 8/12 มม. ในเลเยอร์ 01-iwboard พร้อมเจาะรูตามชนิดหน้าต่าง (HI-Z, TALL-Z, HI-W, ฯลฯ)</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\SB-Joint.png" class="w-9 h-9 mx-auto rounded shadow-xs" alt="Board Joint"></td>
+              <td class="p-3 font-bold text-indigo-900">Build Board Joint</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_inJoint.rb</td>
+              <td class="p-3 text-slate-700">ติดตั้งแผ่นเหล็กประกบรอยต่อแผ่นบอร์ดและมุมห้องในเลเยอร์ 01-iwboard-joint</td>
+            </tr>
+            <!-- Partition -->
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\attr.png" class="w-9 h-9 mx-auto rounded shadow-xs" alt="Attribute Editor"></td>
+              <td class="p-3 font-bold text-blue-900">Attribute Editor</td>
+              <td class="p-3 font-mono text-xs text-slate-500">QJ_util.rb</td>
+              <td class="p-3 text-slate-700">เปิดหน้าต่างดูและแก้ไขพารามิเตอร์ Attributes ในหมวด QHeim ของชิ้นส่วนที่เลือก</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\level.png" class="w-9 h-9 mx-auto rounded shadow-xs" alt="Set Floor Level"></td>
+              <td class="p-3 font-bold text-blue-900">Set Floor Level</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_InVoid.rb</td>
+              <td class="p-3 text-slate-700">กำหนดระดับชั้นของ Grid Unit เพื่อใช้อ้างอิงระดับความสูงของผนังและช่องเปิด</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\door-spec.png" class="w-9 h-9 mx-auto rounded shadow-xs" alt="Door Spec"></td>
+              <td class="p-3 font-bold text-blue-900">Door Spec</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_PtMain.rb</td>
+              <td class="p-3 text-slate-700">หน้าต่างตรวจสอบและกำหนดสเปกประตู, ทิศทางการเปิด (U, D, L, R) และระยะขาประตู</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\spframe.png" class="w-9 h-9 mx-auto rounded shadow-xs" alt="Split Partition"></td>
+              <td class="p-3 font-bold text-blue-900">Split Partition</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_PtMain.rb</td>
+              <td class="p-3 text-slate-700">ตัดแบ่งเส้นแนว Single Wall ออกเป็นช่วงๆ ตามโมดูลและเคลียร์ระยะชนเสาอาคาร</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\door-speddc.png" class="w-9 h-9 mx-auto rounded shadow-xs" alt="Set Wall Height"></td>
+              <td class="p-3 font-bold text-blue-900">Set Wall Height</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_PtMain.rb</td>
+              <td class="p-3 text-slate-700">ตั้งค่าระดับท้องผนัง (Bottom elevation) และความสูงแผงผนัง (Partition height) เช่น 2400 มม.</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\code.jpg" class="w-9 h-9 mx-auto rounded shadow-xs" alt="Code Partition"></td>
+              <td class="p-3 font-bold text-blue-900">Code Partition</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_PtMain.rb</td>
+              <td class="p-3 text-slate-700">วิเคราะห์ทิศทางและใส่รหัสโค้ดกำกับลงบนแผง Partition ชั่วคราวในเลเยอร์ 01-temp-ptwall</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\Change partition code.png" class="w-9 h-9 mx-auto rounded shadow-xs" alt="Change Code"></td>
+              <td class="p-3 font-bold text-blue-900">Change Code</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_PtMain.rb</td>
+              <td class="p-3 text-slate-700">กล่องแก้ไขรหัสโค้ดของแผง Partition ที่เลือก (Top/Bottom หรือ Left/Right Code)</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\buildpartition.png" class="w-9 h-9 mx-auto rounded shadow-xs" alt="Build Partition"></td>
+              <td class="p-3 font-bold text-blue-900">Build Partition</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_PtMain.rb</td>
+              <td class="p-3 text-slate-700">สร้างแผง Partition 3D จริงลงในเลเยอร์ 01-partition พร้อมเสาและแผ่นปิดครบถ้วน</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\Make_Partition_Onsite.png" class="w-9 h-9 mx-auto rounded shadow-xs" alt="Make Onsite"></td>
+              <td class="p-3 font-bold text-blue-900">Make Partition Onsite</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_PtMain.rb</td>
+              <td class="p-3 text-slate-700">คลิกเปลี่ยนแผง Partition ให้เป็นงานประกอบหน้างาน (ON-SITE) ไฮไลต์ด้วยสีส้ม</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\SB-Joint pt.png" class="w-9 h-9 mx-auto rounded shadow-xs" alt="Partition Joint"></td>
+              <td class="p-3 font-bold text-blue-900">Partition Joint</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_PtJoint.rb</td>
+              <td class="p-3 text-slate-700">ติดตั้งชุดข้อต่อเหล็กยึดระหว่างแผง Partition ในเลเยอร์ 01-ptjoint ตามจุดบรรจบผนัง</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\void.jpg" class="w-9 h-9 mx-auto rounded shadow-xs" alt="Set Void"></td>
+              <td class="p-3 font-bold text-blue-900">Set Void or Stair</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_InVoid.rb</td>
+              <td class="p-3 text-slate-700">เจาะช่องเปิด Void บันได, ตัดขอบบอร์ด, ใส่ Box Frame เสริมขอบ และสร้าง Void Joint</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\PSpanel.png" class="w-9 h-9 mx-auto rounded shadow-xs" alt="Service Partition"></td>
+              <td class="p-3 font-bold text-blue-900">Service Partition</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_Shaft.rb</td>
+              <td class="p-3 text-slate-700">สร้างแผงปิดช่อง Service Pipe Shaft พร้อมโครงเหล็กและสมาร์ทบอร์ดในเลเยอร์ 01-ptshaft</td>
+            </tr>
+            <!-- Tagging -->
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\Regen Tag.png" class="w-9 h-9 mx-auto rounded shadow-xs" alt="Regen Tag"></td>
+              <td class="p-3 font-bold text-cyan-900">Regen Partition Tags</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_PtTag.rb</td>
+              <td class="p-3 text-slate-700">รันหมายเลขผนังและสร้างแท็กบอกขนาดมิติ (Dimension style หรือ Arrow style) ลงใน 01-pttag</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\switchframe.png" class="w-9 h-9 mx-auto rounded shadow-xs" alt="Change Tag Type"></td>
+              <td class="p-3 font-bold text-cyan-900">Change Tag Type</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_PtTag.rb</td>
+              <td class="p-3 text-slate-700">สลับรูปแบบแท็ก: Dimension, 3-Line Tag, Tri-Tag, หรือ Long Tag</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\Manaul Tag-PT.png" class="w-9 h-9 mx-auto rounded shadow-xs" alt="Move Tag Text"></td>
+              <td class="p-3 font-bold text-cyan-900">Move Tag Text</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_PtTag.rb</td>
+              <td class="p-3 text-slate-700">คลิกและลากเลื่อนตำแหน่งข้อความบอกระยะของแท็กหลบแนวผนังหรือช่องเปิดอย่างอิสระ</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/height.png" class="w-9 h-9 mx-auto rounded shadow-xs" alt="Resize Tag"></td>
+              <td class="p-3 font-bold text-cyan-900">Resize Tag Text &amp; Line</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_PtTag.rb</td>
+              <td class="p-3 text-slate-700">ปรับขนาดความสูงตัวอักษรและความหนาเส้นของ Dimension Tag ทั่วทั้งโมเดลพร้อมกัน</td>
+            </tr>
+            <!-- Punching -->
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\Punching - Block Array.png" class="w-9 h-9 mx-auto rounded shadow-xs" alt="Punch Blocks"></td>
+              <td class="p-3 font-bold text-teal-900">Punch EE Blocks</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_Punching.rb<br/>Heim_PunchingAC.rb</td>
+              <td class="p-3 text-slate-700">เจาะรูทะลุแผ่น Smartboard 3D ตามตำแหน่งบล็อกสวิตช์/เต้ารับไฟฟ้าและบล็อกแอร์ (AC) อัตโนมัติ</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\Punching - Gen2D-SB.png" class="w-9 h-9 mx-auto rounded shadow-xs" alt="Gen 2D Punching"></td>
+              <td class="p-3 font-bold text-teal-900">Gen 2D Punching</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_Punching.rb</td>
+              <td class="p-3 text-slate-700">สร้างแบบขยายแผ่นเจาะ 2D แบนราบ พร้อมเส้นมิติบอกระยะขอบและพิกัดฉากของทุกรูเจาะ</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\Punching Check-Dialog.png" class="w-9 h-9 mx-auto rounded shadow-xs" alt="Preview Punching"></td>
+              <td class="p-3 font-bold text-teal-900">Punching Preview</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_Punching.rb</td>
+              <td class="p-3 text-slate-700">เปิดหน้าต่าง HTML Viewer ตรวจสอบรายการแผ่นเจาะทั้งหมด พร้อมสถานะและปุ่มค้นหาตำแหน่ง</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\Punching Export-Cutting.png" class="w-9 h-9 mx-auto rounded shadow-xs" alt="Export CAD"></td>
+              <td class="p-3 font-bold text-teal-900">Export Punching to CAD</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_Punching.rb</td>
+              <td class="p-3 text-slate-700">ส่งออก Drawing 2D ของแผ่นเจาะออกเป็นไฟล์ AutoCAD (.DWG) สำหรับส่งโรงงานตัดฉลุ CNC</td>
+            </tr>
+            <!-- Views & Layer Control -->
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\IW-View.png" class="w-9 h-9 mx-auto rounded shadow-xs" alt="IW View"></td>
+              <td class="p-3 font-bold text-slate-900">Interior Layout View</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_InteriorIcon.rb</td>
+              <td class="p-3 text-slate-700">สลับเปิดเฉพาะเลเยอร์งานผนังในอาคาร (IW Layers) และซ่อนเลเยอร์ Partition</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\PT-View.png" class="w-9 h-9 mx-auto rounded shadow-xs" alt="PT View"></td>
+              <td class="p-3 font-bold text-slate-900">Partition Layout View</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_InteriorIcon.rb</td>
+              <td class="p-3 text-slate-700">สลับเปิดเฉพาะเลเยอร์งานแผงกั้นห้อง (Partition Layers) และซ่อนเลเยอร์ IW</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\view-entities.png" class="w-9 h-9 mx-auto rounded shadow-xs" alt="Show All"></td>
+              <td class="p-3 font-bold text-slate-900">Show All Layers</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_InteriorIcon.rb</td>
+              <td class="p-3 text-slate-700">เปิดแสดงผลทุกเลเยอร์ในโมเดลทั้งหมด เพื่อตรวจทานภาพรวมอาคาร</td>
+            </tr>
+            <!-- BOM & SSIC -->
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\csvfilecheck.png" class="w-9 h-9 mx-auto rounded shadow-xs" alt="File Check"></td>
+              <td class="p-3 font-bold text-emerald-900">Export File Check</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_InBom.rb</td>
+              <td class="p-3 text-slate-700">ตรวจสอบความถูกต้องและส่งออกรายงานตรวจสอบรายการชิ้นส่วนโครงและแผ่นผนัง (CSV)</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\uploaddb.png" class="w-9 h-9 mx-auto rounded shadow-xs" alt="Upload Frame DB"></td>
+              <td class="p-3 font-bold text-emerald-900">Upload Frame DB</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_InBom.rb</td>
+              <td class="p-3 text-slate-700">เปรียบเทียบและอัปโหลดข้อมูลโครงสร้าง Frame PS เข้าสู่ฐานข้อมูลกลาง SSIC Database</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\csvfileup.png" class="w-9 h-9 mx-auto rounded shadow-xs" alt="File Up IW"></td>
+              <td class="p-3 font-bold text-emerald-900">Export File Up (IW)</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_InBom.rb</td>
+              <td class="p-3 text-slate-700">สรุปยอดรายการวัสดุผนังใน (IW Takeoff) ส่งออกเป็นไฟล์ CSV สำหรับงานจัดซื้อ</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\uploaddb.png" class="w-9 h-9 mx-auto rounded shadow-xs" alt="Upload PT DB"></td>
+              <td class="p-3 font-bold text-emerald-900">Upload Partition DB</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_InBom.rb</td>
+              <td class="p-3 text-slate-700">เปรียบเทียบและอัปโหลดข้อมูลแผงกั้นห้อง Partition PS เข้าสู่ฐานข้อมูล SSIC</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 text-center"><img src="ICON/Interior\csvfileup.png" class="w-9 h-9 mx-auto rounded shadow-xs" alt="File Up PT"></td>
+              <td class="p-3 font-bold text-emerald-900">Export File Up (PT)</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_InBom.rb</td>
+              <td class="p-3 text-slate-700">สรุปยอดรายการวัสดุแผงกั้นห้อง (Partition Takeoff) ส่งออกเป็นไฟล์ CSV</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Section 3: Operator Guide (SOP for Workers) -->
+    <section id="operator-guide" class="bg-white rounded-2xl shadow-sm border-2 border-purple-300 p-6 md:p-8">
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-xl bg-purple-700 text-white flex items-center justify-center font-black text-2xl shadow-sm">SOP</div>
+          <div>
+            <span class="text-xs font-bold bg-purple-100 text-purple-800 px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+              Standard Operating Procedure
+            </span>
+            <h2 class="text-2xl md:text-3xl font-extrabold text-slate-800 mt-1">
+              คู่มือขั้นตอนการกดใช้งานแต่ละไอคอน (สำหรับคนทำงาน)
+            </h2>
+            <p class="text-sm text-slate-500">
+              สรุปขั้นตอนการปฏิบัติงานจริง วิธีการเลือกวัตถุ, การกดปุ่ม และผลลัพธ์ที่ระบบสร้างให้ในโมเดล
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 Steps Execution Flow -->
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-3 mb-8">
+        <div class="p-4 rounded-xl bg-purple-50 border border-purple-200">
+          <div class="w-6 h-6 rounded-full bg-purple-700 text-white flex items-center justify-center font-bold text-xs mb-2">1</div>
+          <h4 class="font-bold text-purple-900 text-sm">สร้างผนัง 3D</h4>
+          <p class="text-xs text-slate-600 mt-1">กด <strong>Build 3D wall</strong> &rarr; แปลงช่องท่อสุขาภิบาลด้วย <strong>Select Pipe Shaft</strong></p>
+        </div>
+        <div class="p-4 rounded-xl bg-indigo-50 border border-indigo-200">
+          <div class="w-6 h-6 rounded-full bg-indigo-700 text-white flex items-center justify-center font-bold text-xs mb-2">2</div>
+          <h4 class="font-bold text-indigo-900 text-sm">ผนังในอาคาร (IW)</h4>
+          <p class="text-xs text-slate-600 mt-1">รัน <strong>Split Frame &rarr; Build Frame &rarr; Split Board &rarr; Build Board &rarr; Board Joint</strong></p>
+        </div>
+        <div class="p-4 rounded-xl bg-blue-50 border border-blue-200">
+          <div class="w-6 h-6 rounded-full bg-blue-700 text-white flex items-center justify-center font-bold text-xs mb-2">3</div>
+          <h4 class="font-bold text-blue-900 text-sm">แผงกั้นห้อง (PT)</h4>
+          <p class="text-xs text-slate-600 mt-1">รัน <strong>Door Spec &rarr; Set Height &rarr; Split Partition &rarr; Code &rarr; Build Partition</strong></p>
+        </div>
+        <div class="p-4 rounded-xl bg-teal-50 border border-teal-200">
+          <div class="w-6 h-6 rounded-full bg-teal-700 text-white flex items-center justify-center font-bold text-xs mb-2">4</div>
+          <h4 class="font-bold text-teal-900 text-sm">เจาะไฟฟ้า EE</h4>
+          <p class="text-xs text-slate-600 mt-1">วางบล็อก &rarr; รัน <strong>Punch EE Blocks &rarr; Gen 2D &rarr; Export to CAD (DWG)</strong></p>
+        </div>
+        <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-200">
+          <div class="w-6 h-6 rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold text-xs mb-2">5</div>
+          <h4 class="font-bold text-emerald-900 text-sm">แท็กมิติ &amp; BOM</h4>
+          <p class="text-xs text-slate-600 mt-1">กด <strong>Regen Tags &rarr; Move Text &rarr; Export File Up &rarr; Upload Database</strong></p>
+        </div>
+      </div>
+
+      <!-- Detailed Operator Cards -->
+      <div class="space-y-4">
+
+        <!-- Card: Build 3D wall -->
+        <div class="p-4 rounded-xl border border-slate-200 bg-white hover:border-purple-300 transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-56 shrink-0">
+            <img src="ICON/Interior\3d-wall.png" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0" alt="Build 3D wall">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">Build 3D wall</div>
+              <div class="text-xs text-slate-400 font-mono">Heim_InMain</div>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-2 w-full text-xs">
+            <div>
+              <span class="font-bold text-slate-700">🎯 การเลือกวัตถุ:</span>
+              <p class="text-slate-600 mt-0.5">เปิดเลเยอร์ <code class="bg-slate-100 px-1 rounded">A-WALL</code>, <code class="bg-slate-100 px-1 rounded">Hood</code>, <code class="bg-slate-100 px-1 rounded">S-Unit</code> (ไม่ต้องเลือกวัตถุ)</p>
+            </div>
+            <div>
+              <span class="font-bold text-slate-700">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              <p class="text-slate-600 mt-0.5">กดไอคอนครั้งเดียว ระบบประมวลผลก้อนผนัง 3D สูง 1000 มม. อัตโนมัติ</p>
+            </div>
+            <div>
+              <span class="font-bold text-purple-700">📦 ผลลัพธ์ในโมเดล:</span>
+              <p class="text-slate-600 mt-0.5">สร้าง Single Wall (01-3dsinglewall) และ Double Wall (01-3ddoublewall) พร้อมตัดหลบเสา</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Door Spec -->
+        <div class="p-4 rounded-xl border border-slate-200 bg-white hover:border-purple-300 transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-56 shrink-0">
+            <img src="ICON/Interior\door-spec.png" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0" alt="Door Spec">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">Door Spec</div>
+              <div class="text-xs text-slate-400 font-mono">Heim_PtMain</div>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-2 w-full text-xs">
+            <div>
+              <span class="font-bold text-slate-700">🎯 การเลือกวัตถุ:</span>
+              <p class="text-slate-600 mt-0.5">ไม่ต้องเลือกวัตถุล่วงหน้า</p>
+            </div>
+            <div>
+              <span class="font-bold text-slate-700">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              <p class="text-slate-600 mt-0.5">กดไอคอน &rarr; ตรวจสอบขนาด ความกว้าง ทิศทาง (U, D, L, R) &rarr; กด Save</p>
+            </div>
+            <div>
+              <span class="font-bold text-purple-700">📦 ผลลัพธ์ในโมเดล:</span>
+              <p class="text-slate-600 mt-0.5">บันทึกสเปกประตูเข้าสู่ Temp Walls สำหรับใช้อ้างอิงการเว้นช่องเปิดผนัง</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Code & Build Partition -->
+        <div class="p-4 rounded-xl border border-slate-200 bg-white hover:border-purple-300 transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-56 shrink-0">
+            <img src="ICON/Interior\buildpartition.png" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0" alt="Build Partition">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">Build Partition</div>
+              <div class="text-xs text-slate-400 font-mono">Heim_PtMain</div>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-2 w-full text-xs">
+            <div>
+              <span class="font-bold text-slate-700">🎯 การเลือกวัตถุ:</span>
+              <p class="text-slate-600 mt-0.5">ไม่เลือก (สร้างทั้งหมด) หรือเลือกเฉพาะแผงที่ต้องการ Re-generate</p>
+            </div>
+            <div>
+              <span class="font-bold text-slate-700">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              <p class="text-slate-600 mt-0.5">กดไอคอน &rarr; กดยืนยัน Yes ใน Popup (ต้องผ่านการกด Code Partition มาก่อน)</p>
+            </div>
+            <div>
+              <span class="font-bold text-purple-700">📦 ผลลัพธ์ในโมเดล:</span>
+              <p class="text-slate-600 mt-0.5">สร้างแผง Partition 3D จริงลงในเลเยอร์ <code class="bg-slate-100 px-1 rounded font-bold">01-partition</code> พร้อมเสาและแผ่นปิด</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Make Partition Onsite -->
+        <div class="p-4 rounded-xl border border-slate-200 bg-white hover:border-purple-300 transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-56 shrink-0">
+            <img src="ICON/Interior\Make_Partition_Onsite.png" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0" alt="Make Partition Onsite">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">Make Partition Onsite</div>
+              <div class="text-xs text-slate-400 font-mono">Heim_PtMain</div>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-2 w-full text-xs">
+            <div>
+              <span class="font-bold text-slate-700">🎯 การเลือกวัตถุ:</span>
+              <p class="text-slate-600 mt-0.5">ไม่ต้องเลือกวัตถุล่วงหน้า</p>
+            </div>
+            <div>
+              <span class="font-bold text-slate-700">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              <p class="text-slate-600 mt-0.5">กดไอคอน &rarr; นำเมาส์ไปคลิกที่แผง Partition ที่ต้องการประกอบหน้างาน</p>
+            </div>
+            <div>
+              <span class="font-bold text-amber-600">📦 ผลลัพธ์ในโมเดล:</span>
+              <p class="text-slate-600 mt-0.5">แผงเปลี่ยนเป็น <strong class="text-amber-600">สีส้ม</strong>, สถานะเป็น ON-SITE และปรับสูตรถอดแบบ BOM สำหรับหน้างาน</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Punch EE Blocks -->
+        <div class="p-4 rounded-xl border border-slate-200 bg-white hover:border-purple-300 transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-56 shrink-0">
+            <img src="ICON/Interior\Punching - Block Array.png" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0" alt="Punch EE Blocks">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">Punch EE Blocks</div>
+              <div class="text-xs text-slate-400 font-mono">Heim_Punching</div>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-2 w-full text-xs">
+            <div>
+              <span class="font-bold text-slate-700">🎯 การเลือกวัตถุ:</span>
+              <p class="text-slate-600 mt-0.5">วางบล็อกสวิตช์/เต้ารับ/แอร์ไว้บนผนัง (ไม่ต้องเลือกวัตถุ)</p>
+            </div>
+            <div>
+              <span class="font-bold text-slate-700">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              <p class="text-slate-600 mt-0.5">กดไอคอน &rarr; กดยืนยัน Yes ระบบจะสแกนและเจาะทะลุบอร์ดอัตโนมัติ</p>
+            </div>
+            <div>
+              <span class="font-bold text-teal-700">📦 ผลลัพธ์ในโมเดล:</span>
+              <p class="text-slate-600 mt-0.5">เจาะรูทะลุแผ่น Smartboard 3D จริง (หากบล็อกตกขอบจะมีสีแจ้งเตือนทันที)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Regen Partition Tags & Move Text -->
+        <div class="p-4 rounded-xl border border-slate-200 bg-white hover:border-purple-300 transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-56 shrink-0">
+            <img src="ICON/Interior\Regen Tag.png" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0" alt="Regen Partition Tags">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">Regen Partition Tags</div>
+              <div class="text-xs text-slate-400 font-mono">Heim_PtTag</div>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-2 w-full text-xs">
+            <div>
+              <span class="font-bold text-slate-700">🎯 การเลือกวัตถุ:</span>
+              <p class="text-slate-600 mt-0.5">ไม่เลือก (ทำทุกแผง) หรือเลือกเฉพาะแผง Partition ที่ต้องการแท็ก</p>
+            </div>
+            <div>
+              <span class="font-bold text-slate-700">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              <p class="text-slate-600 mt-0.5">กดไอคอน &rarr; เลือก <strong>Dimension style</strong> หรือ <strong>Arrow style</strong> &rarr; ตกลง</p>
+            </div>
+            <div>
+              <span class="font-bold text-purple-700">📦 ผลลัพธ์ในโมเดล:</span>
+              <p class="text-slate-600 mt-0.5">สร้างเส้นบอกขนาดมิติและรหัสผนังในเลเยอร์ <code class="bg-slate-100 px-1 rounded">01-pttag</code> (ใช้ปุ่ม Move Text เลื่อนหลบได้)</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 4: Deep Dive Architecture & Logic -->
+    <section id="logic" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-lg">03</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">สถาปัตยกรรมและตรรกะการคำนวณเชิงลึก (Deep-Dive Logic)</h2>
+          <p class="text-sm text-slate-500">ตรรกะการประมวลผลของโมดูล Ruby แต่ละไฟล์ในระบบ Interior</p>
+        </div>
+      </div>
+
+      <div class="space-y-6 text-xs md:text-sm text-slate-700 leading-relaxed">
+
+        <!-- 4.1 3D Wall Generation -->
+        <div class="p-5 bg-slate-50 rounded-xl border border-slate-200">
+          <h3 class="font-bold text-slate-800 text-base mb-2 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-purple-600"></span>
+            3.1 การสร้างผนัง 3D: Single Wall, Double Wall &amp; Pipe Shaft (Heim_BuildWall.rb)
+          </h3>
+          <p class="mb-3">
+            ระบบอ่านเส้น CAD ผนังที่มีระยะห่าง $41\,\text{mm}$ ($\text{Tolerance} \pm 0.5\,\text{mm}$) แล้วสร้าง Solid Face สี่เหลี่ยมผืนผ้าขึ้นรูปด้วย <code class="font-mono bg-white px-1.5 py-0.5 rounded border border-slate-200">pushpull(-1000.mm, false)</code>:
+          </p>
+          <ul class="list-disc pl-5 space-y-1 mb-3">
+            <li><strong>Single Wall:</strong> จัดเก็บในเลเยอร์ <code class="font-bold text-purple-800 font-mono">01-3dsinglewall</code> กำหนดชื่อกลุ่มเป็น <code class="font-mono">keta</code> หรือ <code class="font-mono">tsuma</code> ทาสีวัสดุ <code class="font-mono">'singlewall'</code></li>
+            <li><strong>Double Wall:</strong> จัดเก็บในเลเยอร์ <code class="font-bold text-purple-800 font-mono">01-3ddoublewall</code> สำหรับผนังคู่ระหว่างยูนิต</li>
+            <li><strong>Opening Clearance:</strong> ฟังก์ชัน <code class="font-mono text-indigo-700">Opening.clearsingleatcolumn()</code> จะยิงตรวจสอบขอบเขตเสาเหล็กของยูนิต และตัดรอนเนื้อ Single Wall ไม่ให้วิ่งล้ำเข้าไปทับเสา</li>
+            <li><strong>Pipe Shaft:</strong> คำสั่ง <code class="font-mono text-indigo-700">PipeShaft.movesingletopipeshaft()</code> จะย้ายผนังชิ้นที่เลือกออกจากหมวดผนังห้องทั่วไป เพื่อไม่ให้ถูกนำไปซอยเป็นแผง Partition</li>
+          </ul>
+        </div>
+
+        <!-- 4.2 Interior Wall Frame & Board -->
+        <div class="p-5 bg-slate-50 rounded-xl border border-slate-200">
+          <h3 class="font-bold text-slate-800 text-base mb-2 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-indigo-600"></span>
+            3.2 ระบบโครงเหล็กและแผ่นสมาร์ทบอร์ดผนังใน (Heim_InFrame.rb &amp; Heim_InBoard.rb)
+          </h3>
+          <p class="mb-3">
+            กำหนดระดับความสูงตามรหัสยูนิตใน <code class="font-mono bg-white px-1 rounded border">$hunitheight</code>:
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
+            <div class="bg-white p-3 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-800">Low (L):</span>
+              <div class="text-xs text-slate-600 mt-1">โครงเหล็ก inframe: <strong>2,540 mm</strong><br/>แผ่นบอร์ด inboard: <strong>2,544 mm</strong></div>
+            </div>
+            <div class="bg-white p-3 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-800">Normal (N):</span>
+              <div class="text-xs text-slate-600 mt-1">โครงเหล็ก inframe: <strong>2,810 mm</strong><br/>แผ่นบอร์ด inboard: <strong>2,815 mm</strong></div>
+            </div>
+            <div class="bg-white p-3 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-800">High (H):</span>
+              <div class="text-xs text-slate-600 mt-1">โครงเหล็ก inframe: <strong>3,210 mm</strong><br/>แผ่นบอร์ด inboard: <strong>3,223 mm</strong></div>
+            </div>
+          </div>
+          <p class="mb-2">
+            <strong>ตรรกะช่องเปิดหน้าต่าง ($iwframe):</strong> สคริปต์จะคำนวณระดับความสูงยกพื้น ($e$) และความสูงช่องเปิด ($height$) เช่น <code class="font-mono">HI-Z</code> ($e=0, H=2290$), <code class="font-mono">HI-WAIST</code> ($e=722, H=1518$), <code class="font-mono">TATAKI</code> ($e=0, H=2206$) เพื่อตัดทอนโครงเหล็กและฉลุแผ่น Smartboard ตามรูปทรงช่องเปิดอัตโนมัติ
+          </p>
+        </div>
+
+        <!-- 4.3 Partition & Door Analysis -->
+        <div class="p-5 bg-slate-50 rounded-xl border border-slate-200">
+          <h3 class="font-bold text-slate-800 text-base mb-2 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+            3.3 ตรรกะการวิเคราะห์แผง Partition และช่องเปิดประตู (Heim_PtMain.rb)
+          </h3>
+          <p class="mb-3">
+            หัวใจสำคัญในการคำนวณตำแหน่งประตูอยู่ที่ฟังก์ชัน <code class="font-mono text-purple-800 bg-white px-1.5 py-0.5 rounded border">gettempwallbetweendoor(door, point, isketa)</code>:
+          </p>
+          <div class="bg-white p-4 rounded-lg border border-slate-200 font-mono text-xs mb-3 space-y-2">
+            <div class="text-slate-500">// การตรวจสอบพิกัด Origin ของประตูเทียบกับขอบเขตผนังชั่วคราว</div>
+            <div class="text-purple-700 font-bold">samewall[index-1][1] &lt; point.x &amp;&amp; point.x &lt; samewall[index][0]</div>
+            <div class="text-slate-600">
+              - <code class="text-slate-800">samewall[index-1][1]</code> คือ จุดสิ้นสุดของผนังชิ้นซ้าย (หรือชิ้นล่าง)<br/>
+              - <code class="text-slate-800">samewall[index][0]</code> คือ จุดเริ่มต้นของผนังชิ้นขวา (หรือชิ้นบน)<br/>
+              - <code class="text-slate-800">point</code> คือ พิกัดกึ่งกลาง/Origin ของตัว Component ประตู
+            </div>
+          </div>
+          <p>
+            หากมีผนังน้อยกว่า 2 ชิ้น (<code class="font-mono">samewall.length &lt; 2</code>) หรือพิกัด <code class="font-mono">point</code> ล้ำออกนอกช่องว่าง ระบบจะคืนค่า <code class="font-mono">nil</code> และแจ้งเตือนข้อผิดพลาดทันที
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 5: EE Punching System -->
+    <section id="punching" class="bg-white rounded-2xl shadow-sm border-2 border-indigo-300 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold text-lg">⚡</div>
+        <div>
+          <span class="text-xs font-bold bg-indigo-100 text-indigo-800 px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+            Smartboard CNC Automation
+          </span>
+          <h2 class="text-2xl font-bold text-slate-800 mt-1">ระบบเจาะแผ่นสมาร์ทบอร์ด EE Punching &amp; ส่งออก CAD DWG</h2>
+          <p class="text-sm text-slate-500">Heim_Punching.rb และ Heim_PunchingAC.rb สำหรับงานระบบไฟฟ้าและแอร์</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="p-4 rounded-xl bg-indigo-50/50 border border-indigo-200">
+          <div class="font-bold text-indigo-900 text-sm mb-1">1. เจาะทะลุ 3D อัตโนมัติ</div>
+          <p class="text-xs text-slate-600">ยิง Raytest จากกึ่งกลางบล็อกไฟฟ้า (Single, Double, Triple, A2, A3, AC) ไปยังแผ่น Smartboard และสร้าง Cutter เจาะรูทะลุบอร์ดจริง</p>
+        </div>
+        <div class="p-4 rounded-xl bg-amber-50/50 border border-amber-200">
+          <div class="font-bold text-amber-900 text-sm mb-1">2. ตรวจจับบล็อกตกขอบ (Off-board)</div>
+          <p class="text-xs text-slate-600">มี Live ModelObserver คอยตรวจสอบ หากบล็อกไฟฟ้าตัวใดขอบเขตหลุดออกนอกแผ่นบอร์ด บล็อกนั้นจะเปลี่ยนสีแจ้งเตือนทันที</p>
+        </div>
+        <div class="p-4 rounded-xl bg-teal-50/50 border border-teal-200">
+          <div class="font-bold text-teal-900 text-sm mb-1">3. สร้างแบบ 2D &amp; ส่งออก DWG</div>
+          <p class="text-xs text-slate-600">คลี่แผ่นบอร์ดเป็น Drawing 2D พร้อมบอกระยะขอบและพิกัดฉาก และส่งออกไฟล์ AutoCAD (.DWG) แยกตามยูนิตสำหรับเครื่อง CNC</p>
+        </div>
+      </div>
+
+      <div class="bg-slate-900 text-slate-200 p-4 rounded-xl text-xs font-mono space-y-1">
+        <div class="text-teal-400 font-bold">// DWG EXPORT ENGINE PROCESS</div>
+        <div>1. สแกนกลุ่มแผ่นเจาะ 2D ในโมเดล: <code class="text-indigo-300">punching_detail_groups</code></div>
+        <div>2. ทำสำเนาวัตถุไปไว้ที่จุดกำเนิดพิกัดฉาก: <code class="text-indigo-300">create_export_origin_copy</code></div>
+        <div>3. จัดการเปิดเฉพาะเลเยอร์ที่เกี่ยวข้องและซ่อนเลเยอร์อื่น: <code class="text-indigo-300">show_layers_for_export</code></div>
+        <div>4. รันคำสั่งส่งออกอัตโนมัติ: <code class="text-emerald-400">model.export(output_dwg_path, false)</code></div>
+      </div>
+    </section>
+
+    <!-- Section 6: Component & Layer Matrix -->
+    <section id="matrix" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-lg">04</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">ตารางสรุปเลเยอร์และคอมโพเนนต์ (Component &amp; Layer Matrix)</h2>
+          <p class="text-sm text-slate-500">ความสัมพันธ์ระหว่างเลเยอร์ใน SketchUp, รหัสชิ้นส่วน และหน่วยนับใน BOM</p>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse text-xs md:text-sm">
+          <thead>
+            <tr class="bg-slate-100 text-slate-700 border-b border-slate-300 font-bold">
+              <th class="p-3">หมวดหมู่งาน</th>
+              <th class="p-3">ชื่อ Layer ใน SketchUp</th>
+              <th class="p-3">รหัสชิ้นส่วน / Definition</th>
+              <th class="p-3">รายละเอียดชิ้นส่วน</th>
+              <th class="p-3 text-center">หน่วยนับ</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            <tr>
+              <td class="p-3 font-bold text-slate-800">3D Wall</td>
+              <td class="p-3 font-mono text-purple-800">01-3dsinglewall</td>
+              <td class="p-3 font-mono">keta, tsuma</td>
+              <td class="p-3">ผนังเดี่ยวหนา 41 มม. สูง 1000 มม. ชั่วคราว</td>
+              <td class="p-3 text-center">ท่อน</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-bold text-slate-800">3D Wall</td>
+              <td class="p-3 font-mono text-purple-800">01-3ddoublewall</td>
+              <td class="p-3 font-mono">doublewall</td>
+              <td class="p-3">ผนังคู่ระหว่างยูนิต</td>
+              <td class="p-3 text-center">ท่อน</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-bold text-indigo-800">IW Frame</td>
+              <td class="p-3 font-mono text-indigo-800">01-iwframe</td>
+              <td class="p-3 font-mono">AAHA01100</td>
+              <td class="p-3">เหล็กตัวซี C-Stud 50x40 มม.</td>
+              <td class="p-3 text-center">ท่อน</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-bold text-indigo-800">IW Frame</td>
+              <td class="p-3 font-mono text-indigo-800">01-iwframe</td>
+              <td class="p-3 font-mono">AAHA09040</td>
+              <td class="p-3">เสากล่อง Box Frame 2810 มม.</td>
+              <td class="p-3 text-center">ท่อน</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-bold text-indigo-800">IW Board</td>
+              <td class="p-3 font-mono text-indigo-800">01-iwboard</td>
+              <td class="p-3 font-mono">AAHZ0061X, AAHW</td>
+              <td class="p-3">แผ่น Smartboard ผนังใน หนา 8/12 มม. พร้อมตัดช่องเปิด</td>
+              <td class="p-3 text-center">แผ่น / ตร.ม.</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-bold text-indigo-800">IW Board Joint</td>
+              <td class="p-3 font-mono text-indigo-800">01-iwboard-joint</td>
+              <td class="p-3 font-mono">iwboardjoint</td>
+              <td class="p-3">แผ่นเหล็กประกบรอยต่อแผ่นบอร์ด</td>
+              <td class="p-3 text-center">ชิ้น (EA)</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-bold text-blue-800">Partition</td>
+              <td class="p-3 font-mono text-blue-800">01-partition</td>
+              <td class="p-3 font-mono">AAIP...</td>
+              <td class="p-3">แผง Partition สำเร็จรูปจากโรงงาน</td>
+              <td class="p-3 text-center">แผง (EA)</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-bold text-blue-800">Partition Onsite</td>
+              <td class="p-3 font-mono text-blue-800">01-partition</td>
+              <td class="p-3 font-mono">AAIP... (Onsite)</td>
+              <td class="p-3">แผง Partition งานประกอบหน้างาน (สีส้ม)</td>
+              <td class="p-3 text-center">แผง (EA)</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-bold text-blue-800">Partition Joint</td>
+              <td class="p-3 font-mono text-blue-800">01-ptjoint</td>
+              <td class="p-3 font-mono">ptjoint</td>
+              <td class="p-3">ชุดข้อต่อเหล็กยึดระหว่างแผง Partition</td>
+              <td class="p-3 text-center">ชิ้น (EA)</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-bold text-cyan-800">Tag &amp; Anno</td>
+              <td class="p-3 font-mono text-cyan-800">01-pttag</td>
+              <td class="p-3 font-mono">ptdimensiontag</td>
+              <td class="p-3">เส้นบอกขนาดมิติแผง Partition พร้อมรหัสกำกับ</td>
+              <td class="p-3 text-center">ชุด</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-bold text-teal-800">EE Punching</td>
+              <td class="p-3 font-mono text-teal-800">01-punching-2d</td>
+              <td class="p-3 font-mono">punchdetail_...</td>
+              <td class="p-3">แบบขยายแผ่นเจาะ 2D พร้อมบอกระยะพิกัดฉาก</td>
+              <td class="p-3 text-center">แผ่น</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-bold text-emerald-800">BOM Hardware</td>
+              <td class="p-3 font-mono text-emerald-800">IN-BOM</td>
+              <td class="p-3 font-mono">AASK03320</td>
+              <td class="p-3">ขอยึดเพดาน (Ceiling Bracket)</td>
+              <td class="p-3 text-center">ชิ้น (EA)</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-bold text-emerald-800">BOM Hardware</td>
+              <td class="p-3 font-mono text-emerald-800">IN-BOM</td>
+              <td class="p-3 font-mono">AASB20090</td>
+              <td class="p-3">สกรูยึดสมาร์ทบอร์ด (Screw)</td>
+              <td class="p-3 text-center">ตัว</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-bold text-emerald-800">BOM Hardware</td>
+              <td class="p-3 font-mono text-emerald-800">IN-BOM</td>
+              <td class="p-3 font-mono">AASB20660</td>
+              <td class="p-3">ขอยึดพื้น (Floor Bracket)</td>
+              <td class="p-3 text-center">ชิ้น (EA)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Section 7: Troubleshooting -->
+    <section id="troubleshooting" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center font-bold text-lg">05</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">การแก้ไขปัญหาที่พบบ่อย (Troubleshooting &amp; FAQs)</h2>
+          <p class="text-sm text-slate-500">แนวทางการวิเคราะห์และแก้ไข Error ที่เกิดขึ้นในการทำงานจริง</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+        <!-- Error 1 -->
+        <div class="p-5 rounded-xl border border-rose-200 bg-rose-50/40">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-rose-600"></span>
+            <h4 class="font-bold text-rose-900 text-sm">Door's origin is outside the temporary wall</h4>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed mb-3">
+            <strong>สาเหตุ:</strong> จุด Origin ของประตูไม่ได้ตกลงในช่องว่างระหว่างผนังชั่วคราว เช่น วางประตูเหลื่อมทับตัวเนื้อผนัง, หรือมีผนังในแนวนั้นน้อยกว่า 2 ชิ้น
+          </p>
+          <div class="bg-white p-2.5 rounded-lg border border-rose-200 text-xs text-rose-950 font-mono">
+            <strong>✅ วิธีแก้:</strong> ตรวจสอบแนว Single Wall ซ้าย-ขวาของประตู, ขยับจุดกึ่งกลางประตูให้ลงช่องว่างพอดี, และตรวจสอบ Attribute ทิศทางเปิดประตู (<code class="font-bold">U, D, L, R</code>)
+          </div>
+        </div>
+
+        <!-- Error 2 -->
+        <div class="p-5 rounded-xl border border-rose-200 bg-rose-50/40">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-rose-600"></span>
+            <h4 class="font-bold text-rose-900 text-sm">undefined method 'include?' for nil:NilClass</h4>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed mb-3">
+            <strong>สาเหตุ:</strong> มียูนิตในเลเยอร์ <code class="bg-slate-200 px-1 rounded">S-Unit</code> ที่ยังไม่มี Attribute <code class="bg-slate-200 px-1 rounded">position</code> ทำให้ <code class="font-mono">$dcposborder[nil]</code> ได้ค่า <code class="font-mono">nil</code>
+          </p>
+          <div class="bg-white p-2.5 rounded-lg border border-rose-200 text-xs text-rose-950 font-mono">
+            <strong>✅ วิธีแก้:</strong> ครอบยูนิตทั้งหมดแล้วรันคำสั่ง <strong>Unit Position</strong> ใหม่ หรือเติม <code class="font-bold">|| []</code> ในไฟล์ <code class="font-bold">Heim_BuildWall.rb:626</code>
+          </div>
+        </div>
+
+        <!-- Error 3 -->
+        <div class="p-5 rounded-xl border border-amber-200 bg-amber-50/40">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-600"></span>
+            <h4 class="font-bold text-amber-900 text-sm">Some walls do not have wall code...</h4>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed mb-3">
+            <strong>สาเหตุ:</strong> กดปุ่ม <strong>Build Partition</strong> โดยที่ยังมีแผงผนังบางชิ้นยังไม่ได้รับการวิเคราะห์ใส่รหัสโค้ด
+          </p>
+          <div class="bg-white p-2.5 rounded-lg border border-amber-200 text-xs text-amber-950 font-mono">
+            <strong>✅ วิธีแก้:</strong> กดปุ่ม <strong>Code Partition</strong> ก่อน เพื่อให้ระบบใส่โค้ดบนแผงชั่วคราวให้ครบทุกชิ้น แล้วจึงกด Build Partition ซ้ำอีกครั้ง
+          </div>
+        </div>
+
+        <!-- Error 4 -->
+        <div class="p-5 rounded-xl border border-amber-200 bg-amber-50/40">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-600"></span>
+            <h4 class="font-bold text-amber-900 text-sm">บล็อกไฟฟ้าแสดงสีเตือน (Off-board Block)</h4>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed mb-3">
+            <strong>สาเหตุ:</strong> บล็อกไฟฟ้าตัวนั้นวางเหลื่อมล้ำออกนอกขอบแผ่น Smartboard ทำให้ระบบ Raytest ไม่สามารถเจาะทะลุแผ่นบอร์ดได้
+          </p>
+          <div class="bg-white p-2.5 rounded-lg border border-amber-200 text-xs text-amber-950 font-mono">
+            <strong>✅ วิธีแก้:</strong> ขยับบล็อกไฟฟ้าให้เข้ามาอยู่ภายในพื้นที่ของแผ่น Smartboard หรือตรวจสอบว่าแผ่น Smartboard บริเวณนั้นถูกสร้างขึ้นเรียบร้อยแล้ว
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="max-w-6xl mx-auto mt-12 mb-8 text-center text-xs text-slate-400 no-print">
+    <p>© 2026 QHeim Modular Construction Extension — Internal Technical Documentation</p>
+    <p class="mt-1 font-mono text-[11px]">C:\QHeim\manual\InteriorWall_Doc.html &amp; InteriorWall_Doc.md</p>
+  </footer>
+
+</body>
+</html>

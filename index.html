@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QHeim Modular BIM - ศูนย์รวมคู่มือและเอกสารระบบ (Master Documentation Portal)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({startOnLoad:true, theme:'neutral'});</script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Tahoma, "Sarabun", sans-serif;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white !important; color: black !important; padding: 0 !important; }
+      .shadow-sm, .shadow-md, .shadow-lg, .shadow-xl { box-shadow: none !important; }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
+
+  <!-- Hero Header -->
+  <header class="bg-gradient-to-r from-slate-900 via-indigo-950 to-blue-900 text-white border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 text-xs font-semibold uppercase tracking-wider mb-3">
+            <span>🏗️ SCG HEIM Modular Construction Automation</span>
+          </div>
+          <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
+            QHeim System Documentation
+          </h1>
+          <p class="text-slate-300 mt-2 text-sm sm:text-base max-w-2xl leading-relaxed">
+            ศูนย์รวมคู่มือการปฏิบัติงาน, สถาปัตยกรรมโค้ด, ตารางอ้างอิงด่วน, และเอกสารส่งมอบงานฉบับสมบูรณ์ สำหรับพนักงานใหม่, คนทำงานประจำ, และทีมงานรุ่นหลัง
+          </p>
+        </div>
+        <div class="flex flex-col sm:flex-row md:flex-col gap-3 w-full md:w-auto text-xs">
+          <a href="https://github.com/suteechu/manual-QHeim.git" target="_blank" class="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-2.5 rounded-xl border border-white/20 transition font-medium backdrop-blur-sm">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/></svg>
+            <span>GitHub Repository</span>
+          </a>
+          <a href="README.md" class="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-4 py-2.5 rounded-xl transition font-medium shadow-sm">
+            <span>📖 อ่าน Master README.md</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Audience Switcher -->
+      <div class="mt-8 pt-6 border-t border-slate-800/80 flex flex-wrap gap-2 text-xs">
+        <a href="#onboarding" class="px-3.5 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-medium hover:bg-emerald-500/30 transition">
+          🔰 สำหรับพนักงานใหม่ (Onboarding)
+        </a>
+        <a href="#cheat-sheet" class="px-3.5 py-1.5 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/30 font-medium hover:bg-amber-500/30 transition">
+          ⚡ สำหรับคนที่ลืม (Cheat Sheet &amp; กฎเหล็ก)
+        </a>
+        <a href="#handover" class="px-3.5 py-1.5 rounded-lg bg-purple-500/20 text-purple-300 border border-purple-500/30 font-medium hover:bg-purple-500/30 transition">
+          🏛️ สำหรับส่งมอบงาน / คนรุ่นหลัง (Handover)
+        </a>
+        <a href="#modules" class="px-3.5 py-1.5 rounded-lg bg-blue-500/20 text-blue-300 border border-blue-500/30 font-medium hover:bg-blue-500/30 transition">
+          📚 คู่มือเจาะลึก 7 โมดูล (Modules Catalog)
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12 flex-grow w-full">
+
+    <!-- Interactive Pipeline Roadmap -->
+    <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-lg">00</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">ลำดับขั้นตอนการทำงานทั้งระบบ (End-to-End Workflow)</h2>
+          <p class="text-sm text-slate-500">เส้นทางการไหลของข้อมูลตั้งแต่ออกแบบ CAD 2D จนถึงผลิตที่โรงงาน SCG Heim</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3 mb-6 text-center text-xs">
+        <a href="CAD_AR_Doc.html" class="p-3 rounded-xl border border-blue-200 bg-blue-50/50 hover:bg-blue-100/50 transition">
+          <div class="font-bold text-blue-800 mb-1">Step 1</div>
+          <div class="font-semibold text-slate-800">CAD AR</div>
+          <div class="text-[10px] text-slate-500 mt-1">นำเข้าแปลน 2D DWG</div>
+        </a>
+        <a href="Struc_Doc.html" class="p-3 rounded-xl border border-indigo-200 bg-indigo-50/50 hover:bg-indigo-100/50 transition">
+          <div class="font-bold text-indigo-800 mb-1">Step 2</div>
+          <div class="font-semibold text-slate-800">Structure</div>
+          <div class="text-[10px] text-slate-500 mt-1">เสา คาน พื้น รูท่อ</div>
+        </a>
+        <a href="LongleadTime_Doc.html" class="p-3 rounded-xl border border-cyan-200 bg-cyan-50/50 hover:bg-cyan-100/50 transition">
+          <div class="font-bold text-cyan-800 mb-1">Step 3</div>
+          <div class="font-semibold text-slate-800">Longlead</div>
+          <div class="text-[10px] text-slate-500 mt-1">ประตู-หน้าต่าง MIM</div>
+        </a>
+        <a href="ExteriorWall_Doc.html" class="p-3 rounded-xl border border-teal-200 bg-teal-50/50 hover:bg-teal-100/50 transition">
+          <div class="font-bold text-teal-800 mb-1">Step 4</div>
+          <div class="font-semibold text-slate-800">Ext Wall</div>
+          <div class="text-[10px] text-slate-500 mt-1">ผนัง AAFP & เสา Stud</div>
+        </a>
+        <a href="InteriorWall_Doc.html" class="p-3 rounded-xl border border-purple-200 bg-purple-50/50 hover:bg-purple-100/50 transition">
+          <div class="font-bold text-purple-800 mb-1">Step 5</div>
+          <div class="font-semibold text-slate-800">Int Wall</div>
+          <div class="text-[10px] text-slate-500 mt-1">ผนังใน & พาร์ทิชัน</div>
+        </a>
+        <a href="PartInstall_Doc.html" class="p-3 rounded-xl border border-rose-200 bg-rose-50/50 hover:bg-rose-100/50 transition">
+          <div class="font-bold text-rose-800 mb-1">Step 6</div>
+          <div class="font-semibold text-slate-800">PartInstall</div>
+          <div class="text-[10px] text-slate-500 mt-1">Flashing & ยางกันสั่น</div>
+        </a>
+        <a href="EE_Doc.html" class="p-3 rounded-xl border border-amber-200 bg-amber-50/50 hover:bg-amber-100/50 transition">
+          <div class="font-bold text-amber-800 mb-1">Step 7</div>
+          <div class="font-semibold text-slate-800">EE System</div>
+          <div class="text-[10px] text-slate-500 mt-1">ไฟฟ้า แอร์ LayOut</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Section: 7 Core Modules Cards Grid -->
+    <section id="modules" class="space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">📚 คลังคู่มือเจาะลึก 7 ระบบหลัก (Subsystem Manuals)</h2>
+          <p class="text-sm text-slate-500">เลือกคลิกเพื่ออ่านคู่มือฉบับเต็มของแต่ละส่วนขยาย</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Card 1: CAD AR -->
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition flex flex-col">
+          <div class="bg-gradient-to-r from-blue-700 to-indigo-700 p-4 text-white">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white/20">Module 01</span>
+              <span class="text-xs text-blue-200">CADLTF</span>
+            </div>
+            <h3 class="text-xl font-bold mt-2">CAD AR / CAD LTF</h3>
+          </div>
+          <div class="p-5 flex-grow flex flex-col justify-between space-y-4 text-xs md:text-sm">
+            <p class="text-slate-600 leading-relaxed">
+              การเตรียมไฟล์ AutoCAD 2D DWG, การส่งออกตัวอักษรและพิกัดด้วย AutoLISP/JSON, การนำเข้าแบบพิกัดเดิม (Preserve Origin), การจัดกลุ่มยูนิต <code class="bg-slate-100 px-1 py-0.5 rounded">S-Unit</code>, และการซิงค์ชื่อช่องเปิดประตู-หน้าต่างอัตโนมัติ
+            </p>
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+              <a href="CAD_AR_Doc.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition text-xs">
+                <span>🌐 เปิดคู่มือเว็บ (HTML)</span>
+              </a>
+              <a href="CAD_AR_Doc.md" class="text-slate-500 hover:text-slate-800 text-xs">
+                Markdown &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Structure -->
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition flex flex-col">
+          <div class="bg-gradient-to-r from-blue-900 to-slate-800 p-4 text-white">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white/20">Module 02</span>
+              <span class="text-xs text-blue-200">Struc</span>
+            </div>
+            <h3 class="text-xl font-bold mt-2">Structure (Struc)</h3>
+          </div>
+          <div class="p-5 flex-grow flex flex-col justify-between space-y-4 text-xs md:text-sm">
+            <p class="text-slate-600 leading-relaxed">
+              ระบบสร้างโครงสร้างโมดูลาร์ 3D (ชั้น 1-3), ปรับระดับพื้น Smartboard, งานระบบห้องน้ำ-บันได-Void-ทางเข้า, งานเจาะท่อ Service Hole (BR/FS/CS/AC), ชิ้นส่วนพิเศษ Setback/Turnbuckle, ข้อต่อเพดาน Ceiling Joint, และการตรวจถอด BOM
+            </p>
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+              <a href="Struc_Doc.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-900 hover:bg-blue-800 text-white font-medium transition text-xs">
+                <span>🌐 เปิดคู่มือเว็บ (HTML)</span>
+              </a>
+              <a href="Struc_Doc.md" class="text-slate-500 hover:text-slate-800 text-xs">
+                Markdown &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: LongleadTime -->
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition flex flex-col">
+          <div class="bg-gradient-to-r from-sky-600 to-cyan-700 p-4 text-white">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white/20">Module 03</span>
+              <span class="text-xs text-sky-200">LongleadTime</span>
+            </div>
+            <h3 class="text-xl font-bold mt-2">LongleadTime</h3>
+          </div>
+          <div class="p-5 flex-grow flex flex-col justify-between space-y-4 text-xs md:text-sm">
+            <p class="text-slate-600 leading-relaxed">
+              ระบบสร้างโมเดลบานประตูและหน้าต่าง 3D, การจับคู่ชื่อแปลนกับรหัส MIM จากฐานข้อมูล, และการถอดสรุปรายการวัสดุสำหรับสั่งผลิตล่วงหน้าส่งเข้าโรงงานเพื่อลด Lead Time ในการผลิต
+            </p>
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+              <a href="LongleadTime_Doc.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-sky-600 hover:bg-sky-700 text-white font-medium transition text-xs">
+                <span>🌐 เปิดคู่มือเว็บ (HTML)</span>
+              </a>
+              <a href="LongleadTime_Doc.md" class="text-slate-500 hover:text-slate-800 text-xs">
+                Markdown &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Exterior Wall -->
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition flex flex-col">
+          <div class="bg-gradient-to-r from-emerald-700 to-teal-800 p-4 text-white">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white/20">Module 04</span>
+              <span class="text-xs text-emerald-200">STD &amp; Switch</span>
+            </div>
+            <h3 class="text-xl font-bold mt-2">Exterior Wall</h3>
+          </div>
+          <div class="p-5 flex-grow flex flex-col justify-between space-y-4 text-xs md:text-sm">
+            <p class="text-slate-600 leading-relaxed">
+              ระบบผนังภายนอกสำเร็จรูป AAFP, เสา Stud, เสามุม Corner, เสา Window Set, ระบบกันซึม C3, ระบบตรวจสอบระยะเสา 225/332 มม. อัตโนมัติ, และการถอดรายการวัสดุเข้าสู่ระบบสั่งตัดแผ่น
+            </p>
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+              <a href="ExteriorWall_Doc.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white font-medium transition text-xs">
+                <span>🌐 เปิดคู่มือเว็บ (HTML)</span>
+              </a>
+              <a href="ExteriorWall_Doc.md" class="text-slate-500 hover:text-slate-800 text-xs">
+                Markdown &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5: Interior Wall -->
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition flex flex-col">
+          <div class="bg-gradient-to-r from-purple-700 to-indigo-800 p-4 text-white">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white/20">Module 05</span>
+              <span class="text-xs text-purple-200">Interior</span>
+            </div>
+            <h3 class="text-xl font-bold mt-2">Interior Wall</h3>
+          </div>
+          <div class="p-5 flex-grow flex flex-col justify-between space-y-4 text-xs md:text-sm">
+            <p class="text-slate-600 leading-relaxed">
+              ระบบผนังภายในและพาร์ทิชันแบ่งห้องสำเร็จรูป, เสากรอบช่องเปิด, บล็อกปิดรอยต่อระหว่างยูนิต, และการคำนวณถอดแบบโครงคร่าวภายในบ้านโมดูลาร์
+            </p>
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+              <a href="InteriorWall_Doc.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-purple-700 hover:bg-purple-800 text-white font-medium transition text-xs">
+                <span>🌐 เปิดคู่มือเว็บ (HTML)</span>
+              </a>
+              <a href="InteriorWall_Doc.md" class="text-slate-500 hover:text-slate-800 text-xs">
+                Markdown &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 6: PartInstall -->
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition flex flex-col">
+          <div class="bg-gradient-to-r from-rose-600 to-orange-700 p-4 text-white">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white/20">Module 06</span>
+              <span class="text-xs text-rose-200">PartInstall</span>
+            </div>
+            <h3 class="text-xl font-bold mt-2">PartInstall</h3>
+          </div>
+          <div class="p-5 flex-grow flex flex-col justify-between space-y-4 text-xs md:text-sm">
+            <p class="text-slate-600 leading-relaxed">
+              ระบบชิ้นส่วนติดตั้งและตัวยึด, Flashing กันน้ำ, Guide Pin รอยต่อ, ยางกันสั่นสะเทือน Antivibration Rubber, Super Sheet, และการคำนวณรหัสทิศทางโมดูลาร์ 01-12
+            </p>
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+              <a href="PartInstall_Doc.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-700 text-white font-medium transition text-xs">
+                <span>🌐 เปิดคู่มือเว็บ (HTML)</span>
+              </a>
+              <a href="PartInstall_Doc.md" class="text-slate-500 hover:text-slate-800 text-xs">
+                Markdown &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 7: Electricity & Communication (EE) -->
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition flex flex-col lg:col-span-3">
+          <div class="bg-gradient-to-r from-amber-600 via-orange-600 to-amber-700 p-4 text-white">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white/20">Module 07</span>
+              <span class="text-xs text-amber-200">EE Module</span>
+            </div>
+            <h3 class="text-xl font-bold mt-2">Electricity &amp; Communication (EE)</h3>
+          </div>
+          <div class="p-5 flex-grow flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-xs md:text-sm">
+            <p class="text-slate-600 leading-relaxed max-w-3xl">
+              ระบบไฟฟ้าแสงสว่าง, เต้ารับ, สวิตช์ 1-3 ทาง, ระบบแอร์ CDU/FCU, ระบบสายสื่อสาร LAN/TV/CCTV/Aiphone, อัลกอริทึม Pathfinding เจาะรู 332mm ข้ามยูนิต, การสร้างผัง Single-line Loop Diagram, ส่งออก Trimble LayOut 2D (1:70), และการสรุปยอดวัสดุสายไฟเข้า Excel
+            </p>
+            <div class="shrink-0 flex items-center gap-2">
+              <a href="EE_Doc.html" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-medium transition text-xs">
+                <span>🌐 เปิดคู่มือเว็บ (HTML)</span>
+              </a>
+              <a href="EE_Doc.md" class="text-slate-500 hover:text-slate-800 text-xs px-2">
+                Markdown &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section: 7 Golden Rules (Cheat Sheet) -->
+    <section id="cheat-sheet" class="bg-amber-50/60 rounded-2xl border-2 border-amber-300 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center font-bold text-lg">⚡</div>
+        <div>
+          <h2 class="text-2xl font-bold text-amber-950">7 กฎเหล็กที่ห้ามทำผิดเด็ดขาด (Critical Golden Rules)</h2>
+          <p class="text-sm text-amber-800">สำหรับคนที่ลืมหรือเจอปัญหาระหว่างทำงาน ตรวจสอบ 7 ข้อนี้ก่อนเสมอ</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm">
+        <div class="p-3.5 bg-white rounded-xl border border-amber-200 shadow-sm">
+          <div class="font-bold text-amber-900 mb-1">1. พิกัด Origin (0,0,0) ใน CAD ต้องตรงกันทุกชั้น</div>
+          <p class="text-slate-600">จุดอ้างอิง WCS ใน AutoCAD ของชั้น 1F, 2F, 3F ต้องตรงกัน มิฉะนั้นโมเดลใน SketchUp จะไม่ซ้อนทับกันอย่างถูกต้อง</p>
+        </div>
+        <div class="p-3.5 bg-white rounded-xl border border-amber-200 shadow-sm">
+          <div class="font-bold text-amber-900 mb-1">2. ลำดับปุ่มนำเข้า CAD AR ห้ามข้ามขั้นตอน</div>
+          <p class="text-slate-600">ต้องรันเรียงตามลำดับ: <code>Import CAD Original</code> &rarr; <code>Unit Number</code> &rarr; <code>Door Window Name</code> เท่านั้น</p>
+        </div>
+        <div class="p-3.5 bg-white rounded-xl border border-amber-200 shadow-sm">
+          <div class="font-bold text-amber-900 mb-1">3. เจาะรูท่อ (Hole SB) ก่อนรัน Ceiling Joint เสมอ</div>
+          <p class="text-slate-600">หากมีคอมโพเนนต์ Ceiling Joint (<code class="font-mono">AGAZ*</code>) ค้างอยู่ในโมเดล ระบบ Hole SB จะถูกบล็อกไม่ให้ทำงาน</p>
+        </div>
+        <div class="p-3.5 bg-white rounded-xl border border-amber-200 shadow-sm">
+          <div class="font-bold text-amber-900 mb-1">4. ต้องกด Shaft และ Floor Area ก่อนเดินสาย EE เสมอ</div>
+          <p class="text-slate-600">เพื่อให้ระบบลงทะเบียนพิกัดกริด <code>ix-iy</code> และทราบตำแหน่งชาร์ป มิฉะนั้นสายไฟจะไม่สามารถค้นหาเส้นทางข้ามยูนิตได้</p>
+        </div>
+        <div class="p-3.5 bg-white rounded-xl border border-amber-200 shadow-sm">
+          <div class="font-bold text-amber-900 mb-1">5. ห้ามย้ายหรือหมุน Unit หลังรัน Floor Area</div>
+          <p class="text-slate-600">หากมีการขยับตำแหน่งยูนิตโมดูลาร์ ต้องกดปุ่ม Floor Area ซ้ำใหม่เสมอเพื่ออัปเดต Attribute ตำแหน่ง</p>
+        </div>
+        <div class="p-3.5 bg-white rounded-xl border border-amber-200 shadow-sm">
+          <div class="font-bold text-amber-900 mb-1">6. ปิดโปรแกรม Microsoft Excel ทุกครั้งก่อน Export BOM</div>
+          <p class="text-slate-600">หากไฟล์ <code>Job Order.xlsx</code> หรือ <code>Recheck*.xlsx</code> ถูกเปิดค้างไว้ สคริปต์จะไม่สามารถเขียนทับได้และจะเกิดข้อผิดพลาด</p>
+        </div>
+        <div class="p-3.5 bg-white rounded-xl border border-amber-200 shadow-sm md:col-span-2">
+          <div class="font-bold text-amber-900 mb-1">7. ห้าม Explode กรุ๊ปชั้นในของคอมโพเนนต์มาตรฐาน</div>
+          <p class="text-slate-600">คอมโพเนนต์ QHeim มีพจนานุกรม Attribute ซ่อนอยู่ภายใน การระเบิดกรุ๊ปจะทำให้ข้อมูล BOM และความสัมพันธ์ของระบบสูญหายทันที</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Handover & Architecture -->
+    <section id="handover" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-lg">🏛️</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">เอกสารส่งมอบงานสำหรับผู้ดูแลระบบและคนรุ่นหลัง (Handover Guide)</h2>
+          <p class="text-sm text-slate-500">พิมพ์เขียวสถาปัตยกรรมระบบสำหรับสืบทอดงานและพัฒนาต่อยอด</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs md:text-sm">
+        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+          <h4 class="font-bold text-slate-800 mb-2">📁 โครงสร้างระบบหลัก (C:\QHeim\)</h4>
+          <ul class="space-y-1 text-slate-600 list-disc list-inside">
+            <li><code class="text-blue-600">Ruby/</code> ซอร์สโค้ด Ruby ทั้งหมดของ Extension</li>
+            <li><code class="text-blue-600">DATA/</code> Master Data, ฐานข้อมูล Excel, JSON</li>
+            <li><code class="text-blue-600">Comp/</code> คลังคอมโพเนนต์ 3D สำเร็จรูป</li>
+            <li><code class="text-blue-600">ICON/</code> รูปไอคอนปุ่มคำสั่งทั้งหมด</li>
+            <li><code class="text-blue-600">AutoLISP_ExportLTF/</code> เครื่องมือ AutoCAD LISP</li>
+          </ul>
+        </div>
+
+        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+          <h4 class="font-bold text-slate-800 mb-2">💾 ฐานข้อมูล Master Data ที่สำคัญ</h4>
+          <ul class="space-y-1 text-slate-600 list-disc list-inside">
+            <li><code class="text-indigo-600">Data MIM&IM - Component Block.xlsx</code></li>
+            <li><code class="text-indigo-600">New-A3.layout</code> (เทมเพลตมาตรฐาน)</li>
+            <li><code class="text-indigo-600">export-text.json</code> (พิกัดและตัวหนังสือ CAD)</li>
+            <li><code class="text-indigo-600">Job Order.xlsx</code> (ใบสรุปสั่งผลิตโรงงาน)</li>
+          </ul>
+        </div>
+
+        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+          <h4 class="font-bold text-slate-800 mb-2">🚀 ทิศทางการพัฒนาต่อยอด (Roadmap)</h4>
+          <ul class="space-y-1 text-slate-600 list-disc list-inside">
+            <li>ย้ายจาก VBA ไปสู่ Pure AutoLISP เต็มรูปแบบ</li>
+            <li>เชื่อมต่อ REST API ส่งยอด BOM สู่ ERP โดยตรง</li>
+            <li>ทดสอบความเข้ากันได้กับ SketchUp Pro เวอร์ชันใหม่</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 text-xs no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3">
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="CAD_AR_Doc.html" class="hover:text-white transition">CAD AR</a> &bull;
+        <a href="Struc_Doc.html" class="hover:text-white transition">Structure</a> &bull;
+        <a href="ExteriorWall_Doc.html" class="hover:text-white transition">Exterior Wall</a> &bull;
+        <a href="InteriorWall_Doc.html" class="hover:text-white transition">Interior Wall</a> &bull;
+        <a href="PartInstall_Doc.html" class="hover:text-white transition">PartInstall</a> &bull;
+        <a href="LongleadTime_Doc.html" class="hover:text-white transition">LongleadTime</a> &bull;
+        <a href="EE_Doc.html" class="hover:text-white transition">EE System</a> &bull;
+        <a href="README.md" class="hover:text-white transition">README.md</a>
+      </div>
+      <p>QHeim Modular Construction BIM Automation Documentation &bull; SCG HEIM Engineering</p>
+      <p class="text-slate-500">Repository: <a href="https://github.com/suteechu/manual-QHeim.git" class="underline hover:text-slate-300">https://github.com/suteechu/manual-QHeim.git</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>

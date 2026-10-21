@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QHeim - เอกสารการทำงานระบบ LongleadTime</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Tahoma, "Sarabun", sans-serif;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white !important; color: black !important; padding: 0 !important; }
+      .shadow-sm, .shadow-md, .shadow-lg, .shadow-xl { box-shadow: none !important; }
+      .border { border-color: #cbd5e1 !important; }
+      section { break-inside: avoid; page-break-inside: avoid; margin-bottom: 24px !important; }
+      table { break-inside: auto; }
+      tr { break-inside: avoid; page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased p-4 md:p-8">
+
+  <!-- Header Container -->
+  <div class="max-w-6xl mx-auto bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden mb-8">
+    <div class="bg-gradient-to-r from-emerald-800 via-teal-700 to-cyan-600 p-8 text-white">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-semibold uppercase tracking-wider mb-2">
+            QHeim Door &amp; Window Automation Extension
+          </span>
+          <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight">คู่มือและเอกสารการทำงาน LongleadTime</h1>
+          <p class="text-emerald-100 mt-2 text-sm md:text-base max-w-2xl">
+            สถาปัตยกรรมโค้ด, ตรรกะการจับคู่ MIM Database, การสร้างและจัดวางชิ้นงาน 3D ประตู-หน้าต่าง, การจัดการเวอร์ชัน (Revision) และการถอดรายการสั่งผลิตล่วงหน้า (Extra Order Request)
+          </p>
+        </div>
+        <div class="text-right">
+          <div class="text-xs text-emerald-200">SketchUp Ruby Extension</div>
+          <div class="text-sm font-bold bg-emerald-950/60 px-3 py-1.5 rounded-lg border border-emerald-400/30 mt-1">
+            Path: C:/QHeim/Ruby/Longleadtime/
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Navigation Bar -->
+    <div class="bg-slate-100 border-b border-slate-200 px-6 py-3 flex flex-wrap gap-2 text-xs md:text-sm font-medium text-slate-600 no-print">
+      <a href="#overview" class="hover:text-emerald-600 px-2 py-1 rounded hover:bg-white transition">ภาพรวม &amp; Workflow</a>
+      <span class="text-slate-300">|</span>
+      <a href="#toolbar" class="hover:text-emerald-600 px-2 py-1 rounded hover:bg-white transition">แถบเครื่องมือ (UI Toolbar)</a>
+      <span class="text-slate-300">|</span>
+      <a href="#operator-guide" class="text-amber-700 bg-amber-100 font-bold px-2 py-1 rounded hover:bg-amber-200 transition">👉 คู่มือการกดใช้งาน (SOP ทีละไอคอน)</a>
+      <span class="text-slate-300">|</span>
+      <a href="#door3d-engine" class="hover:text-emerald-600 px-2 py-1 rounded hover:bg-white transition">ตรรกะ Door3D &amp; แจ้งเตือน</a>
+      <span class="text-slate-300">|</span>
+      <a href="#extra-order" class="hover:text-emerald-600 px-2 py-1 rounded hover:bg-white transition">กฎ Extra Order &amp; AAJO (S4)</a>
+      <span class="text-slate-300">|</span>
+      <a href="#matrix" class="hover:text-emerald-600 px-2 py-1 rounded hover:bg-white transition">Layer &amp; Data Matrix</a>
+      <span class="text-slate-300">|</span>
+      <a href="#troubleshooting" class="hover:text-emerald-600 px-2 py-1 rounded hover:bg-white transition">การแก้ไขปัญหา (Troubleshooting)</a>
+    </div>
+  </div>
+
+  <main class="max-w-6xl mx-auto space-y-8">
+
+    <!-- Section 1: Overview & Workflow -->
+    <section id="overview" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-lg">01</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">ภาพรวมระบบและขั้นตอนการทำงาน (Workflow Lifecycle)</h2>
+          <p class="text-sm text-slate-500">ลำดับการทำงานมาตรฐานในการสร้าง 3D และถอดรายการสั่งซื้อบานประตู-หน้าต่างล่วงหน้า</p>
+        </div>
+      </div>
+
+      <div class="p-4 bg-amber-50 border-l-4 border-amber-500 rounded-r-xl mb-6">
+        <div class="flex items-start gap-2">
+          <span class="text-amber-600 font-bold text-lg">⚠️</span>
+          <div>
+            <h4 class="font-bold text-amber-800 text-sm">กฎเหล็กสำคัญที่สุดของระบบ LongleadTime:</h4>
+            <ul class="text-amber-700 text-xs md:text-sm mt-1 list-disc list-inside space-y-1">
+              <li>การทำงานต้องเรียงลำดับจากซ้ายไปขวา: <strong>CAD &rarr; Unit Number &rarr; Door-Window &rarr; Door3D</strong> เสมอ เพื่อให้ชิ้นงานมีข้อมูลกริดและพิกัดยูนิตรองรับ</li>
+              <li>ก่อนรันคำสั่ง <strong>Door3D</strong> ต้องตรวจสอบให้แน่ใจว่าได้รัน <strong>Unit Number</strong> แล้ว (มีกลุ่มยูนิตในเลเยอร์ <code class="bg-amber-100 px-1 py-0.5 rounded text-amber-900 font-mono">S-Unit</code>)</li>
+              <li>ก่อนกดสั่งออกรายงาน CSV ใดๆ กรุณา <strong>ปิดไฟล์ Excel ที่เปิดค้างไว้ทั้งหมด</strong> เพื่อป้องกันข้อผิดพลาดไฟล์ถูกล็อก</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-slate-50 transition">
+          <div class="text-xs font-bold text-emerald-600 uppercase mb-1">ขั้นตอนที่ 1</div>
+          <h3 class="font-bold text-slate-800 mb-2">นำเข้าแปลน CAD &amp; ตั้งชื่อยูนิต</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            กด <strong>Insert CAD</strong> เพื่อนำเข้าเส้นกริดลงเลเยอร์ <code class="bg-slate-200 px-1 rounded">EE-GRID-UNIT</code> แล้วรัน <strong>Unit Number</strong> เพื่อผูกกลุ่มยูนิต <code class="bg-slate-200 px-1 rounded">S-Unit</code>
+          </p>
+        </div>
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-slate-50 transition">
+          <div class="text-xs font-bold text-teal-600 uppercase mb-1">ขั้นตอนที่ 2</div>
+          <h3 class="font-bold text-slate-800 mb-2">ซิงค์ชื่อบาน 2D</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            กด <strong>Door-Window</strong> เพื่อตรวจสอบและซิงค์ชื่อ Definition Name และ Instance Name ของบล็อกบนเลเยอร์ <code class="bg-slate-200 px-1 rounded">A-WIND</code> / <code class="bg-slate-200 px-1 rounded">A-DOOR</code>
+          </p>
+        </div>
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-slate-50 transition">
+          <div class="text-xs font-bold text-cyan-600 uppercase mb-1">ขั้นตอนที่ 3</div>
+          <h3 class="font-bold text-slate-800 mb-2">สร้างชิ้นงาน 3D อัตโนมัติ</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            กด <strong>Door3D</strong> ระบบจะจับคู่ SQL Database วาง 3D ลงในเลเยอร์ <code class="bg-slate-200 px-1 rounded">3D-WINDOWS</code> / <code class="bg-slate-200 px-1 rounded">3D-DOORS</code> พร้อมกล่องรายงานผล
+          </p>
+        </div>
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-slate-50 transition">
+          <div class="text-xs font-bold text-indigo-600 uppercase mb-1">ขั้นตอนที่ 4</div>
+          <h3 class="font-bold text-slate-800 mb-2">บันทึก Rev &amp; เปรียบเทียบสั่งของ</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            กด <strong>NewRev</strong> เพื่อบันทึก Snapshot (LLT-R1, R2...) และกด <strong>Order</strong> เพื่อเปรียบเทียบผลต่างออกใบสั่งผลิตล่วงหน้า
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Toolbar & Icons -->
+    <section id="toolbar" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-teal-100 text-teal-700 flex items-center justify-center font-bold text-lg">02</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">หน้าต่างเมนูควบคุม (UI Toolbar Controller)</h2>
+          <p class="text-sm text-slate-500">แถบเครื่องมือ HTML Dialog: C:\QHeim\Ruby\Longleadtime\Heim_Longleadtime.html</p>
+        </div>
+      </div>
+
+      <!-- Icon Table -->
+      <div class="overflow-x-auto rounded-xl border border-slate-200">
+        <table class="w-full text-left text-sm text-slate-600">
+          <thead class="bg-slate-50 text-slate-800 text-xs uppercase font-semibold border-b border-slate-200">
+            <tr>
+              <th scope="col" class="px-4 py-3 text-center">ไอคอน</th>
+              <th scope="col" class="px-4 py-3">ชื่อคำสั่ง (Tool Title)</th>
+              <th scope="col" class="px-4 py-3 font-mono">ไฟล์ Ruby ที่ประมวลผล</th>
+              <th scope="col" class="px-4 py-3">หน้าที่หลัก</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            <tr class="hover:bg-slate-50/50 transition">
+              <td class="px-4 py-3 text-center">
+                <img src="ICON/D-CAD.jpg" alt="CAD" class="w-10 h-10 mx-auto rounded-lg border border-slate-300 shadow-xs">
+              </td>
+              <td class="px-4 py-3 font-bold text-slate-800">Insert CAD</td>
+              <td class="px-4 py-3 text-xs font-mono text-emerald-700">Heim_InsertCAD.new</td>
+              <td class="px-4 py-3 text-xs">นำเข้าไฟล์ CAD DWG จากโฟลเดอร์โครงการ และจัดระเบียบเลเยอร์กริด <code class="bg-slate-100 px-1 rounded">EE-GRID-UNIT</code></td>
+            </tr>
+            <tr class="hover:bg-slate-50/50 transition">
+              <td class="px-4 py-3 text-center">
+                <img src="ICON/D-UnitNumber.jpg" alt="Unit Number" class="w-10 h-10 mx-auto rounded-lg border border-slate-300 shadow-xs">
+              </td>
+              <td class="px-4 py-3 font-bold text-slate-800">Unit Number</td>
+              <td class="px-4 py-3 text-xs font-mono text-emerald-700">Heim_Unitname.new</td>
+              <td class="px-4 py-3 text-xs">ระบุชื่อยูนิตลงเลเยอร์ <code class="bg-slate-100 px-1 rounded">S-Unit</code> และวางตำแหน่งท่อ Hood ดูดควันตามไฟล์อ้างอิง</td>
+            </tr>
+            <tr class="hover:bg-slate-50/50 transition">
+              <td class="px-4 py-3 text-center">
+                <img src="ICON/Door_Window.jpg" alt="Door-Window" class="w-10 h-10 mx-auto rounded-lg border border-slate-300 shadow-xs">
+              </td>
+              <td class="px-4 py-3 font-bold text-slate-800">Door-Window</td>
+              <td class="px-4 py-3 text-xs font-mono text-emerald-700">Heim_DoorName.new</td>
+              <td class="px-4 py-3 text-xs">ตรวจสอบความสอดคล้องของชื่อ Definition และ Instance บล็อก 2D บน <code class="bg-slate-100 px-1 rounded">A-WIND</code> / <code class="bg-slate-100 px-1 rounded">A-DOOR</code></td>
+            </tr>
+            <tr class="hover:bg-slate-50/50 transition">
+              <td class="px-4 py-3 text-center">
+                <img src="ICON/Door-Win.jpg" alt="Door3D" class="w-10 h-10 mx-auto rounded-lg border border-slate-300 shadow-xs">
+              </td>
+              <td class="px-4 py-3 font-bold text-slate-800">Door3D</td>
+              <td class="px-4 py-3 text-xs font-mono text-emerald-700">Heim_ExDoor3D.new</td>
+              <td class="px-4 py-3 text-xs">ค้นหา MIM ใน SQL, ดึง 3D Component, จัดทิศทางวงเปิด, ชดเชยระดับ NOTATAKI (+195mm) และรายงานผล</td>
+            </tr>
+            <tr class="hover:bg-slate-50/50 transition">
+              <td class="px-4 py-3 text-center">
+                <img src="ICON/Manaul Tab.jpg" alt="Check Data" class="w-10 h-10 mx-auto rounded-lg border border-slate-300 shadow-xs">
+              </td>
+              <td class="px-4 py-3 font-bold text-slate-800">Check Data</td>
+              <td class="px-4 py-3 text-xs font-mono text-emerald-700">StrucTemplate.takeoffdialog</td>
+              <td class="px-4 py-3 text-xs">เปิดหน้าต่าง HTML Dialog สรุปตาราง Takeoff ชิ้นงานทั้งหมดในโมเดลเทียบฐานข้อมูล SQL</td>
+            </tr>
+            <tr class="hover:bg-slate-50/50 transition">
+              <td class="px-4 py-3 text-center">
+                <img src="ICON/Recheck.jpg" alt="Export To Layout" class="w-10 h-10 mx-auto rounded-lg border border-slate-300 shadow-xs">
+              </td>
+              <td class="px-4 py-3 font-bold text-slate-800">Export To Layout</td>
+              <td class="px-4 py-3 text-xs font-mono text-emerald-700">ExportLLT.quanexport</td>
+              <td class="px-4 py-3 text-xs">ถอดแบบแยกตามหมายเลขยูนิต สรุปข้อมูลลงไฟล์ <code class="bg-slate-100 px-1 rounded">takeoffwind.csv</code> และเปิด Excel</td>
+            </tr>
+            <tr class="hover:bg-slate-50/50 transition">
+              <td class="px-4 py-3 text-center">
+                <img src="ICON/QuanToExcel.jpg" alt="Export CSV" class="w-10 h-10 mx-auto rounded-lg border border-slate-300 shadow-xs">
+              </td>
+              <td class="px-4 py-3 font-bold text-slate-800">Export CSV</td>
+              <td class="px-4 py-3 text-xs font-mono text-emerald-700">ExportLLT.fileupexport</td>
+              <td class="px-4 py-3 text-xs">ส่งออกไฟล์ฟอร์แมต ERP <code class="bg-slate-100 px-1 rounded">lltfileup.csv</code> ระบุ Station, Method และ Place ครบถ้วน</td>
+            </tr>
+            <tr class="hover:bg-slate-50/50 transition">
+              <td class="px-4 py-3 text-center">
+                <img src="ICON/keepversion.jpg" alt="NewRev" class="w-10 h-10 mx-auto rounded-lg border border-slate-300 shadow-xs">
+              </td>
+              <td class="px-4 py-3 font-bold text-slate-800">Save revision (NewRev)</td>
+              <td class="px-4 py-3 text-xs font-mono text-emerald-700">KeepVersion.keepcurrent</td>
+              <td class="px-4 py-3 text-xs">บันทึกสำเนาโมเดล .skp, ค่าปริมาณ lltquan.json และ takeoffllt.csv แยกตามโฟลเดอร์ <code class="bg-slate-100 px-1 rounded">LLT-R1, R2...</code></td>
+            </tr>
+            <tr class="hover:bg-slate-50/50 transition">
+              <td class="px-4 py-3 text-center">
+                <img src="ICON/Order.jpg" alt="Order" class="w-10 h-10 mx-auto rounded-lg border border-slate-300 shadow-xs">
+              </td>
+              <td class="px-4 py-3 font-bold text-slate-800">Export extra order request</td>
+              <td class="px-4 py-3 text-xs font-mono text-emerald-700">ExportLLT.comparepart(true)</td>
+              <td class="px-4 py-3 text-xs">เปรียบเทียบชิ้นงานกับเวอร์ชันล่าสุด คำนวณผลต่าง (+ / -) และกรองเฉพาะบานเลื่อน 4 บาน (S4) ลง <code class="bg-slate-100 px-1 rounded">takeoffllt.csv</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Section 3: Operator SOP -->
+    <section id="operator-guide" class="bg-white rounded-2xl shadow-sm border-2 border-amber-300 p-6 md:p-8">
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-xl bg-amber-500 text-white flex items-center justify-center font-black text-2xl shadow-sm">
+            👷
+          </div>
+          <div>
+            <span class="text-xs font-bold bg-amber-100 text-amber-800 px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+              Standard Operating Procedure (SOP)
+            </span>
+            <h2 class="text-2xl md:text-3xl font-extrabold text-slate-800 mt-1">
+              คู่มือขั้นตอนการกดใช้งานแต่ละไอคอน (สำหรับคนทำงาน)
+            </h2>
+            <p class="text-sm text-slate-500">
+              สรุปขั้นตอนการปฏิบัติงานจริง วิธีการครอบเลือกวัตถุ, การกดปุ่ม และสิ่งที่ระบบสร้างให้ในโมเดล
+            </p>
+          </div>
+        </div>
+        <div class="text-right">
+          <span class="text-xs font-semibold text-slate-400">Toolbar: Heim_Longleadtime.html</span>
+        </div>
+      </div>
+
+      <!-- Icon-by-Icon Operator Manual Grid -->
+      <div class="space-y-4">
+
+        <!-- 1. Insert CAD -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-emerald-400 bg-white transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-56 shrink-0">
+            <img src="ICON/D-CAD.jpg" alt="Insert CAD" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">1. Insert CAD</div>
+              <div class="text-xs text-slate-400 font-mono">Heim_InsertCAD</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              <strong>ไม่ต้องเลือกวัตถุล่วงหน้า</strong>
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              กดไอคอน &rarr; เลือกไฟล์ DWG ประจำโครงการจากโฟลเดอร์ <code class="bg-slate-200 px-1 rounded">D:/00_QHeim_Work/...</code>
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              Explode CAD, ย้ายเลเยอร์กริดเข้า <code class="text-emerald-700 font-bold">EE-GRID-UNIT</code>, เคลียร์ส่วนซ่อน และ Zoom Extents
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Unit Number -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-emerald-400 bg-white transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-56 shrink-0">
+            <img src="ICON/D-UnitNumber.jpg" alt="Unit Number" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">2. Unit Number</div>
+              <div class="text-xs text-slate-400 font-mono">Heim_Unitname</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              ตรวจดูว่ากริดยูนิตแสดงผลอยู่ในโมเดล
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              กดปุ่มไอคอนครั้งเดียว ระบบประมวลผลอัตโนมัติ
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              สร้างเลเยอร์ <code class="text-emerald-700 font-bold">S-Unit</code>, วางตำแหน่ง Hood ดูดควัน และเปิดเลเยอร์ <code class="text-emerald-700">text_door</code>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Door-Window -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-emerald-400 bg-white transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-56 shrink-0">
+            <img src="ICON/Door_Window.jpg" alt="Door-Window" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">3. Door-Window</div>
+              <div class="text-xs text-slate-400 font-mono">Heim_DoorName</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              <strong>ไม่ต้องเลือกวัตถุ</strong> (หรือเลือกเฉพาะกลุ่มผนัง)
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              กดปุ่มไอคอนครั้งเดียว
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              ซิงค์ชื่อบล็อกบน <code class="text-emerald-700 font-bold">A-WIND</code> / <code class="text-emerald-700 font-bold">A-DOOR</code> ให้ตรงกับ Definition และเปิดป้ายชื่อบาน
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Door3D -->
+        <div class="p-4 rounded-xl border-2 border-emerald-300 hover:border-emerald-500 bg-emerald-50/20 transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-56 shrink-0">
+            <img src="ICON/Door-Win.jpg" alt="Door3D" class="w-12 h-12 rounded-lg border border-emerald-400 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-emerald-900 text-sm">4. Door3D (หัวใจหลัก)</div>
+              <div class="text-xs text-emerald-600 font-mono">Heim_ExDoor3D</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-white p-2.5 rounded-lg border border-emerald-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              ครอบเลือกเฉพาะยูนิตที่ต้องการ หรือ<strong>ไม่เลือกวัตถุ</strong> เพื่อทำทั้งหลัง
+            </div>
+            <div class="bg-white p-2.5 rounded-lg border border-emerald-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              กดไอคอน &rarr; ระบบดึงข้อมูลจาก SQL และวาง 3D อัตโนมัติ
+            </div>
+            <div class="bg-white p-2.5 rounded-lg border border-emerald-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              วาง 3D ใน <code class="text-emerald-700 font-bold">3D-WINDOWS</code> / <code class="text-emerald-700 font-bold">3D-DOORS</code> (ปรับชดเชย NOTATAKI +195mm) พร้อมแสดง Popup สรุปผล
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Check Data -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-emerald-400 bg-white transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-56 shrink-0">
+            <img src="ICON/Manaul Tab.jpg" alt="Check Data" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">5. Check Data</div>
+              <div class="text-xs text-slate-400 font-mono">StrucTemplate.takeoffdialog</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              <strong>ไม่ต้องเลือกวัตถุล่วงหน้า</strong>
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              กดไอคอน Check Data
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              เปิดหน้าต่าง HTML Table แสดงรายการชิ้นงาน Takeoff พร้อมข้อมูลสถานีผลิตให้ตรวจสอบ
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. Export To Layout -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-emerald-400 bg-white transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-56 shrink-0">
+            <img src="ICON/Recheck.jpg" alt="Export To Layout" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">6. Export To Layout</div>
+              <div class="text-xs text-slate-400 font-mono">ExportLLT.quanexport</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              มีชิ้นงานใน <code class="bg-slate-200 px-1 rounded">3D-WINDOWS</code> / <code class="bg-slate-200 px-1 rounded">3D-DOORS</code>
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              ปิดไฟล์ Excel เดิม แล้วกดไอคอน
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              สร้างไฟล์ <code class="text-emerald-700 font-bold">C:/QHeim/takeoffwind.csv</code> แยกรายยูนิตและเด้งเปิด Excel
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. Export CSV -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-emerald-400 bg-white transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-56 shrink-0">
+            <img src="ICON/QuanToExcel.jpg" alt="Export CSV" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">7. Export CSV (ERP)</div>
+              <div class="text-xs text-slate-400 font-mono">ExportLLT.fileupexport</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              มีชิ้นงานในโมเดลครบถ้วน
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              ปิดไฟล์ Excel เดิม แล้วกดไอคอน
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              สร้างไฟล์ <code class="text-emerald-700 font-bold">C:/QHeim/lltfileup.csv</code> โครงสร้าง ERP (Unit ="01", AAJO Method 2) และเปิด Excel
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. NewRev -->
+        <div class="p-4 rounded-xl border border-slate-200 hover:border-emerald-400 bg-white transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-56 shrink-0">
+            <img src="ICON/keepversion.jpg" alt="NewRev" class="w-12 h-12 rounded-lg border border-slate-300 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-slate-800 text-sm">8. Save Revision (NewRev)</div>
+              <div class="text-xs text-slate-400 font-mono">KeepVersion.keepcurrent</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              <strong>ไม่ต้องเลือกวัตถุล่วงหน้า</strong>
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              กดไอคอนเมื่อต้องการจบแบบรอบนั้นๆ (เช่น ก่อนส่งแปลนรอบ 1)
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              สร้างโฟลเดอร์ <code class="text-emerald-700 font-bold">LLT-R1, R2...</code> สำเนา .skp, lltquan.json และ takeoffllt.csv ไว้อ้างอิง
+            </div>
+          </div>
+        </div>
+
+        <!-- 9. Order -->
+        <div class="p-4 rounded-xl border-2 border-indigo-300 hover:border-indigo-500 bg-indigo-50/20 transition shadow-xs flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-3 md:w-56 shrink-0">
+            <img src="ICON/Order.jpg" alt="Order" class="w-12 h-12 rounded-lg border border-indigo-400 shadow-sm shrink-0">
+            <div>
+              <div class="font-bold text-indigo-900 text-sm">9. Export extra order request</div>
+              <div class="text-xs text-indigo-600 font-mono">ExportLLT.comparepart(true)</div>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-white p-2.5 rounded-lg border border-indigo-200">
+              <span class="font-bold text-blue-700 block mb-1">🎯 การเลือกวัตถุ:</span>
+              <strong>ไม่ต้องเลือกวัตถุ</strong>
+            </div>
+            <div class="bg-white p-2.5 rounded-lg border border-indigo-200">
+              <span class="font-bold text-indigo-700 block mb-1">🖱️ การคลิก &amp; ตั้งค่า:</span>
+              กดไอคอนหลังแก้แบบเสร็จ (เทียบกับ Rev ล่าสุด)
+            </div>
+            <div class="bg-white p-2.5 rounded-lg border border-indigo-200">
+              <span class="font-bold text-indigo-700 block mb-1">📦 ผลลัพธ์ในโมเดล:</span>
+              สร้างไฟล์ <code class="text-indigo-700 font-bold">takeoffllt.csv</code> คำนวณยอด Add/Close, กรองมือจับเฉพาะบานเลื่อน 4 บาน (S4) และเปิด Excel
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 4: Door3D Engine & UI Alert -->
+    <section id="door3d-engine" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-cyan-100 text-cyan-700 flex items-center justify-center font-bold text-lg">03</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">ตรรกะการทำงาน Door3D และระบบแจ้งเตือน (Notification Logic)</h2>
+          <p class="text-sm text-slate-500">การค้นหา MIM, การหมุนวงเปิด, การยกชดเชยระดับ และรูปแบบหน้าต่างแจ้งเตือน</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        
+        <!-- Left: Technical Rules -->
+        <div class="space-y-4 text-xs md:text-sm text-slate-700 leading-relaxed">
+          <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+            <h4 class="font-bold text-slate-800 mb-2 flex items-center gap-1.5">
+              <span>🔍</span> ตรรกะการค้นหา MIM ในฐานข้อมูล SQL (findIMfromDb):
+            </h4>
+            <ul class="list-disc list-inside space-y-1 text-slate-600">
+              <li>ตัดคำขยายที่ไม่เกี่ยวข้อง: <code class="bg-slate-200 px-1 rounded">(FT)</code>, <code class="bg-slate-200 px-1 rounded">SLITSHUTTER</code>, <code class="bg-slate-200 px-1 rounded">TATAKI</code>, <code class="bg-slate-200 px-1 rounded">NOTATAKI</code></li>
+              <li><strong>กรณีหน้าต่าง TOP3 (Fallback Matching 3 ระดับ):</strong>
+                <ol class="list-decimal list-inside ml-4 mt-1 space-y-0.5 text-xs">
+                  <li>เทียบ Base Target + มี Lock/Crescent, Frost, IGU ครบทุกตัว</li>
+                  <li>เทียบ Base Target + Lock/Crescent + Frost (ผ่อนปรน IGU)</li>
+                  <li>เทียบ Base Target หลัก</li>
+                </ol>
+              </li>
+              <li><strong>กรณีประตูทางเข้า (Entrance Tostem):</strong> รองรับขนาด 1380 และ 1800 โดยหากเป็น 1800 จะตัดตัวอักษรบอกทิศทาง L/R ท้ายชื่อออก</li>
+            </ul>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+            <h4 class="font-bold text-slate-800 mb-2 flex items-center gap-1.5">
+              <span>📐</span> การคำนวณองศาหมุน &amp; ชดเชยระดับ NOTATAKI:
+            </h4>
+            <p class="text-slate-600 text-xs mb-2">
+              ตรวจสอบแนววงเปิดจาก ArcCurve หรือกึ่งกลางยูนิต:
+            </p>
+            <div class="grid grid-cols-2 gap-2 text-xs font-mono">
+              <div class="p-2 bg-white rounded border border-slate-200">
+                <strong>A-DOOR:</strong><br>
+                Right: +90° | Left: -90°<br>
+                Top: 180° | Bot: 0°
+              </div>
+              <div class="p-2 bg-white rounded border border-slate-200">
+                <strong>A-WIND:</strong><br>
+                Right: -90° | Left: +90°<br>
+                Top: 0° | Bot: 180°
+              </div>
+            </div>
+            <div class="mt-2 p-2 bg-amber-50 rounded border border-amber-200 text-xs text-amber-800">
+              <strong>🔺 การยกชดเชย NOTATAKI:</strong> หากชื่อมีคำว่า <code class="bg-amber-100 px-1 rounded font-bold">NOTATAKI</code> ชิ้นงานจะถูกยกขึ้นในแนวแกน Z เป็นระยะ <strong>+195 mm</strong> ทันที
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Alert Box Preview -->
+        <div>
+          <h4 class="font-bold text-slate-800 mb-2 flex items-center gap-1.5 text-sm">
+            <span>💬</span> รูปแบบหน้าต่างแจ้งเตือนสรุปผล (UI Dialog Preview):
+          </h4>
+          <div class="bg-slate-900 text-slate-100 p-5 rounded-2xl shadow-md font-mono text-xs leading-relaxed space-y-3 border border-slate-700">
+            <div class="text-emerald-400 font-bold text-sm">
+              ✅ วางชิ้นงาน 3D สำเร็จ: 12 รายการ
+            </div>
+            
+            <div class="text-amber-400 font-bold border-t border-slate-800 pt-2">
+              ⚠️ พบรายการที่ติดปัญหา (ข้ามการทำงาน):
+            </div>
+
+            <div>
+              <div class="text-slate-300 font-semibold">• ไม่พบ MIM ใน (database) : 1 แบบ</div>
+              <div class="text-slate-400 pl-4">- TOP3-FS0609-LAM</div>
+            </div>
+
+            <div>
+              <div class="text-slate-300 font-semibold">• ไม่พบ 3D ใน (File ปั้น Component): 1 บาน</div>
+              <div class="text-slate-400 pl-4">- AJAE2020-CUSTOM</div>
+            </div>
+
+            <div>
+              <div class="text-slate-300 font-semibold">• ไม่พบตำแหน่ง Grid Unit: 1 รายการ</div>
+              <div class="text-slate-400 pl-4">- W-OUTSIDE-GRID</div>
+            </div>
+          </div>
+          <p class="text-xs text-slate-500 mt-2 italic">
+            * ระบบจะรวมทุกปัญหาแจ้งเตือนในหน้าต่างเดียว ไม่แสดงหน้าต่างซ้ำซ้อนให้รบกวนคนทำงาน
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 5: Extra Order & AAJO Rules -->
+    <section id="extra-order" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-lg">04</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">ตรรกะการคำนวณ Extra Order &amp; เงื่อนไขกลุ่ม AAJO</h2>
+          <p class="text-sm text-slate-500">การเปรียบเทียบเวอร์ชัน (ΔQ), กฎการคัดกรอง Whitelist และเงื่อนไขบานเลื่อน 4 บาน (S4)</p>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <!-- Diff Logic -->
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs md:text-sm text-slate-700 leading-relaxed">
+          <h4 class="font-bold text-slate-800 mb-1">📐 หลักการเปรียบเทียบผลต่าง (Delta Comparison):</h4>
+          <p class="text-slate-600 mb-2">
+            เมื่อรันคำสั่ง <code class="bg-slate-200 px-1 rounded font-bold">Export extra order request</code> ระบบจะนำโมเดลปัจจุบันไปเปรียบเทียบกับ <code class="bg-slate-200 px-1 rounded">lltquan.json</code> ของโฟลเดอร์ Revision ล่าสุด:
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+            <div class="p-3 bg-emerald-50 rounded-lg border border-emerald-200">
+              <span class="font-bold text-emerald-800 block mb-1">➕ กรณีเพิ่มชิ้นงาน (ΔQ &gt; 0):</span>
+              กำหนดคอลัมน์ <code class="bg-emerald-100 text-emerald-900 font-bold px-1 rounded">Add/Close Demand = "Add"</code> โดยระบุ Qty เท่ากับจำนวนที่เพิ่มขึ้นจริง
+            </div>
+            <div class="p-3 bg-rose-50 rounded-lg border border-rose-200">
+              <span class="font-bold text-rose-800 block mb-1">➖ กรณีลดชิ้นงาน (ΔQ &lt; 0):</span>
+              กำหนดคอลัมน์ <code class="bg-rose-100 text-rose-900 font-bold px-1 rounded">Add/Close Demand = "Close"</code> โดยระบุ Qty ที่เป็นบวกเพื่อส่งเรื่องขอยกเลิก
+            </div>
+          </div>
+        </div>
+
+        <!-- AAJO S4 Rule Highlight Card -->
+        <div class="p-5 rounded-xl bg-gradient-to-br from-indigo-50 to-blue-50 border-2 border-indigo-300">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-xl">🔒</span>
+            <h3 class="font-bold text-indigo-950 text-base">
+              กฎพิเศษเฉพาะกลุ่ม AAJO (Curve Handles &amp; Crescent Lock):
+            </h3>
+          </div>
+          <p class="text-xs md:text-sm text-slate-700 leading-relaxed mb-3">
+            เพื่อความถูกต้องของสายการผลิต ระบบมีการล็อกสเปกอุปกรณ์กลุ่ม <strong class="text-indigo-800 font-mono">AAJO</strong> อย่างเข้มงวดดังนี้:
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-white p-3 rounded-lg border border-indigo-200">
+              <span class="font-bold text-indigo-700 block mb-1">1. รายการรหัสมือจับทรงโค้ง:</span>
+              อนุญาตเฉพาะ 5 รหัสเท่านั้น:<br>
+              <code class="text-indigo-900 font-bold font-mono">AAJO10360, AAJO10370,<br>AAJO10380, AAJO10390,<br>AAJO10400</code>
+            </div>
+            <div class="bg-white p-3 rounded-lg border border-indigo-200">
+              <span class="font-bold text-indigo-700 block mb-1">2. บานเลื่อน 4 บาน (S4) เท่านั้น:</span>
+              ต้องเป็นบานที่มีรหัส <code class="bg-indigo-100 text-indigo-900 font-bold px-1 rounded font-mono">S4</code> ระบุอยู่ในชื่อบานหรือชื่อ MIM เท่านั้น หากเป็นบานชนิดอื่นจะถูกข้าม
+            </div>
+            <div class="bg-white p-3 rounded-lg border border-indigo-200">
+              <span class="font-bold text-indigo-700 block mb-1">3. Crescent Lock with Key:</span>
+              • บานเลื่อน 4 บาน (<code class="font-mono">S4</code>): จ่ายคู่รหัส <code class="font-mono font-bold">AAJO01470</code> + <code class="font-mono font-bold">AAJO01480</code><br>
+              • บานเลื่อน 2 บาน (<code class="font-mono">S2</code>): จ่ายเฉพาะ <code class="font-mono font-bold">AAJO01470</code>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 6: Matrix -->
+    <section id="matrix" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-lg">05</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">ตารางสรุปเลเยอร์ ฐานข้อมูล และรายการส่งออก (Data Matrix)</h2>
+          <p class="text-sm text-slate-500">โครงสร้างเลเยอร์ใน SketchUp, รหัสวัสดุ MIM และรายละเอียดไฟล์ที่ระบบสร้างขึ้น</p>
+        </div>
+      </div>
+
+      <!-- Tabs or Sub-tables -->
+      <div class="space-y-6">
+
+        <!-- Layer Table -->
+        <div>
+          <h3 class="font-bold text-slate-800 text-sm mb-2 flex items-center gap-2">
+            <span>📂</span> เลเยอร์ในโมเดล SketchUp (Layer Schema)
+          </h3>
+          <div class="overflow-x-auto rounded-xl border border-slate-200">
+            <table class="w-full text-left text-xs text-slate-600">
+              <thead class="bg-slate-50 text-slate-800 uppercase font-semibold border-b border-slate-200">
+                <tr>
+                  <th class="px-4 py-2.5">ชื่อ Layer ใน SketchUp</th>
+                  <th class="px-4 py-2.5">ประเภทข้อมูล</th>
+                  <th class="px-4 py-2.5">บทบาทและหน้าที่</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200">
+                <tr>
+                  <td class="px-4 py-2 font-mono font-bold text-emerald-800">EE-GRID-UNIT</td>
+                  <td class="px-4 py-2">Component / Lines</td>
+                  <td class="px-4 py-2">เก็บเส้นกริดอ้างอิงยูนิตที่นำเข้าจากไฟล์ CAD AutoCAD</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-2 font-mono font-bold text-emerald-800">S-Unit</td>
+                  <td class="px-4 py-2">Group</td>
+                  <td class="px-4 py-2">กลุ่มขอบเขตยูนิต ใช้ระบุและค้นหาว่าบานประตูหน้าต่างสังกัดยูนิตใด</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-2 font-mono font-bold text-emerald-800">A-WIND / A-DOOR</td>
+                  <td class="px-4 py-2">Component 2D</td>
+                  <td class="px-4 py-2">บล็อกสัญลักษณ์แปลน 2D ต้นฉบับจากสถาปัตย์</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-2 font-mono font-bold text-emerald-800">3D-WINDOWS</td>
+                  <td class="px-4 py-2">Component 3D</td>
+                  <td class="px-4 py-2">ชิ้นงานโมเดล 3D หน้าต่างจริงที่ระบบนำมาวาง</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-2 font-mono font-bold text-emerald-800">3D-DOORS</td>
+                  <td class="px-4 py-2">Component 3D</td>
+                  <td class="px-4 py-2">ชิ้นงานโมเดล 3D ประตูจริงที่ระบบนำมาวาง</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-2 font-mono font-bold text-emerald-800">text_door / text_room</td>
+                  <td class="px-4 py-2">3D Text / Groups</td>
+                  <td class="px-4 py-2">ข้อความและป้ายกำกับแสดงชื่อสัญลักษณ์บานและชื่อห้อง</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- MIM Prefix Matrix -->
+        <div>
+          <h3 class="font-bold text-slate-800 text-sm mb-2 flex items-center gap-2">
+            <span>🏷️</span> หมวดหมู่รหัสชิ้นงานในระบบ (MIM Prefix Matrix)
+          </h3>
+          <div class="overflow-x-auto rounded-xl border border-slate-200">
+            <table class="w-full text-left text-xs text-slate-600">
+              <thead class="bg-slate-50 text-slate-800 uppercase font-semibold border-b border-slate-200">
+                <tr>
+                  <th class="px-4 py-2.5">รหัสกลุ่ม (Prefix)</th>
+                  <th class="px-4 py-2.5">รายละเอียดชิ้นงาน</th>
+                  <th class="px-4 py-2.5">สถานีการผลิต (Station)</th>
+                  <th class="px-4 py-2.5 text-center">รหัสงาน (Task Code)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200 font-mono">
+                <tr>
+                  <td class="px-4 py-2 font-bold text-indigo-700">AAJA</td>
+                  <td class="px-4 py-2 font-sans">วงกบหน้าต่าง (Window Frame)</td>
+                  <td class="px-4 py-2">SL-WF</td>
+                  <td class="px-4 py-2 text-center font-bold">2035</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-2 font-bold text-indigo-700">AAJC</td>
+                  <td class="px-4 py-2 font-sans">กรอบบานหน้าต่าง (Window Sash)</td>
+                  <td class="px-4 py-2">SL-WS</td>
+                  <td class="px-4 py-2 text-center font-bold">2090</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-2 font-bold text-indigo-700">AAJM / AAJS</td>
+                  <td class="px-4 py-2 font-sans">เสากลาง / บานหน้าต่างระบายอากาศ</td>
+                  <td class="px-4 py-2">SL-WS / SL-WF</td>
+                  <td class="px-4 py-2 text-center font-bold">2090 / 2035</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-2 font-bold text-indigo-700">AAJU</td>
+                  <td class="px-4 py-2 font-sans">กรอบบานตาย (Fixed Frame)</td>
+                  <td class="px-4 py-2">SL-WF</td>
+                  <td class="px-4 py-2 text-center font-bold">2035</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-2 font-bold text-indigo-700">AAJP</td>
+                  <td class="px-4 py-2 font-sans">กระจกหน้าต่าง (Glass Panel)</td>
+                  <td class="px-4 py-2">SL-WS</td>
+                  <td class="px-4 py-2 text-center font-bold">2090</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-2 font-bold text-indigo-700">AAKI / AAKJ</td>
+                  <td class="px-4 py-2 font-sans">อุปกรณ์ชุดยึดและบานพับหน้าต่าง</td>
+                  <td class="px-4 py-2">SL-WS</td>
+                  <td class="px-4 py-2 text-center font-bold">2090</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-2 font-bold text-indigo-700">AAJE / AAJB</td>
+                  <td class="px-4 py-2 font-sans">วงกบและกรอบบานประตูระเบียง</td>
+                  <td class="px-4 py-2">SL-WF / SL-DF</td>
+                  <td class="px-4 py-2 text-center font-bold">2035 / 2082</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-2 font-bold text-indigo-700">AAJO</td>
+                  <td class="px-4 py-2 font-sans">อุปกรณ์มือจับและชุดล็อก (Curve Handle เฉพาะ S4)</td>
+                  <td class="px-4 py-2">SL-WS</td>
+                  <td class="px-4 py-2 text-center font-bold">2090</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-2 font-bold text-indigo-700">AAJI</td>
+                  <td class="px-4 py-2 font-sans">มุ้งลวดกันแมลง (Screen) *(ส่งออกเมื่อ HaveScreen = true)*</td>
+                  <td class="px-4 py-2">ST-SP</td>
+                  <td class="px-4 py-2 text-center font-bold">2887</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 7: Troubleshooting -->
+    <section id="troubleshooting" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center font-bold text-lg">06</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">แนวทางแก้ไขปัญหาที่พบบ่อย (Troubleshooting Guide)</h2>
+          <p class="text-sm text-slate-500">วิธีจัดการเมื่อพบข้อผิดพลาดระหว่างการทำงานจริง</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm">
+        
+        <div class="p-4 rounded-xl border border-rose-200 bg-rose-50/30">
+          <h4 class="font-bold text-rose-900 mb-1 flex items-center gap-1.5">
+            <span>❌</span> Error. ...csv already open. please close file
+          </h4>
+          <p class="text-slate-600 text-xs leading-relaxed">
+            <strong>สาเหตุ:</strong> ไฟล์ CSV กำลังถูกเปิดค้างอยู่ในโปรแกรม Excel ทำให้ SketchUp ไม่สามารถเขียนทับไฟล์ได้<br>
+            <strong>วิธีแก้:</strong> ปิดหน้าต่าง Excel ของไฟล์นั้นก่อน แล้วกดย้อนกลับมารันคำสั่งเดิมใน SketchUp ซ้ำอีกครั้ง
+          </p>
+        </div>
+
+        <div class="p-4 rounded-xl border border-amber-200 bg-amber-50/30">
+          <h4 class="font-bold text-amber-900 mb-1 flex items-center gap-1.5">
+            <span>⚠️</span> ไม่พบ MIM ใน (database) : X แบบ
+          </h4>
+          <p class="text-slate-600 text-xs leading-relaxed">
+            <strong>สาเหตุ:</strong> รหัสบาน 2D ในโมเดลไม่ตรงกับฐานข้อมูล SQL <code class="bg-slate-200 px-1 rounded">tbmim</code> (เว้นวรรคผิด หรือเป็นบานรุ่นใหม่)<br>
+            <strong>วิธีแก้:</strong> ตรวจดูชื่อ Definition ใน Entity Info และแจ้งประสานงานเพิ่ม MIM ลงในตารางฐานข้อมูลกลาง
+          </p>
+        </div>
+
+        <div class="p-4 rounded-xl border border-amber-200 bg-amber-50/30">
+          <h4 class="font-bold text-amber-900 mb-1 flex items-center gap-1.5">
+            <span>⚠️</span> ไม่พบ 3D ใน (File ปั้น Component): X บาน
+          </h4>
+          <p class="text-slate-600 text-xs leading-relaxed">
+            <strong>สาเหตุ:</strong> มีรหัสในฐานข้อมูล แต่ยังไม่มีชิ้นงาน 3D ในไฟล์แม่แบบ <code class="bg-slate-200 px-1 rounded">LongLeadTime Component.skp</code><br>
+            <strong>วิธีแก้:</strong> เปิดไฟล์แม่แบบดังกล่าว ปั้นโมเดลชิ้นงานและตั้งชื่อ Definition ให้ตรงกับรหัส MIM จากนั้นบันทึกไฟล์
+          </p>
+        </div>
+
+        <div class="p-4 rounded-xl border border-amber-200 bg-amber-50/30">
+          <h4 class="font-bold text-amber-900 mb-1 flex items-center gap-1.5">
+            <span>⚠️</span> ไม่พบตำแหน่ง Grid Unit: X รายการ
+          </h4>
+          <p class="text-slate-600 text-xs leading-relaxed">
+            <strong>สาเหตุ:</strong> บานประตูหน้าต่างไม่ได้อยู่ภายในขอบเขตของกลุ่มยูนิตในเลเยอร์ <code class="bg-slate-200 px-1 rounded">S-Unit</code><br>
+            <strong>วิธีแก้:</strong> ตรวจสอบว่าได้รันคำสั่ง <strong>Unit Number</strong> หรือยัง และขยับบานให้เข้าชิดผนังของยูนิตนั้นๆ
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="max-w-6xl mx-auto mt-8 mb-12 text-center text-xs text-slate-400 no-print">
+    <p>QHeim Modular Construction Extension &bull; เอกสารคู่มือระบบ LongleadTime &bull; อัปเดตล่าสุด ตุลาคม 2026</p>
+  </footer>
+
+</body>
+</html>

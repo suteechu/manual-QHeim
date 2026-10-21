@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QHeim - เอกสารและคู่มือการทำงานระบบ Exterior Wall</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Tahoma, "Sarabun", sans-serif;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white !important; color: black !important; padding: 0 !important; }
+      .shadow-sm, .shadow-md, .shadow-lg, .shadow-xl { box-shadow: none !important; }
+      .border { border-color: #cbd5e1 !important; }
+      section { break-inside: avoid; page-break-inside: avoid; margin-bottom: 24px !important; }
+      table { break-inside: auto; }
+      tr { break-inside: avoid; page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased p-4 md:p-8">
+
+  <!-- Header Container -->
+  <div class="max-w-6xl mx-auto bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden mb-8">
+    <div class="bg-gradient-to-r from-emerald-800 via-teal-700 to-cyan-700 p-8 text-white">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-semibold uppercase tracking-wider mb-2">
+            QHeim Modular Construction Extension
+          </span>
+          <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight">คู่มือและเอกสารการทำงาน Exterior Wall</h1>
+          <p class="text-teal-100 mt-2 text-sm md:text-base max-w-2xl">
+            สถาปัตยกรรมโค้ด, การสร้างเสามุม (Corner), เสาช่องเปิดหน้าต่าง (Window Set), เสาซอยมาตรฐาน (Stud), แผ่นผนังสำเร็จรูป (Pannel), ระบบกันซึม, ระบบตรวจสอบเสา 225/332 มม. อัตโนมัติ, และการถอดรายการวัสดุ (BOM)
+          </p>
+        </div>
+        <div class="text-right">
+          <div class="text-xs text-teal-200">SketchUp Ruby Extension</div>
+          <div class="text-sm font-bold bg-teal-900/60 px-3 py-1.5 rounded-lg border border-teal-400/30 mt-1">
+            Path: C:/QHeim/Ruby/STD/ & Switch/
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Navigation Bar -->
+    <div class="bg-slate-100 border-b border-slate-200 px-6 py-3 flex flex-wrap gap-2 text-xs md:text-sm font-medium text-slate-600 no-print">
+      <a href="#overview" class="hover:text-teal-600 px-2 py-1 rounded hover:bg-white transition">ภาพรวม & Workflow</a>
+      <span class="text-slate-300">|</span>
+      <a href="#operator-guide" class="text-amber-800 bg-amber-100 font-bold px-2 py-1 rounded hover:bg-amber-200 transition">👉 คู่มือการกดแต่ละไอคอน (SOP สำหรับคนทำงาน)</a>
+      <span class="text-slate-300">|</span>
+      <a href="#check225" class="text-teal-700 bg-teal-100 font-bold px-2 py-1 rounded hover:bg-teal-200 transition">⚡ ระบบเช็ค Stud 225 (Auto-Swap)</a>
+      <span class="text-slate-300">|</span>
+      <a href="#logic" class="hover:text-teal-600 px-2 py-1 rounded hover:bg-white transition">สถาปัตยกรรม & ตรรกะโค้ด</a>
+      <span class="text-slate-300">|</span>
+      <a href="#matrix" class="hover:text-teal-600 px-2 py-1 rounded hover:bg-white transition">ตาราง Component & Layer Matrix</a>
+      <span class="text-slate-300">|</span>
+      <a href="#troubleshooting" class="hover:text-teal-600 px-2 py-1 rounded hover:bg-white transition">วิธีแก้ไขปัญหา (Troubleshooting)</a>
+    </div>
+  </div>
+
+  <main class="max-w-6xl mx-auto space-y-8">
+
+    <!-- Section 1: Overview & Workflow -->
+    <section id="overview" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-teal-100 text-teal-700 flex items-center justify-center font-bold text-lg">01</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">ภาพรวมระบบและขั้นตอนการทำงาน (Workflow Lifecycle)</h2>
+          <p class="text-sm text-slate-500">ลำดับการทำงานมาตรฐานในการสร้างโครงสร้างผนังภายนอกและแผ่นผนังสำเร็จรูป</p>
+        </div>
+      </div>
+
+      <!-- Critical Rules Alert Box -->
+      <div class="p-4 bg-amber-50 border-l-4 border-amber-500 rounded-r-xl mb-6">
+        <div class="flex items-start gap-2">
+          <span class="text-amber-600 font-bold text-lg">⚠️</span>
+          <div>
+            <h4 class="font-bold text-amber-800 text-sm">กฎเหล็กสำคัญที่สุดของระบบ Exterior Wall:</h4>
+            <p class="text-amber-700 text-xs md:text-sm mt-0.5">
+              การทำงานต้องเรียงลำดับจากซ้ายไปขวาเสมอ: 
+              <span class="font-bold text-amber-950 font-mono bg-amber-200/60 px-1.5 py-0.5 rounded">Corner &rarr; Window Set &rarr; Stud &rarr; [เช็ค Stud 225] &rarr; Pannel</span>
+              <br/>
+              *ห้ามข้ามขั้นตอน* เพราะ Window Set ต้องใช้อ้างอิงเสามุม Corner, Stud ต้องใช้อ้างอิงเสามุมและขอบหน้าต่าง, และ Pannel ต้องอ้างอิงช่วงเสาทั้งหมด หากเผลอลบเสามุม <code class="font-bold text-amber-900">Corner1/2/3</code> ทิ้งไป ปุ่ม Stud จะไม่ทำงาน!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-slate-50 transition">
+          <div class="text-xs font-bold text-teal-600 uppercase mb-1">ขั้นตอนที่ 1</div>
+          <h3 class="font-bold text-slate-800 mb-2">เสามุม (Corner Studs)</h3>
+          <p class="text-xs text-slate-600">ครอบยูนิตในเลเยอร์ <code class="bg-slate-200 px-1 rounded">S-Unit</code> รัน <strong>Stud Corner</strong> เพื่อติดตั้งเสามุม Corner1, Corner2, Corner3, CornerIn ลงใน <code class="bg-slate-200 px-1 rounded">S-STD</code></p>
+        </div>
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-slate-50 transition">
+          <div class="text-xs font-bold text-cyan-600 uppercase mb-1">ขั้นตอนที่ 2</div>
+          <h3 class="font-bold text-slate-800 mb-2">กรอบหน้าต่าง & เสาช่องเปิด</h3>
+          <p class="text-xs text-slate-600">ครอบยูนิต รัน <strong>Pannel Window Set</strong> เพื่อสร้างกรอบหน้าต่าง 3D ลงใน <code class="bg-slate-200 px-1 rounded">S-Window</code> และเสาขอบช่องเปิดลงใน <code class="bg-slate-200 px-1 rounded">S-STD</code></p>
+        </div>
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-slate-50 transition">
+          <div class="text-xs font-bold text-emerald-600 uppercase mb-1">ขั้นตอนที่ 3</div>
+          <h3 class="font-bold text-slate-800 mb-2">เสาซอย & เช็คระยะ 225</h3>
+          <p class="text-xs text-slate-600">รัน <strong>Stud Standard</strong> ซอยเสาระยะ 900 มม. จากนั้นกด <strong>Add Extra &rarr; เช็ค Stud 225</strong> เพื่อสลับเป็น <code class="bg-slate-200 px-1 rounded">AAFQ20040</code> อัตโนมัติ</p>
+        </div>
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-slate-50 transition">
+          <div class="text-xs font-bold text-blue-600 uppercase mb-1">ขั้นตอนที่ 4</div>
+          <h3 class="font-bold text-slate-800 mb-2">แผ่นผนัง & ส่งออก BOM</h3>
+          <p class="text-xs text-slate-600">รัน <strong>Pannel Standard</strong> กรุแผ่นผนังภายนอก AAFP &rarr; ปรับแต่งงานระเบียง/กันซึม/Hood &rarr; กด <strong>Export CSV</strong> สรุปยอดลงไฟล์ <code class="bg-slate-200 px-1 rounded">BOMEX.csv</code></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: OPERATOR GUIDE (SOP FOR WORKERS) -->
+    <section id="operator-guide" class="bg-white rounded-2xl shadow-sm border-2 border-amber-300 p-6 md:p-8">
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-xl bg-amber-500 text-white flex items-center justify-center font-black text-2xl shadow-sm">
+            👷
+          </div>
+          <div>
+            <span class="text-xs font-bold bg-amber-100 text-amber-800 px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+              Standard Operating Procedure (SOP)
+            </span>
+            <h2 class="text-2xl md:text-3xl font-extrabold text-slate-800 mt-1">
+              คู่มือขั้นตอนการกดใช้งานแต่ละไอคอน (สำหรับคนทำงาน)
+            </h2>
+            <p class="text-sm text-slate-500">
+              สรุปขั้นตอนการปฏิบัติงานจริง วิธีการครอบเลือกวัตถุ, การกดปุ่ม และสิ่งที่ระบบสร้างให้ในโมเดล
+            </p>
+          </div>
+        </div>
+        <div class="text-right">
+          <span class="text-xs font-semibold text-slate-400">Toolbar: Heim_Exterior.html (12 Icons)</span>
+        </div>
+      </div>
+
+      <!-- ICON CARDS CONTAINER -->
+      <div class="space-y-4">
+
+        <!-- Card 1: Corner -->
+        <div class="p-5 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-white transition flex flex-col md:flex-row gap-5 items-start">
+          <div class="flex-shrink-0 text-center">
+            <img src="ICON/E-Corner.jpg" alt="Corner" class="w-14 h-14 rounded-lg shadow-sm border border-slate-200 mx-auto object-cover">
+            <span class="inline-block mt-1 text-[11px] font-bold text-slate-500">ลำดับที่ 1</span>
+          </div>
+          <div class="flex-grow space-y-2">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <h3 class="text-lg font-bold text-slate-800">1. Stud Corner (เสามุมอาคาร)</h3>
+              <span class="text-xs font-mono bg-slate-200 px-2 py-0.5 rounded text-slate-700">Heim_MakeCorner.rb</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 text-xs">
+              <div class="bg-white p-2.5 rounded-lg border border-slate-200">
+                <span class="font-bold text-blue-700">🎯 การเลือกวัตถุ:</span>
+                <p class="text-slate-600 mt-0.5">ลากเมาส์ครอบ Unit ในเลเยอร์ <code class="bg-slate-100 px-1 rounded">S-Unit</code> ที่ต้องการทำ</p>
+              </div>
+              <div class="bg-white p-2.5 rounded-lg border border-slate-200">
+                <span class="font-bold text-teal-700">🖱️ การคลิก & ตั้งค่า:</span>
+                <p class="text-slate-600 mt-0.5">กดไอคอนครั้งเดียว ระบบประมวลผลมุมยูนิตอัตโนมัติ</p>
+              </div>
+              <div class="bg-white p-2.5 rounded-lg border border-slate-200">
+                <span class="font-bold text-emerald-700">📦 ผลลัพธ์ในโมเดล:</span>
+                <p class="text-slate-600 mt-0.5">ติดตั้ง <code class="font-bold text-emerald-800">Corner1</code> (AAFQ1013X), <code class="font-bold text-emerald-800">Corner3</code>, <code class="font-bold text-emerald-800">CornerIn</code> ลงเลเยอร์ <code class="bg-slate-100 px-1 rounded">S-STD</code></p>
+              </div>
+            </div>
+            <div class="text-[11px] text-amber-700 bg-amber-50 px-2.5 py-1 rounded border border-amber-200">
+              ⚠️ <strong>ข้อควรระวัง:</strong> ถ้ายูนิตเคยมีเสาอยู่ในเลเยอร์ S-STD แล้ว ระบบจะเด้งเตือนว่า Stud exist ให้ใช้ปุ่ม Delete ลบออกก่อน
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Window Set -->
+        <div class="p-5 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-white transition flex flex-col md:flex-row gap-5 items-start">
+          <div class="flex-shrink-0 text-center">
+            <img src="ICON/E-Window%20Set.jpg" alt="Window Set" class="w-14 h-14 rounded-lg shadow-sm border border-slate-200 mx-auto object-cover">
+            <span class="inline-block mt-1 text-[11px] font-bold text-slate-500">ลำดับที่ 2</span>
+          </div>
+          <div class="flex-grow space-y-2">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <h3 class="text-lg font-bold text-slate-800">2. Pannel Window Set (กรอบหน้าต่าง & เสาประกบช่องเปิด)</h3>
+              <span class="text-xs font-mono bg-slate-200 px-2 py-0.5 rounded text-slate-700">Heim_MakeDoor.rb</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 text-xs">
+              <div class="bg-white p-2.5 rounded-lg border border-slate-200">
+                <span class="font-bold text-blue-700">🎯 การเลือกวัตถุ:</span>
+                <p class="text-slate-600 mt-0.5">ลากเมาส์ครอบ Unit ที่มีบล็อกช่องเปิด 2D ในเลเยอร์ <code class="bg-slate-100 px-1 rounded">A-WIND</code> หรือ <code class="bg-slate-100 px-1 rounded">A-DOOR</code></p>
+              </div>
+              <div class="bg-white p-2.5 rounded-lg border border-slate-200">
+                <span class="font-bold text-teal-700">🖱️ การคลิก & ตั้งค่า:</span>
+                <p class="text-slate-600 mt-0.5">กดไอคอนครั้งเดียว ระบบอ่านขนาดและทิศทางอัตโนมัติ</p>
+              </div>
+              <div class="bg-white p-2.5 rounded-lg border border-slate-200">
+                <span class="font-bold text-emerald-700">📦 ผลลัพธ์ในโมเดล:</span>
+                <p class="text-slate-600 mt-0.5">สร้างกรอบหน้าต่าง 3D ใน <code class="bg-slate-100 px-1 rounded">S-Window</code> และวางเสาขอบหน้าต่างซ้าย-ขวา (<code class="font-bold text-emerald-800">Corner2</code>) ใน <code class="bg-slate-100 px-1 rounded">S-STD</code></p>
+              </div>
+            </div>
+            <div class="text-[11px] text-teal-700 bg-teal-50 px-2.5 py-1 rounded border border-teal-200">
+              💡 <strong>กฎระยะเสา:</strong> ถ้าระยะขอบถึงมุม &le; 332 มม. จะวางเสารหัส <strong>AAFQ20040</strong> แต่ถ้ามากกว่าจะวาง AAFQ2002X / 2001X
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Stud Standard -->
+        <div class="p-5 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-white transition flex flex-col md:flex-row gap-5 items-start">
+          <div class="flex-shrink-0 text-center">
+            <img src="ICON/E-Stud.jpg" alt="Stud" class="w-14 h-14 rounded-lg shadow-sm border border-slate-200 mx-auto object-cover">
+            <span class="inline-block mt-1 text-[11px] font-bold text-slate-500">ลำดับที่ 3</span>
+          </div>
+          <div class="flex-grow space-y-2">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <h3 class="text-lg font-bold text-slate-800">3. Stud Standard (เสาซอยมาตรฐาน 900 มม.)</h3>
+              <span class="text-xs font-mono bg-slate-200 px-2 py-0.5 rounded text-slate-700">Heim_MakeSTD.rb</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 text-xs">
+              <div class="bg-white p-2.5 rounded-lg border border-slate-200">
+                <span class="font-bold text-blue-700">🎯 การเลือกวัตถุ:</span>
+                <p class="text-slate-600 mt-0.5">ลากเมาส์ครอบ Unit ในเลเยอร์ <code class="bg-slate-100 px-1 rounded">S-Unit</code> (ที่รัน Corner และ Window แล้ว)</p>
+              </div>
+              <div class="bg-white p-2.5 rounded-lg border border-slate-200">
+                <span class="font-bold text-teal-700">🖱️ การคลิก & ตั้งค่า:</span>
+                <p class="text-slate-600 mt-0.5">กดไอคอนครั้งเดียว ระบบยิง Raytest ซอยเสาระหว่างจุด</p>
+              </div>
+              <div class="bg-white p-2.5 rounded-lg border border-slate-200">
+                <span class="font-bold text-emerald-700">📦 ผลลัพธ์ในโมเดล:</span>
+                <p class="text-slate-600 mt-0.5">เติมเสาซอยย่อย <code class="font-bold text-emerald-800">AAFQ2002X</code> ทุกๆ ก้าวโมดูล 900 มม. ลงในเลเยอร์ <code class="bg-slate-100 px-1 rounded">S-STD</code></p>
+              </div>
+            </div>
+            <div class="text-[11px] text-amber-700 bg-amber-50 px-2.5 py-1 rounded border border-amber-200">
+              ⚠️ <strong>ข้อควรระวัง:</strong> หากไม่พบเสา Corner1 หรือ Corner2 ในเลเยอร์ S-STD สคริปต์จะไม่ทำงานและไม่มีการวางเสา
+            </div>
+          </div>
+        </div>
+
+        <!-- SPECIAL FEATURE BANNER: CHECK STUD 225 -->
+        <div id="check225" class="p-5 rounded-xl border-2 border-teal-500 bg-gradient-to-r from-teal-50 via-cyan-50 to-emerald-50 shadow-sm space-y-3">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+              <span class="bg-teal-600 text-white text-xs font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">ฟังก์ชันใหม่ล่าสุด</span>
+              <h3 class="text-lg font-extrabold text-teal-900">4. ตรวจสอบและสลับเสาอัตโนมัติ: Add Extra &rarr; "เช็ค Stud 225"</h3>
+            </div>
+            <span class="text-xs font-mono bg-teal-200/70 text-teal-900 px-2 py-0.5 rounded font-bold">Heim_Check332.rb</span>
+          </div>
+          <p class="text-xs md:text-sm text-teal-800">
+            ระบบแก้ปัญหาหน้างานจริง กรณีเศษทศนิยมคลาดเคลื่อนทำให้เสาขอบหน้าต่างที่ระยะ 225 มม. (หรือ 332 มม. จากมุม) กลายเป็น <code>AAFQ2001X</code> หรือ <code>AAFQ2002X</code> แทนที่จะเป็น <code>AAFQ20040</code>
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-white/80 backdrop-blur p-3 rounded-lg border border-teal-200">
+              <span class="font-bold text-teal-900">1. การเรียกใช้:</span>
+              <p class="text-slate-700 mt-1">กดไอคอน <strong>Add Extra</strong> &rarr; ใน Dropdown เลือกคำว่า <strong>"เช็ค Stud 225"</strong> (เลือกยูนิตหรือไม่เลือกก็ได้ ระบบจะสแกนให้)</p>
+            </div>
+            <div class="bg-white/80 backdrop-blur p-3 rounded-lg border border-teal-200">
+              <span class="font-bold text-teal-900">2. การแจ้งเตือน & ไฮไลต์:</span>
+              <p class="text-slate-700 mt-1">ระบบจะไฮไลต์ชิ้นงานที่เป็นปัญหา (กรอบสีน้ำเงิน) และแสดงกล่องข้อความแจ้งเตือนพร้อมระบุชื่อยูนิต</p>
+            </div>
+            <div class="bg-white/80 backdrop-blur p-3 rounded-lg border border-teal-200">
+              <span class="font-bold text-teal-900">3. สลับเสาทันทีใน 1 คลิก:</span>
+              <p class="text-slate-700 mt-1">กดยืนยัน <strong>[Yes]</strong> ในกล่องข้อความ ระบบจะดึง Definition <code class="font-bold text-teal-700">AAFQ20040</code> มาแทนที่ให้ทันทีโดยรักษาพิกัดเดิม 100%</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Pannel Standard -->
+        <div class="p-5 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-white transition flex flex-col md:flex-row gap-5 items-start">
+          <div class="flex-shrink-0 text-center">
+            <img src="ICON/E-Pannel.jpg" alt="Pannel" class="w-14 h-14 rounded-lg shadow-sm border border-slate-200 mx-auto object-cover">
+            <span class="inline-block mt-1 text-[11px] font-bold text-slate-500">ลำดับที่ 5</span>
+          </div>
+          <div class="flex-grow space-y-2">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <h3 class="text-lg font-bold text-slate-800">5. Pannel Standard (แผ่นผนังสำเร็จรูปภายนอก AAFP)</h3>
+              <span class="text-xs font-mono bg-slate-200 px-2 py-0.5 rounded text-slate-700">Heim_MakePannel.rb</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 text-xs">
+              <div class="bg-white p-2.5 rounded-lg border border-slate-200">
+                <span class="font-bold text-blue-700">🎯 การเลือกวัตถุ:</span>
+                <p class="text-slate-600 mt-0.5">ลากเมาส์ครอบ Unit ในเลเยอร์ <code class="bg-slate-100 px-1 rounded">S-Unit</code></p>
+              </div>
+              <div class="bg-white p-2.5 rounded-lg border border-slate-200">
+                <span class="font-bold text-teal-700">🖱️ การคลิก & ตั้งค่า:</span>
+                <p class="text-slate-600 mt-0.5">กดไอคอนครั้งเดียว ระบบอ่านตาราง IM.xlsx ติดตั้งแผ่น</p>
+              </div>
+              <div class="bg-white p-2.5 rounded-lg border border-slate-200">
+                <span class="font-bold text-emerald-700">📦 ผลลัพธ์ในโมเดล:</span>
+                <p class="text-slate-600 mt-0.5">วางแผ่นผนังภายนอก <code class="font-bold text-emerald-800">AAFP...</code> ลงในเลเยอร์ <code class="bg-slate-100 px-1 rounded">S-Pannel</code> พร้อมเคลียร์ Stud ที่ซ้ำซ้อนออกให้อัตโนมัติ</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grid for remaining tool cards: 6 to 12 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+          <!-- Card 6: Waterproof -->
+          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-white transition space-y-2">
+            <div class="flex items-center gap-3">
+              <img src="ICON/E-WaterproofC3.jpg" class="w-11 h-11 rounded-lg border border-slate-200 object-cover">
+              <div>
+                <h4 class="font-bold text-slate-800 text-sm">6. Pannel WaterProof (กันซึมระเบียง)</h4>
+                <span class="text-[10px] font-mono text-slate-500">Heim_WaterProof.rb</span>
+              </div>
+            </div>
+            <p class="text-xs text-slate-600">
+              <strong>วิธีใช้:</strong> ลากเส้น Line (Edge) ในเลเยอร์ <code class="bg-slate-100 px-1 rounded">Layer0</code> ตามแนวผนังระเบียง &rarr; เลือกเส้น &rarr; กดไอคอนเพื่อเปลี่ยนแผ่นเป็นรหัสกันซึม <code class="font-bold text-teal-800">WA_...</code> ในเลเยอร์ <code class="bg-slate-100 px-1 rounded">S-WaterProof</code>
+            </p>
+          </div>
+
+          <!-- Card 7: Hood -->
+          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-white transition space-y-2">
+            <div class="flex items-center gap-3">
+              <img src="ICON/E-Hood.jpg" class="w-11 h-11 rounded-lg border border-slate-200 object-cover">
+              <div>
+                <h4 class="font-bold text-slate-800 text-sm">7. Pannel Hood (ช่องท่อดูดควัน)</h4>
+                <span class="text-[10px] font-mono text-slate-500">Heim_Hood.rb</span>
+              </div>
+            </div>
+            <p class="text-xs text-slate-600">
+              <strong>วิธีใช้:</strong> คลิกเลือกบล็อกช่องเปิดดูดควัน (เลเยอร์ <code class="bg-slate-100 px-1 rounded">Hood</code>) &rarr; กดไอคอน ระบบจะเจาะแผ่นผนังภายนอกและวางแผ่นสำเร็จรูปรับท่อระบายควันในเลเยอร์ <code class="bg-slate-100 px-1 rounded">S-Hood</code>
+            </p>
+          </div>
+
+          <!-- Card 8: Connector -->
+          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-white transition space-y-2">
+            <div class="flex items-center gap-3">
+              <img src="ICON/E-Connector.jpg" class="w-11 h-11 rounded-lg border border-slate-200 object-cover">
+              <div>
+                <h4 class="font-bold text-slate-800 text-sm">8. Pannel Connector (ข้อต่อแผงผนัง)</h4>
+                <span class="text-[10px] font-mono text-slate-500">Heim_Connector.rb</span>
+              </div>
+            </div>
+            <p class="text-xs text-slate-600">
+              <strong>วิธีใช้:</strong> ไม่ต้องเลือกวัตถุล่วงหน้า &rarr; กดไอคอน &rarr; นำเมาส์ไปคลิกที่ตำแหน่งแผงผนังเพื่อติดตั้งแผ่นเหล็กยึดประสานแผงผนังลงในเลเยอร์ <code class="bg-slate-100 px-1 rounded">S-Connector</code>
+            </p>
+          </div>
+
+          <!-- Card 9: Balcony Unit -->
+          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-white transition space-y-2">
+            <div class="flex items-center gap-3">
+              <img src="ICON/E-Balcony.jpg" class="w-11 h-11 rounded-lg border border-slate-200 object-cover">
+              <div>
+                <h4 class="font-bold text-slate-800 text-sm">9. Balcony Unit (ผนังยูนิตระเบียง)</h4>
+                <span class="text-[10px] font-mono text-slate-500">Heim_Balcony_Unit.rb</span>
+              </div>
+            </div>
+            <p class="text-xs text-slate-600">
+              <strong>วิธีใช้:</strong> ไม่ต้องเลือกวัตถุ &rarr; กดไอคอน &rarr; คลิกจุดที่ 1 (จุดเริ่มผนังระเบียง) &rarr; คลิกจุดที่ 2 (จุดสิ้นสุด) ระบบจะสร้างแผงผนังระเบียงและแผ่นผนังข้างลงในเลเยอร์ <code class="bg-slate-100 px-1 rounded">S-BalconyUnit</code>
+            </p>
+          </div>
+
+          <!-- Card 10: Add Extra -->
+          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-white transition space-y-2">
+            <div class="flex items-center gap-3">
+              <img src="ICON/E-Extra.jpg" class="w-11 h-11 rounded-lg border border-slate-200 object-cover">
+              <div>
+                <h4 class="font-bold text-slate-800 text-sm">10. Add Extra (อุปกรณ์เสริมผนัง)</h4>
+                <span class="text-[10px] font-mono text-slate-500">Heim_AddExtra.rb</span>
+              </div>
+            </div>
+            <p class="text-xs text-slate-600">
+              <strong>วิธีใช้:</strong> ครอบยูนิต &rarr; กดไอคอน &rarr; เลือกเมนู Dropdown: <strong>เช็ค Stud 225</strong>, <strong>Gasket</strong> (ซีลยาง AATE00210/220/200), <strong>WaterProof 2F</strong>, <strong>Border</strong> (เว้นบัว), หรือ <strong>Void</strong> (เจาะรูพิเศษ)
+            </p>
+          </div>
+
+          <!-- Card 11: Check Data -->
+          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-white transition space-y-2">
+            <div class="flex items-center gap-3">
+              <img src="ICON/Manaul%20Tab.jpg" class="w-11 h-11 rounded-lg border border-slate-200 object-cover">
+              <div>
+                <h4 class="font-bold text-slate-800 text-sm">11. Check Data (ตรวจสอบ Takeoff)</h4>
+                <span class="text-[10px] font-mono text-slate-500">Heim_EWQTODialog.rb</span>
+              </div>
+            </div>
+            <p class="text-xs text-slate-600">
+              <strong>วิธีใช้:</strong> เลือก Unit หรือคลิกชิ้นส่วน &rarr; กดไอคอน &rarr; หน้าต่างตาราง HTML จะเปิดขึ้นมาแสดงรายการ Takeoff ถอดแบบเปรียบเทียบกับฐานข้อมูล SQL Server (PS / MIM Lookup)
+            </p>
+          </div>
+
+          <!-- Card 12: Export CSV -->
+          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-white transition space-y-2">
+            <div class="flex items-center gap-3">
+              <img src="ICON/QuanToExcel.jpg" class="w-11 h-11 rounded-lg border border-slate-200 object-cover">
+              <div>
+                <h4 class="font-bold text-slate-800 text-sm">12. Export CSV (สรุปรายการวัสดุ BOM)</h4>
+                <span class="text-[10px] font-mono text-slate-500">Heim_QuanExt.rb</span>
+              </div>
+            </div>
+            <p class="text-xs text-slate-600">
+              <strong>วิธีใช้:</strong> ปิดไฟล์ Excel เก่าก่อน &rarr; ลากครอบ Unit ทั้งหมด &rarr; กดไอคอน ระบบจะสแกนเลเยอร์หมวด <code class="bg-slate-100 px-1 rounded">S-*</code> สรุปยอดลงไฟล์ <code class="font-bold text-teal-800">BOMEX.csv</code> และเปิด Excel อัตโนมัติ
+            </p>
+          </div>
+
+          <!-- Card 13: Delete -->
+          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-white transition space-y-2">
+            <div class="flex items-center gap-3">
+              <img src="ICON/Delete.jpg" class="w-11 h-11 rounded-lg border border-slate-200 object-cover">
+              <div>
+                <h4 class="font-bold text-slate-800 text-sm">13. Delete (ลบชิ้นส่วนตามหมวด)</h4>
+                <span class="text-[10px] font-mono text-slate-500">Heim_DeleteExt.rb</span>
+              </div>
+            </div>
+            <p class="text-xs text-slate-600">
+              <strong>วิธีใช้:</strong> เลือก Unit &rarr; กดไอคอน &rarr; เลือกประเภท: <code class="text-[11px] font-bold">Pannel | STD | Window | Hood | WaterProof | Connector | Gasket | Border | All</code> เพื่อลบอย่างปลอดภัยโดยไม่กระทบตัวยูนิต
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 3: DEEP MODULE ARCHITECTURE & LOGIC -->
+    <section id="logic" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 space-y-6">
+      <div class="flex items-center gap-3 mb-2">
+        <div class="w-10 h-10 rounded-xl bg-teal-100 text-teal-700 flex items-center justify-center font-bold text-lg">02</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">สถาปัตยกรรมโค้ดและตรรกะการคำนวณ (Module Logic)</h2>
+          <p class="text-sm text-slate-500">เจาะลึกการทำงานภายในสคริปต์ Ruby แต่ละตัว และเงื่อนไขการเลือกชิ้นส่วน</p>
+        </div>
+      </div>
+
+      <!-- Logic 1: Corner -->
+      <div class="p-5 rounded-xl border border-slate-200 bg-slate-50/40 space-y-2">
+        <h3 class="text-base font-bold text-slate-800 flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-teal-500"></span>
+          การวิเคราะห์มุมอาคาร (Heim_MakeCorner.rb)
+        </h3>
+        <p class="text-xs md:text-sm text-slate-600">
+          สคริปต์จะค้นหาจุดพิกัด 4 มุม (Corner 0, 1, 2, 3) จากคอมโพเนนต์ <code class="bg-slate-200 px-1 rounded">EE-GRID-UNIT</code> และทำการยิง Raytest ตรวจสอบการมีอยู่ของยูนิตข้างเคียง:
+        </p>
+        <ul class="list-disc list-inside text-xs text-slate-600 space-y-1 pl-2">
+          <li><strong>Corner1 (มุมเปิดออกภายนอก):</strong> ใส่เสารหัส <code class="font-bold text-teal-800">AAFQ1013X</code> (เหล็กหนา 1.6 มม.) หรือ <code class="font-bold text-teal-800">AAFQ1003X</code> (เหล็กหนา 2.3 มม.) ชดเชยจุดวาง Origin เข้ามา $107\,\text{mm}$ ทั้งแนว X และ Y</li>
+          <li><strong>Corner3 (มุมบรรจบ 3 ยูนิต):</strong> เป็นจุดต่อพิเศษที่มี 3 ยูนิตมาชนกัน จะวางเสารหัส Corner3 เพื่อรองรับระยะเหล็กที่ซ้อนกัน</li>
+          <li><strong>CornerIn (มุมเว้าภายใน):</strong> กรณีอาคารรูปตัว L หรือเว้าเข้าใน จะคำนวณตำแหน่งผ่านฟังก์ชัน <code class="bg-slate-100 px-1 rounded font-mono">checkInCorner</code> และวางเสาเข้ามุมใน</li>
+        </ul>
+      </div>
+
+      <!-- Logic 2: Window Set & Edge Calculation -->
+      <div class="p-5 rounded-xl border border-slate-200 bg-slate-50/40 space-y-3">
+        <h3 class="text-base font-bold text-slate-800 flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-cyan-500"></span>
+          ตรรกะการวางเสาประกบช่องเปิด (Heim_MakeDoor.rb)
+        </h3>
+        <p class="text-xs md:text-sm text-slate-600">
+          คำนวณระยะขอบซ้าย (<code class="font-mono text-cyan-800 font-bold">lfullhalf</code>) และขอบขวา (<code class="font-mono text-cyan-800 font-bold">rfullhalf</code>) จากเสามุมยูนิตถึงขอบหน้าต่าง เพื่อตัดสินใจเลือกรหัสเสา:
+        </p>
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs text-left border border-slate-200 rounded-lg overflow-hidden">
+            <thead class="bg-slate-100 text-slate-700 font-bold">
+              <tr>
+                <th class="p-2 border-b">เงื่อนไขระยะห่างถึงมุมเสา</th>
+                <th class="p-2 border-b">ความกว้างช่องเปิด (dwidth)</th>
+                <th class="p-2 border-b">รหัสเสาที่เลือกใช้งาน (Part ID)</th>
+                <th class="p-2 border-b">ลักษณะการใช้งาน</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200">
+              <tr class="bg-emerald-50/60 font-semibold">
+                <td class="p-2 text-emerald-900">&le; 332 มม. (ระยะชิดมุม 225)</td>
+                <td class="p-2">&le; 2700 มม.</td>
+                <td class="p-2 text-emerald-800 font-mono font-bold">AAFQ20040</td>
+                <td class="p-2">เสาประกบหน้าต่างระยะชิดเสาพิเศษ (ปีกแคบ)</td>
+              </tr>
+              <tr>
+                <td class="p-2">&le; 332 มม.</td>
+                <td class="p-2">&gt; 2700 มม.</td>
+                <td class="p-2 font-mono font-bold">AAFQ20090</td>
+                <td class="p-2">เสาประกบหน้าต่างชิดเสาสำหรับบานกว้างพิเศษ</td>
+              </tr>
+              <tr>
+                <td class="p-2">&gt; 332 มม. (ระยะทั่วไป)</td>
+                <td class="p-2">&le; 1350 มม.</td>
+                <td class="p-2 font-mono font-bold">AAFQ2002X</td>
+                <td class="p-2">เสาประกบหน้าต่างมาตรฐานสำหรับบานขนาดเล็ก-กลาง</td>
+              </tr>
+              <tr>
+                <td class="p-2">&gt; 332 มม. (ระยะทั่วไป)</td>
+                <td class="p-2">1351 - 2700 มม.</td>
+                <td class="p-2 font-mono font-bold">AAFQ2001X</td>
+                <td class="p-2">เสาประกบหน้าต่างมาตรฐานสำหรับบานขนาดใหญ่</td>
+              </tr>
+              <tr>
+                <td class="p-2">&gt; 332 มม. (ระยะทั่วไป)</td>
+                <td class="p-2">&ge; 3600 มม.</td>
+                <td class="p-2 font-mono font-bold">AABK35210</td>
+                <td class="p-2">เสาประกบหน้าต่างเสริมกำลังพิเศษ</td>
+              </tr>
+              <tr class="bg-slate-100">
+                <td class="p-2">ไม่จำกัดระยะ</td>
+                <td class="p-2">ชื่อบานมีคำว่า NOTATAKI</td>
+                <td class="p-2 font-mono font-bold text-slate-800">YYFQ00060</td>
+                <td class="p-2">เสาขอบประตูทางเข้าชนิดพิเศษ No-Tataki</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Logic 3: Check Stud 225 Module -->
+      <div class="p-5 rounded-xl border-2 border-teal-400 bg-teal-50/40 space-y-3">
+        <h3 class="text-base font-bold text-teal-900 flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-teal-600"></span>
+          ตรรกะระบบตรวจสอบและสลับเสาอัตโนมัติ (Heim_Check332.rb)
+        </h3>
+        <p class="text-xs md:text-sm text-slate-700">
+          ระบบใหม่ที่เพิ่มเข้ามาเพื่อขจัด Human Error และความคลาดเคลื่อนของทศนิยม:
+        </p>
+        <ul class="list-disc list-inside text-xs text-slate-700 space-y-1.5 pl-2">
+          <li><strong>ขอบเขตการตรวจจับ:</strong> กวาดค้นหา Component ที่มี Definition เป็น <code class="font-bold text-teal-900">AAFQ2001X</code> หรือ <code class="font-bold text-teal-900">AAFQ2002X</code></li>
+          <li><strong>ช่วงระยะพิกัด (Range Filter):</strong> วัดระยะแบบ 3 มิติไปยังเสามุม <code class="font-mono">Corner1/Corner3</code> หรือขอบยูนิต หากระยะตกอยู่ในช่วง <strong>$200.0 - 370.0\,\text{mm}$</strong> (ครอบคลุมระยะหน้าเสา $225\,\text{mm}$ และระยะเซ็นเตอร์ $332\,\text{mm}$) จะถูกดักจับทันที</li>
+          <li><strong>กระบวนการสลับ Component (Definition Swapping):</strong>
+            <pre class="bg-slate-900 text-teal-300 p-2.5 rounded-lg text-xs font-mono mt-1 overflow-x-auto">
+mod.start_operation("Replace with AAFQ20040", true)
+found_issues.each do |item|
+  item[:stud].definition = def40   # สลับ Definition ทันทีโดยคง Transformation เดิม
+end
+mod.commit_operation</pre>
+          </li>
+          <li><strong>ข้อความผลลัพธ์:</strong>
+            <ul class="list-none pl-4 space-y-1 mt-1 text-[11px] font-mono">
+              <li>&bull; พบปัญหา: <span class="text-amber-800 bg-amber-100 px-1 py-0.5 rounded font-bold">⚠️ คำเตือน: พบ AAFQ2001X / AAFQ2002X | วาง 225 (ปรับเป็น AAFQ20040)</span></li>
+              <li>&bull; ปลอดภัย: <span class="text-emerald-800 bg-emerald-100 px-1 py-0.5 rounded font-bold">✅ ปลอดภัย! ไม่พบ AAFQ2001X หรือ AAFQ2002X | วาง 225 |</span></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Logic 4: Pannel & Dedup -->
+      <div class="p-5 rounded-xl border border-slate-200 bg-slate-50/40 space-y-2">
+        <h3 class="text-base font-bold text-slate-800 flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+          การวางแผ่นผนัง AAFP และฟังก์ชันเคลียร์ Stud ซ้ำซ้อน (Heim_MakePannel.rb)
+        </h3>
+        <p class="text-xs md:text-sm text-slate-600">
+          เมื่อรัน Pannel ระบบจะวางแผ่นผนังสำเร็จรูปตามระยะเสา และรันฟังก์ชัน <code class="bg-slate-200 px-1 rounded font-mono font-bold">checkDupSTD</code> เพื่อตรวจหา Stud ที่อยู่ในระนาบเดียวกับแผ่นหน้าต่าง หากมี Stud ตัวใดซ้อนทับกันเกินระยะ Tolerance ระบบจะทำการ <code class="font-mono text-rose-700 font-bold">.erase!</code> ลบ Stud ตัวที่ซ้ำซ้อนออกให้อัตโนมัติ เพื่อให้ยอดถอดแบบ BOM ถูกต้องแม่นยำ
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 4: COMPONENT & LAYER MATRIX -->
+    <section id="matrix" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-teal-100 text-teal-700 flex items-center justify-center font-bold text-lg">03</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">ตารางสรุปเลเยอร์และคอมโพเนนต์ (Component & Layer Matrix)</h2>
+          <p class="text-sm text-slate-500">ฐานข้อมูลชิ้นส่วน รหัส Part ID เลเยอร์ และหน่วยนับในระบบถอดแบบ BOM</p>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-xs text-left border border-slate-200 rounded-xl overflow-hidden">
+          <thead class="bg-slate-800 text-white font-semibold">
+            <tr>
+              <th class="p-3">หมวดหมู่ชิ้นงาน</th>
+              <th class="p-3">Layer ใน SketchUp</th>
+              <th class="p-3">รหัสชิ้นส่วน (Part ID)</th>
+              <th class="p-3">ชื่อคอมโพเนนต์ / รายละเอียดสเปก</th>
+              <th class="p-3 text-center">หน่วยใน BOM</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200 bg-white">
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 font-bold text-slate-700" rowspan="4">เสามุม (Corner)</td>
+              <td class="p-3 font-mono text-teal-700 font-bold" rowspan="4">S-STD</td>
+              <td class="p-3 font-mono font-bold text-slate-800">AAFQ1013X</td>
+              <td class="p-3">เสามุมภายนอก Corner1 (เหล็กหนา 1.6 มม.)</td>
+              <td class="p-3 text-center font-bold">ชิ้น (EA)</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 font-mono font-bold text-slate-800">AAFQ1003X</td>
+              <td class="p-3">เสามุมภายนอก Corner1 (เหล็กหนา 2.3 มม.)</td>
+              <td class="p-3 text-center font-bold">ชิ้น (EA)</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 font-mono font-bold text-slate-800">Corner3</td>
+              <td class="p-3">เสามุมจุดต่อร่วม 3 ยูนิต (3-Unit Joint)</td>
+              <td class="p-3 text-center font-bold">ชิ้น (EA)</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 font-mono font-bold text-slate-800">CornerIn</td>
+              <td class="p-3">เสามุมเว้าภายใน (Internal Recessed Corner)</td>
+              <td class="p-3 text-center font-bold">ชิ้น (EA)</td>
+            </tr>
+
+            <tr class="hover:bg-emerald-50/50 transition">
+              <td class="p-3 font-bold text-emerald-800" rowspan="6">เสาขอบหน้าต่าง (Window Studs)</td>
+              <td class="p-3 font-mono text-teal-700 font-bold" rowspan="6">S-STD</td>
+              <td class="p-3 font-mono font-bold text-emerald-700 bg-emerald-100/60 px-1 py-0.5 rounded">AAFQ20040</td>
+              <td class="p-3 font-semibold text-emerald-950">เสาขอบหน้าต่างระยะชิดมุม &le; 332 มม. (ระยะ 225 บาน &le; 2700)</td>
+              <td class="p-3 text-center font-bold">ชิ้น (EA)</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 font-mono font-bold text-slate-800">AAFQ20090</td>
+              <td class="p-3">เสาขอบหน้าต่างระยะชิดมุม &le; 332 มม. (สำหรับบาน &gt; 2700)</td>
+              <td class="p-3 text-center font-bold">ชิ้น (EA)</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 font-mono font-bold text-slate-800">AAFQ2002X</td>
+              <td class="p-3">เสาประกบช่องเปิดมาตรฐานทั่วไป (บาน &le; 1350 มม.)</td>
+              <td class="p-3 text-center font-bold">ชิ้น (EA)</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 font-mono font-bold text-slate-800">AAFQ2001X</td>
+              <td class="p-3">เสาประกบช่องเปิดมาตรฐานทั่วไป (บาน 1351 - 2700 มม.)</td>
+              <td class="p-3 text-center font-bold">ชิ้น (EA)</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 font-mono font-bold text-slate-800">AABK35210</td>
+              <td class="p-3">เสาประกบช่องเปิดเสริมกำลังพิเศษ (บาน &ge; 3600 มม.)</td>
+              <td class="p-3 text-center font-bold">ชิ้น (EA)</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 font-mono font-bold text-slate-800">YYFQ00060</td>
+              <td class="p-3">เสาขอบประตูทางเข้าชนิดพิเศษ NOTATAKI</td>
+              <td class="p-3 text-center font-bold">ชิ้น (EA)</td>
+            </tr>
+
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 font-bold text-slate-700">กรอบช่องเปิด 3D</td>
+              <td class="p-3 font-mono text-teal-700 font-bold">S-Window</td>
+              <td class="p-3 font-mono font-bold text-slate-800">Window_Set</td>
+              <td class="p-3">ชุดบล็อกโมเดล 3D ประตูและหน้าต่าง</td>
+              <td class="p-3 text-center font-bold">ชุด (Set)</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 font-bold text-slate-700">เสาซอยมาตรฐาน</td>
+              <td class="p-3 font-mono text-teal-700 font-bold">S-STD</td>
+              <td class="p-3 font-mono font-bold text-slate-800">AAFQ2002X</td>
+              <td class="p-3">เสาซอยย่อยก้าวระยะ 900 มม. (Intermediate Stud)</td>
+              <td class="p-3 text-center font-bold">ชิ้น (EA)</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 font-bold text-slate-700">แผ่นผนังภายนอก</td>
+              <td class="p-3 font-mono text-teal-700 font-bold">S-Pannel</td>
+              <td class="p-3 font-mono font-bold text-slate-800">AAFP...</td>
+              <td class="p-3">แผ่นผนังสำเร็จรูปภายนอก (Exterior Cladding Panels)</td>
+              <td class="p-3 text-center font-bold">แผ่น (Sheet)</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 font-bold text-slate-700">แผ่นกันซึมระเบียง</td>
+              <td class="p-3 font-mono text-teal-700 font-bold">S-WaterProof</td>
+              <td class="p-3 font-mono font-bold text-slate-800">WA_...</td>
+              <td class="p-3">แผ่นผนังเคลือบสารกันซึมสำหรับระเบียงและพื้นที่เปียก</td>
+              <td class="p-3 text-center font-bold">แผ่น (Sheet)</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 font-bold text-slate-700">ช่องท่อดูดควัน</td>
+              <td class="p-3 font-mono text-teal-700 font-bold">S-Hood</td>
+              <td class="p-3 font-mono font-bold text-slate-800">Hood_Pannel</td>
+              <td class="p-3">แผ่นผนังสำเร็จรูปเจาะช่องรับท่อดูดควัน</td>
+              <td class="p-3 text-center font-bold">แผ่น (Sheet)</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 font-bold text-slate-700">ข้อต่อแผงผนัง</td>
+              <td class="p-3 font-mono text-teal-700 font-bold">S-Connector</td>
+              <td class="p-3 font-mono font-bold text-slate-800">Connector</td>
+              <td class="p-3">แผ่นเหล็กยึดประสานรอยต่อระหว่างแผงผนัง</td>
+              <td class="p-3 text-center font-bold">ชิ้น (EA)</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 font-bold text-slate-700">ผนังยูนิตระเบียง</td>
+              <td class="p-3 font-mono text-teal-700 font-bold">S-BalconyUnit</td>
+              <td class="p-3 font-mono font-bold text-slate-800">Balcony_Wall</td>
+              <td class="p-3">แผงผนังข้างและแผ่นปิดยูนิตระเบียง</td>
+              <td class="p-3 text-center font-bold">แผง (Set)</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 font-bold text-slate-700" rowspan="3">อุปกรณ์ซีลกันรั่ว (Gasket)</td>
+              <td class="p-3 font-mono text-teal-700 font-bold" rowspan="3">S-Gasket</td>
+              <td class="p-3 font-mono font-bold text-slate-800">AATE00210</td>
+              <td class="p-3">เส้นยางกันซึม Gasket Type P1</td>
+              <td class="p-3 text-center font-bold">เส้น (M)</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 font-mono font-bold text-slate-800">AATE00220</td>
+              <td class="p-3">เส้นยางกันซึม Gasket Type P2</td>
+              <td class="p-3 text-center font-bold">เส้น (M)</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3 font-mono font-bold text-slate-800">AATE00200</td>
+              <td class="p-3">เส้นยางกันซึม Gasket Type U / IC</td>
+              <td class="p-3 text-center font-bold">เส้น (M)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 5: TROUBLESHOOTING & BEST PRACTICES -->
+    <section id="troubleshooting" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 space-y-6">
+      <div class="flex items-center gap-3 mb-2">
+        <div class="w-10 h-10 rounded-xl bg-teal-100 text-teal-700 flex items-center justify-center font-bold text-lg">04</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">ข้อแนะนำและการแก้ไขปัญหาที่พบบ่อย (Troubleshooting)</h2>
+          <p class="text-sm text-slate-500">วิธีจัดการปัญหาที่มักพบบ่อยระหว่างการขึ้นโมเดลผนังภายนอก</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 space-y-2">
+          <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+            <span class="text-rose-500 font-bold">Q:</span> ขึ้นเตือน "Stud exist in Unit - Please Check"
+          </h4>
+          <p class="text-xs text-slate-600">
+            <strong>สาเหตุ & วิธีแก้:</strong> ในยูนิตนั้นมีชิ้นส่วนอยู่ในเลเยอร์ <code class="bg-slate-200 px-1 rounded">S-STD</code> อยู่แล้ว ระบบบล็อกไม่ให้รันซ้ำเพื่อป้องกันเสาซ้อนทับกัน ให้คลิกปุ่ม <strong>Delete</strong> &rarr; เลือกประเภท <code class="bg-slate-200 px-1 rounded font-bold">STD</code> เพื่อเคลียร์เสาเดิมออกก่อน แล้วจึงรันคำสั่งใหม่
+          </p>
+        </div>
+
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 space-y-2">
+          <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+            <span class="text-rose-500 font-bold">Q:</span> เสาขอบหน้าต่างหลุดเป็น AAFQ2002X ทั้งที่วัดได้ 225 หรือ 332 มม.
+          </h4>
+          <p class="text-xs text-slate-600">
+            <strong>สาเหตุ & วิธีแก้:</strong> เกิดจากเศษทศนิยมในการวางบานคลาดเคลื่อนเกิน 332.0 มม. เล็กน้อย ทำให้สคริปต์เลือกเสาขนาดทั่วไปอัตโนมัติ ให้คลิกปุ่ม <strong>Add Extra</strong> &rarr; เลือก <strong>"เช็ค Stud 225"</strong> &rarr; กด <strong>[Yes]</strong> ระบบจะสลับเป็น <code class="bg-slate-200 px-1 rounded font-bold text-teal-800">AAFQ20040</code> ให้ทันทีทุกจุด
+          </p>
+        </div>
+
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 space-y-2">
+          <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+            <span class="text-rose-500 font-bold">Q:</span> กดปุ่ม Stud Standard แล้วเงียบ ไม่ยอมซอยเสา
+          </h4>
+          <p class="text-xs text-slate-600">
+            <strong>สาเหตุ & วิธีแก้:</strong> ในเลเยอร์ <code class="bg-slate-200 px-1 rounded">S-STD</code> ขาดเสามุมหลัก (<code class="font-bold">Corner1 / Corner2 / Corner3</code>) เนื่องจากถูกลบออกไป สคริปต์จึงไม่สามารถยิง Raytest วัดระยะได้ ให้กดรัน <strong>Stud Corner</strong> และ <strong>Pannel Window Set</strong> ใหม่อีกครั้ง
+          </p>
+        </div>
+
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 space-y-2">
+          <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+            <span class="text-rose-500 font-bold">Q:</span> เกิด Error ตอนกดปุ่ม Export CSV
+          </h4>
+          <p class="text-xs text-slate-600">
+            <strong>สาเหตุ & วิธีแก้:</strong> ไฟล์ <code class="bg-slate-200 px-1 rounded font-bold">BOMEX.csv</code> กำลังถูกเปิดค้างอยู่ในโปรแกรม Microsoft Excel ทำให้ระบบไม่สามารถเขียนทับได้ ให้ปิดโปรแกรม Excel ก่อนแล้วกดไอคอน Export CSV ใหม่อีกครั้ง
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="max-w-6xl mx-auto text-center text-xs text-slate-400 mt-12 py-6 border-t border-slate-200">
+    QHeim Modular Construction System &bull; Exterior Wall Documentation &bull; Created for In-house Engineering Team
+  </footer>
+
+</body>
+</html>

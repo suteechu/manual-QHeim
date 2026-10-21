@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QHeim - คู่มือและเอกสารการนำเข้าและเตรียมไฟล์ CAD AR</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Tahoma, "Sarabun", sans-serif;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white !important; color: black !important; padding: 0 !important; }
+      .shadow-sm, .shadow-md, .shadow-lg, .shadow-xl { box-shadow: none !important; }
+      .border { border-color: #cbd5e1 !important; }
+      section { break-inside: avoid; page-break-inside: avoid; margin-bottom: 24px !important; }
+      table { break-inside: auto; }
+      tr { break-inside: avoid; page-break-inside: avoid; }
+    }
+    pre {
+      background-color: #0f172a;
+      color: #e2e8f0;
+      padding: 1rem;
+      border-radius: 0.75rem;
+      overflow-x: auto;
+      font-size: 0.825rem;
+      line-height: 1.5;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased p-4 md:p-8">
+
+  <!-- Header Container -->
+  <div class="max-w-6xl mx-auto bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden mb-8">
+    <div class="bg-gradient-to-r from-blue-700 via-indigo-700 to-sky-600 p-8 text-white">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-semibold uppercase tracking-wider mb-2">
+            QHeim Modular Construction Extension
+          </span>
+          <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight">คู่มือการนำเข้าและเตรียมไฟล์ CAD AR</h1>
+          <p class="text-blue-100 mt-2 text-sm md:text-base max-w-2xl">
+            มาตรฐานการเตรียมไฟล์ AutoCAD (2D DWG), การส่งออกตัวอักษรด้วย VBA/JSON, การนำเข้าแบบพิกัดเดิม (Preserve Origin), การจัดกลุ่มยูนิต (S-Unit), และการซิงค์ชื่อช่องเปิดประตู-หน้าต่างอัตโนมัติ
+          </p>
+        </div>
+        <div class="text-right">
+          <div class="text-xs text-blue-200">SketchUp Ruby Extension &bull; CAD LTF Module</div>
+          <div class="text-sm font-bold bg-blue-900/60 px-3 py-1.5 rounded-lg border border-blue-400/30 mt-1">
+            Path: C:/QHeim/Ruby/CADLTF/
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Navigation Bar -->
+    <div class="bg-slate-100 border-b border-slate-200 px-6 py-3 flex flex-wrap gap-2 text-xs md:text-sm font-medium text-slate-600 no-print">
+      <a href="#overview" class="hover:text-blue-600 px-2 py-1 rounded hover:bg-white transition">ภาพรวม & Workflow</a>
+      <span class="text-slate-300">|</span>
+      <a href="#ui-controller" class="hover:text-blue-600 px-2 py-1 rounded hover:bg-white transition">เมนูและไอคอน</a>
+      <span class="text-slate-300">|</span>
+      <a href="#sop-autocad" class="text-indigo-700 bg-indigo-100 font-bold px-2 py-1 rounded hover:bg-indigo-200 transition">👉 1. การเตรียมไฟล์ใน AutoCAD</a>
+      <span class="text-slate-300">|</span>
+      <a href="#sop-sketchup" class="text-blue-700 bg-blue-100 font-bold px-2 py-1 rounded hover:bg-blue-200 transition">👉 2. การนำเข้าใน SketchUp</a>
+      <span class="text-slate-300">|</span>
+      <a href="#logic" class="hover:text-blue-600 px-2 py-1 rounded hover:bg-white transition">ตรรกะเชิงลึก (Code Architecture)</a>
+      <span class="text-slate-300">|</span>
+      <a href="#layer-matrix" class="hover:text-blue-600 px-2 py-1 rounded hover:bg-white transition">ตารางเลเยอร์มาตรฐาน</a>
+      <span class="text-slate-300">|</span>
+      <a href="#troubleshooting" class="hover:text-blue-600 px-2 py-1 rounded hover:bg-white transition">การแก้ไขปัญหา</a>
+    </div>
+  </div>
+
+  <main class="max-w-6xl mx-auto space-y-8">
+
+    <!-- Section 1: Overview & Workflow -->
+    <section id="overview" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-lg">01</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">ภาพรวมระบบและขั้นตอนการทำงาน (Workflow Lifecycle)</h2>
+          <p class="text-sm text-slate-500">จุดเริ่มต้นของกระบวนการถอดแบบ BIM ในโมดูลาร์ยูนิต QHeim</p>
+        </div>
+      </div>
+
+      <div class="p-4 bg-amber-50 border-l-4 border-amber-500 rounded-r-xl mb-6">
+        <div class="flex items-start gap-2">
+          <span class="text-amber-600 font-bold text-lg">⚠️</span>
+          <div>
+            <h4 class="font-bold text-amber-800 text-sm">กฎเหล็กสำคัญ 3 ข้อก่อนเริ่มนำเข้าไฟล์ CAD AR:</h4>
+            <ul class="text-amber-700 text-xs md:text-sm mt-1 list-disc list-inside space-y-1">
+              <li><strong>จุด Origin (0,0,0) ใน AutoCAD ต้องเป็นจุดอ้างอิงเดียวกันทุกชั้น (1F, 2F, 3F):</strong> ห้ามขยับหรือ Move แปลนหนีจุดกำเนิดเด็ดขาด มิฉะนั้นแต่ละชั้นจะไม่ซ้อนทับกัน</li>
+              <li><strong>ต้องรัน VBA Macro ส่งออกข้อความ Text เป็น JSON ใน AutoCAD ก่อนเสมอ:</strong> รัน Macro เพื่อสร้างไฟล์ <code class="bg-amber-100 px-1 py-0.5 rounded text-amber-900 font-mono">C:/QHeim/DATA/export-text.json</code> มิฉะนั้นตัวหนังสือจะไม่เข้า SketchUp</li>
+              <li><strong>ลำดับการกดปุ่มใน SketchUp ต้องเรียงตามลำดับ:</strong> <code class="bg-amber-100 px-1 py-0.5 rounded text-amber-900 font-bold">Import CAD Original</code> &rarr; <code class="bg-amber-100 px-1 py-0.5 rounded text-amber-900 font-bold">Unit Number</code> &rarr; <code class="bg-amber-100 px-1 py-0.5 rounded text-amber-900 font-bold">Door Window Name</code></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="p-5 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-slate-50 transition">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold text-blue-600 uppercase">ขั้นตอนที่ 1</span>
+            <span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-[11px] font-semibold">AutoCAD</span>
+          </div>
+          <h3 class="font-bold text-slate-800 mb-2">เตรียมไฟล์และส่งออก JSON</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            ตั้งหน่วยเป็น <strong>Millimeters</strong>, ตรวจพิกัด Origin <strong>(0,0,0)</strong>, จัดเลเยอร์ตามมาตรฐาน QHeim, แล้วรัน VBA Macro บันทึกข้อความลง <code class="bg-slate-200 px-1 rounded">export-text.json</code>
+          </p>
+        </div>
+
+        <div class="p-5 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-slate-50 transition">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold text-indigo-600 uppercase">ขั้นตอนที่ 2</span>
+            <span class="px-2 py-0.5 bg-indigo-100 text-indigo-700 rounded text-[11px] font-semibold">SketchUp</span>
+          </div>
+          <h3 class="font-bold text-slate-800 mb-2">นำเข้าแบบและตั้งชื่อยูนิต</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            กดปุ่ม <strong>Import CAD Original</strong> เพื่อวาง DWG ตรงพิกัดเดิม พร้อมสร้าง 3D Text ภาษาไทย/อังกฤษ แล้วกด <strong>Unit Number</strong> รวมกริดเข้าเป็น <code class="bg-slate-200 px-1 rounded">S-Unit</code>
+          </p>
+        </div>
+
+        <div class="p-5 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-slate-50 transition">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold text-emerald-600 uppercase">ขั้นตอนที่ 3</span>
+            <span class="px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded text-[11px] font-semibold">SketchUp</span>
+          </div>
+          <h3 class="font-bold text-slate-800 mb-2">ซิงค์ชื่อช่องเปิดและงานระบบ</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            กดปุ่ม <strong>Door Window Name</strong> เพื่อจับคู่บล็อก 2D กับข้อความสถาปัตย์ ระบุทิศเปิด <code class="bg-slate-200 px-1 rounded">_L/_R</code> และส่งต่อให้ระบบ LongleadTime, Exterior Wall และ PartInstall
+          </p>
+        </div>
+      </div>
+
+      <!-- Ecosystem Integration Diagram -->
+      <div class="p-4 rounded-xl bg-slate-900 text-slate-200 text-xs">
+        <div class="font-bold text-slate-400 uppercase tracking-wider mb-2">ความเชื่อมโยงกับระบบต่างๆ ใน QHeim Ecosystem:</div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-center">
+          <div class="p-2.5 bg-slate-800 rounded-lg border border-slate-700">
+            <div class="font-bold text-sky-400">LongleadTime</div>
+            <div class="text-[11px] text-slate-400 mt-1">รับรหัสช่องเปิด 2D ไปค้น MIM สร้าง 3D Window/Door</div>
+          </div>
+          <div class="p-2.5 bg-slate-800 rounded-lg border border-slate-700">
+            <div class="font-bold text-amber-400">Exterior Wall</div>
+            <div class="text-[11px] text-slate-400 mt-1">รับ S-Unit และช่องเปิดไปตั้งเสา Stud และกรุผนัง AAFP</div>
+          </div>
+          <div class="p-2.5 bg-slate-800 rounded-lg border border-slate-700">
+            <div class="font-bold text-emerald-400">PartInstall</div>
+            <div class="text-[11px] text-slate-400 mt-1">รับ S-Unit ไปยิง Raytest หา Direction 01-12 ติดตั้ง Flashing</div>
+          </div>
+          <div class="p-2.5 bg-slate-800 rounded-lg border border-slate-700">
+            <div class="font-bold text-indigo-400">EE Electrical</div>
+            <div class="text-[11px] text-slate-400 mt-1">รับบล็อกอุปกรณ์และค่าระดับความสูง H=xxxx ไปเดินสายไฟ</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: UI Controller & Toolbar -->
+    <section id="ui-controller" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-lg">02</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">หน้าต่างแถบเครื่องมือควบคุม (UI Controller)</h2>
+          <p class="text-sm text-slate-500">หน้าต่าง HTML Dialog: <code class="bg-slate-100 px-1 py-0.5 rounded text-slate-700">Heim_CADImport.html</code> ควบคุมผ่าน <code class="bg-slate-100 px-1 py-0.5 rounded text-slate-700">Heim_CADImportIcon.rb</code></p>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs md:text-sm border-collapse">
+          <thead>
+            <tr class="bg-slate-100 border-b border-slate-200 text-slate-700">
+              <th class="p-3 font-bold w-16 text-center">ไอคอน</th>
+              <th class="p-3 font-bold">ชื่อปุ่มคำสั่ง (Tool Title)</th>
+              <th class="p-3 font-bold">Action / Callback</th>
+              <th class="p-3 font-bold">ไฟล์ Ruby ที่ประมวลผล</th>
+              <th class="p-3 font-bold">หน้าที่และการทำงานหลัก</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            <tr class="hover:bg-slate-50">
+              <td class="p-3 text-center">
+                <img src="ICON/D-CAD.jpg" alt="Import CAD" class="w-10 h-10 mx-auto rounded shadow-sm border border-slate-200 object-cover">
+              </td>
+              <td class="p-3 font-bold text-blue-700">Import CAD Original</td>
+              <td class="p-3 font-mono text-slate-600">import_cad</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_InsertCADLTF.rb</td>
+              <td class="p-3 text-slate-700">นำเข้าไฟล์ DWG อิงจุดพิกัดจริง (Preserve Origin) และดึงข้อความจาก JSON มาสร้างเป็น 3D Text แม่นยำ 100%</td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3 text-center">
+                <img src="ICON/D-UnitNumber.jpg" alt="Unit Number" class="w-10 h-10 mx-auto rounded shadow-sm border border-slate-200 object-cover">
+              </td>
+              <td class="p-3 font-bold text-indigo-700">Unit Number</td>
+              <td class="p-3 font-mono text-slate-600">unit_number</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_InsertCADLTF.rb</td>
+              <td class="p-3 text-slate-700">ตรวจหากริดยูนิต <code class="bg-slate-100 px-1 rounded">EE-GRID-UNIT</code> ร่วมกับเบอร์ <code class="bg-slate-100 px-1 rounded">A-ANNO</code> แล้วรวมเป็นก้อน <code class="bg-slate-100 px-1 rounded">S-Unit</code></td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3 text-center">
+                <img src="ICON/D-DoorWindowName.png" alt="Door Window Name" class="w-10 h-10 mx-auto rounded shadow-sm border border-slate-200 object-cover">
+              </td>
+              <td class="p-3 font-bold text-emerald-700">Door Window Name</td>
+              <td class="p-3 font-mono text-slate-600">door_window_name</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_DoorNameLTF.rb</td>
+              <td class="p-3 text-slate-700">ผสานชื่อตัวหนังสือ, จับคู่กับบล็อก 2D ใน <code class="bg-slate-100 px-1 rounded">A-DOOR</code> / <code class="bg-slate-100 px-1 rounded">A-WIND</code>, คำนวณทิศเปิด <code class="bg-slate-100 px-1 rounded">_L/_R</code> และเปลี่ยนชื่อ Definition</td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3 text-center">
+                <img src="ICON/D-ImportTextInside-EE.png" alt="EE Inside" class="w-10 h-10 mx-auto rounded shadow-sm border border-slate-200 object-cover">
+              </td>
+              <td class="p-3 font-bold text-amber-700">Import EE Text Inside</td>
+              <td class="p-3 font-mono text-slate-600">import_text_inside</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_InsertCADLTF.rb</td>
+              <td class="p-3 text-slate-700">นำเข้าข้อความภายในบล็อกอุปกรณ์ไฟฟ้าจากไฟล์ <code class="bg-slate-100 px-1 rounded">export-text-inside-ee-block.json</code></td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3 text-center">
+                <img src="ICON/D-ImportTextInside-AC.png" alt="AC Inside" class="w-10 h-10 mx-auto rounded shadow-sm border border-slate-200 object-cover">
+              </td>
+              <td class="p-3 font-bold text-teal-700">Import AC Text Inside</td>
+              <td class="p-3 font-mono text-slate-600">import_text_inside_ac</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_InsertCADLTF.rb</td>
+              <td class="p-3 text-slate-700">นำเข้าข้อความภายในบล็อกระบบปรับอากาศจากไฟล์ <code class="bg-slate-100 px-1 rounded">export-text-inside-ac-block.json</code></td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3 text-center">
+                <span class="inline-block px-2 py-1 bg-slate-200 rounded font-bold text-[11px] text-slate-700">AC</span>
+              </td>
+              <td class="p-3 font-bold text-slate-700">AC Select Components</td>
+              <td class="p-3 font-mono text-slate-600">manage_ac_components</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_ACGroup.rb</td>
+              <td class="p-3 text-slate-700">เลือกและจัดกลุ่มบล็อกคอมโพเนนต์งานระบบปรับอากาศในโมเดล</td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3 text-center">
+                <span class="inline-block px-2 py-1 bg-blue-100 rounded font-bold text-[11px] text-blue-700">EE</span>
+              </td>
+              <td class="p-3 font-bold text-slate-700">EE Map Height</td>
+              <td class="p-3 font-mono text-slate-600">ee_map_height</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_EEGroup.rb</td>
+              <td class="p-3 text-slate-700">สแกนข้อความ <code class="bg-slate-100 px-1 rounded">H=xxxx</code> ในกลุ่ม <code class="bg-slate-100 px-1 rounded">EE-TEXT</code> เพื่อแม็ประดับความสูงลง Attribute ของอุปกรณ์</td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3 text-center">
+                <span class="inline-block px-2 py-1 bg-indigo-100 rounded font-bold text-[11px] text-indigo-700">EE</span>
+              </td>
+              <td class="p-3 font-bold text-slate-700">EE Change Height</td>
+              <td class="p-3 font-mono text-slate-600">ee_edit_height</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_EEGroup.rb</td>
+              <td class="p-3 text-slate-700">เปิดกล่องข้อความแก้ไขระดับความสูง (mm) ของบล็อกอุปกรณ์ไฟฟ้าที่เลือกพร้อมกัน</td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3 text-center">
+                <span class="inline-block px-2 py-1 bg-emerald-100 rounded font-bold text-[11px] text-emerald-700">EE</span>
+              </td>
+              <td class="p-3 font-bold text-slate-700">EE Show Height</td>
+              <td class="p-3 font-mono text-slate-600">ee_show_text_height</td>
+              <td class="p-3 font-mono text-xs text-slate-500">Heim_EEGroup.rb</td>
+              <td class="p-3 text-slate-700">สร้าง 3D Text จำลองลอยเหนืออุปกรณ์เพื่อตรวจสอบค่าความสูงก่อนส่งผลิตจริง</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Section 3: SOP AutoCAD -->
+    <section id="sop-autocad" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-lg">03</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">ช่วงที่ 1: ขั้นตอนการเตรียมและส่งออกไฟล์ใน AutoCAD (CAD AR Preparation)</h2>
+          <p class="text-sm text-slate-500">ขั้นตอนสำคัญสำหรับผู้เขียนแบบ AutoCAD ก่อนส่งมอบไฟล์เข้ากระบวนการ QHeim</p>
+        </div>
+      </div>
+
+      <div class="space-y-6">
+
+        <!-- Step 1 -->
+        <div class="p-5 rounded-xl border border-slate-200 bg-slate-50">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-xs">1</span>
+            <h3 class="font-bold text-slate-800 text-base">การตั้งค่าหน่วยและระบบพิกัด (Units & WCS Origin)</h3>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm text-slate-600 mt-2">
+            <div class="bg-white p-4 rounded-lg border border-slate-200">
+              <div class="font-bold text-slate-800 mb-1">คำสั่ง UNITS ใน AutoCAD:</div>
+              <ul class="list-disc list-inside space-y-1">
+                <li>Length Type: <strong>Decimal</strong></li>
+                <li>Insertion Scale: <strong>Millimeters</strong> (มิลลิเมตร)</li>
+                <li>Angle Type: <strong>Decimal Degrees</strong></li>
+              </ul>
+            </div>
+            <div class="bg-white p-4 rounded-lg border border-slate-200">
+              <div class="font-bold text-slate-800 mb-1">การตั้งจุดกำเนิด Origin (0,0,0):</div>
+              <p>
+                เลือกจุดตัดแนวเสาหลักของอาคาร (เช่น เสากริด <strong>1-A</strong>) ให้เป็นพิกัด <strong>(0, 0, 0)</strong> ของ WCS โดยแปลนทุกชั้น (1F, 2F, 3F) <strong>ต้องใช้จุดตัดเดียวกันนี้เป็นจุดกำเนิดร่วมเสมอ</strong>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="p-5 rounded-xl border border-slate-200 bg-slate-50">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-xs">2</span>
+            <h3 class="font-bold text-slate-800 text-base">การจัดโครงสร้างเลเยอร์ให้ตรงตามข้อกำหนด QHeim</h3>
+          </div>
+          <p class="text-xs md:text-sm text-slate-600 mb-3">
+            ระบบ QHeim กรองอ่านเลเยอร์ตามข้อกำหนดใน <code class="bg-slate-200 px-1 rounded font-mono">C:/QHeim/DATA/floorplanlayers.txt</code> ผู้เขียนแบบต้องตรวจสอบว่าวัตถุอยู่ในเลเยอร์ที่ถูกต้อง:
+          </p>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+            <div class="p-2.5 bg-white rounded border border-slate-200"><span class="font-mono font-bold text-blue-600">EE-GRID-UNIT</span><br><span class="text-slate-500">กริดยูนิตโมดูลาร์</span></div>
+            <div class="p-2.5 bg-white rounded border border-slate-200"><span class="font-mono font-bold text-blue-600">A-ANNO</span><br><span class="text-slate-500">ตัวเลขยูนิต 01, 02..</span></div>
+            <div class="p-2.5 bg-white rounded border border-slate-200"><span class="font-mono font-bold text-emerald-600">A-DOOR</span><br><span class="text-slate-500">บล็อกบานประตู 2D</span></div>
+            <div class="p-2.5 bg-white rounded border border-slate-200"><span class="font-mono font-bold text-emerald-600">A-WIND</span><br><span class="text-slate-500">บล็อกบานหน้าต่าง 2D</span></div>
+            <div class="p-2.5 bg-white rounded border border-slate-200"><span class="font-mono font-bold text-purple-600">A-ANNO-DOOR</span><br><span class="text-slate-500">ข้อความชื่อบานประตู</span></div>
+            <div class="p-2.5 bg-white rounded border border-slate-200"><span class="font-mono font-bold text-purple-600">A-ANNO-WIND</span><br><span class="text-slate-500">ข้อความชื่อหน้าต่าง</span></div>
+            <div class="p-2.5 bg-white rounded border border-slate-200"><span class="font-mono font-bold text-amber-600">A-WALL</span><br><span class="text-slate-500">เส้นแนวผนังอาคาร</span></div>
+            <div class="p-2.5 bg-white rounded border border-slate-200"><span class="font-mono font-bold text-amber-600">Hood</span><br><span class="text-slate-500">จุดช่องท่อดูดควัน</span></div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="p-5 rounded-xl border border-slate-200 bg-slate-50">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-xs">3</span>
+            <h3 class="font-bold text-slate-800 text-base">การรัน VBA Macro ส่งออกข้อความ (Export Text JSON)</h3>
+          </div>
+          <p class="text-xs md:text-sm text-slate-600 mb-3">
+            เพื่อแก้ปัญหาระบบนำเข้าของ SketchUp ไม่สามารถถอดรหัสภาษาไทยและตำแหน่ง Anchor ของ AutoCAD MText:
+          </p>
+          <ol class="list-decimal list-inside text-xs md:text-sm text-slate-700 space-y-2 bg-white p-4 rounded-lg border border-slate-200">
+            <li>ในหน้าต่าง AutoCAD ให้พิมพ์คำสั่ง <kbd class="px-2 py-0.5 bg-slate-100 border rounded font-mono text-xs">VBALOAD</kbd> แล้วเลือกไฟล์ <code class="bg-slate-100 px-1 rounded font-mono text-blue-700">C:\QHeim\ExportLTF.dvb</code></li>
+            <li>พิมพ์คำสั่ง <kbd class="px-2 py-0.5 bg-slate-100 border rounded font-mono text-xs">VBARUN</kbd> แล้วเลือกสั่งรันฟังก์ชัน <strong class="text-indigo-700">ExportAllText_ForSketchUp_Anchored</strong></li>
+            <li>ระบบจะทำการสแกนข้อความ Text/MText ใน ModelSpace ทั้งหมด แล้วเขียนไฟล์บันทึกไว้ที่:
+              <div class="mt-1 font-mono text-xs bg-slate-900 text-emerald-400 p-2 rounded">C:\QHeim\DATA\export-text.json</div>
+            </li>
+            <li>กล่องข้อความ AutoCAD จะเด้งขึ้นแจ้งเตือนยืนยัน: <em class="text-slate-600">"Export complete. Text count: xxx"</em></li>
+          </ol>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="p-5 rounded-xl border border-slate-200 bg-slate-50">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-xs">4</span>
+            <h3 class="font-bold text-slate-800 text-base">การบันทึกไฟล์ CAD DWG ลงโฟลเดอร์โครงการ</h3>
+          </div>
+          <p class="text-xs md:text-sm text-slate-600">
+            สั่งทำความสะอาดไฟล์ด้วย <kbd class="px-2 py-0.5 bg-slate-100 border rounded font-mono text-xs">-PURGE</kbd> &rarr; <kbd class="px-1.5 py-0.5 bg-slate-100 border rounded font-mono text-xs">ALL</kbd> แล้วบันทึกไฟล์ไว้ในไดเรกทอรีมาตรฐานโครงการ เช่น:
+            <code class="block mt-1 font-mono text-xs bg-white p-2 border border-slate-300 rounded text-slate-800">D:\00_QHeim_Work\&lt;ชื่อโปรเจกต์&gt;\&lt;ชื่อแบบ&gt;.dwg</code>
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 4: SOP SketchUp -->
+    <section id="sop-sketchup" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-lg">04</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">ช่วงที่ 2: ขั้นตอนการนำเข้าและประมวลผลใน SketchUp (SOP)</h2>
+          <p class="text-sm text-slate-500">ลำดับการคลิกใช้งานแถบเครื่องมือ Import OTF CAD สำหรับคนทำงาน</p>
+        </div>
+      </div>
+
+      <div class="space-y-6">
+
+        <!-- Step 1 in SKP -->
+        <div class="border border-blue-200 rounded-xl p-5 bg-blue-50/30">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-3">
+              <img src="ICON/D-CAD.jpg" alt="Import CAD" class="w-10 h-10 rounded shadow-sm border border-blue-300 object-cover">
+              <div>
+                <h3 class="font-bold text-slate-800 text-base">สเต็ปที่ 1: นำเข้าแบบ CAD พิกัดเดิม (Import CAD Original)</h3>
+                <span class="text-xs font-mono text-blue-700">Heim_InsertCADLTF.import_cad_original_location</span>
+              </div>
+            </div>
+            <span class="px-3 py-1 bg-blue-600 text-white rounded-full font-bold text-xs">คำสั่งแรกสุด</span>
+          </div>
+          <div class="space-y-2 text-xs md:text-sm text-slate-700">
+            <p><strong>การกระทำ:</strong> คลิกไอคอน <strong>Import CAD Original</strong> &rarr; หน้าต่างเลือกไฟล์จะเปิดขึ้น &rarr; นำทางไปยังโฟลเดอร์โครงการแล้วเลือกไฟล์ <code class="bg-white px-1 border rounded">.dwg</code> แล้วกด Open</p>
+            <p><strong>สิ่งที่ระบบทำอัตโนมัติ:</strong>
+              1. นำเข้าไฟล์ DWG โดยตั้งค่าพิกัดจุดกำเนิดตรงกัน <code class="bg-white px-1 border rounded">preserve_origin: true</code> หน่วยมิลลิเมตร<br>
+              2. ระเบิด Group ครอบนอกสุด 1 ครั้งเพื่อกระจายเลเยอร์<br>
+              3. อ่านไฟล์ <code class="bg-white px-1 border rounded">export-text.json</code> เพื่อสร้าง 3D Text ภาษาไทย/อังกฤษ (Cordia New) ตรงตำแหน่งพิกัดเป๊ะ<br>
+              4. ทำความสะอาดเลเยอร์และ Zoom Extents ให้อัตโนมัติ
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 2 in SKP -->
+        <div class="border border-indigo-200 rounded-xl p-5 bg-indigo-50/30">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-3">
+              <img src="ICON/D-UnitNumber.jpg" alt="Unit Number" class="w-10 h-10 rounded shadow-sm border border-indigo-300 object-cover">
+              <div>
+                <h3 class="font-bold text-slate-800 text-base">สเต็ปที่ 2: จัดกลุ่มและสร้างรหัสยูนิต (Unit Number)</h3>
+                <span class="text-xs font-mono text-indigo-700">Heim_InsertCADLTF.groupunit</span>
+              </div>
+            </div>
+            <span class="px-3 py-1 bg-indigo-600 text-white rounded-full font-bold text-xs">สเต็ปที่ 2</span>
+          </div>
+          <div class="space-y-2 text-xs md:text-sm text-slate-700">
+            <p><strong>การกระทำ:</strong> เมื่อแบบ CAD เข้ามาแล้ว ให้กดปุ่ม <strong>Unit Number</strong> ทันที โดยไม่ต้องเลือกวัตถุใดๆ ล่วงหน้า</p>
+            <p><strong>สิ่งที่ระบบทำอัตโนมัติ:</strong>
+              ระบบจะจับคู่สี่เหลี่ยมกริด <code class="bg-white px-1 border rounded">EE-GRID-UNIT</code> กับข้อความตัวเลขใน <code class="bg-white px-1 border rounded">A-ANNO</code> แล้วรวมเป็น Group ยูนิตเดียวกัน พร้อมย้ายเข้าสู่เลเยอร์ <strong>S-Unit</strong> และตั้งชื่อเป็นเลข 2 หลัก (<code class="bg-white px-1 border rounded">01</code>, <code class="bg-white px-1 border rounded">02</code>...) พร้อมบันทึก Attribute ตำแหน่ง
+            </p>
+            <p class="text-indigo-800 font-medium"><em>วิธีตรวจสอบ: คลิกที่ยูนิตในหน้าต่าง Entity Info จะต้องเห็น Layer เป็น "S-Unit" และ Instance Name เป็นเลขยูนิตสองหลัก</em></p>
+          </div>
+        </div>
+
+        <!-- Step 3 in SKP -->
+        <div class="border border-emerald-200 rounded-xl p-5 bg-emerald-50/30">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-3">
+              <img src="ICON/D-DoorWindowName.png" alt="Door Window Name" class="w-10 h-10 rounded shadow-sm border border-emerald-300 object-cover">
+              <div>
+                <h3 class="font-bold text-slate-800 text-base">สเต็ปที่ 3: ซิงค์ชื่อช่องเปิดและทิศทางเปิด (Door Window Name)</h3>
+                <span class="text-xs font-mono text-emerald-700">Heim_DoorNameLTF.new</span>
+              </div>
+            </div>
+            <span class="px-3 py-1 bg-emerald-600 text-white rounded-full font-bold text-xs">สเต็ปที่ 3</span>
+          </div>
+          <div class="space-y-2 text-xs md:text-sm text-slate-700">
+            <p><strong>การกระทำ:</strong> กดปุ่ม <strong>Door Window Name</strong> &rarr; เมื่อมีกล่องข้อความถาม <em>"Merge same-line text before grouping?"</em> ให้ตอบ <strong>Yes</strong> &rarr; หากมีประตูทางเข้าหลัก ให้เลือกประเภท Sub-type ใน Popup ยืนยัน</p>
+            <p><strong>สิ่งที่ระบบทำอัตโนมัติ:</strong>
+              1. จัดกลุ่มข้อความกำกับช่องเปิดเข้าสู่เลเยอร์ <code class="bg-white px-1 border rounded">text_door</code><br>
+              2. ค้นหาบล็อก 2D ใน <code class="bg-white px-1 border rounded">A-DOOR</code> และ <code class="bg-white px-1 border rounded">A-WIND</code> แล้วจับคู่กับข้อความชื่อบานที่ใกล้ที่สุด (&lt; 0.90 ม.)<br>
+              3. ยิงพิกัดเช็คขอบยูนิต (<code class="bg-white px-1 border rounded">checkOpen</code>) เพื่อต่อท้ายชื่อทิศทาง เช่น <code class="bg-white px-1 border rounded">_L</code> หรือ <code class="bg-white px-1 border rounded">_R</code><br>
+              4. เปลี่ยนชื่อ Component Definition และ Instance ให้ตรงกับแบบจริง (เช่น <code class="bg-white px-1 border rounded">WW1222_R</code>)
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 4 in SKP (EE & AC) -->
+        <div class="border border-slate-200 rounded-xl p-5 bg-slate-50">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded bg-slate-800 text-sky-400 font-bold flex items-center justify-center text-xs shadow-sm">EE/AC</div>
+              <div>
+                <h3 class="font-bold text-slate-800 text-base">สเต็ปที่ 4: การจัดการงานระบบอาคาร (EE & AC Tools - เสริม)</h3>
+                <span class="text-xs font-mono text-slate-500">Heim_EEGroup &bull; Heim_ACGroup</span>
+              </div>
+            </div>
+            <span class="px-3 py-1 bg-slate-200 text-slate-700 rounded-full font-bold text-xs">งานระบบเสริม</span>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs text-slate-700">
+            <div class="p-3 bg-white rounded-lg border border-slate-200">
+              <div class="font-bold text-slate-800 mb-1">1. Import Inside Block</div>
+              <p>กดปุ่มนำเข้า Text Inside เพื่อดึงสัญลักษณ์และโค้ดอุปกรณ์ที่อยู่ภายในบล็อกแอร์และระบบไฟฟ้า</p>
+            </div>
+            <div class="p-3 bg-white rounded-lg border border-slate-200">
+              <div class="font-bold text-slate-800 mb-1">2. EE Map Height</div>
+              <p>เลือกอุปกรณ์ไฟฟ้า แล้วกดปุ่มนี้เพื่อสแกนข้อความ <code class="bg-slate-100 px-1 rounded">H=xxxx</code> มาบันทึกลง Attribute ความสูง</p>
+            </div>
+            <div class="p-3 bg-white rounded-lg border border-slate-200">
+              <div class="font-bold text-slate-800 mb-1">3. Show/Change Height</div>
+              <p>กดดูตัวเลข 3D แสดงความสูงจำลองเพื่อตรวจสอบความถูกต้อง หรือแก้ไขระดับพร้อมกันทั้งกลุ่ม</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 5: Technical Logic -->
+    <section id="logic" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center font-bold text-lg">05</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">สถาปัตยกรรมและตรรกะเชิงลึก (Code Architecture)</h2>
+          <p class="text-sm text-slate-500">อธิบายการทำงานเชิงเทคนิค อัลกอริทึม และสูตรคำนวณเบื้องหลัง</p>
+        </div>
+      </div>
+
+      <div class="space-y-6">
+
+        <!-- Technical 1 -->
+        <div class="p-5 rounded-xl border border-slate-200 bg-slate-50/50">
+          <h3 class="font-bold text-slate-800 text-base mb-2">1. ตัวเลือกการนำเข้า DWG (Preserve Origin Options)</h3>
+          <p class="text-xs md:text-sm text-slate-600 mb-3">
+            ในไฟล์ <code class="bg-slate-200 px-1 rounded font-mono">Heim_InsertCADLTF.rb</code> ระบบกำหนด Options เพื่อบังคับให้ SketchUp นำเข้าตามพิกัดจริงของ AutoCAD โดยไม่มีการเลื่อนตำแหน่ง:
+          </p>
+          <pre><code>options = {
+  :units => "mm",                  # บังคับหน่วยมิลลิเมตรให้ตรงกับ AutoCAD UNITS
+  :merge_coplanar_faces => false,  # ไม่ยุบระนาบ เพื่อรักษาความสมบูรณ์ของเส้น
+  :show_summary => false,          # ปิดกล่องข้อความสรุปของ SketchUp
+  :preserve_origin => true         # หัวใจสำคัญ: ยึดจุดกำเนิด WCS (0,0,0) ป้องกันการเซ็ตเข้ากึ่งกลางอัตโนมัติ
+}
+status = model.import(dwg_path, options)</code></pre>
+        </div>
+
+        <!-- Technical 2 -->
+        <div class="p-5 rounded-xl border border-slate-200 bg-slate-50/50">
+          <h3 class="font-bold text-slate-800 text-base mb-2">2. การแปลง Anchor และสร้าง 3D Text ภาษาไทยจาก JSON</h3>
+          <p class="text-xs md:text-sm text-slate-600 mb-2">
+            เนื่องจาก 3D Text ของ SketchUp กำหนดจุดกำเนิดที่มุมล่างซ้ายเสมอ สคริปต์จึงคำนวณเวกเตอร์ Translation ย้อนกลับตามจุด Anchor ที่บันทึกมาจาก AutoCAD:
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+            <div class="p-3 bg-white rounded border border-slate-200">
+              <div class="font-bold text-slate-800 mb-1">การคำนวณความสูงและระยะบรรทัด:</div>
+              $$\text{Text Height} = \text{Height}_{\text{JSON}} \times 2.0$$
+              $$\text{Line Offset}_i = [0, -\text{LineSpacing} \times i, 0]$$
+            </div>
+            <div class="p-3 bg-white rounded border border-slate-200">
+              <div class="font-bold text-slate-800 mb-1">Transformation Matrix:</div>
+              $$\mathbf{T}_{\text{final}} = \mathbf{T}_{\text{point}} \times \mathbf{R}_{\text{rotation}} \times \mathbf{T}_{\text{anchor}}$$
+              <span class="text-slate-500 mt-1 block">หมุนรอบแกน Z_AXIS และเลื่อนไปพิกัดจริง x, y, z</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Technical 3 -->
+        <div class="p-5 rounded-xl border border-slate-200 bg-slate-50/50">
+          <h3 class="font-bold text-slate-800 text-base mb-2">3. อัลกอริทึมจับคู่บล็อกช่องเปิดและต่อท้ายทิศทาง (_L / _R)</h3>
+          <p class="text-xs md:text-sm text-slate-600 mb-3">
+            การทำงานใน <code class="bg-slate-200 px-1 rounded font-mono">Heim_DoorNameLTF.rb</code> มีขั้นตอนคำนวณ 3 ขั้นตอน:
+          </p>
+          <div class="space-y-2 text-xs md:text-sm text-slate-700 bg-white p-4 rounded border border-slate-200">
+            <div><strong>1. Merge Same-Line:</strong> ตรวจสอบทิศทาง <code class="bg-slate-100 px-1 rounded">xaxis.angle_between</code> น้อยกว่า 5 องศา และระยะแกน Y ต่ำกว่า 20 มม. จึงรวมเป็นข้อความเดียวกัน</div>
+            <div><strong>2. Distance Matching:</strong> คำนวณระยะทางแบบ Euclidean Distance ระหว่างบล็อก 2D กับข้อความ:
+              $$\Delta = \sqrt{(x_d - x_t)^2 + (y_d - y_t)^2} < 0.90\,\text{m}$$
+            </div>
+            <div><strong>3. Direction Vector (<code class="text-blue-700">checkOpen</code>):</strong> ตรวจสอบเวกเตอร์ของกรอบบานเทียบกับขอบเขต Bounding Box ของยูนิตเพื่อกำหนดทิศทางบานสวิง:
+              <span class="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded font-bold font-mono text-xs ml-2">WW1222 + _R &rarr; WW1222_R</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 6: Layer Matrix -->
+    <section id="layer-matrix" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-lg">06</div>
+          <div>
+            <h2 class="text-2xl font-bold text-slate-800">ตารางเลเยอร์และมาตรฐานข้อมูล (Layer Standards Matrix)</h2>
+            <p class="text-sm text-slate-500">โครงสร้างเลเยอร์ใน AutoCAD และบทบาทในระบบ SketchUp QHeim</p>
+          </div>
+        </div>
+        <div class="w-full md:w-64 no-print">
+          <input type="text" id="searchInput" placeholder="ค้นหาเลเยอร์หรือคำอธิบาย..." class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table id="layerTable" class="w-full text-left text-xs md:text-sm border-collapse">
+          <thead>
+            <tr class="bg-slate-100 border-b border-slate-200 text-slate-700">
+              <th class="p-3 font-bold">เลเยอร์ใน AutoCAD</th>
+              <th class="p-3 font-bold">เลเยอร์ใน SketchUp</th>
+              <th class="p-3 font-bold">ประเภท Entity</th>
+              <th class="p-3 font-bold">บทบาทในระบบ QHeim</th>
+              <th class="p-3 font-bold">ระบบที่นำไปใช้ต่อ</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            <tr class="hover:bg-slate-50">
+              <td class="p-3 font-mono font-bold text-blue-600">EE-GRID-UNIT</td>
+              <td class="p-3 font-mono text-slate-600">EE-GRID-UNIT</td>
+              <td class="p-3">Component / Block</td>
+              <td class="p-3">เส้นและบล็อกกรอบสี่เหลี่ยมขอบเขตของยูนิตโมดูลาร์</td>
+              <td class="p-3 font-bold text-indigo-700">รวมเข้า S-Unit</td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3 font-mono font-bold text-blue-600">A-ANNO</td>
+              <td class="p-3 font-mono text-slate-600">A-ANNO &rarr; S-Unit</td>
+              <td class="p-3">Text / 3D Text</td>
+              <td class="p-3">ตัวเลขระบุเบอร์ของยูนิต เช่น 01, 02 หรือ H01</td>
+              <td class="p-3 font-bold text-indigo-700">Unit Number &rarr; S-Unit</td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3 font-mono font-bold text-emerald-600">A-DOOR</td>
+              <td class="p-3 font-mono text-slate-600">A-DOOR</td>
+              <td class="p-3">ComponentInstance 2D</td>
+              <td class="p-3">สัญลักษณ์บานประตู 2D (บานสวิง, บานเลื่อน, ประตูทางเข้า)</td>
+              <td class="p-3 font-bold text-sky-700">LongleadTime (Door3D)</td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3 font-mono font-bold text-emerald-600">A-WIND</td>
+              <td class="p-3 font-mono text-slate-600">A-WIND</td>
+              <td class="p-3">ComponentInstance 2D</td>
+              <td class="p-3">สัญลักษณ์บานหน้าต่าง 2D (บานเลื่อน, บานกระทุ้ง, ช่องแสง)</td>
+              <td class="p-3 font-bold text-sky-700">LongleadTime (Door3D)</td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3 font-mono font-bold text-purple-600">A-ANNO-DOOR</td>
+              <td class="p-3 font-mono text-slate-600">text_door</td>
+              <td class="p-3">3D Text Group</td>
+              <td class="p-3">ข้อความรหัสเบอร์บานประตู เช่น ENTRANCE, D01</td>
+              <td class="p-3 font-bold text-emerald-700">Door Window Name</td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3 font-mono font-bold text-purple-600">A-ANNO-WIND</td>
+              <td class="p-3 font-mono text-slate-600">text_door</td>
+              <td class="p-3">3D Text Group</td>
+              <td class="p-3">ข้อความรหัสเบอร์หน้าต่าง เช่น WW1222, EW0920</td>
+              <td class="p-3 font-bold text-emerald-700">Door Window Name</td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3 font-mono font-bold text-amber-600">A-WALL</td>
+              <td class="p-3 font-mono text-slate-600">A-WALL</td>
+              <td class="p-3">Line / Polyline</td>
+              <td class="p-3">เส้นแนวผนังและขอบเขตกั้นห้องสถาปัตย์ 2D</td>
+              <td class="p-3 font-bold text-amber-700">Interior Wall System</td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3 font-mono font-bold text-amber-600">A-PATT-WALL</td>
+              <td class="p-3 font-mono text-slate-600">A-PATT-WALL</td>
+              <td class="p-3">Hatch / Lines</td>
+              <td class="p-3">ลวดลายและแฮทช์แสดงวัสดุบนแนวผนัง</td>
+              <td class="p-3 font-bold text-slate-600">Visual Reference</td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3 font-mono font-bold text-teal-600">A-AREA</td>
+              <td class="p-3 font-mono text-slate-600">A-ANNO-A-AREA</td>
+              <td class="p-3">Polyline Loop</td>
+              <td class="p-3">เส้นขอบเขตพื้นที่ห้องสำหรับคำนวณตารางเมตร (Area)</td>
+              <td class="p-3 font-bold text-teal-700">Floor Area Calculation</td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3 font-mono font-bold text-rose-600">Hood</td>
+              <td class="p-3 font-mono text-slate-600">Hood</td>
+              <td class="p-3">Component / Circle</td>
+              <td class="p-3">จุดตำแหน่งท่อระบายอากาศและฮูดดูดควันในห้องครัว</td>
+              <td class="p-3 font-bold text-rose-700">Exterior Wall (Hood)</td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3 font-mono font-bold text-sky-600">IN-SAN-WARE</td>
+              <td class="p-3 font-mono text-slate-600">IN-SAN-WARE</td>
+              <td class="p-3">Component 2D</td>
+              <td class="p-3">สุขภัณฑ์ อ่างล้างหน้า โถส้วม และอุปกรณ์ห้องน้ำ</td>
+              <td class="p-3 font-bold text-sky-700">Sanitary & Joint Plate (WC)</td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3 font-mono font-bold text-indigo-600">EE-TEXT</td>
+              <td class="p-3 font-mono text-slate-600">EE-TEXT</td>
+              <td class="p-3">3D Text Group</td>
+              <td class="p-3">ข้อความกำกับระดับความสูงอุปกรณ์ไฟฟ้า เช่น H=300, H=1100</td>
+              <td class="p-3 font-bold text-indigo-700">EE Map Height</td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3 font-mono font-bold text-indigo-600">EE-EQPM-*</td>
+              <td class="p-3 font-mono text-slate-600">02-eeblock</td>
+              <td class="p-3">ComponentInstance</td>
+              <td class="p-3">บล็อกอุปกรณ์ไฟฟ้า (เต้ารับ, สวิตช์, ตู้ควบคุม, แอร์)</td>
+              <td class="p-3 font-bold text-indigo-700">EE Electrical System</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Section 7: Troubleshooting -->
+    <section id="troubleshooting" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center font-bold text-lg">07</div>
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">แนวทางแก้ไขปัญหาที่พบบ่อย (Troubleshooting Guide)</h2>
+          <p class="text-sm text-slate-500">วิธีวินิจฉัยและแก้ปัญหาที่มักพบในงานเตรียมและนำเข้าไฟล์ CAD AR</p>
+        </div>
+      </div>
+
+      <div class="space-y-4 text-xs md:text-sm">
+
+        <!-- Trouble 1 -->
+        <div class="p-5 rounded-xl border border-red-200 bg-red-50/50">
+          <h4 class="font-bold text-red-900 mb-1 text-sm">1. แปลนแต่ละชั้นนำเข้าแล้วไม่ตรงกัน (ชั้น 1 กับชั้น 2 เหลื่อมกัน)</h4>
+          <p class="text-red-700 mb-2">
+            <strong>สาเหตุ:</strong> จุดกำเนิด Origin <code class="bg-red-100 px-1 rounded font-mono">(0,0,0)</code> ใน AutoCAD ของทั้งสองไฟล์ไม่ได้อยู่ที่ตำแหน่งเสาเดียวกัน หรือเกิดการ Move ย้ายแปลนหลังจากเขียนเสร็จ
+          </p>
+          <div class="bg-white p-3 rounded-lg border border-red-200 text-slate-700">
+            <strong class="text-emerald-700">วิธีแก้:</strong> เปิดไฟล์ AutoCAD ทั้งสองชั้น ใช้คำสั่ง <kbd class="px-1.5 py-0.5 bg-slate-100 border rounded font-mono">ID</kbd> คลิกที่จุดตัดมุมเสาอ้างอิงหลัก (เช่น เสา 1-A) ว่าได้พิกัด <code class="font-mono">X=0, Y=0, Z=0</code> หรือไม่ หากไม่ตรง ให้ใช้คำสั่ง <kbd class="px-1.5 py-0.5 bg-slate-100 border rounded font-mono">MOVE</kbd> แปลนทั้งหมดโดยใช้จุดตัดเสานั้นเป็น Base Point แล้วพิมพ์พิกัดปลายทางเป็น <code class="font-mono">0,0,0</code> จากนั้น Save ไฟล์แล้ว Import เข้า SketchUp ใหม่
+          </div>
+        </div>
+
+        <!-- Trouble 2 -->
+        <div class="p-5 rounded-xl border border-amber-200 bg-amber-50/50">
+          <h4 class="font-bold text-amber-900 mb-1 text-sm">2. ตัวหนังสือภาษาไทยไม่ปรากฏ หรือขึ้นเตือน "CAD text JSON file not found"</h4>
+          <p class="text-amber-700 mb-2">
+            <strong>สาเหตุ:</strong> ยังไม่ได้สั่งรัน VBA Macro ใน AutoCAD หรือรันแล้วแต่เกิดข้อผิดพลาดในการเขียนไฟล์ <code class="bg-amber-100 px-1 rounded font-mono">C:/QHeim/DATA/export-text.json</code>
+          </p>
+          <div class="bg-white p-3 rounded-lg border border-amber-200 text-slate-700">
+            <strong class="text-emerald-700">วิธีแก้:</strong> กลับไปที่หน้าต่าง AutoCAD ตรวจสอบว่าเปิดไฟล์แปลนอยู่ แล้วพิมพ์คำสั่ง <kbd class="px-1.5 py-0.5 bg-slate-100 border rounded font-mono">VBARUN</kbd> &rarr; เลือก <code class="font-mono">ExportAllText_ForSketchUp_Anchored</code> &rarr; รอจนมี Popup ยืนยันยอดจำนวนตัวอักษร แล้วค่อยกลับมากดปุ่ม <strong>Import CAD Original</strong> ใน SketchUp
+          </div>
+        </div>
+
+        <!-- Trouble 3 -->
+        <div class="p-5 rounded-xl border border-amber-200 bg-amber-50/50">
+          <h4 class="font-bold text-amber-900 mb-1 text-sm">3. สระหรือวรรณยุกต์ภาษาไทยอ่านไม่ออกหรือเพี้ยน (Encoding Issue)</h4>
+          <p class="text-amber-700 mb-2">
+            <strong>สาเหตุ:</strong> การเข้ารหัสไฟล์ข้อความไม่ตรงกันระหว่างระบบ Windows ANSI กับ UTF-8
+          </p>
+          <div class="bg-white p-3 rounded-lg border border-amber-200 text-slate-700">
+            <strong class="text-emerald-700">วิธีแก้:</strong> สคริปต์ <code class="font-mono">Heim_InsertCADLTF.rb</code> เวอร์ชันล่าสุดได้รับการปรับปรุงให้อ่าน Byte Order Mark (UTF-16LE, UTF-8) อัตโนมัติ หากยังพบปัญหา สามารถเปิดไฟล์ <code class="font-mono">C:/QHeim/DATA/export-text.json</code> ด้วย Notepad แล้วกด Save As &rarr; เลือก Encoding เป็น <strong>UTF-8 with BOM</strong>
+          </div>
+        </div>
+
+        <!-- Trouble 4 -->
+        <div class="p-5 rounded-xl border border-blue-200 bg-blue-50/50">
+          <h4 class="font-bold text-blue-900 mb-1 text-sm">4. บล็อกประตู-หน้าต่างไม่เปลี่ยนชื่อ หรือไม่ต่อท้ายทิศทาง (_L / _R)</h4>
+          <p class="text-blue-700 mb-2">
+            <strong>สาเหตุ:</strong> 
+            1. ตัวหนังสือไม่ได้อยู่ในเลเยอร์ <code class="bg-blue-100 px-1 rounded font-mono">A-ANNO-DOOR</code> หรือ <code class="bg-blue-100 px-1 rounded font-mono">A-ANNO-WIND</code><br>
+            2. บล็อก 2D ไม่ได้อยู่ในเลเยอร์ <code class="bg-blue-100 px-1 rounded font-mono">A-DOOR</code> หรือ <code class="bg-blue-100 px-1 rounded font-mono">A-WIND</code><br>
+            3. ระยะห่างระหว่างตัวหนังสือกับบล็อกไกลเกินระยะ Tolerance 0.90 เมตร
+          </p>
+          <div class="bg-white p-3 rounded-lg border border-blue-200 text-slate-700">
+            <strong class="text-emerald-700">วิธีแก้:</strong> ตรวจสอบเลเยอร์ของวัตถุทั้งสองชิ้นให้ถูกต้อง หากเลเยอร์ถูกต้องแต่วางข้อความห่างเกินไป ให้เลื่อนข้อความเข้ามาใกล้จุดศูนย์กลางของบล็อกบาน แล้วกดปุ่ม <strong>Door Window Name</strong> ซ้ำอีกครั้ง
+          </div>
+        </div>
+
+        <!-- Trouble 5 -->
+        <div class="p-5 rounded-xl border border-purple-200 bg-purple-50/50">
+          <h4 class="font-bold text-purple-900 mb-1 text-sm">5. กด Unit Number แล้วไม่เกิดกลุ่มในเลเยอร์ S-Unit</h4>
+          <p class="text-purple-700 mb-2">
+            <strong>สาเหตุ:</strong> ข้อความตัวเลขยูนิตในเลเยอร์ <code class="bg-purple-100 px-1 rounded font-mono">A-ANNO</code> ไม่ได้อยู่ภายในพื้นที่สี่เหลี่ยมกริดของ <code class="bg-purple-100 px-1 rounded font-mono">EE-GRID-UNIT</code> หรือรูปแบบข้อความไม่ได้เป็นตัวเลข
+          </p>
+          <div class="bg-white p-3 rounded-lg border border-purple-200 text-slate-700">
+            <strong class="text-emerald-700">วิธีแก้:</strong> ตรวจสอบว่าตัวหนังสือระบุชื่อยูนิตต้องเป็นตัวเลขล้วน (เช่น <code class="font-mono">01</code>, <code class="font-mono">02</code>) หรือขึ้นต้นด้วยตัว H (เช่น <code class="font-mono">H01</code>) และตำแหน่งตัวหนังสือต้องวางอยู่ภายในกรอบสี่เหลี่ยมกริดของยูนิตนั้นๆ
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="max-w-6xl mx-auto text-center text-xs text-slate-400 py-8">
+    QHeim Modular Construction System &bull; CAD AR Import Documentation &bull; Generated Automatically
+  </footer>
+
+  <script>
+    // Live Search Filter for Layer Standards Table
+    const searchInput = document.getElementById('searchInput');
+    const table = document.getElementById('layerTable');
+    const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+    searchInput.addEventListener('input', function() {
+      const filter = searchInput.value.toLowerCase();
+      for (let i = 0; i < rows.length; i++) {
+        const text = rows[i].textContent.toLowerCase();
+        rows[i].style.display = text.includes(filter) ? '' : 'none';
+      }
+    });
+  </script>
+</body>
+</html>
