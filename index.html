@@ -48,17 +48,17 @@
 
       <!-- Quick Audience Switcher -->
       <div class="mt-8 pt-6 border-t border-slate-800/80 flex flex-wrap gap-2 text-xs">
-        <a href="#onboarding" class="px-3.5 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-medium hover:bg-emerald-500/30 transition">
-          🔰 สำหรับพนักงานใหม่ (Onboarding)
-        </a>
-        <a href="#cheat-sheet" class="px-3.5 py-1.5 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/30 font-medium hover:bg-amber-500/30 transition">
-          ⚡ สำหรับคนที่ลืม (Cheat Sheet &amp; กฎเหล็ก)
-        </a>
-        <a href="#handover" class="px-3.5 py-1.5 rounded-lg bg-purple-500/20 text-purple-300 border border-purple-500/30 font-medium hover:bg-purple-500/30 transition">
-          🏛️ สำหรับส่งมอบงาน / คนรุ่นหลัง (Handover)
+        <a href="#parallel-workflow" class="px-3.5 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-medium hover:bg-emerald-500/30 transition">
+          👥 การแบ่งสายงานในทีม (Parallel Workflow)
         </a>
         <a href="#modules" class="px-3.5 py-1.5 rounded-lg bg-blue-500/20 text-blue-300 border border-blue-500/30 font-medium hover:bg-blue-500/30 transition">
           📚 คู่มือเจาะลึก 7 โมดูล (Modules Catalog)
+        </a>
+        <a href="#cheat-sheet" class="px-3.5 py-1.5 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/30 font-medium hover:bg-amber-500/30 transition">
+          ⚡ 7 กฎเหล็ก &amp; Cheat Sheet
+        </a>
+        <a href="#handover" class="px-3.5 py-1.5 rounded-lg bg-purple-500/20 text-purple-300 border border-purple-500/30 font-medium hover:bg-purple-500/30 transition">
+          🏛️ เอกสารส่งมอบงาน (Handover)
         </a>
       </div>
     </div>
@@ -66,31 +66,31 @@
 
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12 flex-grow w-full">
 
-    <!-- Interactive Pipeline Roadmap -->
+    <!-- Interactive Pipeline Roadmap (Updated 7 Steps Order) -->
     <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
       <div class="flex items-center gap-3 mb-4">
         <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-lg">00</div>
         <div>
-          <h2 class="text-2xl font-bold text-slate-800">ลำดับขั้นตอนการทำงานทั้งระบบ (End-to-End Workflow)</h2>
-          <p class="text-sm text-slate-500">เส้นทางการไหลของข้อมูลตั้งแต่ออกแบบ CAD 2D จนถึงผลิตที่โรงงาน SCG Heim</p>
+          <h2 class="text-2xl font-bold text-slate-800">7 ลำดับขั้นตอนมาตรฐาน (Standard 7-Step Pipeline)</h2>
+          <p class="text-sm text-slate-500">ขั้นตอนการทำงานตั้งแต่ไฟล์ CAD 2D จนถึงแบบ 2D Shop Drawing และการส่งยอดผลิตโรงงาน</p>
         </div>
       </div>
 
-      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3 mb-6 text-center text-xs">
+      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3 mb-4 text-center text-xs">
         <a href="CAD_AR_Doc.html" class="p-3 rounded-xl border border-blue-200 bg-blue-50/50 hover:bg-blue-100/50 transition">
           <div class="font-bold text-blue-800 mb-1">Step 1</div>
           <div class="font-semibold text-slate-800">CAD AR</div>
           <div class="text-[10px] text-slate-500 mt-1">นำเข้าแปลน 2D DWG</div>
         </a>
-        <a href="Struc_Doc.html" class="p-3 rounded-xl border border-indigo-200 bg-indigo-50/50 hover:bg-indigo-100/50 transition">
-          <div class="font-bold text-indigo-800 mb-1">Step 2</div>
-          <div class="font-semibold text-slate-800">Structure</div>
-          <div class="text-[10px] text-slate-500 mt-1">เสา คาน พื้น รูท่อ</div>
-        </a>
-        <a href="LongleadTime_Doc.html" class="p-3 rounded-xl border border-cyan-200 bg-cyan-50/50 hover:bg-cyan-100/50 transition">
-          <div class="font-bold text-cyan-800 mb-1">Step 3</div>
+        <a href="LongleadTime_Doc.html" class="p-3 rounded-xl border border-sky-200 bg-sky-50/50 hover:bg-sky-100/50 transition">
+          <div class="font-bold text-sky-800 mb-1">Step 2</div>
           <div class="font-semibold text-slate-800">Longlead</div>
           <div class="text-[10px] text-slate-500 mt-1">ประตู-หน้าต่าง MIM</div>
+        </a>
+        <a href="Struc_Doc.html" class="p-3 rounded-xl border border-indigo-200 bg-indigo-50/50 hover:bg-indigo-100/50 transition">
+          <div class="font-bold text-indigo-800 mb-1">Step 3</div>
+          <div class="font-semibold text-slate-800">Structure</div>
+          <div class="text-[10px] text-slate-500 mt-1">เสา คาน พื้น รูท่อ</div>
         </a>
         <a href="ExteriorWall_Doc.html" class="p-3 rounded-xl border border-teal-200 bg-teal-50/50 hover:bg-teal-100/50 transition">
           <div class="font-bold text-teal-800 mb-1">Step 4</div>
@@ -115,6 +115,104 @@
       </div>
     </section>
 
+    <!-- NEW SECTION: Team Parallel Workflow -->
+    <section id="parallel-workflow" class="bg-gradient-to-br from-emerald-50 via-teal-50/30 to-slate-50 rounded-2xl border-2 border-emerald-300 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold text-lg">👥</div>
+        <div>
+          <h2 class="text-2xl font-bold text-emerald-950">การแบ่งสายงานในทีมแบบคู่ขนาน (Multi-User Parallel Workflow)</h2>
+          <p class="text-sm text-emerald-800">กระบวนการทำงานจริงในทีม SCG HEIM: คนทำ Step 1 เสร็จแล้วแจกจ่ายให้ทีมงานทำพร้อมกัน</p>
+        </div>
+      </div>
+
+      <!-- Explanation Banner -->
+      <div class="bg-white p-4 rounded-xl border border-emerald-200 mb-6 text-xs md:text-sm text-slate-700 leading-relaxed shadow-sm">
+        <div class="font-bold text-emerald-900 text-base mb-1">💡 หลักการกระจายงาน (Work Distribution Principle):</div>
+        <p>
+          <strong>Step 1 (CAD AR)</strong> จะมีพนักงานเพียงคนเดียวทำหน้าที่นำเข้าแบบและเซ็ตอัปโครงสร้างโมเดลตั้งต้นให้สมบูรณ์ (Master Base Model) 
+          จากนั้นจึงส่งต่อไฟล์นี้ให้ทีมงานแยกย้ายกันไปทำคู่ขนานตามความเชี่ยวชาญ:
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3 font-medium">
+          <div class="p-2.5 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-900">
+            👉 <strong>บางคนทำ Step 2 (Longlead) ควบคู่กับ Step 4 (Ext Wall)</strong>
+          </div>
+          <div class="p-2.5 rounded-lg bg-indigo-50 border border-indigo-200 text-indigo-900">
+            👉 <strong>บางคนทำ Step 3 (Structure)</strong>
+          </div>
+          <div class="p-2.5 rounded-lg bg-purple-50 border border-purple-200 text-purple-900">
+            👉 <strong>บางคนทำ Step 5 (Int Wall)</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mermaid Diagram -->
+      <div class="bg-white p-5 rounded-xl border border-emerald-200 shadow-sm mb-6">
+        <h4 class="text-xs font-bold uppercase text-slate-500 mb-3 tracking-wider">ผังการทำงานเป็นทีมแบบคู่ขนาน (Parallel Collaboration Flowchart)</h4>
+        <pre class="mermaid bg-transparent p-0">
+flowchart TD
+    subgraph S1["1. ผู้จัดเตรียมไฟล์ตั้งต้น (Preparer / Modeler Lead)"]
+        A["Step 1: CAD AR (นำเข้าแปลน 2D DWG)<br/>จัดกลุ่ม S-Unit & ซิงค์ชื่อ Door/Window"] --> BASE[("📁 Master Base File:<br/>CAD_AR_Setup.skp")]
+    end
+
+    subgraph S_PARA["2. แจกจ่ายไฟล์ให้ทีมงานต่างคนต่างทำพร้อมกัน (Parallel Workstreams)"]
+        BASE -->|แจกไฟล์ Base| B1["👤 สายงาน A: ช่องเปิด & เปลือกนอก<br/>👉 Step 2: LongleadTime (ประตู-หน้าต่าง MIM)<br/>👉 Step 4: Ext Wall (ผนัง AAFP & เสา Stud)"]
+        BASE -->|แจกไฟล์ Base| B2["👤 สายงาน B: วิศวกรรมโครงสร้าง<br/>👉 Step 3: Structure (เสา-คาน-พื้น-รูท่อ)"]
+        BASE -->|แจกไฟล์ Base| B3["👤 สายงาน C: สถาปัตยกรรมภายใน<br/>👉 Step 5: Int Wall (ผนังใน & พาร์ทิชัน)"]
+    end
+
+    subgraph S_MERGE["3. รวมโมเดล & งานระบบขั้นสุดท้าย (Assembly & Final Delivery)"]
+        B1 & B2 & B3 --> M["🔗 รวมโมเดลทุกสายงานเข้าด้วยกัน"]
+        M --> C1["👉 Step 6: PartInstall (Flashing & ยางกันสั่น)"]
+        C1 --> C2["👉 Step 7: EE System (ไฟฟ้า แอร์ สื่อสาร LayOut BOM)"]
+        C2 --> OUT[("📦 ส่งออกผลิตโรงงาน (BOM & LayOut Drawing)")]
+    end
+        </pre>
+      </div>
+
+      <!-- Role Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs md:text-sm">
+        <div class="p-4 bg-white rounded-xl border border-emerald-200 shadow-sm space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-emerald-900 text-sm">สายงาน A: ประตู-หน้าต่าง &amp; ผนังนอก</span>
+            <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[10px] font-bold">Step 2 + 4</span>
+          </div>
+          <p class="text-slate-600 leading-relaxed">
+            ทำ <strong>Step 2 (LongleadTime)</strong> สร้างประตู-หน้าต่าง 3D และถอดรหัส MIM ควบคู่กับ <strong>Step 4 (Ext Wall)</strong> วางเสา Stud, เสามุม Corner, เสา Window Set และแผ่นผนัง AAFP เนื่องจากตำแหน่งเสาข้างช่องเปิดต้องอ้างอิงกับบานประตู-หน้าต่างโดยตรง
+          </p>
+          <div class="pt-2 flex gap-2">
+            <a href="LongleadTime_Doc.html" class="text-sky-700 hover:underline font-semibold">คู่มือ Longlead &rarr;</a>
+            <a href="ExteriorWall_Doc.html" class="text-teal-700 hover:underline font-semibold">คู่มือ Ext Wall &rarr;</a>
+          </div>
+        </div>
+
+        <div class="p-4 bg-white rounded-xl border border-indigo-200 shadow-sm space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-indigo-900 text-sm">สายงาน B: วิศวกรรมโครงสร้าง</span>
+            <span class="px-2 py-0.5 rounded bg-indigo-100 text-indigo-800 text-[10px] font-bold">Step 3</span>
+          </div>
+          <p class="text-slate-600 leading-relaxed">
+            ทำ <strong>Step 3 (Structure)</strong> สร้างโครงสร้างโมดูลาร์ 3D (เสา, คาน, ตง, พื้น Smartboard), ดรอปพื้นห้องน้ำ (Bathroom), ช่องเปิดบันได (Stair), ช่องเปิดโล่ง (Void), ชานเข้าบ้าน (Entrance), เจาะรูท่อ Service Hole (BR/FS/CS/AC) และ Ceiling Joint
+          </p>
+          <div class="pt-2">
+            <a href="Struc_Doc.html" class="text-indigo-700 hover:underline font-semibold">คู่มือ Structure &rarr;</a>
+          </div>
+        </div>
+
+        <div class="p-4 bg-white rounded-xl border border-purple-200 shadow-sm space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-purple-900 text-sm">สายงาน C: สถาปัตยกรรมภายใน</span>
+            <span class="px-2 py-0.5 rounded bg-purple-100 text-purple-800 text-[10px] font-bold">Step 5</span>
+          </div>
+          <p class="text-slate-600 leading-relaxed">
+            ทำ <strong>Step 5 (Int Wall)</strong> ติดตั้งผนังพาร์ทิชันแบ่งห้องสำเร็จรูปภายในบ้านโมดูลาร์, เสากรอบช่องเปิดประตู-หน้าต่างภายใน, และวางบล็อกปิดรอยต่อระหว่างยูนิตกล่องโมดูลาร์
+          </p>
+          <div class="pt-2">
+            <a href="InteriorWall_Doc.html" class="text-purple-700 hover:underline font-semibold">คู่มือ Interior Wall &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Section: 7 Core Modules Cards Grid -->
     <section id="modules" class="space-y-6">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
@@ -130,7 +228,7 @@
         <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition flex flex-col">
           <div class="bg-gradient-to-r from-blue-700 to-indigo-700 p-4 text-white">
             <div class="flex items-center justify-between">
-              <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white/20">Module 01</span>
+              <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white/20">Step 01</span>
               <span class="text-xs text-blue-200">CADLTF</span>
             </div>
             <h3 class="text-xl font-bold mt-2">CAD AR / CAD LTF</h3>
@@ -150,35 +248,11 @@
           </div>
         </div>
 
-        <!-- Card 2: Structure -->
-        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition flex flex-col">
-          <div class="bg-gradient-to-r from-blue-900 to-slate-800 p-4 text-white">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white/20">Module 02</span>
-              <span class="text-xs text-blue-200">Struc</span>
-            </div>
-            <h3 class="text-xl font-bold mt-2">Structure (Struc)</h3>
-          </div>
-          <div class="p-5 flex-grow flex flex-col justify-between space-y-4 text-xs md:text-sm">
-            <p class="text-slate-600 leading-relaxed">
-              ระบบสร้างโครงสร้างโมดูลาร์ 3D (ชั้น 1-3), ปรับระดับพื้น Smartboard, งานระบบห้องน้ำ-บันได-Void-ทางเข้า, งานเจาะท่อ Service Hole (BR/FS/CS/AC), ชิ้นส่วนพิเศษ Setback/Turnbuckle, ข้อต่อเพดาน Ceiling Joint, และการตรวจถอด BOM
-            </p>
-            <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
-              <a href="Struc_Doc.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-900 hover:bg-blue-800 text-white font-medium transition text-xs">
-                <span>🌐 เปิดคู่มือเว็บ (HTML)</span>
-              </a>
-              <a href="Struc_Doc.md" class="text-slate-500 hover:text-slate-800 text-xs">
-                Markdown &rarr;
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 3: LongleadTime -->
+        <!-- Card 2: LongleadTime -->
         <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition flex flex-col">
           <div class="bg-gradient-to-r from-sky-600 to-cyan-700 p-4 text-white">
             <div class="flex items-center justify-between">
-              <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white/20">Module 03</span>
+              <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white/20">Step 02</span>
               <span class="text-xs text-sky-200">LongleadTime</span>
             </div>
             <h3 class="text-xl font-bold mt-2">LongleadTime</h3>
@@ -198,11 +272,35 @@
           </div>
         </div>
 
+        <!-- Card 3: Structure -->
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition flex flex-col">
+          <div class="bg-gradient-to-r from-blue-900 to-slate-800 p-4 text-white">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white/20">Step 03</span>
+              <span class="text-xs text-blue-200">Struc</span>
+            </div>
+            <h3 class="text-xl font-bold mt-2">Structure (Struc)</h3>
+          </div>
+          <div class="p-5 flex-grow flex flex-col justify-between space-y-4 text-xs md:text-sm">
+            <p class="text-slate-600 leading-relaxed">
+              ระบบสร้างโครงสร้างโมดูลาร์ 3D (ชั้น 1-3), ปรับระดับพื้น Smartboard, งานระบบห้องน้ำ-บันได-Void-ทางเข้า, งานเจาะท่อ Service Hole (BR/FS/CS/AC), ชิ้นส่วนพิเศษ Setback/Turnbuckle, ข้อต่อเพดาน Ceiling Joint, และการตรวจถอด BOM
+            </p>
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+              <a href="Struc_Doc.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-900 hover:bg-blue-800 text-white font-medium transition text-xs">
+                <span>🌐 เปิดคู่มือเว็บ (HTML)</span>
+              </a>
+              <a href="Struc_Doc.md" class="text-slate-500 hover:text-slate-800 text-xs">
+                Markdown &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+
         <!-- Card 4: Exterior Wall -->
         <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition flex flex-col">
           <div class="bg-gradient-to-r from-emerald-700 to-teal-800 p-4 text-white">
             <div class="flex items-center justify-between">
-              <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white/20">Module 04</span>
+              <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white/20">Step 04</span>
               <span class="text-xs text-emerald-200">STD &amp; Switch</span>
             </div>
             <h3 class="text-xl font-bold mt-2">Exterior Wall</h3>
@@ -226,7 +324,7 @@
         <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition flex flex-col">
           <div class="bg-gradient-to-r from-purple-700 to-indigo-800 p-4 text-white">
             <div class="flex items-center justify-between">
-              <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white/20">Module 05</span>
+              <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white/20">Step 05</span>
               <span class="text-xs text-purple-200">Interior</span>
             </div>
             <h3 class="text-xl font-bold mt-2">Interior Wall</h3>
@@ -250,7 +348,7 @@
         <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition flex flex-col">
           <div class="bg-gradient-to-r from-rose-600 to-orange-700 p-4 text-white">
             <div class="flex items-center justify-between">
-              <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white/20">Module 06</span>
+              <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white/20">Step 06</span>
               <span class="text-xs text-rose-200">PartInstall</span>
             </div>
             <h3 class="text-xl font-bold mt-2">PartInstall</h3>
@@ -274,7 +372,7 @@
         <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition flex flex-col lg:col-span-3">
           <div class="bg-gradient-to-r from-amber-600 via-orange-600 to-amber-700 p-4 text-white">
             <div class="flex items-center justify-between">
-              <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white/20">Module 07</span>
+              <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white/20">Step 07</span>
               <span class="text-xs text-amber-200">EE Module</span>
             </div>
             <h3 class="text-xl font-bold mt-2">Electricity &amp; Communication (EE)</h3>
@@ -313,15 +411,15 @@
           <p class="text-slate-600">จุดอ้างอิง WCS ใน AutoCAD ของชั้น 1F, 2F, 3F ต้องตรงกัน มิฉะนั้นโมเดลใน SketchUp จะไม่ซ้อนทับกันอย่างถูกต้อง</p>
         </div>
         <div class="p-3.5 bg-white rounded-xl border border-amber-200 shadow-sm">
-          <div class="font-bold text-amber-900 mb-1">2. ลำดับปุ่มนำเข้า CAD AR ห้ามข้ามขั้นตอน</div>
+          <div class="font-bold text-amber-900 mb-1">2. ลำดับปุ่มนำเข้า CAD AR ห้ามข้ามขั้นตอน (Step 1)</div>
           <p class="text-slate-600">ต้องรันเรียงตามลำดับ: <code>Import CAD Original</code> &rarr; <code>Unit Number</code> &rarr; <code>Door Window Name</code> เท่านั้น</p>
         </div>
         <div class="p-3.5 bg-white rounded-xl border border-amber-200 shadow-sm">
-          <div class="font-bold text-amber-900 mb-1">3. เจาะรูท่อ (Hole SB) ก่อนรัน Ceiling Joint เสมอ</div>
+          <div class="font-bold text-amber-900 mb-1">3. เจาะรูท่อ (Hole SB) ก่อนรัน Ceiling Joint เสมอ (Step 3)</div>
           <p class="text-slate-600">หากมีคอมโพเนนต์ Ceiling Joint (<code class="font-mono">AGAZ*</code>) ค้างอยู่ในโมเดล ระบบ Hole SB จะถูกบล็อกไม่ให้ทำงาน</p>
         </div>
         <div class="p-3.5 bg-white rounded-xl border border-amber-200 shadow-sm">
-          <div class="font-bold text-amber-900 mb-1">4. ต้องกด Shaft และ Floor Area ก่อนเดินสาย EE เสมอ</div>
+          <div class="font-bold text-amber-900 mb-1">4. ต้องกด Shaft และ Floor Area ก่อนเดินสาย EE เสมอ (Step 7)</div>
           <p class="text-slate-600">เพื่อให้ระบบลงทะเบียนพิกัดกริด <code>ix-iy</code> และทราบตำแหน่งชาร์ป มิฉะนั้นสายไฟจะไม่สามารถค้นหาเส้นทางข้ามยูนิตได้</p>
         </div>
         <div class="p-3.5 bg-white rounded-xl border border-amber-200 shadow-sm">
@@ -388,17 +486,20 @@
   <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 text-xs no-print">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3">
       <div class="flex flex-wrap justify-center gap-4">
-        <a href="CAD_AR_Doc.html" class="hover:text-white transition">CAD AR</a> &bull;
-        <a href="Struc_Doc.html" class="hover:text-white transition">Structure</a> &bull;
-        <a href="ExteriorWall_Doc.html" class="hover:text-white transition">Exterior Wall</a> &bull;
-        <a href="InteriorWall_Doc.html" class="hover:text-white transition">Interior Wall</a> &bull;
-        <a href="PartInstall_Doc.html" class="hover:text-white transition">PartInstall</a> &bull;
-        <a href="LongleadTime_Doc.html" class="hover:text-white transition">LongleadTime</a> &bull;
-        <a href="EE_Doc.html" class="hover:text-white transition">EE System</a> &bull;
+        <a href="CAD_AR_Doc.html" class="hover:text-white transition">Step 1: CAD AR</a> &bull;
+        <a href="LongleadTime_Doc.html" class="hover:text-white transition">Step 2: Longlead</a> &bull;
+        <a href="Struc_Doc.html" class="hover:text-white transition">Step 3: Structure</a> &bull;
+        <a href="ExteriorWall_Doc.html" class="hover:text-white transition">Step 4: Ext Wall</a> &bull;
+        <a href="InteriorWall_Doc.html" class="hover:text-white transition">Step 5: Int Wall</a> &bull;
+        <a href="PartInstall_Doc.html" class="hover:text-white transition">Step 6: PartInstall</a> &bull;
+        <a href="EE_Doc.html" class="hover:text-white transition">Step 7: EE System</a> &bull;
         <a href="README.md" class="hover:text-white transition">README.md</a>
       </div>
       <p>QHeim Modular Construction BIM Automation Documentation &bull; SCG HEIM Engineering</p>
-      <p class="text-slate-500">Repository: <a href="https://github.com/suteechu/manual-QHeim.git" class="underline hover:text-slate-300">https://github.com/suteechu/manual-QHeim.git</a></p>
+      <p class="text-slate-500">
+        GitHub Pages: <a href="https://suteechu.github.io/manual-QHeim/" class="underline hover:text-slate-300">https://suteechu.github.io/manual-QHeim/</a> | 
+        Repository: <a href="https://github.com/suteechu/manual-QHeim.git" class="underline hover:text-slate-300">https://github.com/suteechu/manual-QHeim.git</a>
+      </p>
     </div>
   </footer>
 
