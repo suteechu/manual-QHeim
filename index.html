@@ -32,33 +32,35 @@
             QHeim System Documentation
           </h1>
           <p class="text-slate-300 mt-2 text-sm sm:text-base max-w-2xl leading-relaxed">
-            ศูนย์รวมคู่มือการปฏิบัติงาน, สถาปัตยกรรมโค้ด, ตารางอ้างอิงด่วน, และเอกสารส่งมอบงานฉบับสมบูรณ์ สำหรับพนักงานใหม่, คนทำงานประจำ, และทีมงานรุ่นหลัง
+            ศูนย์รวมคู่มือการปฏิบัติงานและเอกสารส่งมอบงาน สำหรับพนักงานใหม่, พนักงานประจำ
           </p>
         </div>
+        <!-- ซ่อนปุ่ม GitHub Repository และ อ่าน Master README.md ตามคำขอ (ไม่จำเป็นต้องอ่าน) -->
+        <!--
         <div class="flex flex-col sm:flex-row md:flex-col gap-3 w-full md:w-auto text-xs">
           <a href="https://github.com/suteechu/manual-QHeim.git" target="_blank" class="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-2.5 rounded-xl border border-white/20 transition font-medium backdrop-blur-sm">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/></svg>
             <span>GitHub Repository</span>
           </a>
           <a href="README.md" class="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-4 py-2.5 rounded-xl transition font-medium shadow-sm">
             <span>📖 อ่าน Master README.md</span>
           </a>
         </div>
+        -->
       </div>
 
       <!-- Quick Audience Switcher -->
       <div class="mt-8 pt-6 border-t border-slate-800/80 flex flex-wrap gap-2 text-xs">
         <a href="#parallel-workflow" class="px-3.5 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-medium hover:bg-emerald-500/30 transition">
-          👥 การแบ่งสายงานในทีม (Parallel Workflow)
+          👥 สายงานในทีม (Parallel Workflow)
         </a>
         <a href="#modules" class="px-3.5 py-1.5 rounded-lg bg-blue-500/20 text-blue-300 border border-blue-500/30 font-medium hover:bg-blue-500/30 transition">
-          📚 คู่มือเจาะลึก 8 โมดูล (Modules Catalog)
+          📚 คู่มือ 8 ระบบ (Modules)
         </a>
         <a href="#cheat-sheet" class="px-3.5 py-1.5 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/30 font-medium hover:bg-amber-500/30 transition">
-          ⚡ 7 กฎเหล็ก &amp; Cheat Sheet
+          ⚡ 7 กฎเหล็ก (Cheat Sheet)
         </a>
         <a href="#handover" class="px-3.5 py-1.5 rounded-lg bg-purple-500/20 text-purple-300 border border-purple-500/30 font-medium hover:bg-purple-500/30 transition">
-          🏛️ เอกสารส่งมอบงาน (Handover)
+          🏛️ ส่งมอบงาน (Handover)
         </a>
       </div>
     </div>
@@ -105,7 +107,7 @@
         <a href="PartInstall_Doc.html" class="p-2.5 rounded-xl border border-rose-200 bg-rose-50/50 hover:bg-rose-100/50 transition">
           <div class="font-bold text-rose-800 mb-0.5">Step 6</div>
           <div class="font-semibold text-slate-800">PartInstall</div>
-          <div class="text-[10px] text-slate-500 mt-0.5">Flashing &amp; กันสั่น</div>
+          <div class="text-[10px] text-slate-500 mt-0.5">Flashing &amp; แผ่นกันสั่น</div>
         </a>
         <a href="EE_Doc.html" class="p-2.5 rounded-xl border border-amber-200 bg-amber-50/50 hover:bg-amber-100/50 transition">
           <div class="font-bold text-amber-800 mb-0.5">Step 7</div>
@@ -141,15 +143,34 @@
           จากนั้นจึงส่งต่อไฟล์นี้ให้ทีมงานแยกย้ายกันไปทำคู่ขนานตามความเชี่ยวชาญ:
         </p>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3 font-medium">
-          <div class="p-2.5 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-900">
-            👉 <strong>บางคนทำ Step 2 (Longlead) ควบคู่กับ Step 4 (Ext Wall)</strong>
+          <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 flex flex-col justify-between shadow-sm hover:border-emerald-400 transition">
+            <div class="font-bold text-sm text-emerald-950 mb-1 flex items-center justify-between">
+              <span>🚪 สายงาน A: ประตูหน้าต่าง &amp; Ext Wall</span>
+              <span class="text-[10px] bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded font-bold">Step 2+4</span>
+            </div>
+            <div class="text-[11px] text-emerald-700 flex items-center gap-2 mt-1">
+              <a href="LongleadTime_Doc.html" class="px-2 py-0.5 rounded bg-emerald-200/80 hover:bg-emerald-300 font-semibold transition">Step 2 (Longlead) &rarr;</a>
+              <a href="ExteriorWall_Doc.html" class="px-2 py-0.5 rounded bg-teal-200/80 hover:bg-teal-300 font-semibold transition">Step 4 (Ext Wall) &rarr;</a>
+            </div>
           </div>
-          <div class="p-2.5 rounded-lg bg-indigo-50 border border-indigo-200 text-indigo-900">
-            👉 <strong>บางคนทำ Step 3 (Structure)</strong>
-          </div>
-          <div class="p-2.5 rounded-lg bg-purple-50 border border-purple-200 text-purple-900">
-            👉 <strong>บางคนทำ Step 5 (Int Wall)</strong>
-          </div>
+          <a href="Struc_Doc.html" class="p-3 rounded-xl bg-indigo-50 border border-indigo-200 text-indigo-900 hover:bg-indigo-100 hover:border-indigo-400 transition flex items-center justify-between group shadow-sm">
+            <div>
+              <div class="font-bold text-sm text-indigo-950 flex items-center gap-1.5">
+                <span>🏗️ สายงาน B: โครงสร้าง (Step 3)</span>
+              </div>
+              <div class="text-[11px] text-indigo-700 mt-1">เสา, คาน, พื้น, รูท่อ</div>
+            </div>
+            <span class="text-indigo-600 font-bold group-hover:translate-x-1 transition-transform">&rarr;</span>
+          </a>
+          <a href="InteriorWall_Doc.html" class="p-3 rounded-xl bg-purple-50 border border-purple-200 text-purple-900 hover:bg-purple-100 hover:border-purple-400 transition flex items-center justify-between group shadow-sm">
+            <div>
+              <div class="font-bold text-sm text-purple-950 flex items-center gap-1.5">
+                <span>🧱 สายงาน C: ผนังใน (Step 5)</span>
+              </div>
+              <div class="text-[11px] text-purple-700 mt-1">ผนังภายใน &amp; พาร์ทิชัน</div>
+            </div>
+            <span class="text-purple-600 font-bold group-hover:translate-x-1 transition-transform">&rarr;</span>
+          </a>
         </div>
       </div>
 
@@ -163,14 +184,14 @@ flowchart TD
     end
 
     subgraph S_PARA["2. แจกจ่ายไฟล์ให้ทีมงานต่างคนต่างทำพร้อมกัน (Parallel Workstreams)"]
-        BASE -->|แจกไฟล์ Base| B1["👤 สายงาน A: ช่องเปิด & เปลือกนอก<br/>👉 Step 2: LongleadTime (ประตู-หน้าต่าง MIM)<br/>👉 Step 4: Ext Wall (ผนัง AAFP & เสา Stud)"]
+        BASE -->|แจกไฟล์ Base| B1["👤 สายงาน A: ประตูหน้าต่าง & Ext Wall<br/>👉 Step 2: LongleadTime (ประตู-หน้าต่าง MIM)<br/>👉 Step 4: Ext Wall (ผนัง AAFP & เสา Stud)"]
         BASE -->|แจกไฟล์ Base| B2["👤 สายงาน B: วิศวกรรมโครงสร้าง<br/>👉 Step 3: Structure (เสา-คาน-พื้น-รูท่อ)"]
         BASE -->|แจกไฟล์ Base| B3["👤 สายงาน C: สถาปัตยกรรมภายใน<br/>👉 Step 5: Int Wall (ผนังใน & พาร์ทิชัน)"]
     end
 
     subgraph S_MERGE["3. รวมโมเดล & งานระบบขั้นสุดท้าย (Assembly & Final Delivery)"]
         B1 & B2 & B3 --> M["🔗 รวมโมเดลทุกสายงานเข้าด้วยกัน"]
-        M --> C1["👉 Step 6: PartInstall (Flashing & ยางกันสั่น)"]
+        M --> C1["👉 Step 6: PartInstall (Flashing & แผ่นกันสั่น)"]
         C1 --> C2["👉 Step 7: EE System (ไฟฟ้า แอร์ สื่อสาร LayOut BOM)"]
         C2 --> C3["🚧 Step 8: Bathroom & Finishing (ห้องน้ำ สุขภัณฑ์ ปิดผิว)"]
         C3 --> OUT[("📦 ส่งออกผลิตโรงงาน (BOM & LayOut Drawing)")]
@@ -180,45 +201,47 @@ flowchart TD
 
       <!-- Role Cards Grid -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs md:text-sm">
-        <div class="p-4 bg-white rounded-xl border border-emerald-200 shadow-sm space-y-2">
+        <div class="p-4 bg-white rounded-xl border border-emerald-200 shadow-sm space-y-2 hover:border-emerald-400 transition">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-emerald-900 text-sm">สายงาน A: ประตู-หน้าต่าง &amp; ผนังนอก</span>
+            <span class="font-bold text-emerald-900 text-sm">🚪 สายงาน A: ประตูหน้าต่าง &amp; Ext Wall</span>
             <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[10px] font-bold">Step 2 + 4</span>
           </div>
-          <p class="text-slate-600 leading-relaxed">
-            ทำ <strong>Step 2 (LongleadTime)</strong> สร้างประตู-หน้าต่าง 3D และถอดรหัส MIM ควบคู่กับ <strong>Step 4 (Ext Wall)</strong> วางเสา Stud, เสามุม Corner, เสา Window Set และแผ่นผนัง AAFP เนื่องจากตำแหน่งเสาข้างช่องเปิดต้องอ้างอิงกับบานประตู-หน้าต่างโดยตรง
+          <p class="text-slate-600 leading-relaxed text-xs">
+            ทำ <strong>Step 2 (Longlead)</strong> ประตู-หน้าต่าง 3D ควบคู่กับ <strong>Step 4 (Ext Wall)</strong> ผนัง AAFP, เสา Stud และ Window Set เนื่องจากเสาข้างช่องเปิดอ้างอิงกับบานประตู-หน้าต่างโดยตรง
           </p>
           <div class="pt-2 flex gap-2">
-            <a href="LongleadTime_Doc.html" class="text-sky-700 hover:underline font-semibold">คู่มือ Longlead &rarr;</a>
-            <a href="ExteriorWall_Doc.html" class="text-teal-700 hover:underline font-semibold">คู่มือ Ext Wall &rarr;</a>
+            <a href="LongleadTime_Doc.html" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-sky-100 text-sky-800 hover:bg-sky-200 font-semibold text-xs transition">คู่มือ Longlead &rarr;</a>
+            <a href="ExteriorWall_Doc.html" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-teal-100 text-teal-800 hover:bg-teal-200 font-semibold text-xs transition">คู่มือ Ext Wall &rarr;</a>
           </div>
         </div>
 
-        <div class="p-4 bg-white rounded-xl border border-indigo-200 shadow-sm space-y-2">
+        <a href="Struc_Doc.html" class="block p-4 bg-white rounded-xl border border-indigo-200 shadow-sm space-y-2 hover:border-indigo-400 hover:shadow-md transition group cursor-pointer text-inherit no-underline">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-indigo-900 text-sm">สายงาน B: วิศวกรรมโครงสร้าง</span>
+            <span class="font-bold text-indigo-900 text-sm group-hover:text-indigo-600 transition-colors">🏗️ สายงาน B: โครงสร้าง</span>
             <span class="px-2 py-0.5 rounded bg-indigo-100 text-indigo-800 text-[10px] font-bold">Step 3</span>
           </div>
-          <p class="text-slate-600 leading-relaxed">
-            ทำ <strong>Step 3 (Structure)</strong> สร้างโครงสร้างโมดูลาร์ 3D (เสา, คาน, ตง, พื้น Smartboard), ดรอปพื้นห้องน้ำ (Bathroom), ช่องเปิดบันได (Stair), ช่องเปิดโล่ง (Void), ชานเข้าบ้าน (Entrance), เจาะรูท่อ Service Hole (BR/FS/CS/AC) และ Ceiling Joint
+          <p class="text-slate-600 leading-relaxed text-xs">
+            ทำ <strong>Step 3 (Structure)</strong> โครงสร้างโมดูลาร์ เสา, คาน, พื้น Smartboard, ดรอปพื้นห้องน้ำ, Void, เจาะรูท่อ Service Hole (BR/FS/CS/AC) และ Ceiling Joint
           </p>
-          <div class="pt-2">
-            <a href="Struc_Doc.html" class="text-indigo-700 hover:underline font-semibold">คู่มือ Structure &rarr;</a>
+          <div class="pt-2 flex items-center justify-between text-indigo-700 font-semibold text-xs">
+            <span>คู่มือ Structure &rarr;</span>
+            <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
           </div>
-        </div>
+        </a>
 
-        <div class="p-4 bg-white rounded-xl border border-purple-200 shadow-sm space-y-2">
+        <a href="InteriorWall_Doc.html" class="block p-4 bg-white rounded-xl border border-purple-200 shadow-sm space-y-2 hover:border-purple-400 hover:shadow-md transition group cursor-pointer text-inherit no-underline">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-purple-900 text-sm">สายงาน C: สถาปัตยกรรมภายใน</span>
+            <span class="font-bold text-purple-900 text-sm group-hover:text-purple-600 transition-colors">🧱 สายงาน C: ผนังใน</span>
             <span class="px-2 py-0.5 rounded bg-purple-100 text-purple-800 text-[10px] font-bold">Step 5</span>
           </div>
-          <p class="text-slate-600 leading-relaxed">
-            ทำ <strong>Step 5 (Int Wall)</strong> ติดตั้งผนังพาร์ทิชันแบ่งห้องสำเร็จรูปภายในบ้านโมดูลาร์, เสากรอบช่องเปิดประตู-หน้าต่างภายใน, และวางบล็อกปิดรอยต่อระหว่างยูนิตกล่องโมดูลาร์
+          <p class="text-slate-600 leading-relaxed text-xs">
+            ทำ <strong>Step 5 (Int Wall)</strong> ผนังและพาร์ทิชันแบ่งห้องสำเร็จรูปภายในบ้านโมดูลาร์, เสากรอบช่องเปิดประตู-หน้าต่างภายใน, และวางบล็อกปิดรอยต่อระหว่างยูนิตกล่อง
           </p>
-          <div class="pt-2">
-            <a href="InteriorWall_Doc.html" class="text-purple-700 hover:underline font-semibold">คู่มือ Interior Wall &rarr;</a>
+          <div class="pt-2 flex items-center justify-between text-purple-700 font-semibold text-xs">
+            <span>คู่มือ Interior Wall &rarr;</span>
+            <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
           </div>
-        </div>
+        </a>
       </div>
     </section>
 
@@ -234,194 +257,180 @@ flowchart TD
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
 
         <!-- Card 1: CAD AR -->
-        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition flex flex-col">
+        <a href="CAD_AR_Doc.html" class="group bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl hover:border-blue-500 hover:-translate-y-1.5 transition-all duration-200 flex flex-col block cursor-pointer text-slate-800 hover:text-slate-900 no-underline">
           <div class="bg-gradient-to-r from-blue-700 to-indigo-700 p-4 text-white">
             <div class="flex items-center justify-between">
               <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white/20">Step 01</span>
               <span class="text-xs text-blue-200">CADLTF</span>
             </div>
-            <h3 class="text-lg font-bold mt-1.5">CAD AR</h3>
+            <h3 class="text-lg font-bold mt-1.5 group-hover:text-blue-100 transition-colors">CAD AR</h3>
           </div>
           <div class="p-4 flex-grow flex flex-col justify-between space-y-3 text-xs">
             <p class="text-slate-600 leading-relaxed">
               เตรียมไฟล์ 2D DWG, ส่งออก Text JSON, นำเข้าคงพิกัด WCS, จัดกลุ่ม <code class="bg-slate-100 px-1 py-0.5 rounded">S-Unit</code>, ซิงค์ชื่อช่องเปิดประตู-หน้าต่างอัตโนมัติ
             </p>
-            <div class="pt-2 border-t border-slate-100 flex items-center justify-between gap-2">
-              <a href="CAD_AR_Doc.html" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition text-xs">
-                <span>🌐 เว็บ (HTML)</span>
-              </a>
-              <a href="CAD_AR_Doc.md" class="text-slate-500 hover:text-slate-800 text-xs">
-                Markdown &rarr;
-              </a>
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-blue-600 group-hover:text-blue-700">
+              <span class="inline-flex items-center gap-1.5">
+                <span>📖 อ่านคู่มือ CAD AR</span>
+              </span>
+              <span class="text-slate-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all text-sm">&rarr;</span>
             </div>
           </div>
-        </div>
+        </a>
 
         <!-- Card 2: LongleadTime -->
-        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition flex flex-col">
+        <a href="LongleadTime_Doc.html" class="group bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl hover:border-sky-500 hover:-translate-y-1.5 transition-all duration-200 flex flex-col block cursor-pointer text-slate-800 hover:text-slate-900 no-underline">
           <div class="bg-gradient-to-r from-sky-600 to-cyan-700 p-4 text-white">
             <div class="flex items-center justify-between">
               <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white/20">Step 02</span>
               <span class="text-xs text-sky-200">Longlead</span>
             </div>
-            <h3 class="text-lg font-bold mt-1.5">LongleadTime</h3>
+            <h3 class="text-lg font-bold mt-1.5 group-hover:text-sky-100 transition-colors">LongleadTime</h3>
           </div>
           <div class="p-4 flex-grow flex flex-col justify-between space-y-3 text-xs">
             <p class="text-slate-600 leading-relaxed">
               สร้างโมเดลบานประตู-หน้าต่าง 3D, แมปรหัส MIM จากฐานข้อมูล, สรุป BOM สั่งผลิตล่วงหน้าส่งเข้าโรงงาน
             </p>
-            <div class="pt-2 border-t border-slate-100 flex items-center justify-between gap-2">
-              <a href="LongleadTime_Doc.html" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-sky-600 hover:bg-sky-700 text-white font-medium transition text-xs">
-                <span>🌐 เว็บ (HTML)</span>
-              </a>
-              <a href="LongleadTime_Doc.md" class="text-slate-500 hover:text-slate-800 text-xs">
-                Markdown &rarr;
-              </a>
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-sky-600 group-hover:text-sky-700">
+              <span class="inline-flex items-center gap-1.5">
+                <span>📖 อ่านคู่มือ Longlead</span>
+              </span>
+              <span class="text-slate-400 group-hover:text-sky-600 group-hover:translate-x-1 transition-all text-sm">&rarr;</span>
             </div>
           </div>
-        </div>
+        </a>
 
         <!-- Card 3: Structure -->
-        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition flex flex-col">
+        <a href="Struc_Doc.html" class="group bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl hover:border-indigo-500 hover:-translate-y-1.5 transition-all duration-200 flex flex-col block cursor-pointer text-slate-800 hover:text-slate-900 no-underline">
           <div class="bg-gradient-to-r from-blue-900 to-slate-800 p-4 text-white">
             <div class="flex items-center justify-between">
               <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white/20">Step 03</span>
               <span class="text-xs text-blue-200">Struc</span>
             </div>
-            <h3 class="text-lg font-bold mt-1.5">Structure</h3>
+            <h3 class="text-lg font-bold mt-1.5 group-hover:text-blue-200 transition-colors">Structure</h3>
           </div>
           <div class="p-4 flex-grow flex flex-col justify-between space-y-3 text-xs">
             <p class="text-slate-600 leading-relaxed">
               เสา-คาน-ตง 3D, ดรอปพื้น Smartboard, ห้องน้ำ, บันได, Void, รูท่อ Service Hole (BR/FS/CS/AC), และ Ceiling Joint
             </p>
-            <div class="pt-2 border-t border-slate-100 flex items-center justify-between gap-2">
-              <a href="Struc_Doc.html" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-blue-900 hover:bg-blue-800 text-white font-medium transition text-xs">
-                <span>🌐 เว็บ (HTML)</span>
-              </a>
-              <a href="Struc_Doc.md" class="text-slate-500 hover:text-slate-800 text-xs">
-                Markdown &rarr;
-              </a>
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-indigo-600 group-hover:text-indigo-700">
+              <span class="inline-flex items-center gap-1.5">
+                <span>📖 อ่านคู่มือ Structure</span>
+              </span>
+              <span class="text-slate-400 group-hover:text-indigo-600 group-hover:translate-x-1 transition-all text-sm">&rarr;</span>
             </div>
           </div>
-        </div>
+        </a>
 
         <!-- Card 4: Exterior Wall -->
-        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition flex flex-col">
+        <a href="ExteriorWall_Doc.html" class="group bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl hover:border-teal-500 hover:-translate-y-1.5 transition-all duration-200 flex flex-col block cursor-pointer text-slate-800 hover:text-slate-900 no-underline">
           <div class="bg-gradient-to-r from-emerald-700 to-teal-800 p-4 text-white">
             <div class="flex items-center justify-between">
               <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white/20">Step 04</span>
               <span class="text-xs text-emerald-200">Exterior</span>
             </div>
-            <h3 class="text-lg font-bold mt-1.5">Exterior Wall</h3>
+            <h3 class="text-lg font-bold mt-1.5 group-hover:text-emerald-100 transition-colors">Exterior Wall</h3>
           </div>
           <div class="p-4 flex-grow flex flex-col justify-between space-y-3 text-xs">
             <p class="text-slate-600 leading-relaxed">
               ผนังภายนอก AAFP, เสา Stud, เสามุม Corner, เสา Window Set, กันซึม C3, ระบบตรวจระยะเสา 225/332 มม.
             </p>
-            <div class="pt-2 border-t border-slate-100 flex items-center justify-between gap-2">
-              <a href="ExteriorWall_Doc.html" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white font-medium transition text-xs">
-                <span>🌐 เว็บ (HTML)</span>
-              </a>
-              <a href="ExteriorWall_Doc.md" class="text-slate-500 hover:text-slate-800 text-xs">
-                Markdown &rarr;
-              </a>
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-teal-600 group-hover:text-teal-700">
+              <span class="inline-flex items-center gap-1.5">
+                <span>📖 อ่านคู่มือ Exterior Wall</span>
+              </span>
+              <span class="text-slate-400 group-hover:text-teal-600 group-hover:translate-x-1 transition-all text-sm">&rarr;</span>
             </div>
           </div>
-        </div>
+        </a>
 
         <!-- Card 5: Interior Wall -->
-        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition flex flex-col">
+        <a href="InteriorWall_Doc.html" class="group bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl hover:border-purple-500 hover:-translate-y-1.5 transition-all duration-200 flex flex-col block cursor-pointer text-slate-800 hover:text-slate-900 no-underline">
           <div class="bg-gradient-to-r from-purple-700 to-indigo-800 p-4 text-white">
             <div class="flex items-center justify-between">
               <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white/20">Step 05</span>
               <span class="text-xs text-purple-200">Interior</span>
             </div>
-            <h3 class="text-lg font-bold mt-1.5">Interior Wall</h3>
+            <h3 class="text-lg font-bold mt-1.5 group-hover:text-purple-100 transition-colors">Interior Wall</h3>
           </div>
           <div class="p-4 flex-grow flex flex-col justify-between space-y-3 text-xs">
             <p class="text-slate-600 leading-relaxed">
               ผนังภายในและพาร์ทิชันแบ่งห้อง, เสากรอบช่องเปิด, บล็อกปิดรอยต่อระหว่างยูนิต, และถอดแบบโครงคร่าว
             </p>
-            <div class="pt-2 border-t border-slate-100 flex items-center justify-between gap-2">
-              <a href="InteriorWall_Doc.html" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-purple-700 hover:bg-purple-800 text-white font-medium transition text-xs">
-                <span>🌐 เว็บ (HTML)</span>
-              </a>
-              <a href="InteriorWall_Doc.md" class="text-slate-500 hover:text-slate-800 text-xs">
-                Markdown &rarr;
-              </a>
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-purple-600 group-hover:text-purple-700">
+              <span class="inline-flex items-center gap-1.5">
+                <span>📖 อ่านคู่มือ Interior Wall</span>
+              </span>
+              <span class="text-slate-400 group-hover:text-purple-600 group-hover:translate-x-1 transition-all text-sm">&rarr;</span>
             </div>
           </div>
-        </div>
+        </a>
 
         <!-- Card 6: PartInstall -->
-        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition flex flex-col">
+        <a href="PartInstall_Doc.html" class="group bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl hover:border-rose-500 hover:-translate-y-1.5 transition-all duration-200 flex flex-col block cursor-pointer text-slate-800 hover:text-slate-900 no-underline">
           <div class="bg-gradient-to-r from-rose-600 to-orange-700 p-4 text-white">
             <div class="flex items-center justify-between">
               <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white/20">Step 06</span>
               <span class="text-xs text-rose-200">PartInstall</span>
             </div>
-            <h3 class="text-lg font-bold mt-1.5">PartInstall</h3>
+            <h3 class="text-lg font-bold mt-1.5 group-hover:text-rose-100 transition-colors">PartInstall</h3>
           </div>
           <div class="p-4 flex-grow flex flex-col justify-between space-y-3 text-xs">
             <p class="text-slate-600 leading-relaxed">
-              Flashing กันน้ำ, Guide Pin รอยต่อ, ยางกันสั่น Antivibration Rubber, Super Sheet, รหัสทิศทาง 01-12
+              Flashing กันน้ำ, Guide Pin รอยต่อ, แผ่นกันสั่น Antivibration Rubber, Super Sheet, รหัสทิศทาง 01-12
             </p>
-            <div class="pt-2 border-t border-slate-100 flex items-center justify-between gap-2">
-              <a href="PartInstall_Doc.html" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-rose-600 hover:bg-rose-700 text-white font-medium transition text-xs">
-                <span>🌐 เว็บ (HTML)</span>
-              </a>
-              <a href="PartInstall_Doc.md" class="text-slate-500 hover:text-slate-800 text-xs">
-                Markdown &rarr;
-              </a>
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-rose-600 group-hover:text-rose-700">
+              <span class="inline-flex items-center gap-1.5">
+                <span>📖 อ่านคู่มือ PartInstall</span>
+              </span>
+              <span class="text-slate-400 group-hover:text-rose-600 group-hover:translate-x-1 transition-all text-sm">&rarr;</span>
             </div>
           </div>
-        </div>
+        </a>
 
         <!-- Card 7: Electricity & Communication (EE) -->
-        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition flex flex-col">
+        <a href="EE_Doc.html" class="group bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl hover:border-amber-500 hover:-translate-y-1.5 transition-all duration-200 flex flex-col block cursor-pointer text-slate-800 hover:text-slate-900 no-underline">
           <div class="bg-gradient-to-r from-amber-600 to-orange-700 p-4 text-white">
             <div class="flex items-center justify-between">
               <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white/20">Step 07</span>
               <span class="text-xs text-amber-200">EE Module</span>
             </div>
-            <h3 class="text-lg font-bold mt-1.5">EE System</h3>
+            <h3 class="text-lg font-bold mt-1.5 group-hover:text-amber-100 transition-colors">EE System</h3>
           </div>
           <div class="p-4 flex-grow flex flex-col justify-between space-y-3 text-xs">
             <p class="text-slate-600 leading-relaxed">
               ไฟฟ้าแสงสว่าง, เต้ารับ, แอร์ CDU/FCU, สื่อสาร COMMU, Pathfinding 332mm, Single-line, LayOut 2D (1:70)
             </p>
-            <div class="pt-2 border-t border-slate-100 flex items-center justify-between gap-2">
-              <a href="EE_Doc.html" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-medium transition text-xs">
-                <span>🌐 เว็บ (HTML)</span>
-              </a>
-              <a href="EE_Doc.md" class="text-slate-500 hover:text-slate-800 text-xs">
-                Markdown &rarr;
-              </a>
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-amber-600 group-hover:text-amber-700">
+              <span class="inline-flex items-center gap-1.5">
+                <span>📖 อ่านคู่มือ EE System</span>
+              </span>
+              <span class="text-slate-400 group-hover:text-amber-600 group-hover:translate-x-1 transition-all text-sm">&rarr;</span>
             </div>
           </div>
-        </div>
+        </a>
 
         <!-- Card 8: Bathroom & Finishing (Upcoming) -->
-        <div class="bg-gradient-to-b from-teal-50/60 to-white rounded-2xl shadow-sm border-2 border-dashed border-teal-400 overflow-hidden hover:shadow-md transition flex flex-col">
+        <a href="Bathroom_Finishing_Doc.html" class="group bg-gradient-to-b from-teal-50/60 to-white rounded-2xl shadow-sm border-2 border-dashed border-teal-400 overflow-hidden hover:shadow-xl hover:border-teal-500 hover:-translate-y-1.5 transition-all duration-200 flex flex-col block cursor-pointer text-slate-800 hover:text-slate-900 no-underline">
           <div class="bg-gradient-to-r from-teal-700 to-slate-800 p-4 text-white">
             <div class="flex items-center justify-between">
               <span class="text-xs font-bold px-2 py-0.5 rounded-full bg-amber-400 text-amber-950">Step 08</span>
               <span class="text-xs text-teal-200">🚧 กำลังพัฒนา</span>
             </div>
-            <h3 class="text-lg font-bold mt-1.5">Bathroom &amp; Finishing</h3>
+            <h3 class="text-lg font-bold mt-1.5 group-hover:text-teal-200 transition-colors">Bathroom &amp; Finishing</h3>
           </div>
           <div class="p-4 flex-grow flex flex-col justify-between space-y-3 text-xs">
             <p class="text-slate-600 leading-relaxed">
               ระบบประกอบห้องน้ำสำเร็จรูป (WC Pod), สุขภัณฑ์, งานกันซึม, และงาน Finishing (คำนวณปูนกาว, ปูนฉาบ, ยาแนว, เคมีภัณฑ์อื่นๆ)
             </p>
-            <div class="pt-2 border-t border-teal-100 flex items-center justify-between gap-2">
-              <a href="Bathroom_Finishing_Doc.html" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-teal-700 hover:bg-teal-800 text-white font-medium transition text-xs">
-                <span>🚧 ดูแผนพัฒนา</span>
-              </a>
-              <span class="text-[11px] text-amber-700 font-medium">Coming Soon</span>
+            <div class="pt-3 border-t border-teal-100 flex items-center justify-between text-xs font-semibold text-teal-700 group-hover:text-teal-800">
+              <span class="inline-flex items-center gap-1.5">
+                <span>🚧 ดูแผนพัฒนา &amp; สูตรคำนวณ</span>
+              </span>
+              <span class="text-slate-400 group-hover:text-teal-700 group-hover:translate-x-1 transition-all text-sm">&rarr;</span>
             </div>
           </div>
-        </div>
+        </a>
 
       </div>
     </section>
@@ -534,6 +543,13 @@ flowchart TD
       </p>
     </div>
   </footer>
+
+  <!-- Floating Scroll to Top Widget -->
+  <aside aria-label="Scroll to Top" class="fixed bottom-6 right-6 z-50 no-print">
+    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="เลื่อนขึ้นบนสุด (Top)" class="w-11 h-11 rounded-full bg-slate-900/90 hover:bg-blue-600 text-white shadow-xl border border-slate-700/60 flex items-center justify-center text-sm font-bold transition-all hover:scale-110 cursor-pointer backdrop-blur-md">
+      ▲
+    </button>
+  </aside>
 
 </body>
 </html>
